@@ -1,0 +1,85 @@
+logging:
+  level: INFO
+  format: '%(levelname)s:%(name)s:%(message)s'
+
+run:
+  name: "pypsa-lmp"
+
+countries: ['GB']
+
+# docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#enable
+enable:
+  retrieve: auto
+
+lines:
+  types:
+    220.: "Al/St 240/40 2-bundle 220.0"
+    300.: "Al/St 240/40 3-bundle 300.0"
+    380.: "Al/St 240/40 4-bundle 380.0"
+    500.: "Al/St 240/40 4-bundle 380.0"
+    750.: "Al/St 560/50 4-bundle 750.0"
+  s_max_pu: 1.
+  s_nom_max: .inf
+  max_extension: 0. # MW
+  length_factor: 1.25
+  under_construction: 'remove' # 'zero': set capacity to zero, 'remove': remove, 'keep': with full capacity
+
+# docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#links
+links:
+  p_max_pu: 1.0
+  p_nom_max: .inf
+  max_extension: 0. # MW
+  include_tyndp: false
+  under_construction: 'remove' # 'zero': set capacity to zero, 'remove': remove, 'keep': with full capacity
+
+transformers:
+  x: 0.1
+  s_nom: 2000.
+  type: ''
+
+# docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#electricity
+electricity:
+  voltages: [220., 300., 380., 500., 750.]
+  gaslimit_enable: false
+  gaslimit: false
+  co2limit_enable: false
+  co2limit: 7.75e+7
+  co2base: 1.487e+9
+  agg_p_nom_limits: data/agg_p_nom_minmax.csv
+
+  operational_reserve:
+    activate: false
+    epsilon_load: 0.02
+    epsilon_vres: 0.02
+    contingency: 4000
+
+  max_hours:
+    battery: 6
+    H2: 168
+
+  extendable_carriers:
+    Generator: []
+    StorageUnit: [] # battery, H2
+    Store: []
+    Link: [] # H2 pipeline
+
+  powerplants_filter: (DateOut >= 2022 or DateOut != DateOut)
+  custom_powerplants: false
+  everywhere_powerplants: [nuclear, oil, OCGT, CCGT, coal, lignite, geothermal, biomass]
+
+  conventional_carriers: [nuclear, oil, OCGT, CCGT, coal, lignite, geothermal, biomass]
+  renewable_carriers: [solar, onwind, offwind-ac, offwind-dc, hydro]
+
+  estimate_renewable_capacities:
+    enable: true
+    from_opsd: true
+    year: 2020
+    expansion_limit: false
+    technology_mapping:
+      Offshore: [offwind-ac, offwind-dc]
+      Onshore: [onwind]
+      PV: [solar]
+
+  autarky:
+    enable: false
+    by_country: false

@@ -14,6 +14,9 @@ from tqdm import tqdm
 
 from pathlib import Path
 
+
+REGION_COLS = ["geometry", "name", "x", "y", "country"]
+
 # Define a context manager to temporarily mute print statements
 @contextlib.contextmanager
 def mute_print():

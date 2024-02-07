@@ -143,3 +143,24 @@ rule base_network:
         "envs/environment.yaml"
     script:
         "scripts/base_network.py"
+
+
+rule build_bus_regions:
+    params:
+        countries=config["countries"],
+    input:
+        country_shapes=RESOURCES + "country_shapes.geojson",
+        offshore_shapes=RESOURCES + "offshore_shapes.geojson",
+        base_network=RESOURCES + "networks/base.nc",
+    output:
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        regions_offshore=RESOURCES + "regions_offshore.geojson",
+    log:
+        LOGS + "build_bus_regions.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/build_bus_regions.py"

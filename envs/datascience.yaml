@@ -2,6 +2,7 @@ name: data-science
 channels:
   - defaults
   - conda-forge
+  - bioconda
 dependencies:
   - blas=1.0=mkl
   - bottleneck=1.3.5=py312he558020_0

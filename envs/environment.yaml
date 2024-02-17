@@ -48,6 +48,7 @@ dependencies:
 - pyxlsb
 - graphviz
 - ipopt
+- SPARQLWrapper
 
   # Keep in conda environment when calling ipython
 - ipython

@@ -166,15 +166,33 @@ rule build_bus_regions:
         "scripts/build_bus_regions.py"
 
 
-rule prepare_wiki_data:
+rule retrieve_wiki_data:
     output:
         wiki_data=RESOURCES + "wiki_data.csv",
     log:
-        LOGS + "prepare_wiki_data.log",
+        LOGS + "retrieve_wiki_data.log",
     threads: 1
     resources:
         mem_mb=1000,
     conda:
         "envs/environment.yaml"
     script:
-        "scripts/prepare_wiki_data.py"
+        "scripts/retrieve_wiki_data.py"
+
+
+rule prepare_bmu_data:
+    params:
+        elexon=config["elexon"],
+    input:
+        wiki_data=RESOURCES + "wiki_data.csv",
+    output:
+        bmunits_loc=RESOURCES + "bmunits_loc.csv",
+    log:
+        LOGS + "prepare_bmu_data.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/prepare_bmu_data.py"

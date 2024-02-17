@@ -11,6 +11,9 @@ countries: ['GB']
 enable:
   retrieve: auto
 
+elexon:
+  bmu_date: '2024-02-01' # determines the date of the BMU list, retrieved from a snapshot of the Physical Data
+
 lines:
   types:
     220.: "Al/St 240/40 2-bundle 220.0"

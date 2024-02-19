@@ -185,6 +185,9 @@ rule prepare_bmu_data:
         elexon=config["elexon"],
     input:
         wiki_data=RESOURCES + "wiki_data.csv",
+        osuked_ids="data/ids.csv",
+        osuked_plant_locations="data/plant-locations.csv",
+        manual_bmus="data/manual_bmus.csv",
     output:
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
     log:

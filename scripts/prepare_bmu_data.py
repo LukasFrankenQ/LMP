@@ -16,6 +16,7 @@ Elexon Insights, and matches them with datasources to determine their location.
 import logging
 
 import requests
+import numpy as np
 import pandas as pd
 
 from io import StringIO
@@ -63,9 +64,6 @@ if __name__ == "__main__":
         [["LevelFrom", "LevelTo", "BmUnit"]]
     )
 
-    print(df.head())
-    print(df.tail())
-
     all_units = pd.DataFrame(index=df.index.get_level_values(2).unique())
     logger.info(f"Retrieved {len(all_units)} BMUs from Elexon Insights.")
 
@@ -73,17 +71,45 @@ if __name__ == "__main__":
 
     wiki_df = pd.read_csv(snakemake.input["wiki_data"])
 
-    print("wiki_data")
-    print(wiki_df.head())
-
-    merged = pd.concat((
+    located_df = pd.concat((
         all_units,
         wiki_df[["bmrs_id", "lat", "lon", "capacity"]].groupby("bmrs_id").mean(),
     ), axis=1).fillna(0).loc[all_units.index]
 
-    found_idx = merged.loc[merged["lat"] != 0].index
+    found_idx = located_df.loc[located_df["lat"] != 0].index
+    logger.info(f"Found {len(found_idx)/len(located_df)*100:.2f}% of BMUs in wikidata.")
 
-    logger.info(f"Found {len(found_idx)/len(merged)*100:.2f}% of BMUs in wikidata.")
+    logger.info("Adding locations provided by github.com/OSUKED/Power-Station-Dictionary.")
 
-    print("merged")
-    print(merged)
+    osuked_ids = pd.read_csv(snakemake.input["osuked_ids"])
+    osuked_plant_locations = pd.read_csv(snakemake.input["osuked_plant_locations"])
+
+    for name in all_units.index:
+
+        row = osuked_ids.loc[osuked_ids['ngc_bmu_id'].fillna('').str.contains(name)]
+
+        if row.empty:
+            continue
+
+        bmu_id = row.index[0]
+
+        try:
+            located_df.loc[name, 'lat'] = osuked_plant_locations.loc[row.index[0], 'latitude'] or np.nan
+            located_df.loc[name, 'lon'] = osuked_plant_locations.loc[row.index[0], 'longitude'] or np.nan
+        except KeyError:
+            continue
+
+    found_idx = located_df.loc[located_df["lat"] != 0].index
+    logger.info(f"Found share {len(found_idx)/len(located_df)*100:.2f}% after wikidata and OSUKED.")
+    
+    logger.info("Adding manual locations.")
+
+    manual_bmus = pd.read_csv(snakemake.input["manual_bmus"]).set_index("nationalGridBmUnit")
+
+    located_df.update(manual_bmus[["lon", "lat"]])
+
+    found_idx = located_df.loc[located_df["lat"] != 0].index
+    logger.info(f"Found share {len(found_idx)/len(located_df)*100:.2f}% after wikidata, OSUKED and manual data.")
+
+    located_df.to_csv(snakemake.output["bmunits_loc"])
+    logger.info("Saved BMU data to " + snakemake.output["bmunits_loc"])

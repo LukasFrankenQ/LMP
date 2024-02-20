@@ -166,6 +166,7 @@ rule build_bus_regions:
         "scripts/build_bus_regions.py"
 
 
+
 rule retrieve_wiki_data:
     output:
         wiki_data=RESOURCES + "wiki_data.csv",
@@ -199,3 +200,46 @@ rule prepare_bmu_data:
         "envs/environment.yaml"
     script:
         "scripts/prepare_bmu_data.py"
+
+
+rule add_generators:
+    params:
+        elexon=config["elexon"],
+    input:
+        base_network=RESOURCES + "networks/base.nc",
+        bmunits_loc=RESOURCES + "bmunits_loc.csv",
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        regions_offshore=RESOURCES + "regions_offshore.geojson",
+    output:
+        gen_network=RESOURCES + "networks/gen.nc",
+    log:
+        LOGS + "add_generators.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/add_generators.py"
+
+
+rule build_load_weights:
+    input:
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        gsp_regions="data/gsp_geometries.geojson",
+
+
+rule retrieve_live_bmu_data:
+    output:
+        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+    log:
+        LOGS + "retrieve_live_bmu_data_{date}_{period}.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_live_bmu_data.py"
+
+

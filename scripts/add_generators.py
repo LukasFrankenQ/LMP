@@ -46,12 +46,12 @@ if __name__ == "__main__":
 
         hit = onshore.loc[onshore.geometry.contains(bmu.geometry)].index
         if len(hit) == 1:
-            n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0], p_nom=bmu["capacity"])
+            n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0])
             continue
 
         hit = offshore.loc[offshore.geometry.contains(bmu.geometry)].index
         if len(hit) == 1:
-            n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0], p_nom=bmu["capacity"])
+            n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0])
             continue
 
         non_assigned += 1

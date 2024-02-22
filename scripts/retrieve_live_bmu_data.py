@@ -29,12 +29,15 @@ if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    logger.info("Retrieving Live BMU Data from Elexon Insights API.")
+    date = snakemake.wildcards.date
+    period = snakemake.wildcards.period
+
+    logger.info(f"Retrieving Live BMU Data from Elexon Insights API for {date} settlement period {period}.")
 
     params = {
         'dataset': 'PN',
-        'settlementDate': snakemake.wildcards.date,
-        'settlementPeriod': snakemake.wildcards.period,
+        'settlementDate': date,
+        'settlementPeriod': period,
         'format': 'csv'  # Response data format
     }
         

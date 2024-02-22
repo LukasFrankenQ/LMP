@@ -110,7 +110,6 @@ rule build_shapes:
         "scripts/build_shapes.py"
 
 
-
 rule base_network:
     params:
         countries=config["countries"],
@@ -164,7 +163,6 @@ rule build_bus_regions:
         "envs/environment.yaml"
     script:
         "scripts/build_bus_regions.py"
-
 
 
 rule retrieve_wiki_data:
@@ -258,4 +256,20 @@ rule retrieve_live_bmu_data:
     script:
         "scripts/retrieve_live_bmu_data.py"
 
+
+rule prepare_live_network:
+    input:
+        network=RESOURCES + "networks/gen.nc",
+        load_weights=RESOURCES + "load_weights.csv",
+        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+    output:
+        live_network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+    log:
+        LOGS + "prepare_live_network_{date}_{period}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/prepare_live_network.py"
 

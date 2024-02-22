@@ -96,6 +96,7 @@ if __name__ == "__main__":
         overlap = hold.geometry.intersection(row.geometry).area
         if overlap.sum() == 0.:
             continue
+
         overlap = overlap / overlap.sum()
 
         load_weights.at[i, "load_weight"] = overlap.mul(hold["weight"]).sum()

@@ -110,7 +110,6 @@ rule build_shapes:
         "scripts/build_shapes.py"
 
 
-
 rule base_network:
     params:
         countries=config["countries"],
@@ -164,3 +163,113 @@ rule build_bus_regions:
         "envs/environment.yaml"
     script:
         "scripts/build_bus_regions.py"
+
+
+rule retrieve_wiki_data:
+    output:
+        wiki_data=RESOURCES + "wiki_data.csv",
+    log:
+        LOGS + "retrieve_wiki_data.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_wiki_data.py"
+
+
+rule prepare_bmu_data:
+    params:
+        elexon=config["elexon"],
+    input:
+        wiki_data=RESOURCES + "wiki_data.csv",
+        osuked_ids="data/ids.csv",
+        osuked_plant_locations="data/plant-locations.csv",
+        manual_bmus="data/manual_bmus.csv",
+    output:
+        bmunits_loc=RESOURCES + "bmunits_loc.csv",
+    log:
+        LOGS + "prepare_bmu_data.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/prepare_bmu_data.py"
+
+
+rule add_generators:
+    params:
+        elexon=config["elexon"],
+    input:
+        base_network=RESOURCES + "networks/base.nc",
+        bmunits_loc=RESOURCES + "bmunits_loc.csv",
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        regions_offshore=RESOURCES + "regions_offshore.geojson",
+    output:
+        gen_network=RESOURCES + "networks/gen.nc",
+    log:
+        LOGS + "add_generators.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/add_generators.py"
+
+
+rule build_load_weights:
+    params:
+        load=config["load"],
+    input:
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        gsp_regions="data/gsp_geometries.geojson",
+        gsp_regions_lookup="data/gsp_gnode_directconnect_region_lookup.csv",
+        fes_2021_lw_demandpeaks="data/FES-2021--Leading_the_Way--demandpk-all--gridsupplypoints.csv",
+        fes_2021_fs_demandpeaks="data/FES-2021--Falling_Short--demandpk-all--gridsupplypoints.csv",
+    output:
+        load_weights=RESOURCES + "load_weights.csv",
+    log:
+        LOGS + "build_load_weights.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/build_load_weights.py"
+
+
+rule retrieve_live_bmu_data:
+    output:
+        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+    log:
+        LOGS + "retrieve_live_bmu_data_{date}_{period}.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_live_bmu_data.py"
+
+
+rule prepare_live_network:
+    input:
+        network=RESOURCES + "networks/gen.nc",
+        load_weights=RESOURCES + "load_weights.csv",
+        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+    output:
+        live_network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+    log:
+        LOGS + "prepare_live_network_{date}_{period}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/prepare_live_network.py"
+

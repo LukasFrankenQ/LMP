@@ -32,6 +32,12 @@ RESOURCES = "resources/"
 RESULTS = "results/"
 
 
+wildcard_constraints:
+    date = r"\d{4}-\d{2}-\d{2}",
+    period="[0-9]*",
+    simpl="[a-zA-Z0-9]*",
+
+
 # Check if the workflow has access to the internet by trying to access the HEAD of specified url
 def has_internet_access(url="www.zenodo.org") -> bool:
     import http.client as http_client
@@ -71,7 +77,8 @@ if config["enable"]["retrieve"] and config["enable"].get("retrieve_databundle", 
 
     rule retrieve_databundle:
         output:
-            protected(expand("data/bundle/{file}", file=datafiles)),
+            # protected(expand("data/bundle/{file}", file=datafiles)),
+            expand("data/bundle/{file}", file=datafiles),
         log:
             LOGS + "retrieve_databundle.log",
         resources:
@@ -273,3 +280,32 @@ rule prepare_live_network:
     script:
         "scripts/prepare_live_network.py"
 
+
+rule simplify_network:
+    params:
+        simplify_network=config["clustering"]["simplify"],
+        aggregation_strategies=config["clustering"]["aggregation_strategies"],
+        renewable_carriers=config["electricity"]["renewable_carriers"],
+        max_hours=config["electricity"]["max_hours"],
+        length_factor=config["lines"]["length_factor"],
+        p_max_pu=config["links"]["p_max_pu"],
+        costs=config["costs"],
+    input:
+        live_network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        regions_offshore=RESOURCES + "regions_offshore.geojson",
+        tech_costs="data/costs_2020.csv",
+    output:
+        simplified_live_network=RESOURCES + "networks/prepared_live_{date}_{period}_elec_s{simpl}.nc",
+        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_elec_s{simpl}.geojson",
+        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_elec_s{simpl}.geojson",
+        busmap=RESOURCES + "busmap_{date}_{period}_s{simpl}.csv",
+        connection_costs=RESOURCES + "connection_costs_{date}_{period}_s{simpl}.csv",
+    log:
+        LOGS + "simplify_network_{date}_{period}_s{simpl}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/simplify_network.py"

@@ -51,7 +51,13 @@ if __name__ == "__main__":
     bmu = bmu.loc[bmu > 0]
 
     n.generators.loc[bmu.index, 'p_nom'] = bmu
+    n.generators.loc[:, 'marginal_cost'] = 1.
 
     logger.warning("no sensible costs yet!")
 
+    print(n.transformers)
+
+    n.transformers.loc[:, 'r'] = 1.
+
     n.export_to_netcdf(snakemake.output["live_network"])
+    n.optimize(solver_name='gurobi')

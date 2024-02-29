@@ -1,4 +1,130 @@
+# -*- coding: utf-8 -*-
+# SPDX-FileCopyrightText: : 2017-2024 The PyPSA-Eur Authors
+#
+# SPDX-License-Identifier: MIT
+
+# coding: utf-8
+"""
+Creates networks clustered to ``{cluster}`` number of zones with aggregated
+buses, generators and transmission corridors.
+
+Relevant Settings
+-----------------
+
+.. code:: yaml
+
+    clustering:
+      cluster_network:
+      aggregation_strategies:
+      focus_weights:
+
+    solving:
+        solver:
+            name:
+
+    lines:
+        length_factor:
+
+.. seealso::
+    Documentation of the configuration file ``config/config.yaml`` at
+    :ref:`toplevel_cf`, :ref:`renewable_cf`, :ref:`solving_cf`, :ref:`lines_cf`
+
+Inputs
+------
+
+- ``resources/regions_onshore_elec_s{simpl}.geojson``: confer :ref:`simplify`
+- ``resources/regions_offshore_elec_s{simpl}.geojson``: confer :ref:`simplify`
+- ``resources/busmap_elec_s{simpl}.csv``: confer :ref:`simplify`
+- ``networks/elec_s{simpl}.nc``: confer :ref:`simplify`
+- ``data/custom_busmap_elec_s{simpl}_{clusters}.csv``: optional input
+
+Outputs
+-------
+
+- ``resources/regions_onshore_elec_s{simpl}_{clusters}.geojson``:
+
+    .. image:: img/regions_onshore_elec_s_X.png
+        :scale: 33 %
+
+- ``resources/regions_offshore_elec_s{simpl}_{clusters}.geojson``:
+
+    .. image:: img/regions_offshore_elec_s_X.png
+        :scale: 33 %
+
+- ``resources/busmap_elec_s{simpl}_{clusters}.csv``: Mapping of buses from ``networks/elec_s{simpl}.nc`` to ``networks/elec_s{simpl}_{clusters}.nc``;
+- ``resources/linemap_elec_s{simpl}_{clusters}.csv``: Mapping of lines from ``networks/elec_s{simpl}.nc`` to ``networks/elec_s{simpl}_{clusters}.nc``;
+- ``networks/elec_s{simpl}_{clusters}.nc``:
+
+    .. image:: img/elec_s_X.png
+        :scale: 40  %
+
+Description
+-----------
+
+.. note::
+
+    **Why is clustering used both in** ``simplify_network`` **and** ``cluster_network`` **?**
+
+        Consider for example a network ``networks/elec_s100_50.nc`` in which
+        ``simplify_network`` clusters the network to 100 buses and in a second
+        step ``cluster_network``` reduces it down to 50 buses.
+
+        In preliminary tests, it turns out, that the principal effect of
+        changing spatial resolution is actually only partially due to the
+        transmission network. It is more important to differentiate between
+        wind generators with higher capacity factors from those with lower
+        capacity factors, i.e. to have a higher spatial resolution in the
+        renewable generation than in the number of buses.
+
+        The two-step clustering allows to study this effect by looking at
+        networks like ``networks/elec_s100_50m.nc``. Note the additional
+        ``m`` in the ``{cluster}`` wildcard. So in the example network
+        there are still up to 100 different wind generators.
+
+        In combination these two features allow you to study the spatial
+        resolution of the transmission network separately from the
+        spatial resolution of renewable generators.
+
+    **Is it possible to run the model without the** ``simplify_network`` **rule?**
+
+        No, the network clustering methods in the PyPSA module
+        `pypsa.clustering.spatial <https://github.com/PyPSA/PyPSA/blob/master/pypsa/clustering/spatial.py>`_
+        do not work reliably with multiple voltage levels and transformers.
+
+.. tip::
+    The rule :mod:`cluster_networks` runs
+    for all ``scenario`` s in the configuration file
+    the rule :mod:`cluster_network`.
+
+Exemplary unsolved network clustered to 512 nodes:
+
+.. image:: img/elec_s_512.png
+    :scale: 40  %
+    :align: center
+
+Exemplary unsolved network clustered to 256 nodes:
+
+.. image:: img/elec_s_256.png
+    :scale: 40  %
+    :align: center
+
+Exemplary unsolved network clustered to 128 nodes:
+
+.. image:: img/elec_s_128.png
+    :scale: 40  %
+    :align: center
+
+Exemplary unsolved network clustered to 37 nodes:
+
+.. image:: img/elec_s_37.png
+    :scale: 40  %
+    :align: center
+"""
+
+
 import logging
+
+import pypsa
 import linopy
 import numpy as np
 import pandas as pd
@@ -7,10 +133,9 @@ import geopandas as gpd
 from functools import reduce
 
 from pypsa.clustering.spatial import get_clustering_from_busmap
-from _helpers import configure_logging
+from _helpers import configure_logging, update_p_nom_max, set_scenario_config, load_costs
 
 logger = logging.getLogger(__name__)
-configure_logging(snakemake)
 
 
 def normed(x):
@@ -248,3 +373,120 @@ def cluster_regions(busmaps, input=None, output=None):
         regions_c.index.name = "name"
         regions_c = regions_c.reset_index()
         regions_c.to_file(getattr(output, which))
+
+
+def make_busmap(n, zones):
+    df = gpd.GeoDataFrame(
+        index=n.buses.index,
+        geometry=gpd.points_from_xy(n.buses.x, n.buses.y),
+        crs="EPSG:4326",
+        )
+
+    return gpd.sjoin(df, zones, how="left", op="within").rename(columns={"index_right": 0})[0]
+
+
+if __name__ == "__main__":
+    if "snakemake" not in globals():
+        from _helpers import mock_snakemake
+
+        snakemake = mock_snakemake("cluster_network", simpl="", clusters="37")
+    configure_logging(snakemake)
+    set_scenario_config(snakemake)
+
+    params = snakemake.params
+    solver_name = snakemake.config["solving"]["solver"]["name"]
+
+    n = pypsa.Network(snakemake.input.network)
+
+    # remove integer outputs for compatibility with PyPSA v0.26.0
+    n.generators.drop("n_mod", axis=1, inplace=True, errors="ignore")
+
+    exclude_carriers = params.cluster_network["exclude_carriers"]
+    aggregate_carriers = set(n.generators.carrier) - set(exclude_carriers)
+    conventional_carriers = set(params.conventional_carriers)
+
+    target_regions = gpd.read_file(snakemake.input.target_regions).set_index("name")[["geometry"]]
+    custom_busmap = make_busmap(n, target_regions)
+
+    non = custom_busmap.loc[custom_busmap.isna()].index
+
+    logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
+    for c in n.iterate_components(n.one_port_components):
+        (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
+
+    for c in n.iterate_components(n.branch_components):
+        (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
+    
+    n.buses.drop(non, inplace=True)
+
+    custom_busmap.dropna(inplace=True)
+
+    n_clusters = custom_busmap.nunique()
+
+    if params.cluster_network.get("consider_efficiency_classes", False):
+        carriers = []
+        for c in aggregate_carriers:
+            gens = n.generators.query("carrier == @c")
+            low = gens.efficiency.quantile(0.10)
+            high = gens.efficiency.quantile(0.90)
+            if low >= high:
+                carriers += [c]
+            else:
+                labels = ["low", "medium", "high"]
+                suffix = pd.cut(
+                    gens.efficiency, bins=[0, low, high, 1], labels=labels
+                ).astype(str)
+                carriers += [f"{c} {label} efficiency" for label in labels]
+                n.generators.update(
+                    {"carrier": gens.carrier + " " + suffix + " efficiency"}
+                )
+        aggregate_carriers = carriers
+
+    if n_clusters == len(n.buses):
+        # Fast-path if no clustering is necessary
+        busmap = n.buses.index.to_series()
+        linemap = n.lines.index.to_series()
+        clustering = pypsa.clustering.spatial.Clustering(
+            n, busmap, linemap, linemap, pd.Series(dtype="O")
+        )
+    else:
+        Nyears = n.snapshot_weightings.objective.sum() / 8760
+
+        hvac_overhead_cost = load_costs(
+            snakemake.input.tech_costs,
+            params.costs,
+            params.max_hours,
+            Nyears,
+        ).at["HVAC overhead", "capital_cost"]
+
+        clustering = clustering_for_n_clusters(
+            n,
+            n_clusters,
+            custom_busmap,
+            aggregate_carriers,
+            params.length_factor,
+            params.aggregation_strategies,
+            solver_name,
+            params.cluster_network["algorithm"],
+            params.cluster_network["feature"],
+            hvac_overhead_cost,
+        )
+
+    update_p_nom_max(clustering.network)
+
+    if params.cluster_network.get("consider_efficiency_classes"):
+        labels = [f" {label} efficiency" for label in ["low", "medium", "high"]]
+        nc = clustering.network
+        nc.generators["carrier"] = nc.generators.carrier.replace(labels, "", regex=True)
+
+    clustering.network.meta = dict(
+        snakemake.config, **dict(wildcards=dict(snakemake.wildcards))
+    )
+    clustering.network.export_to_netcdf(snakemake.output.network)
+    for attr in (
+        "busmap",
+        "linemap",
+    ):  # also available: linemap_positive, linemap_negative
+        getattr(clustering, attr).to_csv(snakemake.output[attr])
+
+    cluster_regions((clustering.busmap,), snakemake.input, snakemake.output)

@@ -55,9 +55,8 @@ if __name__ == "__main__":
 
     logger.warning("no sensible costs yet!")
 
-    print(n.transformers)
-
-    n.transformers.loc[:, 'r'] = 1.
+    # print(n.transformers)
+    # n.transformers.loc[:, 'r'] = 1.
 
     n.export_to_netcdf(snakemake.output["live_network"])
-    n.optimize(solver_name='gurobi')
+    # n.optimize(solver_name='gurobi')

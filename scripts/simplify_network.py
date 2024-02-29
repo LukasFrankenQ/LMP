@@ -436,10 +436,7 @@ def cluster(
 
 
 if __name__ == "__main__":
-    if "snakemake" not in globals():
-        from _helpers import mock_snakemake
 
-        snakemake = mock_snakemake("simplify_network", simpl="")
     configure_logging(snakemake)
     set_scenario_config(snakemake)
 
@@ -506,7 +503,7 @@ if __name__ == "__main__":
             )
             busmaps.append(busmap_hac)
 
-    if snakemake.wildcards.simpl:
+    if "":
         n, cluster_map = cluster(
             n,
             int(snakemake.wildcards.simpl),

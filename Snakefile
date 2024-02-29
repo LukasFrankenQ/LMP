@@ -35,7 +35,7 @@ RESULTS = "results/"
 wildcard_constraints:
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
-    simpl="[a-zA-Z0-9]*",
+    # simpl="[a-zA-Z0-9]*",
 
 
 # Check if the workflow has access to the internet by trying to access the HEAD of specified url
@@ -291,21 +291,53 @@ rule simplify_network:
         p_max_pu=config["links"]["p_max_pu"],
         costs=config["costs"],
     input:
-        live_network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+        network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
         tech_costs="data/costs_2020.csv",
     output:
-        simplified_live_network=RESOURCES + "networks/prepared_live_{date}_{period}_elec_s{simpl}.nc",
-        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_elec_s{simpl}.geojson",
-        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_elec_s{simpl}.geojson",
-        busmap=RESOURCES + "busmap_{date}_{period}_s{simpl}.csv",
-        connection_costs=RESOURCES + "connection_costs_{date}_{period}_s{simpl}.csv",
+        network=RESOURCES + "networks/prepared_live_{date}_{period}_s.nc",
+        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_s.geojson",
+        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_s.geojson",
+        busmap=RESOURCES + "busmap_{date}_{period}_s.csv",
+        connection_costs=RESOURCES + "connection_costs_{date}_{period}_s.csv",
     log:
-        LOGS + "simplify_network_{date}_{period}_s{simpl}.log",
+        LOGS + "simplify_network_{date}_{period}_s.log",
     resources:
         mem_mb=1500,
     conda:
         "envs/environment.yaml"
     script:
         "scripts/simplify_network.py"
+
+
+rule cluster_network:
+    params:
+        cluster_network=config["clustering"]["cluster_network"],
+        aggregation_strategies=config["clustering"]["aggregation_strategies"],
+        renewable_carriers=config["electricity"]["renewable_carriers"],
+        conventional_carriers=config["electricity"]["conventional_carriers"],
+        max_hours=config["electricity"]["max_hours"],
+        length_factor=config["lines"]["length_factor"],
+        costs=config["costs"],
+    input:
+        target_regions="data/{layout}_zones.geojson",
+        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_s.geojson",
+        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_s.geojson",
+        network=RESOURCES + "networks/prepared_live_{date}_{period}_s.nc",
+        tech_costs="data/costs_2020.csv",
+    output:
+        network=RESOURCES + "networks/prepared_live_{date}_{period}_s_{layout}.nc",
+        regions_onshore=RESOURCES + "regions_onshore_elec_{date}_{period}_s_{layout}.geojson",
+        regions_offshore=RESOURCES + "regions_offshore_elec_{date}_{period}_s_{layout}.geojson",
+        busmap=RESOURCES + "busmap_elec_{date}_{period}_s_{layout}.csv",
+        linemap=RESOURCES + "linemap_elec_{date}_{period}_s_{layout}.csv",
+    log:
+        LOGS + "cluster_network_{date}_{period}_s_{layout}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/cluster_network.py"
+

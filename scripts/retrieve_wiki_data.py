@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     # Define your SPARQL query
     sparql_query = """
-    SELECT DISTINCT ?item ?itemLabel ?bmrs_id ?repd_id ?lat ?lon ?capacity ?typeLabel WHERE {
+    SELECT DISTINCT ?item ?itemLabel ?bmrs_id ?repd_id ?lat ?lon ?capacity ?typeLabel ?instance WHERE {
     ?item wdt:P11610 ?bmrs_id.
     OPTIONAL { ?item wdt:P9891 ?repd_id. }
     OPTIONAL { ?item wdt:P2109 ?capacity. }
@@ -48,6 +48,7 @@ if __name__ == "__main__":
         ?item wdt:P31 ?type.
         ?type wdt:P279+ wd:Q159719.
     }
+    OPTIONAL { ?item wdt:P31 ?instance. }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
     }
     """
@@ -72,6 +73,7 @@ if __name__ == "__main__":
         ("item", str),
         ("itemLabel", str),
         ("typeLabel", str),
+        ("instance", str),
     ]:
         wiki_df[key] = get_quantity(key, _type)
 

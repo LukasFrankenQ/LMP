@@ -15,6 +15,7 @@ Elexon Insights, and matches them with datasources to determine their location.
 
 import logging
 
+import yaml
 import requests
 import numpy as np
 import pandas as pd
@@ -24,6 +25,32 @@ from copy import deepcopy
 
 from _helpers import configure_logging
 from _elexon_helpers import process_multiples
+
+
+power_hierarchy = {
+    "wind": ["offwind", "onwind"],
+    "gas": ["CCGT", "CHP"],
+    "interconnector": ["HVDC submarine", ""],
+    "hydro": ["hydro-scheme", "PHS", "dam"],
+    "thermal": ["coal", "biomass"]
+    }
+
+def intersection(a, b):
+    return list(set(a) & set(b))
+
+def assign_carrier(cands):
+    if "battery" in cands:
+        return "battery"
+    
+    for outer, inner in power_hierarchy.items():
+        if (i := intersection(cands, inner)):
+            return i[0]
+
+        if outer in cands:
+            return outer
+        
+    return "powerstation"
+
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +74,7 @@ if __name__ == "__main__":
 
         if not isinstance(date, str):
             date = date.strftime("%Y-%m-%d")
-        
+
         params = deepcopy(query_params)
         params.update({"settlementDate": date, "settlementPeriod": period})
 
@@ -71,10 +98,58 @@ if __name__ == "__main__":
 
     wiki_df = pd.read_csv(snakemake.input["wiki_data"])
 
+    print("wiki df")
+    print(wiki_df)
+    print("--------------------------------------")
+
+    carrier_mapper = yaml.safe_load(open(snakemake.input["carrier_mapper"]))
+    print('carrier')
+    print(carrier_mapper)
+
+    wiki_df["carrier"] = wiki_df["instance"].apply(lambda entry: carrier_mapper[entry])
+
+    print("--------------------------------------")
+    print("wiki df")
+    print(wiki_df)
+    print("--------------------------------------")
+
     located_df = pd.concat((
         all_units,
         wiki_df[["bmrs_id", "lat", "lon", "capacity"]].groupby("bmrs_id").mean(),
     ), axis=1).fillna(0).loc[all_units.index]
+
+    print("located_df")
+    print(located_df)
+
+    carriers = wiki_df["instance"].apply(lambda entry: carrier_mapper[entry])
+    carriers.index = wiki_df["bmrs_id"]
+
+    print("carrier")
+    print(carriers)
+    
+    def get_carrier(entry):
+
+        try:
+            value = carriers.loc[entry]
+        except KeyError:
+            return np.nan
+
+        if isinstance(value, pd.Series):
+            return assign_carrier(value.tolist())
+
+        elif isinstance(value, str):
+            return value
+
+        return "other"
+
+    located_df["carrier"] = list(map(get_carrier, located_df.index))
+
+    print("located_df")
+    print(located_df.head())
+    print(located_df.carrier.isna().mean())
+    print(located_df["carrier"].tolist())
+    print("bmrs_id" in located_df["carrier"].tolist())
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++===")
 
     found_idx = located_df.loc[located_df["lat"] != 0].index
     logger.info(f"Found {len(found_idx)/len(located_df)*100:.2f}% of BMUs in wikidata.")
@@ -106,7 +181,17 @@ if __name__ == "__main__":
 
     manual_bmus = pd.read_csv(snakemake.input["manual_bmus"]).set_index("nationalGridBmUnit")
 
-    located_df.update(manual_bmus[["lon", "lat"]])
+    print("=======================================")
+    print('manual bmus')
+    print(manual_bmus.head())
+    print("bmrs_id" in manual_bmus["bmu_type"].values.tolist())
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++===")
+
+    located_df.update(manual_bmus.rename(columns={"bmu_type": "carrier"})[["lon", "lat", "carrier"]])
+
+    print("=======================================")
+    print('final located')
+    print(located_df.head(10))
 
     found_idx = located_df.loc[located_df["lat"] != 0].index
     logger.info(f"Found share {len(found_idx)/len(located_df)*100:.2f}% after wikidata, OSUKED and manual data.")

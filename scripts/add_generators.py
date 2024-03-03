@@ -14,6 +14,7 @@ Assigns located generators to buses based on regions
 
 import logging
 
+import yaml
 import pypsa
 import pandas as pd
 import geopandas as gpd
@@ -34,7 +35,7 @@ if __name__ == "__main__":
 
     bmus = (
         gpd.GeoDataFrame(bmus, geometry=gpd.points_from_xy(bmus.lon, bmus.lat))
-        [["geometry", "NationalGridBmUnit", "capacity"]]
+        [["geometry", "NationalGridBmUnit", "capacity", "carrier"]]
         ).set_crs(epsg=4326)
 
     onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
@@ -59,5 +60,12 @@ if __name__ == "__main__":
     logger.info(f"Assigned {len(n.generators)} generators to buses based on regions.")
     logger.info(f"Failed to assign {non_assigned} generators to buses based on regions.")
     logger.info(f"Saving network to {snakemake.output['gen_network']}.")
+
+    n.generators.loc[:, 'carrier'] = bmus.set_index("NationalGridBmUnit").loc[n.generators.index, 'carrier']
+    logger.info(f"Added carriers to generators. Share Unknown: {n.generators.carrier.isna().sum()/len(n.generators)}.")
+
+    logger.info(f"Adding marginal costs to generators from '{snakemake.input['carrier_costs']}'.")
+    costs = yaml.safe_load(open(snakemake.input["carrier_costs"]))
+    n.generators.loc[:, "marginal_cost"] = n.generators.carrier.apply(lambda carrier: costs.get(carrier, 100))
 
     n.export_to_netcdf(snakemake.output["gen_network"])

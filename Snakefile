@@ -193,7 +193,8 @@ rule prepare_bmu_data:
         wiki_data=RESOURCES + "wiki_data.csv",
         osuked_ids="data/ids.csv",
         osuked_plant_locations="data/plant-locations.csv",
-        manual_bmus="data/manual_bmus.csv",
+        manual_bmus="data/manual/bmus.csv",
+        carrier_mapper="data/manual/wiki_carrier_mapper.yaml",
     output:
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
     log:
@@ -215,6 +216,7 @@ rule add_generators:
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
+        carrier_costs="data/manual/carrier_costs.yaml",
     output:
         gen_network=RESOURCES + "networks/gen.nc",
     log:
@@ -340,4 +342,3 @@ rule cluster_network:
         "envs/environment.yaml"
     script:
         "scripts/cluster_network.py"
-

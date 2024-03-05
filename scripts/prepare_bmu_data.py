@@ -98,34 +98,17 @@ if __name__ == "__main__":
 
     wiki_df = pd.read_csv(snakemake.input["wiki_data"])
 
-    print("wiki df")
-    print(wiki_df)
-    print("--------------------------------------")
-
     carrier_mapper = yaml.safe_load(open(snakemake.input["carrier_mapper"]))
-    print('carrier')
-    print(carrier_mapper)
 
     wiki_df["carrier"] = wiki_df["instance"].apply(lambda entry: carrier_mapper[entry])
-
-    print("--------------------------------------")
-    print("wiki df")
-    print(wiki_df)
-    print("--------------------------------------")
 
     located_df = pd.concat((
         all_units,
         wiki_df[["bmrs_id", "lat", "lon", "capacity"]].groupby("bmrs_id").mean(),
     ), axis=1).fillna(0).loc[all_units.index]
 
-    print("located_df")
-    print(located_df)
-
     carriers = wiki_df["instance"].apply(lambda entry: carrier_mapper[entry])
     carriers.index = wiki_df["bmrs_id"]
-
-    print("carrier")
-    print(carriers)
     
     def get_carrier(entry):
 
@@ -143,13 +126,6 @@ if __name__ == "__main__":
         return "other"
 
     located_df["carrier"] = list(map(get_carrier, located_df.index))
-
-    print("located_df")
-    print(located_df.head())
-    print(located_df.carrier.isna().mean())
-    print(located_df["carrier"].tolist())
-    print("bmrs_id" in located_df["carrier"].tolist())
-    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++===")
 
     found_idx = located_df.loc[located_df["lat"] != 0].index
     logger.info(f"Found {len(found_idx)/len(located_df)*100:.2f}% of BMUs in wikidata.")
@@ -180,18 +156,7 @@ if __name__ == "__main__":
     logger.info("Adding manual locations.")
 
     manual_bmus = pd.read_csv(snakemake.input["manual_bmus"]).set_index("nationalGridBmUnit")
-
-    print("=======================================")
-    print('manual bmus')
-    print(manual_bmus.head())
-    print("bmrs_id" in manual_bmus["bmu_type"].values.tolist())
-    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++===")
-
     located_df.update(manual_bmus.rename(columns={"bmu_type": "carrier"})[["lon", "lat", "carrier"]])
-
-    print("=======================================")
-    print('final located')
-    print(located_df.head(10))
 
     found_idx = located_df.loc[located_df["lat"] != 0].index
     logger.info(f"Found share {len(found_idx)/len(located_df)*100:.2f}% after wikidata, OSUKED and manual data.")

@@ -31,6 +31,7 @@ if __name__ == "__main__":
     logger.info(f"Preparing live network for {date} settlement period {period}.")
     n = pypsa.Network(snakemake.input["network"])
 
+    logger.warning("Should be Export Limit for dispatchable generators, but not yet implemented!")
     bmu = pd.read_csv(snakemake.input["bmu_physical_data"]).set_index("NationalGridBmUnit")["LevelTo"]
 
     load_weights = pd.read_csv(snakemake.input["load_weights"], index_col=0)["load_weight"]
@@ -54,4 +55,4 @@ if __name__ == "__main__":
 
     logger.warning("no sensible costs yet!")
 
-    n.export_to_netcdf(snakemake.output["live_network"])
+    n.export_to_netcdf(snakemake.output["network"])

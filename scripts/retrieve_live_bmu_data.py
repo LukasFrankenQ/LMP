@@ -8,7 +8,7 @@ This rule downloads live data on BMU activity from the Elexon Insights API.
 
 **Outputs**
 
-- ``RESOURCES/bmu_physical_{data}_{period}.csv``: collected Physical Data
+- ``RESOURCES/{date}_{period}/bmu_physical.csv``: collected Physical Data
 
 """
 

@@ -35,6 +35,7 @@ RESULTS = "results/"
 wildcard_constraints:
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
+    # layout="^(nodal|fti|eso)$",
     # simpl="[a-zA-Z0-9]*",
 
 
@@ -254,7 +255,7 @@ rule build_load_weights:
 
 rule retrieve_live_bmu_data:
     output:
-        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+        bmu_physical_data=RESOURCES + "live_data/{date}_{period}/bmu_physical.csv",
     log:
         LOGS + "retrieve_live_bmu_data_{date}_{period}.log",
     threads: 1
@@ -270,9 +271,9 @@ rule prepare_live_network:
     input:
         network=RESOURCES + "networks/gen.nc",
         load_weights=RESOURCES + "load_weights.csv",
-        bmu_physical_data=RESOURCES + "live_physical/bmu_physical_{date}_{period}.csv",
+        bmu_physical_data=RESOURCES + "live_data/{date}_{period}/bmu_physical.csv",
     output:
-        live_network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+        network=RESOURCES + "live_data/{date}_{period}/network.nc",
     log:
         LOGS + "prepare_live_network_{date}_{period}.log",
     resources:
@@ -293,16 +294,16 @@ rule simplify_network:
         p_max_pu=config["links"]["p_max_pu"],
         costs=config["costs"],
     input:
-        network=RESOURCES + "networks/prepared_live_{date}_{period}.nc",
+        network=RESOURCES + "live_data/{date}_{period}/network.nc",
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
         tech_costs="data/costs_2020.csv",
     output:
-        network=RESOURCES + "networks/prepared_live_{date}_{period}_s.nc",
-        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_s.geojson",
-        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_s.geojson",
-        busmap=RESOURCES + "busmap_{date}_{period}_s.csv",
-        connection_costs=RESOURCES + "connection_costs_{date}_{period}_s.csv",
+        network=RESOURCES + "live_data/{date}_{period}/network_s.nc",
+        regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s.geojson",
+        busmap=RESOURCES + "live_data/{date}_{period}/busmap_s.csv",
+        connection_costs=RESOURCES + "live_data/{date}_{period}/connection_costs_s.csv",
     log:
         LOGS + "simplify_network_{date}_{period}_s.log",
     resources:
@@ -324,16 +325,16 @@ rule cluster_network:
         costs=config["costs"],
     input:
         target_regions="data/{layout}_zones.geojson",
-        regions_onshore=RESOURCES + "regions_onshore_{date}_{period}_s.geojson",
-        regions_offshore=RESOURCES + "regions_offshore_{date}_{period}_s.geojson",
-        network=RESOURCES + "networks/prepared_live_{date}_{period}_s.nc",
+        regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s.geojson",
+        network=RESOURCES + "live_data/{date}_{period}/network_s.nc",
         tech_costs="data/costs_2020.csv",
     output:
-        network=RESOURCES + "networks/prepared_live_{date}_{period}_s_{layout}.nc",
-        regions_onshore=RESOURCES + "regions_onshore_elec_{date}_{period}_s_{layout}.geojson",
-        regions_offshore=RESOURCES + "regions_offshore_elec_{date}_{period}_s_{layout}.geojson",
-        busmap=RESOURCES + "busmap_elec_{date}_{period}_s_{layout}.csv",
-        linemap=RESOURCES + "linemap_elec_{date}_{period}_s_{layout}.csv",
+        network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
+        # regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s_{layout}.geojson",
+        # regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s_{layout}.geojson",
+        # busmap=RESOURCES + "live_data/{date}_{period}/busmap_s_{layout}.csv",
+        # linemap=RESOURCES + "live_data/{date}_{period}/linemap_s_{layout}.csv",
     log:
         LOGS + "cluster_network_{date}_{period}_s_{layout}.log",
     resources:
@@ -342,3 +343,20 @@ rule cluster_network:
         "envs/environment.yaml"
     script:
         "scripts/cluster_network.py"
+
+
+rule solve_network:
+    params:
+        solving=config["solving"]["options"],
+    input:
+        network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
+    output:
+        network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}_solved.nc",
+    log:
+        LOGS + "solve_network_{date}_{period}_s_{layout}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/solve_network.py"

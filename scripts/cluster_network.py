@@ -124,6 +124,7 @@ Exemplary unsolved network clustered to 37 nodes:
 
 import logging
 
+import sys
 import pypsa
 import linopy
 import numpy as np
@@ -386,10 +387,7 @@ def make_busmap(n, zones):
 
 
 if __name__ == "__main__":
-    if "snakemake" not in globals():
-        from _helpers import mock_snakemake
 
-        snakemake = mock_snakemake("cluster_network", simpl="", clusters="37")
     configure_logging(snakemake)
     set_scenario_config(snakemake)
 
@@ -397,6 +395,10 @@ if __name__ == "__main__":
     solver_name = snakemake.config["solving"]["solver"]["name"]
 
     n = pypsa.Network(snakemake.input.network)
+
+    if snakemake.wildcards.layout == "nodal":
+        n.export_to_netcdf(snakemake.output["network"])
+        sys.exit()
 
     # remove integer outputs for compatibility with PyPSA v0.26.0
     n.generators.drop("n_mod", axis=1, inplace=True, errors="ignore")
@@ -483,10 +485,12 @@ if __name__ == "__main__":
         snakemake.config, **dict(wildcards=dict(snakemake.wildcards))
     )
     clustering.network.export_to_netcdf(snakemake.output.network)
+    
+    '''
     for attr in (
         "busmap",
         "linemap",
     ):  # also available: linemap_positive, linemap_negative
         getattr(clustering, attr).to_csv(snakemake.output[attr])
-
-    cluster_regions((clustering.busmap,), snakemake.input, snakemake.output)
+    '''
+    # cluster_regions((clustering.busmap,), snakemake.input, snakemake.output)

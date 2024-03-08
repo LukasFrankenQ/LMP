@@ -331,10 +331,6 @@ rule cluster_network:
         tech_costs="data/costs_2020.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
-        # regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s_{layout}.geojson",
-        # regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s_{layout}.geojson",
-        # busmap=RESOURCES + "live_data/{date}_{period}/busmap_s_{layout}.csv",
-        # linemap=RESOURCES + "live_data/{date}_{period}/linemap_s_{layout}.csv",
     log:
         LOGS + "cluster_network_{date}_{period}_s_{layout}.log",
     resources:

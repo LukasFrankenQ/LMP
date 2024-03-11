@@ -23,7 +23,12 @@ logger = logging.getLogger(__name__)
 from _helpers import configure_logging
 from _elexon_helpers import process_multiples
 
-url = 'https://data.elexon.co.uk/bmrs/api/v1/balancing/physical/all'
+
+prep_time = lambda x: str(x).zfill(2)
+
+# url = 'https://data.elexon.co.uk/bmrs/api/v1/balancing/physical/all'
+pn_url = "https://data.elexon.co.uk/bmrs/api/v1/datasets/PN?settlementDate={}&settlementPeriod={}&format=csv"
+mels_url = "https://data.elexon.co.uk/bmrs/api/v1/datasets/MELS?from={}T{}%3A{}Z&to={}T{}%3A{}Z&format=csv"
 
 if __name__ == "__main__":
 
@@ -34,15 +39,40 @@ if __name__ == "__main__":
 
     logger.info(f"Retrieving Live BMU Data from Elexon Insights API for {date} settlement period {period}.")
 
-    params = {
-        'dataset': 'PN',
-        'settlementDate': date,
-        'settlementPeriod': period,
-        'format': 'csv'  # Response data format
-    }
-        
-    response = requests.get(url, params=params)
-    df = pd.read_csv(StringIO(response.text))
+    response = requests.get(pn_url.format(date, period))
+    pn = (
+        process_multiples(
+            pd.read_csv(
+                StringIO(
+                    response.text
+                    )
+                )
+            )
+        .set_index("NationalGridBmUnit")
+        [["LevelTo"]]
+        .rename(columns={"LevelTo": "PN"})
+    )
+
+    print('Physical Data:')
+    print(pn.head())
+
+    end = pd.Timestamp(date) + period * pd.Timedelta("30min")
+    start = end - pd.Timedelta("30min")
+
+    response = requests.get(
+        mels_url.format(
+            date,
+            prep_time(start.hour),
+            prep_time(start.minute),
+            date,
+            prep_time(end.hour),
+            prep_time(end.minute)
+        )
+    )
+
+    mels = process_multiples(pd.read_csv(StringIO(response.text))).set_index
+
+
 
     df = (
         process_multiples(df)

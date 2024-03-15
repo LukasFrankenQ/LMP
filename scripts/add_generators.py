@@ -53,10 +53,11 @@ if __name__ == "__main__":
     for c in n.iterate_components(n.branch_components):
         (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
 
+    n.buses.drop(non, inplace=True)
+
     non_assigned = 0
 
     for _, bmu in bmus.iterrows():
-        print(bmu.geometry)
         
         hit = onshore.loc[onshore.geometry.contains(bmu.geometry)].index
         if len(hit) == 1:

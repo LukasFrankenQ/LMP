@@ -41,8 +41,6 @@ if __name__ == "__main__":
 
     logger.warning("Solver configuration not yet taken from gurobi!")
 
-    print(n.lines[['r', 'x', 'b', 's_nom', 'x_pu_eff', 'r_pu_eff']])
-
     n.optimize(solver_name="gurobi")
     logger.warning("Solver does not yet check for infeasibility!")
 

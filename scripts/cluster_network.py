@@ -396,6 +396,7 @@ if __name__ == "__main__":
 
     n = pypsa.Network(snakemake.input.network)
 
+    """
     fixes = ['r', 'x', 'b', 's_nom', 'x_pu_eff', 'r_pu_eff']
     logger.warning("Patching up network lines with ad-hoc solution for columns.")
     logger.warning(', '.join(fixes))
@@ -407,6 +408,7 @@ if __name__ == "__main__":
 
     print('after')
     print(n.lines[fixes])
+    """
 
     if snakemake.wildcards.layout == "nodal":
         n.export_to_netcdf(snakemake.output["network"])

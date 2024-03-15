@@ -31,7 +31,7 @@ def simplify_network_to_380(n):
     their starting bus to their ending bus. The corresponding starting
     buses are removed as well.
     """
-    target_value = 400.
+    target_value = 380.
     logger.warning(f"Setting lines voltage to {target_value} kV and removing transformers.")
 
     logger.info(f"Mapping all network lines onto a single {target_value} kV layer")

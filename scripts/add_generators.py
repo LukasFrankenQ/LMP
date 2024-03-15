@@ -20,6 +20,7 @@ import pandas as pd
 import geopandas as gpd
 
 from _helpers import configure_logging
+from cluster_network import make_busmap
 
 logger = logging.getLogger(__name__)
 
@@ -41,10 +42,22 @@ if __name__ == "__main__":
     onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
     offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
 
+    custom_busmap = make_busmap(n, onshore)
+
+    non = custom_busmap.loc[custom_busmap.isna()].index
+
+    logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
+    for c in n.iterate_components(n.one_port_components):
+        (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
+
+    for c in n.iterate_components(n.branch_components):
+        (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
+
     non_assigned = 0
 
     for _, bmu in bmus.iterrows():
-
+        print(bmu.geometry)
+        
         hit = onshore.loc[onshore.geometry.contains(bmu.geometry)].index
         if len(hit) == 1:
             n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0])

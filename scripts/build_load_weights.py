@@ -93,6 +93,9 @@ if __name__ == "__main__":
 
     for i, row in bus_regions.iterrows():
 
+        if row.geometry is None:
+            continue
+
         overlap = hold.geometry.intersection(row.geometry).area
         if overlap.sum() == 0.:
             continue

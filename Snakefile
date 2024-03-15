@@ -255,7 +255,7 @@ rule build_load_weights:
 
 rule retrieve_live_bmu_data:
     output:
-        live_bmu_data=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
+        elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
     log:
         LOGS + "retrieve_live_bmu_data_{date}_{period}.log",
     threads: 1
@@ -271,7 +271,7 @@ rule prepare_live_network:
     input:
         network=RESOURCES + "networks/gen.nc",
         load_weights=RESOURCES + "load_weights.csv",
-        bmu_physical_data=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
+        elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network.nc",
     log:

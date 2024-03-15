@@ -31,13 +31,16 @@ def simplify_network_to_380(n):
     their starting bus to their ending bus. The corresponding starting
     buses are removed as well.
     """
-    logger.info("Mapping all network lines onto a single 380kV layer")
+    target_value = 400.
+    logger.warning(f"Setting lines voltage to {target_value} kV and removing transformers.")
 
-    n.buses["v_nom"] = 380.0
+    logger.info(f"Mapping all network lines onto a single {target_value} kV layer")
 
-    (linetype_380,) = n.lines.loc[n.lines.v_nom == 380.0, "type"].unique()
+    n.buses["v_nom"] = target_value
+
+    (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
     n.lines["type"] = linetype_380
-    n.lines["v_nom"] = 380
+    n.lines["v_nom"] = target_value
     n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
     n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
 

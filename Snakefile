@@ -156,9 +156,11 @@ rule build_bus_regions:
     params:
         countries=config["countries"],
     input:
-        country_shapes=RESOURCES + "country_shapes.geojson",
+        # country_shapes=RESOURCES + "country_shapes.geojson",
+        country_shapes="data/gb_shape.geojson",
         offshore_shapes=RESOURCES + "offshore_shapes.geojson",
-        base_network=RESOURCES + "networks/base.nc",
+        # base_network=RESOURCES + "networks/etys_base.nc",
+        base_network="data/etys_base.nc",
     output:
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
@@ -213,7 +215,8 @@ rule add_generators:
     params:
         elexon=config["elexon"],
     input:
-        base_network=RESOURCES + "networks/base.nc",
+        base_network="data/etys_base.nc",
+        # base_network=RESOURCES + "networks/base.nc",
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",

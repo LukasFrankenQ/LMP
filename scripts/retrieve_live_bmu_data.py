@@ -83,4 +83,4 @@ if __name__ == "__main__":
         ["MELS"]
     )
 
-    pd.concat([pn, mels], axis=1).to_csv(snakemake.output["live_bmu_data"])
+    pd.concat([pn, mels], axis=1).to_csv(snakemake.output["elexon_bmus"])

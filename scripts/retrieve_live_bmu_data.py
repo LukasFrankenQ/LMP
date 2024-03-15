@@ -35,7 +35,7 @@ if __name__ == "__main__":
     configure_logging(snakemake)
 
     date = snakemake.wildcards.date
-    period = snakemake.wildcards.period
+    period = int(snakemake.wildcards.period)
 
     logger.info(f"Retrieving Live BMU Data from Elexon Insights API for {date} settlement period {period}.")
 
@@ -53,9 +53,6 @@ if __name__ == "__main__":
         .rename(columns={"LevelTo": "PN"})
     )
 
-    print('Physical Data:')
-    print(pn.head())
-
     end = pd.Timestamp(date) + period * pd.Timedelta("30min")
     start = end - pd.Timedelta("30min")
 
@@ -70,12 +67,20 @@ if __name__ == "__main__":
         )
     )
 
-    mels = process_multiples(pd.read_csv(StringIO(response.text))).set_index
+    mels = (
+        process_multiples(
+            pd.read_csv(
+                StringIO(response.text)
+                )
+            )
+        .set_index("NationalGridBmUnit")
+    )
+    
+    mels = (
+        mels
+        .loc[mels["SettlementPeriod"] == period]
+        .rename(columns={"LevelTo": "MELS"})
+        ["MELS"]
+    )
 
-
-
-    df = (
-        process_multiples(df)
-        .set_index(["SettlementDate", "SettlementPeriod", "NationalGridBmUnit"])
-        [["LevelFrom", "LevelTo", "BmUnit"]]
-    ).to_csv(snakemake.output["bmu_physical_data"])
+    pd.concat([pn, mels], axis=1).to_csv(snakemake.output["live_bmu_data"])

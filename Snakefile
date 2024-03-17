@@ -134,7 +134,8 @@ rule base_network:
         parameter_corrections="data/parameter_corrections.yaml",
         links_p_nom="data/links_p_nom.csv",
         links_tyndp="data/links_tyndp.csv",
-        country_shapes=RESOURCES + "country_shapes.geojson",
+        # country_shapes=RESOURCES + "country_shapes.geojson",
+        country_shapes="data/gb_shape.geojson",
         offshore_shapes=RESOURCES + "offshore_shapes.geojson",
         europe_shape=RESOURCES + "europe_shape.geojson",
     output:

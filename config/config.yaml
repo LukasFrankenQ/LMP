@@ -147,7 +147,7 @@ costs:
 solving:
   #tmpdir: "path/to/tmp"
   options:
-    p_nom_multiplier: 8.0
+    p_nom_multiplier: 4.0
 
     clip_p_max_pu: 1.e-2
     load_shedding: false

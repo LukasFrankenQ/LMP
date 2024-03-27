@@ -396,20 +396,6 @@ if __name__ == "__main__":
 
     n = pypsa.Network(snakemake.input.network)
 
-    """
-    fixes = ['r', 'x', 'b', 's_nom', 'x_pu_eff', 'r_pu_eff']
-    logger.warning("Patching up network lines with ad-hoc solution for columns.")
-    logger.warning(', '.join(fixes))
-    print('before')
-    print(n.lines[fixes])
-    for col in fixes:
-        n.lines.loc[n.lines[col] == 0, col] = np.nan
-        n.lines[col] = n.lines[col].fillna(n.lines[col].mean())
-
-    print('after')
-    print(n.lines[fixes])
-    """
-
     if snakemake.wildcards.layout == "nodal":
         n.export_to_netcdf(snakemake.output["network"])
         sys.exit()
@@ -423,19 +409,6 @@ if __name__ == "__main__":
 
     target_regions = gpd.read_file(snakemake.input.target_regions).set_index("name")[["geometry"]]
     custom_busmap = make_busmap(n, target_regions)
-
-    '''
-    non = custom_busmap.loc[custom_busmap.isna()].index
-
-    logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
-    for c in n.iterate_components(n.one_port_components):
-        (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
-
-    for c in n.iterate_components(n.branch_components):
-        (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
-    
-    n.buses.drop(non, inplace=True)
-    '''
 
     custom_busmap.dropna(inplace=True)
 

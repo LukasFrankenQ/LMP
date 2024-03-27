@@ -272,6 +272,20 @@ rule retrieve_live_bmu_data:
         "scripts/retrieve_live_bmu_data.py"
 
 
+rule retrieve_live_prices:
+    output:
+        price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
+    log:
+        LOGS + "retrieve_live_prices_{date}_{period}.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_live_prices.py"
+
+
 rule prepare_live_network:
     input:
         network=RESOURCES + "networks/gen.nc",

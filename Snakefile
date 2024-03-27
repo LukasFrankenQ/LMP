@@ -375,3 +375,26 @@ rule solve_network:
         "envs/environment.yaml"
     script:
         "scripts/solve_network.py"
+
+
+rule summarise_period:
+    input:
+        network_nodal=RESOURCES + "live_data/{date}_{period}/network_s_nodal_solved.nc",
+        regions_nodal=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        network_fti=RESOURCES + "live_data/{date}_{period}/network_s_fti_solved.nc",
+        regions_fti="data/fti_zones.geojson",
+        network_eso=RESOURCES + "live_data/{date}_{period}/network_s_eso_solved.nc",
+        regions_eso="data/eso_zones.geojson",
+        price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
+    output:
+        summary=RESOURCES + "live_data/{date}_{period}/summary.csv",
+        maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
+    log:
+        LOGS + "summarise_period_{date}_{period}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/summarise_period.py"
+    

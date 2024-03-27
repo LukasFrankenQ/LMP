@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: MIT
 """
-This rule downloads live data on BMU activity from the Elexon Insights API.
+This rule downloads live data on wholesale market prices from the Elexon Insights API.
 
 **Outputs**
 
@@ -35,7 +35,7 @@ def get_value(df, feature):
                 return float(feature[:-1])
 
 
-url = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}".format(date, date, period, period)
+template = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}"
 
 if __name__ == "__main__":
 
@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     results = pd.Series()
 
-    url = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}".format(date, date, period, period)
+    url = template.format(date, date, period, period)
     response = requests.get(url)
     df = pd.read_csv(StringIO(response.text))
 

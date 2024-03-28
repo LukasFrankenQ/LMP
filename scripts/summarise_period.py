@@ -28,24 +28,72 @@ if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+    layouts = ['nodal', 'fti', 'eso']
 
     stats = pd.read_csv(snakemake.input["price_stats"], index_col=0)
 
-    axs[1].set_title('Wholesale Market Index: {}'.format(stats.loc['market_index'].iloc[0]))
-
-    for layout, ax in zip(['nodal', 'fti', 'eso'], axs):
-
-        n = pypsa.Network(snakemake.input["network_{}".format(layout)])
-        regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
-
+    def price_to_zones(n, regions):
         c = n.buses_t.marginal_price.columns
-        regions['price'] = n.buses_t.marginal_price.iloc[0].loc[regions.index.intersection(c)]
-        regions.plot(column='price', legend=True, ax=ax, vmin=0, vmax=100)
+        return n.buses_t.marginal_price.iloc[0].loc[regions.index.intersection(c)]
+    
+    def load_to_zones(n, regions):
+        return (
+            n.loads.loc[
+                regions.index.intersection(n.loads.index), 'p_set'
+                ]
+                .rename('load')
+        )
+    
+    def p_nom_to_zones(n, regions):
+        return (g := n.generators.groupby('bus')['p_nom'].sum()).loc[regions.index.intersection(g.index)]
+    
+    def dispatch_to_zones(n, regions):
+        con = pd.concat((n.generators, n.generators_t.p.T), axis=1)
+        con = con.rename(columns={con.columns[-1]: 'dispatch'})
+        con = con.groupby('bus').sum()['dispatch']
+        return con.loc[regions.index.intersection(con.index)]
 
-        ax.set_axis_off()
+    vmins = {
+        'price': 0,
+    }
+    vmaxs = {
+        'price': 100,
+    }
 
-    plt.savefig(snakemake.output["maps"], bbox_inches='tight')
-    pd.DataFrame().to_csv(snakemake.output["summary"])
-    plt.show()
+    for metric in ['dispatch', 'load', 'price', 'p_nom']:    
 
+        get_func = globals()[f"{metric}_to_zones"]
+
+        fig, axs = plt.subplots(1, len(layouts), figsize=(15, 5))
+
+        for layout, ax in zip(layouts, axs):
+
+            n = pypsa.Network(snakemake.input["network_{}".format(layout)])
+            regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
+
+            regions.loc[:, metric] = get_func(n, regions)            
+            regions[metric] = regions[metric].fillna(0)
+
+            regions.plot(
+                column=metric,
+                legend=True,
+                ax=ax,
+                vmin=vmins.get(metric, None),
+                vmax=vmaxs.get(metric, None),
+                # label='Price in £/MWh',
+                edgecolor='k',
+                linewidth=0.5
+                )
+
+            ax.set_xticks([])
+            ax.set_yticks([])
+
+        axs[0].set_title('Modelled {}'.format(metric))
+
+        if metric == 'price':
+            axs[1].set_title('Wholesale Market Index: {} £/MWh'.format(stats.loc['market_index'].iloc[0]))
+        
+        plt.savefig(snakemake.output[f"{metric}_map"], bbox_inches='tight')
+        plt.show()
+
+    # pd.DataFrame().to_csv(snakemake.output["summary"])

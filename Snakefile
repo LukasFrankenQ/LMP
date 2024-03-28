@@ -388,7 +388,10 @@ rule summarise_period:
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
     output:
         summary=RESOURCES + "live_data/{date}_{period}/summary.csv",
-        maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
+        price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
+        load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
+        p_nom_map=RESOURCES + "live_data/{date}_{period}/p_nom_map.pdf",
+        dispatch_map=RESOURCES + "live_data/{date}_{period}/dispatch_map.pdf",
     log:
         LOGS + "summarise_period_{date}_{period}.log",
     resources:

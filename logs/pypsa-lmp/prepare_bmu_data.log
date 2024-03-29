@@ -1,0 +1,10 @@
+INFO:__main__:Retrieving list of all available BMUs from Elexon Insights from 
+https://data.elexon.co.uk/bmrs/api/v1/balancing/physical/all
+INFO:__main__:Retrieved 1852 BMUs from Elexon Insights.
+INFO:__main__:Adding locations provided by wikidata.
+INFO:__main__:Found 15.60% of BMUs in wikidata.
+INFO:__main__:Adding locations provided by github.com/OSUKED/Power-Station-Dictionary.
+INFO:__main__:Found share 19.65% after wikidata and OSUKED.
+INFO:__main__:Adding manual locations.
+INFO:__main__:Found share 24.24% after wikidata, OSUKED and manual data.
+INFO:__main__:Saved BMU data to resources/bmunits_loc.csv

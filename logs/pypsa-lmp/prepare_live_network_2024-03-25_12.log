@@ -1,0 +1,11 @@
+INFO:__main__:Preparing live network for 2024-03-25 settlement period 12.
+INFO:pypsa.io:Imported network gen.nc has buses, generators, lines, links, transformers
+WARNING:__main__:Should be Export Limit for dispatchable generators, but not yet implemented!
+WARNING:pypsa.io:The following Load have buses which are not defined:
+Index(['DUDH1Q', 'DUDH1R', 'GART4A', 'GART4B', 'HAMB4A', 'HAMB4B', 'HUMR41',
+       'IMPP41', 'FYRI1K', 'HUNN2D', 'LOCB1M', 'WHSO2A', 'WHSO2B', 'DUDH3-',
+       'HUMR31', 'IMPP31'],
+      dtype='object', name='name')
+WARNING:__main__:Just deleting negative ones
+WARNING:__main__:no sensible costs yet!
+INFO:pypsa.io:Exported network network.nc has transformers, buses, generators, loads, lines, links

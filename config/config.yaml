@@ -99,8 +99,10 @@ clustering:
     algorithm: kmeans # choose from: [hac, kmeans]
     feature: solar+onwind-time
     exclude_carriers: []
-    remove_stubs: true
-    remove_stubs_across_borders: true
+    remove_stubs: false    
+    # remove_stubs: true
+    remove_stubs_across_borders: false
+    # remove_stubs_across_borders: true
   cluster_network:
     algorithm: kmeans
     feature: solar+onwind-time
@@ -147,7 +149,8 @@ costs:
 solving:
   #tmpdir: "path/to/tmp"
   options:
-    p_nom_multiplier: 1.2
+    # p_nom_multiplier: 1.2
+    p_nom_multiplier: 5
 
     clip_p_max_pu: 1.e-2
     load_shedding: false

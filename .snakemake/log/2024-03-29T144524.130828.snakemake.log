@@ -1,0 +1,11 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+WorkflowError:
+MissingInputException: Missing input files for rule build_bus_regions:
+    output: resources/regions_onshore.geojson, resources/regions_offshore.geojson
+    affected files:
+        resources/offshore_shapes.geojson
+MissingInputException: Missing input files for rule build_bus_regions:
+    output: resources/regions_onshore.geojson, resources/regions_offshore.geojson
+    affected files:
+        resources/offshore_shapes.geojson

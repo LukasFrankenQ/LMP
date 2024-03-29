@@ -1,0 +1,11 @@
+WARNING:pypsa.io:The following Load have buses which are not defined:
+Index(['DUDH1Q', 'DUDH1R', 'GART4A', 'GART4B', 'HAMB4A', 'HAMB4B', 'HUMR41',
+       'IMPP41', 'FYRI1K', 'HUNN2D', 'LOCB1M', 'WHSO2A', 'WHSO2B', 'DUDH3-',
+       'HUMR31', 'IMPP31'],
+      dtype='object', name='name')
+INFO:pypsa.io:Imported network network.nc has buses, generators, lines, links, loads, transformers
+WARNING:__main__:Setting lines voltage to 380.0 kV and removing transformers.
+INFO:__main__:Mapping all network lines onto a single 380.0 kV layer
+INFO:__main__:Simplifying connected link components
+INFO:__main__:Joining the links 2923, 2924 connecting the buses SPIT1K, Central DC Substation, BLHI4R to simple link 2923+1
+INFO:pypsa.io:Exported network network_s.nc has buses, generators, lines, links, loads

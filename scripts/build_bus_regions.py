@@ -135,7 +135,8 @@ if __name__ == "__main__":
         c_b = n.buses.country == country
 
         onshore_shape = country_shapes[country]
-        onshore_locs = n.buses.loc[c_b & n.buses.substation_lv, ["x", "y"]]
+        # onshore_locs = n.buses.loc[c_b & n.buses.substation_lv, ["x", "y"]]
+        onshore_locs = n.buses.loc[c_b, ["x", "y"]]
         onshore_regions.append(
             gpd.GeoDataFrame(
                 {
@@ -153,7 +154,8 @@ if __name__ == "__main__":
         if country not in offshore_shapes.index:
             continue
         offshore_shape = offshore_shapes[country]
-        offshore_locs = n.buses.loc[c_b & n.buses.substation_off, ["x", "y"]]
+        # offshore_locs = n.buses.loc[c_b & n.buses.substation_off, ["x", "y"]]
+        offshore_locs = n.buses.loc[c_b, ["x", "y"]]
         offshore_regions_c = gpd.GeoDataFrame(
             {
                 "name": offshore_locs.index,

@@ -30,7 +30,7 @@ if __name__ == "__main__":
     sparql_url = "https://query.wikidata.org/sparql"
 
     # Create a SPARQLWrapper object with the defined URL
-    sparql = SPARQLWrapper(sparql_url)
+    sparql = SPARQLWrapper(sparql_url, agent='example-UA (https://example.com/; mail@example.com)')
 
     # Define your SPARQL query
     sparql_query = """

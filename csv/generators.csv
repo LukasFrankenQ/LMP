@@ -1,0 +1,26 @@
+name,bus,carrier,marginal_cost,p_nom,control,weight
+BLHI1J onwind,BLHI1J,onwind,0.01,37.0,,1.0
+BREC1Q onwind,BREC1Q,onwind,0.01,62.0,,1.0
+CILF2A wind,CILF2A,wind,0.01,228.0,,1.0
+COTT41 gas,COTT41,gas,68.0,1250.0,,3.0
+DAIN41 gas,DAIN41,gas,68.0,360.0,,2.0
+DENS1Q onwind,DENS1Q,onwind,0.01,25.0,,2.0
+FENW4A onwind,FENW4A,onwind,0.01,48.0,,1.0
+GRNA4C onwind,GRNA4C,onwind,0.01,88.0,,2.0
+KNOC1J onwind,KNOC1J,onwind,0.01,85.0,,2.0
+KNOC1J wind,KNOC1J,wind,0.01,92.0,,2.0
+KNOC2M wind,KNOC2M,wind,0.01,41.0,,1.0
+LAGA41 CCGT,LAGA41,CCGT,68.0,384.0,,1.0
+LAIR3- onwind,LAIR3-,onwind,0.01,145.0,,2.0
+LAIR3- wind,LAIR3-,wind,0.01,92.0,,1.0
+LOAN2- wind,LOAN2-,wind,0.01,31.0,,1.0
+LOCB1K onwind,LOCB1K,onwind,0.01,67.0,,1.0
+MAWO41 gas,MAWO41,gas,68.0,862.0,,1.0
+MAYT1T onwind,MAYT1T,onwind,0.01,69.0,,1.0
+MOFF4C onwind,MOFF4C,onwind,0.01,685.0,,6.0
+NECU1R onwind,NECU1R,onwind,0.01,27.0,,1.0
+NECU1R wind,NECU1R,wind,0.01,240.0,,1.0
+PEHS5- offwind,PEHS5-,offwind,0.01,97.0,,1.0
+TORN1- onwind,TORN1-,onwind,0.01,144.0,,1.0
+WHIB1G onwind,WHIB1G,onwind,0.01,190.0,,2.0
+WHSO4A CCGT,WHSO4A,CCGT,68.0,390.0,,2.0

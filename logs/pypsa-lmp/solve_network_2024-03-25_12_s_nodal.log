@@ -1,0 +1,17 @@
+INFO:pypsa.io:Imported network network_s_nodal.nc has buses, generators, lines, links, loads
+WARNING:__main__:Solver configuration not yet taken from gurobi!
+ERROR:root:Uncaught exception
+Traceback (most recent call last):
+  File "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\scripts\tmp5z75t_9f.solve_network.py", line 95, in <module>
+    n.optimize(solver_name="gurobi")
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\site-packages\pypsa\optimization\optimize.py", line 604, in __call__
+    return optimize(self._parent, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\site-packages\pypsa\optimization\optimize.py", line 574, in optimize
+    m = create_model(
+        ^^^^^^^^^^^^^
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\site-packages\pypsa\optimization\optimize.py", line 294, in create_model
+    define_nodal_balance_constraints(
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\site-packages\pypsa\optimization\constraints.py", line 586, in define_nodal_balance_constraints
+    raise ValueError("Empty LHS with non-zero RHS in nodal balance constraint.")
+ValueError: Empty LHS with non-zero RHS in nodal balance constraint.

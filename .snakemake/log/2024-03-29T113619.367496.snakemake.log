@@ -1,0 +1,42 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                     count
+--------------------  -------
+add_generators              1
+cluster_network             1
+prepare_bmu_data            1
+prepare_live_network        1
+retrieve_wiki_data          1
+simplify_network            1
+solve_network               1
+total                       7
+
+Select jobs to execute...
+
+[Fri Mar 29 11:36:20 2024]
+rule retrieve_wiki_data:
+    output: resources/wiki_data.csv
+    log: logs/pypsa-lmp/retrieve_wiki_data.log
+    jobid: 6
+    reason: Missing output files: resources/wiki_data.csv
+    resources: tmpdir=C:\Users\alyden\AppData\Local\Temp, mem_mb=1000, mem_mib=954
+
+[Fri Mar 29 11:36:21 2024]
+Error in rule retrieve_wiki_data:
+    jobid: 6
+    output: resources/wiki_data.csv
+    log: logs/pypsa-lmp/retrieve_wiki_data.log (check log file(s) for error details)
+    conda-env: C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\conda\cf0dbe1799d06fa5b5ff98f73b111298_
+
+RuleException:
+CalledProcessError in file C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile, line 190:
+Command 'C:/Users/alyden/AppData/Local/miniforge3/envs/pypsa-lmp/python.exe "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\scripts\tmprfapu45d.retrieve_wiki_data.py"' returned non-zero exit status 1.
+  File "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile", line 190, in __rule_retrieve_wiki_data
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\concurrent\futures\thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake\log\2024-03-29T113619.367496.snakemake.log

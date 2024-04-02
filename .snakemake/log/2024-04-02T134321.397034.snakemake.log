@@ -1,0 +1,4 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+MissingRuleException:
+No rule to produce resources/live_data/2024-3-25_12/network_s_nodal_solved.nc (if you use input functions make sure that they don't raise unexpected exceptions).

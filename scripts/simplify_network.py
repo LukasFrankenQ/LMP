@@ -38,11 +38,11 @@ def simplify_network_to_380(n):
 
     n.buses["v_nom"] = target_value
 
-    (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
-    n.lines["type"] = linetype_380
+    # (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
+    # n.lines["type"] = linetype_380
     n.lines["v_nom"] = target_value
-    n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
-    n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
+    # n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
+    # n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
 
     trafo_map = pd.Series(n.transformers.bus1.values, n.transformers.bus0.values)
     trafo_map = trafo_map[~trafo_map.index.duplicated(keep="first")]
@@ -72,12 +72,12 @@ def _prepare_connection_costs_per_link(n, costs, renewable_carriers, length_fact
         tech: (
             n.links.length
             * length_factor
-            * (
-                n.links.underwater_fraction
-                * costs.at[tech + "-connection-submarine", "capital_cost"]
-                + (1.0 - n.links.underwater_fraction)
-                * costs.at[tech + "-connection-underground", "capital_cost"]
-            )
+            # * (
+            #     n.links.underwater_fraction
+            #     * costs.at[tech + "-connection-submarine", "capital_cost"]
+            #     + (1.0 - n.links.underwater_fraction)
+            #     * costs.at[tech + "-connection-underground", "capital_cost"]
+            # )
         )
         for tech in renewable_carriers
         if tech.startswith("offwind")
@@ -289,11 +289,11 @@ def simplify_links(
                     n.links.loc[[i for _, i in l], "length"].mean() for l in links
                 ),
                 p_nom=min(n.links.loc[[i for _, i in l], "p_nom"].sum() for l in links),
-                underwater_fraction=sum(
-                    lengths
-                    / lengths.sum()
-                    * n.links.loc[all_links, "underwater_fraction"]
-                ),
+                # underwater_fraction=sum(
+                #     lengths
+                #     / lengths.sum()
+                #     * n.links.loc[all_links, "underwater_fraction"]
+                # ),
                 p_max_pu=p_max_pu,
                 p_min_pu=-p_max_pu,
                 underground=False,
@@ -447,6 +447,7 @@ if __name__ == "__main__":
     solver_name = snakemake.config["solving"]["solver"]["name"]
 
     n = pypsa.Network(snakemake.input.network)
+
     Nyears = n.snapshot_weightings.objective.sum() / 8760
 
     # remove integer outputs for compatibility with PyPSA v0.26.0
@@ -472,6 +473,7 @@ if __name__ == "__main__":
         params.aggregation_strategies,
     )
 
+    # busmaps = [trafo_map]
     busmaps = [trafo_map, simplify_links_map]
 
     if params.simplify_network["remove_stubs"]:

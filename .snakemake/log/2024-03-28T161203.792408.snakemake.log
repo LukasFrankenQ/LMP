@@ -1,0 +1,12 @@
+Building DAG of jobs...
+MissingInputException in rule build_shapes in file C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile, line 94:
+Missing input files for rule build_shapes:
+    output: resources/country_shapes.geojson, resources/offshore_shapes.geojson, resources/europe_shape.geojson, resources/nuts3_shapes.geojson
+    affected files:
+        data/bundle/eez/World_EEZ_v8_2014.shp
+        data/bundle/NUTS_2013_60M_SH/data/NUTS_RG_60M_2013.shp
+        data/bundle/naturalearth/ne_10m_admin_0_countries.shp
+        data/bundle/nama_10r_3gdp.tsv.gz
+        data/bundle/je-e-21.03.02.xls
+        data/bundle/nama_10r_3popgdp.tsv.gz
+        data/bundle/ch_cantons.csv

@@ -1,0 +1,8 @@
+INFO:__main__:Assigning generators to buses based on regions.
+INFO:pypsa.io:Imported network ETYS_base.nc has buses, lines, links, transformers
+INFO:__main__:Assigned 56 generators to buses based on regions.
+INFO:__main__:Failed to assign 393 generators to buses based on regions.
+INFO:__main__:Saving network to resources/networks/gen.nc.
+INFO:__main__:Added carriers to generators. Share Unknown: 0.05357142857142857.
+INFO:__main__:Adding marginal costs to generators from 'data/manual/carrier_costs.yaml'.
+INFO:pypsa.io:Exported network gen.nc has buses, links, generators, transformers, lines

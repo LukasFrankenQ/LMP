@@ -1,0 +1,43 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                 count
+----------------  -------
+cluster_network         1
+simplify_network        1
+solve_network           1
+total                   3
+
+Select jobs to execute...
+
+[Fri Mar 29 11:44:23 2024]
+rule simplify_network:
+    input: resources/live_data/2024-03-25_12/network.nc, resources/regions_onshore.geojson, resources/regions_offshore.geojson, data/costs_2020.csv
+    output: resources/live_data/2024-03-25_12/network_s.nc, resources/live_data/2024-03-25_12/regions_onshore_s.geojson, resources/live_data/2024-03-25_12/regions_offshore_s.geojson, resources/live_data/2024-03-25_12/busmap_s.csv, resources/live_data/2024-03-25_12/connection_costs_s.csv
+    log: logs/pypsa-lmp/simplify_network_2024-03-25_12_s.log
+    jobid: 0
+    reason: Missing output files: resources/live_data/2024-03-25_12/regions_offshore_s.geojson, resources/live_data/2024-03-25_12/regions_onshore_s.geojson, resources/live_data/2024-03-25_12/network_s.nc
+    wildcards: date=2024-03-25, period=12
+    resources: tmpdir=C:\Users\alyden\AppData\Local\Temp, mem_mb=1500, mem_mib=1431
+
+[Fri Mar 29 11:44:28 2024]
+Error in rule simplify_network:
+    jobid: 0
+    input: resources/live_data/2024-03-25_12/network.nc, resources/regions_onshore.geojson, resources/regions_offshore.geojson, data/costs_2020.csv
+    output: resources/live_data/2024-03-25_12/network_s.nc, resources/live_data/2024-03-25_12/regions_onshore_s.geojson, resources/live_data/2024-03-25_12/regions_offshore_s.geojson, resources/live_data/2024-03-25_12/busmap_s.csv, resources/live_data/2024-03-25_12/connection_costs_s.csv
+    log: logs/pypsa-lmp/simplify_network_2024-03-25_12_s.log (check log file(s) for error details)
+    conda-env: C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\conda\cf0dbe1799d06fa5b5ff98f73b111298_
+
+RuleException:
+CalledProcessError in file C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile, line 333:
+Command 'C:/Users/alyden/AppData/Local/miniforge3/envs/pypsa-lmp/python.exe "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\scripts\tmpyaz14wdo.simplify_network.py"' returned non-zero exit status 1.
+  File "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile", line 333, in __rule_simplify_network
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\concurrent\futures\thread.py", line 58, in run
+Removing output files of failed job simplify_network since they might be corrupted:
+resources/live_data/2024-03-25_12/connection_costs_s.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake\log\2024-03-29T114423.169873.snakemake.log

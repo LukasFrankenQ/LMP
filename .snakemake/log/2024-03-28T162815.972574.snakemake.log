@@ -1,0 +1,79 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                       count
+----------------------  -------
+add_generators                1
+build_bus_regions             1
+build_load_weights            1
+cluster_network               1
+prepare_bmu_data              1
+prepare_live_network          1
+retrieve_live_bmu_data        1
+retrieve_wiki_data            1
+simplify_network              1
+solve_network                 1
+total                        10
+
+Select jobs to execute...
+
+[Thu Mar 28 16:28:16 2024]
+rule build_bus_regions:
+    input: data/gb_shape.geojson, resources/offshore_shapes.geojson, data/ETYS_base.nc
+    output: resources/regions_onshore.geojson, resources/regions_offshore.geojson
+    log: logs/pypsa-lmp/build_bus_regions.log
+    jobid: 7
+    reason: Missing output files: resources/regions_offshore.geojson, resources/regions_onshore.geojson
+    resources: tmpdir=C:\Users\alyden\AppData\Local\Temp, mem_mb=1000, mem_mib=954
+
+[Thu Mar 28 16:28:16 2024]
+rule retrieve_wiki_data:
+    output: resources/wiki_data.csv
+    log: logs/pypsa-lmp/retrieve_wiki_data.log
+    jobid: 6
+    reason: Missing output files: resources/wiki_data.csv
+    resources: tmpdir=C:\Users\alyden\AppData\Local\Temp, mem_mb=1000, mem_mib=954
+
+[Thu Mar 28 16:28:16 2024]
+rule retrieve_live_bmu_data:
+    output: resources/live_data/2024-03-25_12/elexon_bmus.csv
+    log: logs/pypsa-lmp/retrieve_live_bmu_data_2024-03-25_12.log
+    jobid: 9
+    reason: Code has changed since last execution
+    wildcards: date=2024-03-25, period=12
+    resources: tmpdir=C:\Users\alyden\AppData\Local\Temp, mem_mb=1000, mem_mib=954
+
+[Thu Mar 28 16:28:17 2024]
+Error in rule retrieve_wiki_data:
+    jobid: 6
+    output: resources/wiki_data.csv
+    log: logs/pypsa-lmp/retrieve_wiki_data.log (check log file(s) for error details)
+    conda-env: C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\conda\cf0dbe1799d06fa5b5ff98f73b111298_
+
+RuleException:
+CalledProcessError in file C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile, line 190:
+Command 'C:/Users/alyden/AppData/Local/miniforge3/envs/pypsa-lmp/python.exe "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\scripts\tmpbfrvqgck.retrieve_wiki_data.py"' returned non-zero exit status 1.
+  File "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile", line 190, in __rule_retrieve_wiki_data
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\concurrent\futures\thread.py", line 58, in run
+[Thu Mar 28 16:28:19 2024]
+Finished job 9.
+1 of 10 steps (10%) done
+[Thu Mar 28 16:28:24 2024]
+Error in rule build_bus_regions:
+    jobid: 7
+    input: data/gb_shape.geojson, resources/offshore_shapes.geojson, data/ETYS_base.nc
+    output: resources/regions_onshore.geojson, resources/regions_offshore.geojson
+    log: logs/pypsa-lmp/build_bus_regions.log (check log file(s) for error details)
+    conda-env: C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\conda\cf0dbe1799d06fa5b5ff98f73b111298_
+
+RuleException:
+CalledProcessError in file C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile, line 176:
+Command 'C:/Users/alyden/AppData/Local/miniforge3/envs/pypsa-lmp/python.exe "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\.snakemake\scripts\tmpoww6jmqj.build_bus_regions.py"' returned non-zero exit status 1.
+  File "C:\Users\alyden\OneDrive - University of Edinburgh\Python\LMP\Snakefile", line 176, in __rule_build_bus_regions
+  File "C:\Users\alyden\AppData\Local\miniforge3\envs\pypsa-lmp\Lib\concurrent\futures\thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake\log\2024-03-28T162815.972574.snakemake.log

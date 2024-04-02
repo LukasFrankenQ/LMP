@@ -1,7 +1,0 @@
-INFO:pypsa.io:Imported network network.nc has buses, generators, lines, links, loads, transformers
-WARNING:__main__:Setting lines voltage to 380.0 kV and removing transformers.
-INFO:__main__:Mapping all network lines onto a single 380.0 kV layer
-INFO:__main__:Simplifying connected link components
-INFO:__main__:Joining the links 2924, 2923 connecting the buses BLHI4R, Central DC Substation, SPIT1K to simple link 2924+1
-INFO:__main__:Removing stubs
-INFO:pypsa.io:Exported network network_s.nc has lines, buses, loads, generators, links

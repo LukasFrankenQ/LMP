@@ -1,6 +1,0 @@
-INFO:__main__:Preparing live network for 2024-03-25 settlement period 12.
-INFO:pypsa.io:Imported network gen.nc has buses, generators, lines, links, transformers
-WARNING:__main__:Should be Export Limit for dispatchable generators, but not yet implemented!
-WARNING:__main__:Just deleting negative ones
-WARNING:__main__:no sensible costs yet!
-INFO:pypsa.io:Exported network network.nc has buses, generators, links, transformers, lines, loads

@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    layouts = ['nodal', 'fti', 'eso']
+    layouts = ['national', 'nodal', 'fti', 'eso']
 
     stats = pd.read_csv(snakemake.input["price_stats"], index_col=0)
 
@@ -60,16 +60,16 @@ if __name__ == "__main__":
         'price': 100,
     }
 
-    for metric in ['dispatch', 'load', 'price', 'p_nom']:    
+    show_metrics = ['dispatch', 'load', 'price', 'p_nom']    
+    fig, all_axs = plt.subplots(len(show_metrics), len(layouts), figsize=(10, 3*len(show_metrics)))
 
-        get_func = globals()[f"{metric}_to_zones"]
+    for layout, axs in zip(layouts, all_axs.T):
 
-        fig, axs = plt.subplots(1, len(layouts), figsize=(15, 5))
+        n = pypsa.Network(snakemake.input["network_{}".format(layout)])
+        regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
 
-        for layout, ax in zip(layouts, axs):
-
-            n = pypsa.Network(snakemake.input["network_{}".format(layout)])
-            regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
+        for metric, ax in zip(show_metrics, axs):
+            get_func = globals()[f"{metric}_to_zones"]
 
             regions.loc[:, metric] = get_func(n, regions)            
             regions[metric] = regions[metric].fillna(0)
@@ -88,12 +88,15 @@ if __name__ == "__main__":
             ax.set_xticks([])
             ax.set_yticks([])
 
-        axs[0].set_title('Modelled {}'.format(metric))
 
-        if metric == 'price':
-            axs[1].set_title('Wholesale Market Index: {} £/MWh'.format(stats.loc['market_index'].iloc[0]))
-        
-        plt.savefig(snakemake.output[f"{metric}_map"], bbox_inches='tight')
-        plt.show()
 
-    # pd.DataFrame().to_csv(snakemake.output["summary"])
+    for ax, metric in zip(all_axs[:,0], show_metrics):
+        ax.set_title('Modelled {}'.format(metric))
+
+    all_axs[show_metrics.index('price'), 1].set_title('Wholesale Market Index: {} £/MWh'.format(stats.loc['market_index'].iloc[0]))
+
+    plt.tight_layout()
+    plt.savefig(snakemake.output["maps"], bbox_inches='tight')
+    plt.show()
+
+    pd.DataFrame().to_csv(snakemake.output["summary"])

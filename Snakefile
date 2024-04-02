@@ -272,6 +272,20 @@ rule retrieve_live_bmu_data:
         "scripts/retrieve_live_bmu_data.py"
 
 
+rule retrieve_balancing_actions:
+    output:
+        real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
+    log:
+        LOGS + "retrieve_balancing_actions_{date}_{period}.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_balancing_actions.py"
+
+
 rule retrieve_live_prices:
     output:
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
@@ -385,13 +399,17 @@ rule summarise_period:
         regions_fti="data/fti_zones.geojson",
         network_eso=RESOURCES + "live_data/{date}_{period}/network_s_eso_solved.nc",
         regions_eso="data/eso_zones.geojson",
+        network_national=RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
+        regions_national="data/national_zones.geojson",
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
+        real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
     output:
         summary=RESOURCES + "live_data/{date}_{period}/summary.csv",
-        price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
-        load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
-        p_nom_map=RESOURCES + "live_data/{date}_{period}/p_nom_map.pdf",
-        dispatch_map=RESOURCES + "live_data/{date}_{period}/dispatch_map.pdf",
+        maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
+        # price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
+        # load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
+        # p_nom_map=RESOURCES + "live_data/{date}_{period}/p_nom_map.pdf",
+        # dispatch_map=RESOURCES + "live_data/{date}_{period}/dispatch_map.pdf",
     log:
         LOGS + "summarise_period_{date}_{period}.log",
     resources:

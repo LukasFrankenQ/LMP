@@ -8,7 +8,7 @@ This rule downloads live data on BMU activity from the Elexon Insights API.
 
 **Outputs**
 
-- ``RESOURCES/{date}_{period}/bmu_physical.csv``: collected Physical Data
+- ``RESOURCES/{date}_{period}/elexon_bmus.csv``: collected Physical Data
 
 """
 
@@ -75,12 +75,18 @@ if __name__ == "__main__":
             )
         .set_index("NationalGridBmUnit")
     )
-    
+
     mels = (
         mels
-        .loc[mels["SettlementPeriod"] == period]
+        # .loc[mels["SettlementPeriod"] == period]
         .rename(columns={"LevelTo": "MELS"})
+        .sort_values(by="SettlementPeriod", ascending=True)
+        .reset_index()
+        .drop_duplicates(subset='NationalGridBmUnit', keep='first')
+        .set_index("NationalGridBmUnit")
         ["MELS"]
     )
 
+    # import sys
+    # sys.exit()
     pd.concat([pn, mels], axis=1).to_csv(snakemake.output["elexon_bmus"])

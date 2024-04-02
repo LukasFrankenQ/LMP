@@ -116,10 +116,3 @@ if __name__ == "__main__":
     )
 
     logger.info(f"Saved load weights to {snakemake.output['load_weights']}.")
-
-
-
-
-
-
-

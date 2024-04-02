@@ -19,10 +19,10 @@ import pypsa
 import pandas as pd
 import geopandas as gpd
 
-from _helpers import configure_logging
-from cluster_network import make_busmap
+from _helpers import configure_logging, check_network_consistency
 
 logger = logging.getLogger(__name__)
+
 
 if __name__ == "__main__":
     configure_logging(snakemake)
@@ -42,54 +42,20 @@ if __name__ == "__main__":
     onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
     offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
 
-    custom_busmap = make_busmap(n, onshore)
-
-    '''
-    non = custom_busmap.loc[custom_busmap.isna()].index
-
-    logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
-    for c in n.iterate_components(n.one_port_components):
-        (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
-
-    for c in n.iterate_components(n.branch_components):
-        (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
-
-    n.buses.drop(non, inplace=True)
-    '''
-
-    import pypsa
-    import networkx as nx
-
-    # Assuming 'network' is your PyPSA network
-    graph = n.graph()
-
-    # Find the connected components
-    connected_components = list(nx.connected_components(graph))
-
-    # The largest component is usually the main system
-    main_system = max(connected_components, key=len)
-
-    # print("Main system:", main_system)
-    print("Number of buses in the main system:", len(main_system))
-    # print("Buses:", network.buses.index)
-
-    # Find the buses not in the main system
-    isolated_buses = [bus for bus in n.buses.index if bus not in main_system]
-
-    print("Isolated buses:", isolated_buses)
-    print("Number of isolated buses:", len(isolated_buses))
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     non_assigned = 0
 
     for _, bmu in bmus.iterrows():
         
         hit = onshore.loc[onshore.geometry.contains(bmu.geometry)].index
-        if len(hit) == 1:
+        if len(hit) >= 1:
             n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0])
             continue
 
         hit = offshore.loc[offshore.geometry.contains(bmu.geometry)].index
-        if len(hit) == 1:
+        if len(hit) >= 1:
             n.add("Generator", bmu["NationalGridBmUnit"], bus=hit[0])
             continue
 

@@ -11,6 +11,7 @@ import hashlib
 import requests
 import contextlib
 import pandas as pd
+import networkx as nx
 
 from snakemake.utils import update_config
 
@@ -258,3 +259,15 @@ def load_costs(tech_costs, config, max_hours, Nyears=1.0):
             costs.loc[overwrites.index, attr] = overwrites
 
     return costs
+
+
+def check_network_consistency(n):
+    """Checks if the network is one connected graph. Returns isolated buses"""
+
+    graph = n.graph()
+
+    connected_components = list(nx.connected_components(graph))
+
+    main_system = max(connected_components, key=len)
+
+    return n.buses.loc[~n.buses.index.isin(main_system)].index.tolist()

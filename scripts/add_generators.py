@@ -44,6 +44,7 @@ if __name__ == "__main__":
 
     custom_busmap = make_busmap(n, onshore)
 
+    '''
     non = custom_busmap.loc[custom_busmap.isna()].index
 
     logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
@@ -54,6 +55,29 @@ if __name__ == "__main__":
         (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
 
     n.buses.drop(non, inplace=True)
+    '''
+
+    import pypsa
+    import networkx as nx
+
+    # Assuming 'network' is your PyPSA network
+    graph = n.graph()
+
+    # Find the connected components
+    connected_components = list(nx.connected_components(graph))
+
+    # The largest component is usually the main system
+    main_system = max(connected_components, key=len)
+
+    # print("Main system:", main_system)
+    print("Number of buses in the main system:", len(main_system))
+    # print("Buses:", network.buses.index)
+
+    # Find the buses not in the main system
+    isolated_buses = [bus for bus in n.buses.index if bus not in main_system]
+
+    print("Isolated buses:", isolated_buses)
+    print("Number of isolated buses:", len(isolated_buses))
 
     non_assigned = 0
 

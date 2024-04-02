@@ -447,6 +447,7 @@ if __name__ == "__main__":
     solver_name = snakemake.config["solving"]["solver"]["name"]
 
     n = pypsa.Network(snakemake.input.network)
+
     Nyears = n.snapshot_weightings.objective.sum() / 8760
 
     # remove integer outputs for compatibility with PyPSA v0.26.0
@@ -472,8 +473,8 @@ if __name__ == "__main__":
         params.aggregation_strategies,
     )
 
-    busmaps = [trafo_map]
-    # busmaps = [trafo_map, simplify_links_map]
+    # busmaps = [trafo_map]
+    busmaps = [trafo_map, simplify_links_map]
 
     if params.simplify_network["remove_stubs"]:
         n, stub_map = remove_stubs(

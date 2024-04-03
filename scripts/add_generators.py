@@ -20,6 +20,7 @@ import pandas as pd
 import geopandas as gpd
 
 from _helpers import configure_logging, check_network_consistency
+from cluster_network import make_busmap
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,41 @@ if __name__ == "__main__":
 
     n = pypsa.Network(snakemake.input["base_network"])
 
+    onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
+    offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
+
+    if snakemake.params["electricity"]["network_dataset"] == "ENTSO-E":
+        # gb_shape = gpd.read_file(snakemake.input["gb_shape"]).geometry[0]
+        # 
+        # buses_geom = gpd.GeoDataFrame(
+        #    index=n.buses.index,
+        #     geometry=gpd.points_from_xy(
+        #         n.buses["x"].values, n.buses["y"].values
+        #         )
+        #     ).set_crs(epsg=4326)
+        # outside_gb = buses_geom.loc[~buses_geom.within(gb_shape)].index
+
+        # import matplotlib.pyplot as plt
+        # fig, ax = plt.subplots()
+        # buses_geom.plot(ax=ax, color="black", label="All")
+        # buses_geom.loc[outside_gb].plot(ax=ax, color="red", label="Outside GB")
+        # ax.legend()
+        # plt.show()
+
+        custom_busmap = make_busmap(n, onshore)
+
+        non = custom_busmap.loc[custom_busmap.isna()].index
+
+        logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
+        for c in n.iterate_components(n.one_port_components):
+            (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
+
+        for c in n.iterate_components(n.branch_components):
+            (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
+
+        n.buses.drop(non, inplace=True)
+
+
     bmus = pd.read_csv(snakemake.input["bmunits_loc"])
     bmus = bmus.loc[bmus.lat != 0.]
 
@@ -39,8 +75,6 @@ if __name__ == "__main__":
         [["geometry", "NationalGridBmUnit", "capacity", "carrier"]]
         ).set_crs(epsg=4326)
 
-    onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
-    offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
 
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))

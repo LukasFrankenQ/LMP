@@ -161,7 +161,10 @@ rule build_bus_regions:
         total_shape="data/gb_shape.geojson",
         offshore_shapes=RESOURCES + "offshore_shapes.geojson",
         # base_network=RESOURCES + "networks/base.nc",
-        base_network="data/ETYS_base.nc",
+        # base_network="data/ETYS_base.nc",
+        base_network=RESOURCES + "networks/base.nc"
+        if config["electricity"]["network_dataset"]
+        else "data/ETYS_base.nc",
     output:
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
@@ -215,10 +218,12 @@ rule prepare_bmu_data:
 rule add_generators:
     params:
         elexon=config["elexon"],
+        electricity=config["electricity"],
     input:
-        base_network="data/ETYS_base.nc",
-        # base_network=RESOURCES + "networks/base.nc",
-        total_shape="data/gb_shape.geojson",
+        base_network=RESOURCES + "networks/base.nc"
+        if config["electricity"]["network_dataset"]
+        else "data/ETYS_base.nc",
+        gb_shape="data/gb_shape.geojson",
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
@@ -315,6 +320,20 @@ rule prepare_live_network:
         "envs/environment.yaml"
     script:
         "scripts/prepare_live_network.py"
+
+
+rule retrieve_live_constraint_flows:
+    output:
+        constraint_flows=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
+    log:
+        LOGS + "retrieve_live_constraint_flows_{date}_{period}.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/retrieve_live_constraint_flows.py"
 
 
 rule simplify_network:

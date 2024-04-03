@@ -6,7 +6,13 @@ import pandas as pd
 import pypsa
 import scipy as sp
 
-from _helpers import configure_logging, update_p_nom_max, set_scenario_config, load_costs
+from _helpers import (
+    configure_logging,
+    update_p_nom_max,
+    set_scenario_config,
+    load_costs,
+    check_network_consistency,
+)
 from cluster_network import cluster_regions, clustering_for_n_clusters
 from pypsa.clustering.spatial import (
     aggregateoneport,
@@ -18,6 +24,103 @@ from scipy.sparse.csgraph import connected_components, dijkstra
 
 logger = logging.getLogger(__name__)
 
+
+"""
+def simplify_network_to_380(n):
+    Fix all lines to a voltage level of 380 kV and remove all transformers.
+
+    The function preserves the transmission capacity for each line while
+    updating its voltage level, line type and number of parallel bundles
+    (num_parallel).
+
+    Transformers are removed and connected components are moved from
+    their starting bus to their ending bus. The corresponding starting
+    buses are removed as well.
+
+    target_value = 400.
+
+    logger.info(f"Mapping all network lines onto a single {int(target_value)}kV layer")
+
+    n.buses["v_nom"] = target_value
+    print(n.lines.v_nom.value_counts())
+
+    (linetype,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
+
+    linetype = "Al/St 240/40 4-bundle 380.0"
+    n.lines["type"] = linetype
+    n.lines["v_nom"] = int(target_value)
+    print('linetype: ', linetype)
+    print(n.line_types.i_nom)
+    print(n.line_types.i_nom[linetype])
+    n.lines["i_nom"] = n.line_types.i_nom[linetype]
+    n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
+
+    trafo_map = pd.Series(n.transformers.bus1.values, n.transformers.bus0.values)
+    print(n.transformers)
+    print('trafo map')
+    print(trafo_map)
+    print(trafo_map.shape)
+    print(trafo_map.index.duplicated(keep="first"))
+
+    trafo_map = trafo_map[~trafo_map.index.duplicated(keep="first")]
+    print('after')
+    print(trafo_map)
+    several_trafo_b = trafo_map.isin(trafo_map.index)
+    print('several trafor b')
+    print(several_trafo_b)
+    print(several_trafo_b.loc[several_trafo_b])
+    print('total')
+    print(several_trafo_b.sum())
+    trafo_map[several_trafo_b] = trafo_map[several_trafo_b].map(trafo_map)
+    missing_buses_i = n.buses.index.difference(trafo_map.index)
+    print('missing buses: ', missing_buses_i)
+    missing = pd.Series(missing_buses_i, missing_buses_i)
+    print('missing: ', missing)
+    trafo_map = pd.concat([trafo_map, missing])
+
+    print(n.lines.v_nom.value_counts())
+
+    for name, trafo in n.transformers.iterrows():
+        n.add("Line", name, **dict(trafo))
+        n.transformers.drop(name, inplace=True)
+
+        # print(name)
+        # print(trafo)
+        # print(dict(trafo))
+
+        # import sys
+        # sys.exit()
+
+    for c in n.one_port_components | n.branch_components:
+
+        df = n.df(c)
+        for col in df.columns:
+            if col.startswith("bus"):
+                df[col] = df[col].map(trafo_map)
+
+        print(f'--------------------- after {c} loop -----------------------------------')
+        isolated_buses = check_network_consistency(n)
+        logger.info(f"A total of {len(isolated_buses)} isolated buses")
+
+    print('--------------------- beofre transformer removal -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
+    n.mremove("Transformer", n.transformers.index)
+
+    print('--------------------- after transformer removal -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
+    n.mremove("Bus", n.buses.index.difference(trafo_map))
+
+    print('--------------------- after buses removal -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
+    return n, pd.Series(n.buses.index, n.buses.index)
+    # return n, trafo_map
+"""
 
 def simplify_network_to_380(n):
     """
@@ -38,11 +141,11 @@ def simplify_network_to_380(n):
 
     n.buses["v_nom"] = target_value
 
-    # (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
-    # n.lines["type"] = linetype_380
+    (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
+    n.lines["type"] = linetype_380
     n.lines["v_nom"] = target_value
-    # n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
-    # n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
+    n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
+    n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
 
     trafo_map = pd.Series(n.transformers.bus1.values, n.transformers.bus0.values)
     trafo_map = trafo_map[~trafo_map.index.duplicated(keep="first")]
@@ -62,6 +165,7 @@ def simplify_network_to_380(n):
     n.mremove("Bus", n.buses.index.difference(trafo_map))
 
     return n, trafo_map
+
 
 
 def _prepare_connection_costs_per_link(n, costs, renewable_carriers, length_factor):
@@ -448,12 +552,24 @@ if __name__ == "__main__":
 
     n = pypsa.Network(snakemake.input.network)
 
+    print('--------------------- right after loading -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     Nyears = n.snapshot_weightings.objective.sum() / 8760
 
     # remove integer outputs for compatibility with PyPSA v0.26.0
     n.generators.drop("n_mod", axis=1, inplace=True, errors="ignore")
 
+    print('--------------------- after gen dropping -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     n, trafo_map = simplify_network_to_380(n)
+
+    print('--------------------- after network to 380 -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     technology_costs = load_costs(
         snakemake.input.tech_costs,
@@ -473,6 +589,10 @@ if __name__ == "__main__":
         params.aggregation_strategies,
     )
 
+    print('--------------------- after simplifying links -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     # busmaps = [trafo_map]
     busmaps = [trafo_map, simplify_links_map]
 
@@ -488,9 +608,17 @@ if __name__ == "__main__":
         )
         busmaps.append(stub_map)
 
+    print('--------------------- after removing stubs -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     if params.simplify_network["to_substations"]:
         n, substation_map = aggregate_to_substations(n, params.aggregation_strategies)
         busmaps.append(substation_map)
+
+    print('--------------------- after simplifying to substations -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     # treatment of outliers (nodes without a profile for considered carrier):
     # all nodes that have no profile of the given carrier are being aggregated to closest neighbor
@@ -508,7 +636,12 @@ if __name__ == "__main__":
             )
             busmaps.append(busmap_hac)
 
+    print('--------------------- after hac -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     if "":
+        print()
         n, cluster_map = cluster(
             n,
             int(snakemake.wildcards.simpl),
@@ -533,9 +666,22 @@ if __name__ == "__main__":
         "underground",
     ]
     n.buses.drop(remove, axis=1, inplace=True, errors="ignore")
+
+    print('--------------------- after bus removal -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     n.lines.drop(remove, axis=1, errors="ignore", inplace=True)
 
+    print('--------------------- after line removal -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
+
     update_p_nom_max(n)
+
+    print('--------------------- after update_p_nom_max -----------------------------------')
+    isolated_buses = check_network_consistency(n)
+    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     n.meta = dict(snakemake.config, **dict(wildcards=dict(snakemake.wildcards)))
     n.export_to_netcdf(snakemake.output.network)

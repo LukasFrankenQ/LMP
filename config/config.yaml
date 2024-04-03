@@ -15,6 +15,32 @@ enable:
 elexon:
   bmu_date: '2024-02-01' # determines the date of the BMU list, retrieved from a snapshot of the Physical Data
 
+
+boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of lines representing the boundary
+  # Warning! Only functional for dataset "ENTSO-E"
+  nodal:
+    SSE-SP: [13161, 6241, 6146, 6145, 6149, 6150]
+    SCOTEX: [14109, 6139, 11758]
+    SSHARN: [11778, 11780, 5225]
+    SWALEX: [11515, 11519]
+    ESTEX: [8705, 5185, 5194, 10414, 6329, 6326, 11743]
+    SEIMP: [6121, 12746, 11742]
+  fti:
+    SSE-SP: [0]
+    SCOTEX: [1]
+    SSHARN: [2]
+    SWALEX: []
+    ESTEX: []
+    SEIMP: []
+  eso:
+    SSE-SP: [20,21]
+    SCOTEX: [23]
+    SSHARN: [24,25]
+    SWALEX: [4,6,10,11]
+    ESTEX: [1,3,6,10,15]
+    SEIMP: [8,12,14]
+
+
 load:
   load_distribution_scenario: 'lw' # can be 'lw' (Leading the Way) or 'fs' (Falling Short)
   load_distribution_year: 2021     # only implemented for 2021 so far
@@ -47,6 +73,7 @@ transformers:
 
 # docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#electricity
 electricity:
+  network_dataset: "ENTSO-E" # can be "ENTSO-E" or "ETYS" (ETYS not functional yet!)
   voltages: [220., 300., 380., 500., 750.]
   gaslimit_enable: false
   gaslimit: false
@@ -158,7 +185,7 @@ solving:
   #tmpdir: "path/to/tmp"
   options:
     # p_nom_multiplier: 1.2
-    p_nom_multiplier: 5
+    p_nom_multiplier: 1.2
 
     clip_p_max_pu: 1.e-2
     load_shedding: false

@@ -18,10 +18,14 @@ from _helpers import configure_logging
 
 import requests
 import pandas as pd
+from urllib import parse
 
 logger = logging.getLogger(__name__)
 
+
 if __name__ == "__main__":
+
+    configure_logging(snakemake)
 
     date = snakemake.wildcards.date
     period = int(snakemake.wildcards.period)
@@ -41,8 +45,12 @@ if __name__ == "__main__":
     params = {'sql': sql_query}
 
     try:
-        resposne = requests.get('https://api.nationalgrideso.com/api/3/action/datastore_search_sql', params = parse.urlencode(params))
-        data = resposne.json()["result"]
+        response = requests.get(
+            'https://api.nationalgrideso.com/api/3/action/datastore_search_sql',
+            params=parse.urlencode(params)
+            )
+
+        data = response.json()["result"]
 
         df = (
             pd.DataFrame(data["records"])
@@ -52,7 +60,6 @@ if __name__ == "__main__":
                 "Limit (MW)": "limit",
                 "Flow (MW)": "flow",
                 "Date (GMT/BST)": "date",
-                "_count": "period",
                 })
         )
     except requests.exceptions.RequestException as e:

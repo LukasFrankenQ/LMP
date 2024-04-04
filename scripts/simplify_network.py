@@ -141,11 +141,11 @@ def simplify_network_to_380(n):
 
     n.buses["v_nom"] = target_value
 
-    (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique()
-    n.lines["type"] = linetype_380
+    (linetype_380,) = n.lines.loc[n.lines.v_nom == target_value, "type"].unique() #
+    n.lines["type"] = linetype_380 #
     n.lines["v_nom"] = target_value
-    n.lines["i_nom"] = n.line_types.i_nom[linetype_380]
-    n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)")
+    n.lines["i_nom"] = n.line_types.i_nom[linetype_380] #
+    n.lines["num_parallel"] = n.lines.eval("s_nom / (sqrt(3) * v_nom * i_nom)") #
 
     trafo_map = pd.Series(n.transformers.bus1.values, n.transformers.bus0.values)
     trafo_map = trafo_map[~trafo_map.index.duplicated(keep="first")]
@@ -552,24 +552,12 @@ if __name__ == "__main__":
 
     n = pypsa.Network(snakemake.input.network)
 
-    print('--------------------- right after loading -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     Nyears = n.snapshot_weightings.objective.sum() / 8760
 
     # remove integer outputs for compatibility with PyPSA v0.26.0
     n.generators.drop("n_mod", axis=1, inplace=True, errors="ignore")
 
-    print('--------------------- after gen dropping -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     n, trafo_map = simplify_network_to_380(n)
-
-    print('--------------------- after network to 380 -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     technology_costs = load_costs(
         snakemake.input.tech_costs,
@@ -589,10 +577,6 @@ if __name__ == "__main__":
         params.aggregation_strategies,
     )
 
-    print('--------------------- after simplifying links -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     # busmaps = [trafo_map]
     busmaps = [trafo_map, simplify_links_map]
 
@@ -608,17 +592,9 @@ if __name__ == "__main__":
         )
         busmaps.append(stub_map)
 
-    print('--------------------- after removing stubs -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     if params.simplify_network["to_substations"]:
         n, substation_map = aggregate_to_substations(n, params.aggregation_strategies)
         busmaps.append(substation_map)
-
-    print('--------------------- after simplifying to substations -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     # treatment of outliers (nodes without a profile for considered carrier):
     # all nodes that have no profile of the given carrier are being aggregated to closest neighbor
@@ -636,12 +612,8 @@ if __name__ == "__main__":
             )
             busmaps.append(busmap_hac)
 
-    print('--------------------- after hac -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     if "":
-        print()
         n, cluster_map = cluster(
             n,
             int(snakemake.wildcards.simpl),
@@ -667,21 +639,9 @@ if __name__ == "__main__":
     ]
     n.buses.drop(remove, axis=1, inplace=True, errors="ignore")
 
-    print('--------------------- after bus removal -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     n.lines.drop(remove, axis=1, errors="ignore", inplace=True)
 
-    print('--------------------- after line removal -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
-
     update_p_nom_max(n)
-
-    print('--------------------- after update_p_nom_max -----------------------------------')
-    isolated_buses = check_network_consistency(n)
-    logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     n.meta = dict(snakemake.config, **dict(wildcards=dict(snakemake.wildcards)))
     n.export_to_netcdf(snakemake.output.network)

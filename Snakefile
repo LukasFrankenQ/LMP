@@ -396,8 +396,10 @@ rule cluster_network:
 rule solve_network:
     params:
         solving=config["solving"]["options"],
+        boundaries=config["boundaries"],
     input:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
+        network_constraints=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}_solved.nc",
     log:

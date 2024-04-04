@@ -25,6 +25,7 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SWALEX: [11515, 11519]
     ESTEX: [8705, 5185, 5194, 10414, 6329, 6326, 11743]
     SEIMP: [6121, 12746, 11742]
+    FLOWSTH: [5203, 11528, 11764, 6203, 5207]
   fti:
     SSE-SP: [0]
     SCOTEX: [1]
@@ -32,13 +33,23 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SWALEX: []
     ESTEX: []
     SEIMP: []
+    FlOWSTH: [5, 4]
   eso:
-    SSE-SP: [20,21]
+    SSE-SP: [20, 21]
     SCOTEX: [23]
-    SSHARN: [24,25]
-    SWALEX: [4,6,10,11]
-    ESTEX: [1,3,6,10,15]
-    SEIMP: [8,12,14]
+    SSHARN: [24, 25]
+    SWALEX: [4, 6, 10, 11]
+    ESTEX: [1, 3, 6, 10, 15]
+    SEIMP: [8, 12, 14]
+    FLOWSTH: [1, 3, 4]
+  national:
+    SSE-SP: []
+    SCOTEX: []
+    SSHARN: []
+    SWALEX: []
+    ESTEX: []
+    SEIMP: []
+
 
 
 load:

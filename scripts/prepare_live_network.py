@@ -41,7 +41,30 @@ if __name__ == "__main__":
 
     total_load = bmu.loc[bmu["PN"] > 0, "PN"].sum()
 
+    logger.info("Moving exporting interconnectors from load to generators.")
+    interconnectors = n.links[n.links.carrier == "AC"]
+
+    export = bmu.loc[(
+        bmu.index.str.startswith('I') &
+        (bmu.index.str[3] == '-') &
+        bmu.index.str[:3].str.isalpha() &
+        (bmu["PN"] < 0)
+        ), "PN"]
+    print('exporters')
+    print(export)
+    
+    total_export = abs(export.sum())
+
+    logger.info(f"Total export capacity: {total_export} MW. Removed from load.")
+
+    print('before total load')
+    print(total_load)
+    total_load -= total_export
+    print('after total load')
+    print(total_load)
+
     loads = load_weights.loc[load_weights > 0].index
+
     n.madd(
         "Load",
         loads,
@@ -55,6 +78,22 @@ if __name__ == "__main__":
     bmu = bmu.loc[bmu["PN"] > 0].max(axis=1)
 
     n.generators.loc[bmu.index, 'p_nom'] = bmu
+
+    print('current state of exporters')
+    print(n.generators.loc[export.index, ['p_nom', 'marginal_cost', 'p_max_pu', 'p_min_pu']])
+
+    pu = export.div(n.generators.loc[export.index, 'p_nom'])
+    print('export')
+    print(export)
+
+    print('pu')
+    print(pu)
+
+    n.generators.loc[export.index, 'p_max_pu'] = pu
+    n.generators.loc[export.index, 'p_min_pu'] = pu
+
+    print('after state of exporters')
+    print(n.generators.loc[export.index, ['p_nom', 'marginal_cost', 'p_max_pu', 'p_min_pu']])
 
     logger.warning("no sensible costs yet!")
 
@@ -81,15 +120,6 @@ if __name__ == "__main__":
         else:
             mask.append(False)
     '''
-
-    # import matplotlib.pyplot as plt
-    # fig, ax = plt.subplots()
-
-    # ax.scatter(n.buses['x'], n.buses['y'], label='all')
-    # ax.scatter(n.buses.loc[mask, 'x'], n.buses.loc[mask, 'y'], label='mask')
-
-    # ax.legend()
-    # plt.show()
 
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))

@@ -46,6 +46,18 @@ def calculate_annuity(n, r):
         return 1 / n
 
 
+def get_scenarios(run):
+    scenario_config = run.get("scenarios", {})
+    if run["name"] and scenario_config.get("enable"):
+        fn = Path(scenario_config["file"])
+        if fn.exists():
+            scenarios = yaml.safe_load(fn.read_text())
+            if run["name"] == "all":
+                run["name"] = list(scenarios.keys())
+            return scenarios
+    return {}
+
+
 def set_scenario_config(snakemake):
     scenario = snakemake.config["run"].get("scenarios", {})
     if scenario.get("enable") and "run" in snakemake.wildcards.keys():
@@ -265,7 +277,6 @@ def check_network_consistency(n):
     """Checks if the network is one connected graph. Returns isolated buses"""
 
     graph = n.graph()
-
     connected_components = list(nx.connected_components(graph))
 
     main_system = max(connected_components, key=len)

@@ -10,6 +10,8 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from snakemake.utils import min_version
 from datetime import datetime, timedelta
 
+from scripts._helpers import get_scenarios
+
 HTTP = HTTPRemoteProvider()
 
 min_version("7.7")
@@ -18,7 +20,6 @@ conf_file = os.path.join(workflow.current_basedir, "config/config.yaml")
 conf_default_file = os.path.join(workflow.current_basedir, "config/config.yaml")
 if not exists(conf_file) and exists(conf_default_file):
     copyfile(conf_default_file, conf_file)
-
 
 configfile: "config/config.yaml"
 
@@ -31,12 +32,16 @@ BENCHMARKS = "benchmarks/" + RDIR
 RESOURCES = "resources/"
 RESULTS = "results/"
 
+run = config["run"]
+scenarios = get_scenarios(run)
 
 wildcard_constraints:
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
     # layout="^(nodal|fti|eso)$",
     # simpl="[a-zA-Z0-9]*",
+
+include: "rules/gather.smk"
 
 
 # Check if the workflow has access to the internet by trying to access the HEAD of specified url
@@ -399,6 +404,7 @@ rule solve_network:
         boundaries=config["boundaries"],
     input:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
+        nodal_network=RESOURCES + "live_data/{date}_{period}/network_s_nodal.nc",
         network_constraints=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}_solved.nc",

@@ -54,5 +54,5 @@ if __name__ == "__main__":
 
     results.loc['market_index'] = get_value(df, 'price')
     results.loc['volume'] = get_value(df, 'volume')
-    
+
     results.to_csv(snakemake.output["price_stats"])

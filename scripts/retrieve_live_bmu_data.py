@@ -78,7 +78,6 @@ if __name__ == "__main__":
 
     mels = (
         mels
-        # .loc[mels["SettlementPeriod"] == period]
         .rename(columns={"LevelTo": "MELS"})
         .sort_values(by="SettlementPeriod", ascending=True)
         .reset_index()
@@ -87,6 +86,4 @@ if __name__ == "__main__":
         ["MELS"]
     )
 
-    # import sys
-    # sys.exit()
     pd.concat([pn, mels], axis=1).to_csv(snakemake.output["elexon_bmus"])

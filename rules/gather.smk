@@ -36,4 +36,3 @@ rule gather_live_prices:
             RESOURCES + "live_data/{date}_{period}/price_stats.csv",
             **config["scenario"]
         )
-

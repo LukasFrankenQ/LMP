@@ -20,6 +20,7 @@ import pandas as pd
 import geopandas as gpd
 
 from _helpers import configure_logging, check_network_consistency
+from _elexon_helpers import fill_interconnector_locations
 from cluster_network import make_busmap
 
 logger = logging.getLogger(__name__)
@@ -31,11 +32,12 @@ if __name__ == "__main__":
     logger.info("Assigning generators to buses based on regions.")
 
     n = pypsa.Network(snakemake.input["base_network"])
+    nds = snakemake.params["electricity"]["network_dataset"]
 
     onshore = gpd.read_file(snakemake.input["regions_onshore"]).set_index("name")
     offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
 
-    if snakemake.params["electricity"]["network_dataset"] == "ENTSO-E":
+    if nds == "ENTSO-E":
         # gb_shape = gpd.read_file(snakemake.input["gb_shape"]).geometry[0]
         # 
         # buses_geom = gpd.GeoDataFrame(
@@ -55,26 +57,30 @@ if __name__ == "__main__":
 
         custom_busmap = make_busmap(n, onshore)
 
-        non = custom_busmap.loc[custom_busmap.isna()].index
+        outsiders = custom_busmap.loc[custom_busmap.isna()].index
 
-        logger.warning(f"Excluding {len(non)} buses from clustering with an ad-hoc method.")
+        logger.warning(f"Excluding {len(outsiders)} buses from network with an ad-hoc method.")
         for c in n.iterate_components(n.one_port_components):
-            (c := c.df).drop(c.loc[c.bus.isin(non)].index, inplace=True)
+            (c := c.df).drop(c.loc[c.bus.isin(outsiders)].index, inplace=True)
 
         for c in n.iterate_components(n.branch_components):
-            (c := c.df).drop(c.loc[(c.bus0.isin(non)) | (c.bus1.isin(non))].index, inplace=True)
+            (c := c.df).drop(c.loc[(c.bus0.isin(outsiders)) | (c.bus1.isin(outsiders))].index, inplace=True)
 
-        n.buses.drop(non, inplace=True)
+        n.buses.drop(outsiders, inplace=True)
 
+    else:
+        raise ValueError(f"Currently only ENTSO-E network dataset is supported, found {nds}.")
 
     bmus = pd.read_csv(snakemake.input["bmunits_loc"])
+
+    bmus = fill_interconnector_locations(bmus.set_index("NationalGridBmUnit")).reset_index()
+
     bmus = bmus.loc[bmus.lat != 0.]
 
     bmus = (
         gpd.GeoDataFrame(bmus, geometry=gpd.points_from_xy(bmus.lon, bmus.lat))
         [["geometry", "NationalGridBmUnit", "capacity", "carrier"]]
         ).set_crs(epsg=4326)
-
 
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
@@ -100,6 +106,11 @@ if __name__ == "__main__":
     logger.info(f"Saving network to {snakemake.output['gen_network']}.")
 
     n.generators.loc[:, 'carrier'] = bmus.set_index("NationalGridBmUnit").loc[n.generators.index, 'carrier']
+    n.generators.loc[
+        (n.generators.index.str.startswith("I")) &
+        (n.generators.index.str[3] == "-"),
+        "carrier"] = "interconnector"
+
     logger.info(f"Added carriers to generators. Share Unknown: {n.generators.carrier.isna().sum()/len(n.generators)}.")
 
     logger.info(f"Adding marginal costs to generators from '{snakemake.input['carrier_costs']}'.")

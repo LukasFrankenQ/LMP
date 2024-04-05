@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 
+import numpy as np
 import pandas as pd
 
 def process_multiples(df):
@@ -26,3 +27,57 @@ def process_multiples(df):
     df = df.loc[~df["BmUnit"].isin(removals)]
 
     return pd.concat([df, pd.concat(new_rows, axis=1).T], axis=0, ignore_index=True)
+
+
+def infer_index(name, df, x):
+
+    has_data = df[x] != 0.
+
+    try:
+        if "MOYL1" in name:
+            return df.loc[(has_data) & (df.index.str.contains("MOYL1"))].index[0]
+        
+        else:
+            return df.loc[(has_data) & (df.index.str.startswith(name[:3]))].index[0]
+    except IndexError:
+        return np.nan
+
+
+def fill_interconnector_locations(df):
+    """Fills in missing locations of interconnector BMUs based on existing data.
+    Uses that many BMUs of are referring to the same interconnector."""
+
+    x = df.columns.intersection(["x", "lon"])[0]
+    y = df.columns.intersection(["y", "lat"])[0]
+
+    def infer_location(name, df):
+        if (df.loc[name, x] != 0.) or not name.startswith("I"):
+
+            return df.loc[name, [x, y]].values
+        
+        elif ("MOYL1" in name) or (name[3] == "-"):
+
+            other = infer_index(name, df, x)
+
+        else:
+            return df.loc[name, [x, y]].values
+        
+        if isinstance(other, str):
+            return df.loc[other, [x, y]].values
+        else:
+            return [0., 0.]
+
+    df.loc[:, x], df.loc[:, y] = zip(
+        *df.reset_index().iloc[:,0].apply(lambda name: infer_location(name, df))
+        )
+
+    return df
+
+
+def find_other_interconnectors(new, df):
+    if isinstance(new, pd.Series):
+        new = new.to_frame()
+    
+    others = new.reset_index().iloc[:,0].apply(lambda name: infer_index(name, df, "bus"))
+
+    return others

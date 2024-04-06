@@ -2,37 +2,38 @@
 #
 # SPDX-License-Identifier: MIT
 
+from scripts._helpers import process_scenarios
+
 localrules:
     all,
     gather_balancing,
     gather_bmu_data,
     gather_live_prices,
 
-
 rule all:
     input:
         expand(
             RESOURCES + "live_data/{date}_{period}/maps.pdf",
-            **config["scenario"]
+            **process_scenarios(config["scenario"])
         )
 
 rule gather_balancing:
     input:
         expand(
             RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
-            **config["scenario"]
+            **process_scenarios(config["scenario"])
         )
 
 rule gather_bmu_data:
     input:
         expand(
             RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
-            **config["scenario"]
+            **process_scenarios(config["scenario"])
         )
 
 rule gather_live_prices:
     input:
         expand(
             RESOURCES + "live_data/{date}_{period}/price_stats.csv",
-            **config["scenario"]
+            **process_scenarios(config["scenario"])
         )

@@ -13,6 +13,8 @@ import contextlib
 import pandas as pd
 import networkx as nx
 
+from dateutil.parser import parse as check_if_date
+
 from snakemake.utils import update_config
 
 from tqdm import tqdm
@@ -282,3 +284,25 @@ def check_network_consistency(n):
     main_system = max(connected_components, key=len)
 
     return n.buses.loc[~n.buses.index.isin(main_system)].index.tolist()
+
+
+def process_scenarios(scenarios):
+    """Transforms wildcard ranges from 'start', 'end' format into snakemake friendly lists."""
+
+    for key, item in scenarios.items():
+        if isinstance(item, list):
+            continue
+
+        assert 'start' in item and 'end' in item, "If wildcards are not as list, start and end must be defined in the scenario"
+
+        try:
+            check_if_date(item['start'])
+            wildcard_list = pd.date_range(start=item['start'], end=item['end'], freq='d')
+            wildcard_list = [time.strftime('%Y-%m-%d') for time in wildcard_list]
+
+        except TypeError:
+            wildcard_list = list(range(item['start'], item['end']+1))
+
+        scenarios[key] = wildcard_list
+
+    return scenarios

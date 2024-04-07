@@ -96,6 +96,26 @@ if config["enable"]["retrieve"] and config["enable"].get("retrieve_databundle", 
             "scripts/retrieve_databundle.py"
 
 
+from scripts.my_test_rule import get_last_constraint_date
+
+rule my_test_rule:
+    output:
+        test_output=RESOURCES + "test_output_{date}_{period}.csv"
+        log:
+            LOGS + "my_test_rule.log",
+        resources:
+            mem_mb=1000,
+        conda:
+            "envs/environment.yaml"
+        script:
+            "scripts/my_test_rule.py"
+    
+
+
+        
+
+
+
 rule build_shapes:
     params:
         countries=config["countries"],
@@ -328,6 +348,8 @@ rule prepare_live_network:
 
 
 rule retrieve_live_constraint_flows:
+    params:
+        RESOURCES=RESOURCES,
     output:
         constraint_flows=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
     log:

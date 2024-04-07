@@ -40,6 +40,15 @@ if __name__ == "__main__":
     logger.info(f"Retrieving Live BMU Data from Elexon Insights API for {date} settlement period {period}.")
 
     response = requests.get(pn_url.format(date, period))
+
+    print('received raw response')
+    print(pd.read_csv(
+        StringIO(
+            response.text
+            )
+        )
+    )
+
     pn = (
         process_multiples(
             pd.read_csv(

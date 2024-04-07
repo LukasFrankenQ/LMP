@@ -32,6 +32,22 @@ def mute_print():
             yield
 
 
+def to_datetime(date, period):
+    return pd.Timestamp(date) + pd.Timedelta(minutes=30) * (period + 1)
+
+
+def to_date_period(dt):
+
+    period = (dt - dt.normalize()) // pd.Timedelta(minutes=30) - 1
+    if period <= 0:
+        date = (dt - pd.Timedelta(days=1)).strftime('%Y-%m-%d')
+        period = 48 + period
+    else:
+        date = dt.strftime('%Y-%m-%d')
+    
+    return date, period
+
+
 def calculate_annuity(n, r):
     """
     Calculate the annuity factor for an asset with lifetime n years and.

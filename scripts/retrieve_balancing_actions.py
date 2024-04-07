@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     response = requests.get(accepts_url)
     accepts = pd.read_csv(StringIO(response.text))
-    logger.info(f"Retrieved accted {len(accepts)} balancing actions.")
+    logger.info(f"Retrieved {len(accepts)} balancing actions.")
 
     bidsoffers_url = (
     "https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/"

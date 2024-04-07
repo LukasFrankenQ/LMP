@@ -38,6 +38,13 @@ rule gather_live_prices:
             **process_scenarios(config["scenario"])
         )
 
+rule gather_constraint_flows:
+    input:
+        expand(
+            RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
+            **process_scenarios(config["scenario"])
+        )
+
 rule gather_model_plots:
     params:
         scenario=config["scenario"],
@@ -64,10 +71,10 @@ rule gather_model_plots:
             **process_scenarios(config["scenario"])
         )
     output:
-        prices=RESOURCES + "plots" / "prices.pdf",
-        generation=RESOURCES + "plots" / "generation.pdf",
+        prices=RESOURCES + "plots/prices.pdf",
+        generation=RESOURCES + "plots/generation.pdf",
     log:
-        RESOURCES + "logs" / "gather_model_plots.log"
+        RESOURCES + "logs/gather_model_plots.log"
     resources:
         mem_mb=1000,
     conda:

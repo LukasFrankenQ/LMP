@@ -7,12 +7,14 @@ run:
 
 scenario:
   date:
-    start: "2024-04-01"
-    end: "2024-04-03"
+    start: "2024-03-30"
+    end: "2024-04-07"
 
   period:
-    start: 6
-    end: 7
+    start: 1
+    end: 48
+    # - 27
+
   layout:
     - nodal
     - fti

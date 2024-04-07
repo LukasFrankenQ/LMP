@@ -10,7 +10,7 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from snakemake.utils import min_version
 from datetime import datetime, timedelta
 
-from scripts._helpers import get_scenarios
+from scripts._helpers import get_scenarios, to_total_seconds
 
 HTTP = HTTPRemoteProvider()
 
@@ -433,8 +433,8 @@ rule summarise_period:
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
         real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
     output:
-        summary=RESOURCES + "live_data/{date}_{period}/summary.csv",
-        maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
+        summary=RESULTS + "half-hourly/{date}_{period}.json",
+        # maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
         # price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
         # load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
         # p_nom_map=RESOURCES + "live_data/{date}_{period}/p_nom_map.pdf",

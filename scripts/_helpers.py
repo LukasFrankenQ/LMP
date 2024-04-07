@@ -48,6 +48,10 @@ def to_date_period(dt):
     return date, period
 
 
+def to_total_seconds(date, period):
+    return to_datetime(date, period).total_seconds()
+
+
 def calculate_annuity(n, r):
     """
     Calculate the annuity factor for an asset with lifetime n years and.

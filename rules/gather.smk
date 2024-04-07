@@ -17,6 +17,14 @@ rule all:
             **process_scenarios(config["scenario"])
         )
 
+
+rule gather_summaries:
+    input:
+        expand(
+            RESULTS + "half-hourly/{date}_{period}.json",
+            **process_scenarios(config["scenario"])
+        )
+
 rule gather_balancing:
     input:
         expand(
@@ -44,6 +52,7 @@ rule gather_constraint_flows:
             RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
             **process_scenarios(config["scenario"])
         )
+
 
 rule gather_model_plots:
     params:

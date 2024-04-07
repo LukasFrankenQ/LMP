@@ -61,11 +61,9 @@ if __name__ == "__main__":
 
     response = requests.get(
         mels_url.format(
-            # date,
             start.strftime('%Y-%m-%d'),
             prep_time(start.hour),
             prep_time(start.minute),
-            # date,
             end.strftime('%Y-%m-%d'),
             prep_time(end.hour),
             prep_time(end.minute)

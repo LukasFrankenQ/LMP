@@ -4,99 +4,77 @@
 #
 # SPDX-License-Identifier: MIT
 """
-This rule makes a summary of the period comparing modelled to actual wholesale prices.
+This scripts compiles model outputs from a date, period pair into output files ready to
+be used for web visualisation.
 
 **Outputs**
 
-- ``RESOURCES/{date}_{period}/summary.csv``: the summary
-- ``RESOURCES/{date}_{period}/maps.csv``: maps showing the prices in different layouts and the market price
+- ``RESULTS/half-hourly/{date}_{period}.json``
 
 """
 
-import logging
-
+import json
 import pypsa
+import logging
 import pandas as pd
 import geopandas as gpd
-import matplotlib.pyplot as plt
 
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging
+    
+
+def price_to_zones(n, regions):
+    c = n.buses_t.marginal_price.columns
+    return n.buses_t.marginal_price.iloc[0].loc[regions.index.intersection(c)]
+
+def load_to_zones(n, regions):
+    return (
+        n.loads.loc[
+            regions.index.intersection(n.loads.index), 'p_set'
+            ]
+            .rename('load')
+    )
+
+def p_nom_to_zones(n, regions):
+    return (g := n.generators.groupby('bus')['p_nom'].sum()).loc[regions.index.intersection(g.index)]
+
+def dispatch_to_zones(n, regions):
+    con = pd.concat((n.generators, n.generators_t.p.T), axis=1)
+    con = con.rename(columns={con.columns[-1]: 'dispatch'})
+    con = con.groupby('bus').sum()['dispatch']
+    return con.loc[regions.index.intersection(con.index)]
+
 
 if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    layouts = ['national', 'nodal', 'fti', 'eso']
+    date = snakemake.wildcards.date
+    period = int(snakemake.wildcards.period)
 
-    stats = pd.read_csv(snakemake.input["price_stats"], index_col=0)
+    layouts = ['nodal', 'national', 'fti', 'eso']
+    results = {layout: {} for layout in layouts}
 
-    def price_to_zones(n, regions):
-        c = n.buses_t.marginal_price.columns
-        return n.buses_t.marginal_price.iloc[0].loc[regions.index.intersection(c)]
-    
-    def load_to_zones(n, regions):
-        return (
-            n.loads.loc[
-                regions.index.intersection(n.loads.index), 'p_set'
-                ]
-                .rename('load')
-        )
-    
-    def p_nom_to_zones(n, regions):
-        return (g := n.generators.groupby('bus')['p_nom'].sum()).loc[regions.index.intersection(g.index)]
-    
-    def dispatch_to_zones(n, regions):
-        con = pd.concat((n.generators, n.generators_t.p.T), axis=1)
-        con = con.rename(columns={con.columns[-1]: 'dispatch'})
-        con = con.groupby('bus').sum()['dispatch']
-        return con.loc[regions.index.intersection(con.index)]
+    for layout in layouts:
 
-    vmins = {
-        'price': 0,
-    }
-    vmaxs = {
-        'price': 100,
-    }
-
-    show_metrics = ['dispatch', 'load', 'price', 'p_nom']    
-    fig, all_axs = plt.subplots(len(show_metrics), len(layouts), figsize=(10, 3*len(show_metrics)))
-
-    for layout, axs in zip(layouts, all_axs.T):
+        logger.info("Summarising layout {} for {} {}.".format(layout, date, period))
 
         n = pypsa.Network(snakemake.input["network_{}".format(layout)])
         regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
 
-        for metric, ax in zip(show_metrics, axs):
-            get_func = globals()[f"{metric}_to_zones"]
+        layout_results = pd.DataFrame(index=regions.index)
 
-            regions.loc[:, metric] = get_func(n, regions)            
-            regions[metric] = regions[metric].fillna(0)
+        layout_results.loc[:, "marginal_price"] = price_to_zones(n, regions)
+        layout_results.loc[:, "load"] = load_to_zones(n, regions)
+        layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
+        layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)
 
-            regions.plot(
-                column=metric,
-                legend=True,
-                ax=ax,
-                vmin=vmins.get(metric, None),
-                vmax=vmaxs.get(metric, None),
-                # label='Price in £/MWh',
-                edgecolor='k',
-                linewidth=0.5
-                )
+        for region in regions.index:
 
-            ax.set_xticks([])
-            ax.set_yticks([])
+            results[layout][region] = {
+                "variables": layout_results.T[region].fillna(0.).to_dict()
+            }
 
-
-
-    for ax, metric in zip(all_axs[:,0], show_metrics):
-        ax.set_title('Modelled {}'.format(metric))
-
-    all_axs[show_metrics.index('price'), 1].set_title('Wholesale Market Index: {} £/MWh'.format(stats.loc['market_index'].iloc[0]))
-
-    plt.tight_layout()
-    plt.savefig(snakemake.output["maps"], bbox_inches='tight')
-    plt.show()
-
-    pd.DataFrame().to_csv(snakemake.output["summary"])
+    with open(snakemake.output[0], "w") as f:
+        json.dump(results, f)

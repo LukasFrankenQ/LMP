@@ -326,3 +326,38 @@ def process_scenarios(scenarios):
         scenarios[key] = wildcard_list
 
     return scenarios
+
+
+def get_next_month(date):
+    y, m = date.split('-')
+    if m == '12':
+        return f'{int(y)+1}-01'
+    else:
+        return f'{y}-{int(m)+1:02}'
+
+
+def process_time(time):
+
+    template = "{}/{}.json"
+    periods = list(range(1, 49))
+
+    if len(time.split('-')) == 2:
+
+        next_month = get_next_month(time)
+        days = list(pd.date_range(time, next_month, freq='d').strftime('%Y-%m-%d'))[:-1]
+
+        return template.format('monthly', time), days, periods
+
+    elif len(time.split('-')) == 3:
+        return template.format('daily', time), [time], periods
+
+    else:
+        raise ValueError("Time must be in format 'yyyy-mm' or 'yyyy-mm-dd'")
+
+
+def get_outname(time):
+    return process_time(time)[0]
+
+
+def get_datelist(time):
+    return process_time(time)[1]

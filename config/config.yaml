@@ -14,13 +14,19 @@ scenario:
   period:
     # start: 1
     # end: 48
+    - 8
+    - 9
     - 10
+    - 11
 
   layout:
     - nodal
     - fti
     - eso
     - national
+  
+  aggregate:
+    - "2024-03-15"
     
 
 countries: ['GB']

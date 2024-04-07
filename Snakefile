@@ -10,7 +10,7 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from snakemake.utils import min_version
 from datetime import datetime, timedelta
 
-from scripts._helpers import get_scenarios, to_total_seconds
+from scripts._helpers import get_scenarios, to_total_seconds, get_outname, get_datelist
 
 HTTP = HTTPRemoteProvider()
 
@@ -447,4 +447,22 @@ rule summarise_period:
         "envs/environment.yaml"
     script:
         "scripts/summarise_period.py"
+
+
+rule aggregate_periods:
+    input:
+        expand(
+            RESULTS + "half-hourly/{date}_{period}.json",
+            date=get_datelist(config["scenario"]["aggregate"][0]),
+            period=list(range(1, 49))),
+    output:
+        RESULTS + get_outname(config["scenario"]["aggregate"][0]),
+    log:
+        LOGS + "aggregate_periods.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/aggregate_periods.py"
     

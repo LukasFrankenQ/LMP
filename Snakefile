@@ -96,26 +96,6 @@ if config["enable"]["retrieve"] and config["enable"].get("retrieve_databundle", 
             "scripts/retrieve_databundle.py"
 
 
-from scripts.my_test_rule import get_last_constraint_date
-
-rule my_test_rule:
-    output:
-        test_output=RESOURCES + "test_output_{date}_{period}.csv"
-        log:
-            LOGS + "my_test_rule.log",
-        resources:
-            mem_mb=1000,
-        conda:
-            "envs/environment.yaml"
-        script:
-            "scripts/my_test_rule.py"
-    
-
-
-        
-
-
-
 rule build_shapes:
     params:
         countries=config["countries"],

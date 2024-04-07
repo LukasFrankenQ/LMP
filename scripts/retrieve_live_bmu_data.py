@@ -20,7 +20,7 @@ from io import StringIO
 
 logger = logging.getLogger(__name__)
 
-from _helpers import configure_logging
+from _helpers import configure_logging, to_datetime
 from _elexon_helpers import process_multiples
 
 
@@ -41,13 +41,7 @@ if __name__ == "__main__":
 
     response = requests.get(pn_url.format(date, period))
 
-    print('received raw response')
-    print(pd.read_csv(
-        StringIO(
-            response.text
-            )
-        )
-    )
+    df = pd.read_csv(StringIO( response.text))
 
     pn = (
         process_multiples(
@@ -67,10 +61,12 @@ if __name__ == "__main__":
 
     response = requests.get(
         mels_url.format(
-            date,
+            # date,
+            start.strftime('%Y-%m-%d'),
             prep_time(start.hour),
             prep_time(start.minute),
-            date,
+            # date,
+            end.strftime('%Y-%m-%d'),
             prep_time(end.hour),
             prep_time(end.minute)
         )

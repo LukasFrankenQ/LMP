@@ -59,6 +59,8 @@ def has_internet_access(url="www.zenodo.org") -> bool:
     finally:
         conn.close()
 
+
+"""
 if config["enable"].get("retrieve", "auto") == "auto":
     config["enable"]["retrieve"] = has_internet_access()
 
@@ -156,6 +158,7 @@ rule base_network:
         "envs/environment.yaml"
     script:
         "scripts/base_network.py"
+"""
 
 
 rule build_bus_regions:
@@ -164,12 +167,12 @@ rule build_bus_regions:
     input:
         # country_shapes=RESOURCES + "country_shapes.geojson",
         total_shape="data/gb_shape.geojson",
-        offshore_shapes=RESOURCES + "offshore_shapes.geojson",
+        offshore_shapes="data/offshore_shapes.geojson",
         # base_network=RESOURCES + "networks/base.nc",
         # base_network="data/ETYS_base.nc",
-        base_network=RESOURCES + "networks/base.nc"
-        if config["electricity"]["network_dataset"]
-        else "data/ETYS_base.nc",
+        base_network="data/base.nc"
+        # if config["electricity"]["network_dataset"]
+        # else "data/ETYS_base.nc",
     output:
         regions_onshore=RESOURCES + "regions_onshore.geojson",
         regions_offshore=RESOURCES + "regions_offshore.geojson",
@@ -225,9 +228,10 @@ rule add_generators:
         elexon=config["elexon"],
         electricity=config["electricity"],
     input:
-        base_network=RESOURCES + "networks/base.nc"
-        if config["electricity"]["network_dataset"]
-        else "data/ETYS_base.nc",
+        base_network="data/base.nc",
+        # base_network=RESOURCES + "networks/base.nc"
+        # if config["electricity"]["network_dataset"]
+        # else "data/ETYS_base.nc",
         gb_shape="data/gb_shape.geojson",
         bmunits_loc=RESOURCES + "bmunits_loc.csv",
         regions_onshore=RESOURCES + "regions_onshore.geojson",

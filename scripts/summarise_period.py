@@ -82,4 +82,4 @@ if __name__ == "__main__":
     with open(snakemake.output[0], "w") as f:
         json.dump({int(to_datetime(date, period).timestamp()): results}, f)
 
-    os.remove(snakmemake.input["regions_nodal"])
+    os.remove(snakemake.input["regions_nodal"])

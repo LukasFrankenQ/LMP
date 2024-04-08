@@ -44,7 +44,7 @@ if __name__ == "__main__":
         prices = [get_stat(fn, layout, 'marginal_price') for fn in filelist]
         prices = pd.concat(prices, axis=1)
 
-        loads = [get_stat(fn, layout, 'loads') for fn in filelist]
+        loads = [get_stat(fn, layout, 'load') for fn in filelist]
         loads = pd.concat(loads, axis=1)
 
         capacity = [get_stat(fn, layout, 'available_capacity') for fn in filelist]

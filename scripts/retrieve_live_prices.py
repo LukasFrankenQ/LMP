@@ -13,6 +13,8 @@ This rule downloads live data on wholesale market prices from the Elexon Insight
 """
 
 import logging
+
+import re
 import requests
 import pandas as pd
 
@@ -21,6 +23,9 @@ from io import StringIO
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging
+
+
+clean_string = lambda value: re.sub('[0-9.]', '', value)
 
 
 def get_value(df, feature):
@@ -32,7 +37,7 @@ def get_value(df, feature):
             try:
                 return float(feature)
             except ValueError:
-                return float(feature[:-1])
+                return float(clean_string(feature[:-1]))
 
 
 template = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}"

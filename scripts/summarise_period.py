@@ -17,6 +17,7 @@ import os
 import json
 import pypsa
 import logging
+import numpy as np
 import pandas as pd
 import geopandas as gpd
 
@@ -76,9 +77,9 @@ if __name__ == "__main__":
         for region in regions.index:
 
             results[layout]['geographies'][region] = {
-                "variables": layout_results.T[region].fillna(0.).to_dict()
+                "variables": layout_results.T[region].fillna(0.).astype(np.float16).to_dict()
             }
-        
+
     with open(snakemake.output[0], "w") as f:
         json.dump({int(to_datetime(date, period).timestamp()): results}, f)
 

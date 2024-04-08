@@ -41,39 +41,57 @@ if __name__ == "__main__":
     layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
     filelist = list(snakemake.input)
 
-    for layout in list(layout_dicts):
+    outfile = snakemake.output[0]
+    if 'half-hourly' in outfile:
+        logger.info("Aggregating to half-hourly resolution by merging into single file.")
 
-        prices = [get_stat(fn, layout, 'marginal_price') for fn in filelist]
-        prices = pd.concat(prices, axis=1)
+        total_dict = {}
 
-        loads = [get_stat(fn, layout, 'load') for fn in filelist]
-        loads = pd.concat(loads, axis=1)
+        for fn in filelist:
+            with open(fn) as f:
+                data = json.load(f)
 
-        capacity = [get_stat(fn, layout, 'available_capacity') for fn in filelist]
-        capacity = pd.concat(capacity, axis=1)
+            ts = list(data)[0]
+            total_dict[ts] = data[ts]
 
-        dispatch = [get_stat(fn, layout, 'dispatch') for fn in filelist]
-        dispatch = pd.concat(dispatch, axis=1)
+        with open(outfile, "w") as f:
+            json.dump(total_dict, f)
 
-        normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
-        avg_prices = prices.mul(normalized_loads).mean(axis=1)
+    elif "daily" in outfile:
 
-        results = pd.concat([
-            avg_prices,
-            loads.mean(axis=1),
-            capacity.mean(axis=1),
-            dispatch.mean(axis=1)
-            ], axis=1)
+        for layout in list(layout_dicts):
 
-        results.columns = ['marginal_price', 'load', 'available_capacity', 'dispatch']
+            prices = [get_stat(fn, layout, 'marginal_price') for fn in filelist]
+            prices = pd.concat(prices, axis=1)
 
-        for region in results.index:
+            loads = [get_stat(fn, layout, 'load') for fn in filelist]
+            loads = pd.concat(loads, axis=1)
 
-            layout_dicts[layout]["geographies"][region] = {
-                "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
-            }
+            capacity = [get_stat(fn, layout, 'available_capacity') for fn in filelist]
+            capacity = pd.concat(capacity, axis=1)
 
-    total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
+            dispatch = [get_stat(fn, layout, 'dispatch') for fn in filelist]
+            dispatch = pd.concat(dispatch, axis=1)
 
-    with open(snakemake.output[0], "w") as f:
-        json.dump({total_seconds: layout_dicts}, f)
+            normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
+            avg_prices = prices.mul(normalized_loads).mean(axis=1)
+
+            results = pd.concat([
+                avg_prices,
+                loads.mean(axis=1),
+                capacity.mean(axis=1),
+                dispatch.mean(axis=1)
+                ], axis=1)
+
+            results.columns = ['marginal_price', 'load', 'available_capacity', 'dispatch']
+
+            for region in results.index:
+
+                layout_dicts[layout]["geographies"][region] = {
+                    "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
+                }
+
+        total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
+
+        with open(snakemake.output[0], "w") as f:
+            json.dump({total_seconds: layout_dicts}, f)

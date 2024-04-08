@@ -7,17 +7,17 @@ run:
 
 scenario:
   date:
-    # start: "2024-04-03"
-    # end: "2024-04-06"
-    - "2024-04-04"
+    start: "2023-10-01"
+    end: "2024-03-13"
+    # - "2023-12-29"
 
   period:
-    # start: 1
-    # end: 48
-    - 8
-    - 9
-    - 10
-    - 11
+    start: 1
+    end: 48
+    # - 8
+    # - 9
+    # - 10
+    # - 11
 
   layout:
     - nodal
@@ -26,7 +26,7 @@ scenario:
     - national
   
   aggregate:
-    - "2024-03-10"
+    - "2024-03-06"
     
 
 countries: ['GB']

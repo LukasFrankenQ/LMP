@@ -41,20 +41,17 @@ if __name__ == "__main__":
 
     response = requests.get(pn_url.format(date, period))
 
-    df = pd.read_csv(StringIO( response.text))
+    df = pd.read_csv(StringIO(response.text))
 
-    pn = (
-        process_multiples(
-            pd.read_csv(
-                StringIO(
-                    response.text
-                    )
-                )
-            )
-        .set_index("NationalGridBmUnit")
-        [["LevelTo"]]
-        .rename(columns={"LevelTo": "PN"})
-    )
+    if not df.empty:
+        pn = (
+            process_multiples(df)
+            .set_index("NationalGridBmUnit")
+            [["LevelTo"]]
+            .rename(columns={"LevelTo": "PN"})
+        )
+    else:
+        pn = pd.DataFrame(columns=["PN"])
 
     end = pd.Timestamp(date) + period * pd.Timedelta("30min")
     start = end - pd.Timedelta("30min")
@@ -70,14 +67,14 @@ if __name__ == "__main__":
         )
     )
 
-    mels = (
-        process_multiples(
-            pd.read_csv(
-                StringIO(response.text)
-                )
-            )
-        .set_index("NationalGridBmUnit")
-    )
+    df = pd.read_csv(StringIO(response.text))
+    if not df.empty:
+        mels = (
+            process_multiples(df)
+            .set_index("NationalGridBmUnit")
+        )
+    else:
+        pn = pd.DataFrame(columns=["PN"])
 
     mels = (
         mels

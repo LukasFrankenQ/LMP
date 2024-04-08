@@ -338,7 +338,6 @@ def get_next_month(date):
 
 def process_time(time):
 
-    template = "{}/{}.json"
     periods = list(range(1, 49))
 
     if len(time.split('-')) == 2:
@@ -346,17 +345,28 @@ def process_time(time):
         next_month = get_next_month(time)
         days = list(pd.date_range(time, next_month, freq='d').strftime('%Y-%m-%d'))[:-1]
 
-        return template.format('monthly', time), days, periods
+        return 'monthly', days, periods
 
     elif len(time.split('-')) == 3:
-        return template.format('daily', time), [time], periods
+        return 'daily', [time], periods
 
     else:
         raise ValueError("Time must be in format 'yyyy-mm' or 'yyyy-mm-dd'")
 
 
-def get_outname(time):
-    return process_time(time)[0]
+def get_outfiles(time):
+    template = "{}/{}.json"
+
+    mode = process_time(time)[0]
+
+    if mode == 'daily':
+        return template.format('half-hourly', time)
+
+    elif mode == 'monthly':
+        return template.format('daily', time)
+
+    else:
+        raise ValueError
 
 
 def get_datelist(time):

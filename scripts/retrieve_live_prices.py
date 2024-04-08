@@ -14,7 +14,6 @@ This rule downloads live data on wholesale market prices from the Elexon Insight
 
 import logging
 
-import re
 import requests
 import pandas as pd
 
@@ -23,22 +22,6 @@ from io import StringIO
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging
-
-
-clean_string = lambda value: re.sub('[0-9.]', '', value)
-
-
-def get_value(df, feature):
-    """Helper function to clean received value."""
-    for col in df.columns:
-        if feature in col:
-            feature = col.split(':')[-1]
-
-            try:
-                return float(feature)
-            except ValueError:
-                return float(clean_string(feature[:-1]))
-
 
 template = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}"
 
@@ -57,7 +40,11 @@ if __name__ == "__main__":
     response = requests.get(url)
     df = pd.read_csv(StringIO(response.text))
 
-    results.loc['market_index'] = get_value(df, 'price')
-    results.loc['volume'] = get_value(df, 'volume')
+    for col1, col2 in zip(df.columns[:-1], df.columns[1:]):
+        if not ('price' in col1 and 'volume' in col2):
+            continue
 
+        results.loc['market_index'] = float(col1.split(':')[-1])
+        break
+    
     results.to_csv(snakemake.output["price_stats"])

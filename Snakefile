@@ -10,7 +10,7 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from snakemake.utils import min_version
 from datetime import datetime, timedelta
 
-from scripts._helpers import get_scenarios, to_total_seconds, get_outname, get_datelist
+from scripts._helpers import get_scenarios, to_total_seconds, get_outfiles, get_datelist
 
 HTTP = HTTPRemoteProvider()
 
@@ -38,8 +38,6 @@ scenarios = get_scenarios(run)
 wildcard_constraints:
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
-    # layout="^(nodal|fti|eso)$",
-    # simpl="[a-zA-Z0-9]*",
 
 include: "rules/gather.smk"
 
@@ -437,7 +435,7 @@ rule summarise_period:
         # price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
         # real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
     output:
-        summary=RESULTS + "half-hourly/{date}_{period}.json",
+        summary=RESULTS + "periods/{date}_{period}.json",
         # maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
         # price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
         # load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
@@ -458,11 +456,11 @@ rule aggregate_periods:
         date=config["scenario"]["aggregate"][0],
     input:
         expand(
-            RESULTS + "half-hourly/{date}_{period}.json",
+            RESULTS + "periods/{date}_{period}.json",
             date=get_datelist(config["scenario"]["aggregate"][0]),
             period=list(range(1, 49))),
     output:
-        RESULTS + get_outname(config["scenario"]["aggregate"][0]),
+        RESULTS + get_outfiles(config["scenario"]["aggregate"][0]),
     log:
         LOGS + "aggregate_periods.log",
     resources:
@@ -471,4 +469,8 @@ rule aggregate_periods:
         "envs/environment.yaml"
     script:
         "scripts/aggregate_periods.py"
+
+
+
+
     

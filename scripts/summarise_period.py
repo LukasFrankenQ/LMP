@@ -13,6 +13,7 @@ be used for web visualisation.
 
 """
 
+import os
 import json
 import pypsa
 import logging
@@ -61,7 +62,9 @@ if __name__ == "__main__":
         logger.info("Summarising layout {} for {} {}.".format(layout, date, period))
 
         n = pypsa.Network(snakemake.input["network_{}".format(layout)])
-        regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
+        
+        regions_file = snakemake.input["regions_{}".format(layout)]
+        regions = gpd.read_file(regions_file).set_index("name")
 
         layout_results = pd.DataFrame(index=regions.index)
 
@@ -75,6 +78,8 @@ if __name__ == "__main__":
             results[layout]['geographies'][region] = {
                 "variables": layout_results.T[region].fillna(0.).to_dict()
             }
-
+        
     with open(snakemake.output[0], "w") as f:
         json.dump({int(to_datetime(date, period).timestamp()): results}, f)
+
+    os.remove(snakmemake.input["regions_nodal"])

@@ -21,7 +21,7 @@ import geopandas as gpd
 
 logger = logging.getLogger(__name__)
 
-from _helpers import configure_logging
+from _helpers import configure_logging, to_datetime
     
 
 def price_to_zones(n, regions):
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     period = int(snakemake.wildcards.period)
 
     layouts = ['nodal', 'national', 'fti', 'eso']
-    results = {layout: {} for layout in layouts}
+    results = {layout: {'geographies': {}} for layout in layouts}
 
     for layout in layouts:
 
@@ -72,9 +72,9 @@ if __name__ == "__main__":
 
         for region in regions.index:
 
-            results[layout][region] = {
+            results[layout]['geographies'][region] = {
                 "variables": layout_results.T[region].fillna(0.).to_dict()
             }
 
     with open(snakemake.output[0], "w") as f:
-        json.dump(results, f)
+        json.dump({int(to_datetime(date, period).timestamp()): results}, f)

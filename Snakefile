@@ -430,8 +430,8 @@ rule summarise_period:
         regions_eso="data/eso_zones.geojson",
         network_national=RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
         regions_national="data/national_zones.geojson",
-        price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
-        real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
+        # price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
+        # real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
     output:
         summary=RESULTS + "half-hourly/{date}_{period}.json",
         # maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
@@ -450,6 +450,8 @@ rule summarise_period:
 
 
 rule aggregate_periods:
+    params:
+        date=config["scenario"]["aggregate"][0],
     input:
         expand(
             RESULTS + "half-hourly/{date}_{period}.json",

@@ -16,6 +16,7 @@ the scripts computes a weighted mean based on load
 
 import json
 import logging
+import numpy as np
 import pandas as pd
 
 from _helpers import configure_logging
@@ -28,15 +29,16 @@ def get_stat(fn, layout, variable):
     with open(fn) as f:
         data = json.load(f)
 
-    geos = list(data[layout])
-    return pd.Series({geo: data[layout][geo]['variables'][variable] for geo in geos})
+    ts = list(data)[0]
+    geos = list(data[ts][layout]['geographies'])
+    return pd.Series({geo: data[ts][layout]["geographies"][geo]['variables'][variable] for geo in geos})
 
 
 if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    layout_dicts = {layout: {} for layout in ['nodal', 'national', 'eso', 'fti']}
+    layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
     filelist = list(snakemake.input)
 
     for layout in list(layout_dicts):
@@ -67,9 +69,11 @@ if __name__ == "__main__":
 
         for region in results.index:
 
-            layout_dicts[layout][region] = {
-                "variables": results.T[region].fillna(0.).to_dict()
+            layout_dicts[layout]["geographies"][region] = {
+                "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
             }
 
+    total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
+
     with open(snakemake.output[0], "w") as f:
-        json.dump(layout_dicts, f)
+        json.dump({total_seconds: layout_dicts}, f)

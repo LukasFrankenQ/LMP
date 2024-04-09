@@ -33,6 +33,8 @@ def mute_print():
 
 
 def to_datetime(date, period):
+    if isinstance(period, str):
+        period = int(period)
     return pd.Timestamp(date) + pd.Timedelta(minutes=30) * (period + 1)
 
 

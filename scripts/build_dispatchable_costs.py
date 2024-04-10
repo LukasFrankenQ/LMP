@@ -114,7 +114,7 @@ def get_bmu_price_distribution(dispatch, prices, visval=False, **kwargs):
         if len(dispatch) > 1e3:
             end = dispatch.index[min(len(dispatch)-1, 1000)]
 
-        fig, ax = plt.subplots(1, 1, figsize=(10, 3.5))
+        _, ax = plt.subplots(1, 1, figsize=(10, 3.5))
         ax.plot(dispatch, color='k')
         for on in switchons:
             ax.axvline(on, color='r', linestyle='--')
@@ -175,9 +175,6 @@ if __name__ == "__main__":
         ]
     )
 
-    total_generation = dispatchers.generation.sum()
-    logger.info(f'total generation : {np.around(total_generation*1e-6, decimals=2)} TWh')
-
     avg_prices = {}
 
     from tqdm import tqdm
@@ -188,11 +185,12 @@ if __name__ == "__main__":
                 prices,
                 visval=False,
                 neighbour_filter=5)
-        
+
         avg_prices[unit] = pd.Series(generator_prices).median()
 
     avg_prices = pd.Series(avg_prices)
 
+    total_generation = dispatchers.generation.sum()
     found_share = dispatch[avg_prices.index].sum().sum() / total_generation
     logger.info(f"Found share of generation: {found_share*100:.8f}%")
 

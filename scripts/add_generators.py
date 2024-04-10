@@ -115,6 +115,13 @@ if __name__ == "__main__":
 
     logger.info(f"Adding marginal costs to generators from '{snakemake.input['carrier_costs']}'.")
     costs = yaml.safe_load(open(snakemake.input["carrier_costs"]))
+    
     n.generators.loc[:, "marginal_cost"] = n.generators.carrier.apply(lambda carrier: costs.get(carrier, 100))
+
+    logger.info("Inserting cost estimates for dispatchable generators.")
+
+    bmu_costs = pd.read_csv(snakemake.input["bmu_cost_estimates"], index_col=0)
+    inter = n.generators.index.intersection(bmu_costs.index)
+    n.generators.loc[inter, ["marginal_cost"]] = bmu_costs.loc[inter].values
 
     n.export_to_netcdf(snakemake.output["gen_network"])

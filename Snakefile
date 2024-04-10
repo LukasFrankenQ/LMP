@@ -221,33 +221,6 @@ rule prepare_bmu_data:
         "scripts/prepare_bmu_data.py"
 
 
-rule add_generators:
-    params:
-        elexon=config["elexon"],
-        electricity=config["electricity"],
-    input:
-        base_network="data/base.nc",
-        # base_network=RESOURCES + "networks/base.nc"
-        # if config["electricity"]["network_dataset"]
-        # else "data/ETYS_base.nc",
-        gb_shape="data/gb_shape.geojson",
-        bmunits_loc=RESOURCES + "bmunits_loc.csv",
-        regions_onshore=RESOURCES + "regions_onshore.geojson",
-        regions_offshore=RESOURCES + "regions_offshore.geojson",
-        carrier_costs="data/manual/carrier_costs.yaml",
-    output:
-        gen_network=RESOURCES + "networks/gen.nc",
-    log:
-        LOGS + "add_generators.log",
-    threads: 1
-    resources:
-        mem_mb=1000,
-    conda:
-        "envs/environment.yaml"
-    script:
-        "scripts/add_generators.py"
-
-
 rule build_load_weights:
     params:
         load=config["load"],
@@ -327,6 +300,34 @@ rule build_dispatchable_costs:
         "envs/environment.yaml"
     script:
         "scripts/build_dispatchable_costs.py"
+
+
+rule add_generators:
+    params:
+        elexon=config["elexon"],
+        electricity=config["electricity"],
+    input:
+        base_network="data/base.nc",
+        # base_network=RESOURCES + "networks/base.nc"
+        # if config["electricity"]["network_dataset"]
+        # else "data/ETYS_base.nc",
+        gb_shape="data/gb_shape.geojson",
+        bmunits_loc=RESOURCES + "bmunits_loc.csv",
+        regions_onshore=RESOURCES + "regions_onshore.geojson",
+        regions_offshore=RESOURCES + "regions_offshore.geojson",
+        carrier_costs="data/manual/carrier_costs.yaml",
+        bmu_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
+    output:
+        gen_network=RESOURCES + "networks/gen.nc",
+    log:
+        LOGS + "add_generators.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/add_generators.py"
 
 
 rule prepare_live_network:

@@ -312,6 +312,23 @@ rule retrieve_live_prices:
         "scripts/retrieve_live_prices.py"
 
 
+rule build_dispatchable_costs:
+    input:
+        bmus_dispatch="data/bmu_operation_winter.csv",
+        bmus_data=RESOURCES + "bmunits_loc.csv",
+        market_prices="data/market_index_winter.csv",
+    output:
+        bmu_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
+    log:
+        LOGS + "build_dispatchable_costs.log",
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/build_dispatchable_costs.py"
+
+
 rule prepare_live_network:
     input:
         network=RESOURCES + "networks/gen.nc",
@@ -469,8 +486,3 @@ rule aggregate_periods:
         "envs/environment.yaml"
     script:
         "scripts/aggregate_periods.py"
-
-
-
-
-    

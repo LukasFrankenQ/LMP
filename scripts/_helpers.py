@@ -33,20 +33,28 @@ def mute_print():
 
 
 def to_datetime(date, period):
+    """
+    Takes settlement period defined by date 'yyyy-mm-dd' and number [1, 48] and
+    returns the STARTING datetime of the respective period. Period 1 for each day starts at midnight
+    in accordance with https://bscdocs.elexon.co.uk/bsc/bsc-section-x-2-technical-glossary
+    """
     if isinstance(period, str):
         period = int(period)
-    return pd.Timestamp(date) + pd.Timedelta(minutes=30) * (period + 1)
+    return pd.Timestamp(date) + pd.Timedelta(minutes=30) * (period - 1)
 
 
 def to_date_period(dt):
+    """
+    Inverse function of to_datetime
+    """
 
-    period = (dt - dt.normalize()) // pd.Timedelta(minutes=30) - 1
+    period = (dt - dt.normalize()) // pd.Timedelta(minutes=30) + 1
     if period <= 0:
         date = (dt - pd.Timedelta(days=1)).strftime('%Y-%m-%d')
         period = 48 + period
     else:
         date = dt.strftime('%Y-%m-%d')
-    
+
     return date, period
 
 

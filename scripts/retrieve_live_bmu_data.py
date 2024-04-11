@@ -53,8 +53,8 @@ if __name__ == "__main__":
     else:
         pn = pd.DataFrame(columns=["PN"])
 
-    end = pd.Timestamp(date) + period * pd.Timedelta("30min")
-    start = end - pd.Timedelta("30min")
+    start = to_datetime(date, period)
+    end = start + pd.Timedelta("30min")
 
     response = requests.get(
         mels_url.format(

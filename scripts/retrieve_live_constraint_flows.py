@@ -74,7 +74,7 @@ if __name__ == "__main__":
     df = pd.DataFrame()
 
     def is_valid(df):
-        """Makes sure that obtained flows are neither all zero not empty"""
+        """Makes sure that obtained flows are neither all zero nor empty"""
         return not (df.empty or df.limit.sum() == 0)
 
     for i in range(max_tries):

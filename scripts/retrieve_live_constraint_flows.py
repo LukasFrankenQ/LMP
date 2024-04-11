@@ -16,8 +16,6 @@ import logging
 
 from _helpers import configure_logging, to_datetime, to_date_period
 
-import sys
-import shutil
 import requests
 import pandas as pd
 from urllib import parse
@@ -73,32 +71,39 @@ if __name__ == "__main__":
     max_tries = 400
 
     try_date, try_period = date, period
+    df = pd.DataFrame()
+
+    def is_valid(df):
+        """Makes sure that obtained flows are neither all zero not empty"""
+        return not (df.empty or df.limit.sum() == 0)
+
     for i in range(max_tries):
 
         try:
             df = retrieve_constraints(try_date, try_period)
-
-            break
+            method = "Live"
 
         except (requests.exceptions.RequestException, KeyError) as e:
-            try_date, try_period = to_date_period(
-                to_datetime(try_date, try_period)
-                - pd.Timedelta("30min")
-            )
+            print(f'Detected error, trying previous period: {e}.')
 
             if (fn := Path(snakemake.params.RESOURCES +
                 f"/live_data/{try_date}_{try_period}/constraint_flows.csv")
                 ).exists():
 
                 df = pd.read_csv(fn, index_col=0)
-
-                method = "Cached"
-                break
-
-            else:
                 method = "Past"
-                continue
-    
+
+        if not is_valid(df):
+
+            try_date, try_period = to_date_period(
+                to_datetime(try_date, try_period)
+                - pd.Timedelta("30min")
+            )
+            continue 
+
+        else:
+            break
+
     if i == 0:
         method = "Live"
 

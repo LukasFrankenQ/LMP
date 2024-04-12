@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     bmu = bmu.loc[n.generators.index]
 
-    logger.warning("Just deleting negative ones")
+    logger.warning("Just deleting BMUS with negative Physical Notification for now.")
     bmu = bmu.loc[bmu["PN"] > 0].max(axis=1)
 
     n.generators.loc[bmu.index, 'p_nom'] = bmu

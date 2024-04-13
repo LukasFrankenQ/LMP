@@ -71,6 +71,13 @@ if __name__ == "__main__":
     def get_balancing_summary(bm):
         accepts.loc[accepts["SoFlag"]]["NationalGridBmUnit"].value_counts()
 
+        # print(f"====================== {bm} ======================")
+        drops = bids.columns[~bids.columns.str.contains("Volume")]
+        # print(bids.loc[bids['nationalGridBmUnit'] == bm].drop(columns=drops))
+        # print('------------------')
+        # print(trades.loc[trades['NationalGridBmUnit'] == bm])
+        # print("=============================================")
+
         bm_summary = pd.Series({
             "offer volume": offers.loc[offers['nationalGridBmUnit'] == bm, ["totalVolumeAccepted"]].max().max(),
             "offer price": trades.loc[trades['NationalGridBmUnit'] == bm, 'Offer'].max(),

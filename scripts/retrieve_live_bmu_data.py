@@ -20,7 +20,7 @@ from io import StringIO
 
 logger = logging.getLogger(__name__)
 
-from _helpers import configure_logging, to_datetime
+from _helpers import configure_logging, to_datetime, to_date_period
 from _elexon_helpers import process_multiples
 
 
@@ -39,20 +39,34 @@ if __name__ == "__main__":
 
     logger.info(f"Retrieving Live BMU Data from Elexon Insights API for {date} settlement period {period}.")
 
-    response = requests.get(pn_url.format(date, period))
+    max_tries = 3
+    try_date, try_period = date, period
 
-    df = pd.read_csv(StringIO(response.text))
+    for i in range(max_tries):
 
-    if not df.empty:
-        pn = (
-            process_multiples(df)
-            .set_index("NationalGridBmUnit")
-            [["LevelTo"]]
-            .rename(columns={"LevelTo": "PN"})
-        )
-    else:
-        pn = pd.DataFrame(columns=["PN"])
+        response = requests.get(pn_url.format(try_date, try_period))
+        df = pd.read_csv(StringIO(response.text))
 
+        if df.empty:
+            try_date, try_period = to_date_period(
+                to_datetime(try_date, try_period)
+                - pd.Timedelta("30min")
+            )
+
+            logger.warning(f"Data unavailable; taking PN data for earlier {try_date} period {try_period}.")
+            continue
+        
+        else:
+
+            pn = (
+                process_multiples(df)
+                .set_index("NationalGridBmUnit")
+                [["LevelTo"]]
+                .rename(columns={"LevelTo": "PN"})
+            )
+            break
+
+    # get Export Limit Data
     start = to_datetime(date, period)
     end = start + pd.Timedelta("30min")
 
@@ -86,4 +100,5 @@ if __name__ == "__main__":
         ["MELS"]
     )
 
+    output = pd.concat([pn, mels], axis=1).fillna(0.)
     pd.concat([pn, mels], axis=1).to_csv(snakemake.output["elexon_bmus"])

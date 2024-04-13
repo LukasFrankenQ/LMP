@@ -10,13 +10,13 @@ localrules:
     gather_bmu_data,
     gather_live_prices,
 
+
 rule all:
     input:
         expand(
             RESOURCES + "live_data/{date}_{period}/maps.pdf",
             **process_scenarios(config["scenario"])
         )
-
 
 rule gather_summaries:
     input:
@@ -52,7 +52,6 @@ rule gather_constraint_flows:
             RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
             **process_scenarios(config["scenario"])
         )
-
 
 rule gather_model_plots:
     params:

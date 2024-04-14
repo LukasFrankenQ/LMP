@@ -86,7 +86,7 @@ if __name__ == "__main__":
     n.generators.loc[export.index, 'p_max_pu'] = pu
     n.generators.loc[export.index, 'p_min_pu'] = pu
 
-    logger.warning("no sensible costs yet!")
+    logger.warning("No sensible cost estimations yet for some types of generators!")
     bus_ids = n.buses.index
 
     isolated_buses = check_network_consistency(n)

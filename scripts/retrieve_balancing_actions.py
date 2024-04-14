@@ -69,10 +69,10 @@ if __name__ == "__main__":
     trades = pd.read_csv(StringIO(response.text))
 
     def get_balancing_summary(bm):
-        accepts.loc[accepts["SoFlag"]]["NationalGridBmUnit"].value_counts()
+        # accepts.loc[accepts["SoFlag"]]["NationalGridBmUnit"].value_counts()
 
         # print(f"====================== {bm} ======================")
-        drops = bids.columns[~bids.columns.str.contains("Volume")]
+        # drops = bids.columns[~bids.columns.str.contains("Volume")]
         # print(bids.loc[bids['nationalGridBmUnit'] == bm].drop(columns=drops))
         # print('------------------')
         # print(trades.loc[trades['NationalGridBmUnit'] == bm])
@@ -96,7 +96,14 @@ if __name__ == "__main__":
     so_units = accepts.loc[accepts.SoFlag]["NationalGridBmUnit"].unique()
 
     if len(so_units) > 0:
+        for bm in so_units:
+            print('---------------------------------------------')
+            print(bm)
+            print(get_balancing_summary(bm))
+
         so_actions = pd.concat((get_balancing_summary(bm) for bm in so_units), axis=1).T
+        print('final so actions')
+        print(so_actions)
     else:
         # this is not nice...
         so_actions = pd.DataFrame(

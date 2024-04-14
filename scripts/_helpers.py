@@ -317,7 +317,7 @@ def check_network_consistency(n):
 
 
 def process_scenarios(scenarios):
-    """Transforms wildcard ranges from 'start', 'end' format into snakemake friendly lists."""
+    """Transforms wildcard ranges from 'start', 'end' format into snakemake-friendly lists."""
 
     for key, item in scenarios.items():
         if isinstance(item, list):

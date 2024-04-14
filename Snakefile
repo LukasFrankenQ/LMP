@@ -469,6 +469,25 @@ rule summarise_period:
         "scripts/summarise_period.py"
 
 
+rule plot_period:
+    input:
+        data=RESULTS + "periods/{date}_{period}.json",
+        regions_nodal="data/regions_onshore_s.geojson",
+        regions_fti="data/fti_zones.geojson",
+        regions_eso="data/eso_zones.geojson",
+        regions_national="data/national_zones.geojson",
+    output:
+        plot=RESULTS + "plots/{date}_{period}.pdf",
+    log:
+        LOGS + "plot_period_{date}_{period}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/plot_period.py"
+
+
 rule aggregate_periods:
     params:
         date=config["scenario"]["aggregate"][0],

@@ -24,7 +24,7 @@ from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
 
 logger = logging.getLogger(__name__)
 
-from _helpers import configure_logging
+from _helpers import configure_logging, to_datetime
 
 if __name__ == "__main__":
 
@@ -87,8 +87,12 @@ if __name__ == "__main__":
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
 
+    axs[0].text(
+        -9, 48,
+        "Plotting {}, ".format(to_datetime(snakemake.wildcards.date, snakemake.wildcards.period)),
+        fontsize=8)
 
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.savefig(snakemake.output["plot"], bbox_inches='tight')
     plt.show()
 

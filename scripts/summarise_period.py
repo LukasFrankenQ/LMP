@@ -48,6 +48,17 @@ def dispatch_to_zones(n, regions):
     return con.loc[regions.index.intersection(con.index)]
 
 
+def get_generation_stack(n):
+    return (
+        pd.concat((
+            n.generators[["carrier"]],
+            (p := n.generators_t.p.T).rename(columns={p.columns[0]: "dispatch"})
+        ), axis=1)
+        .groupby("carrier").sum()
+        [["dispatch"]]
+    )
+
+
 if __name__ == "__main__":
 
     configure_logging(snakemake)
@@ -55,24 +66,54 @@ if __name__ == "__main__":
     date = snakemake.wildcards.date
     period = int(snakemake.wildcards.period)
 
-    layouts = ['nodal', 'national', 'fti', 'eso']
+    layouts = ['national', 'nodal', 'fti', 'eso']
     results = {layout: {'geographies': {}} for layout in layouts}
 
-    for layout in layouts:
+    # treating nodal differently, as it is assumed to be the layout
+    # the requires no further balancing
+    nodal_generation_stack = (
+        get_generation_stack(
+            pypsa.Network(snakemake.input["network_nodal"]))
+    )
+
+    balancing_cost = snakemake.params["balancing"]
+
+    logger.warning("Unsolved issue with dispatch and p_nom for nodal layout.")
+
+    assert layouts[0] == 'national', "Assumes national layout is first in list."
+    for layout in set(layouts):
 
         logger.info("Summarising layout {} for {} {}.".format(layout, date, period))
 
         n = pypsa.Network(snakemake.input["network_{}".format(layout)])
+
+        genstack = get_generation_stack(n)
+        diff = (genstack - nodal_generation_stack).abs().iloc[:,0]
         
+        bcost = pd.Series(
+                    map(
+                        lambda carrier: balancing_cost.get(carrier, balancing_cost['default']),
+                        diff.index  
+                    ),
+                    index=diff.index
+                ).mul(diff, axis=0).sum()
+        bvol = diff.sum()
+
         regions_file = snakemake.input["regions_{}".format(layout)]
         regions = gpd.read_file(regions_file).set_index("name")
 
         layout_results = pd.DataFrame(index=regions.index)
 
         layout_results.loc[:, "marginal_price"] = price_to_zones(n, regions)
-        layout_results.loc[:, "load"] = load_to_zones(n, regions)
+        layout_results.loc[:, "load"] = load_to_zones(n, regions)# .values
         layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
-        layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)
+        layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
+
+        G = layout_results["load"].sum()
+
+        layout_results.loc[:, "post_balancing_price"] = (
+            (layout_results['marginal_price'] * G + bcost) / G
+        )
 
         for region in regions.index:
 

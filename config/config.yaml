@@ -7,8 +7,8 @@ run:
 
 scenario:
   date:
-    start: "2023-10-01"
-    end: "2024-03-31"
+    start: "2024-03-14"
+    end: "2024-03-15"
     # - "2024-03-06"
 
   period:
@@ -26,7 +26,7 @@ scenario:
     - national
   
   aggregate:
-    - "2024-03"
+    - "2024-03-14"
     
 
 countries: ['GB']
@@ -72,6 +72,11 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SWALEX: []
     ESTEX: []
     SEIMP: []
+
+
+balancing:
+  extra_cost:
+    default: 100 # £/MWh; assumed default extra cost for BM trades vs wholesale
 
 
 load:

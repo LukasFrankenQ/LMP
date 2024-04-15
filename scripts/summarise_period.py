@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
         layout_results = pd.DataFrame(index=regions.index)
 
-        layout_results.loc[:, "marginal_price"] = price_to_zones(n, regions)
+        layout_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
         layout_results.loc[:, "load"] = load_to_zones(n, regions)# .values
         layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
         layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         G = layout_results["load"].sum()
 
         layout_results.loc[:, "post_balancing_price"] = (
-            (layout_results['marginal_price'] * G + bcost) / G
+            (layout_results['wholesale_price'] * G + bcost) / G
         )
 
         for region in regions.index:

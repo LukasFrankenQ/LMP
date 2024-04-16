@@ -7,8 +7,8 @@ run:
 
 scenario:
   date:
-    start: "2024-03-14"
-    end: "2024-03-15"
+    start: "2024-03-05"
+    end: "2024-03-07"
     # - "2024-03-06"
 
   period:
@@ -26,8 +26,8 @@ scenario:
     - national
   
   aggregate:
-    - "2024-03-14"
-    
+    - "2024-03-06"
+
 
 countries: ['GB']
 
@@ -38,6 +38,7 @@ enable:
 
 elexon:
   bmu_date: '2024-02-02' # determines the date of the BMU list, retrieved from a snapshot of the Physical Data
+  cost_spread: 1.2 # spreads the estimated costs of dispatchable generators; essentially a tuning parameter to capture the wholesale cost curve more accurately
 
 boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of lines representing the boundary
   # Warning! Only functional for dataset "ENTSO-E"

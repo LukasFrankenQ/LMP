@@ -80,7 +80,7 @@ rule gather_model_plots:
         )
     output:
         prices=RESOURCES + "plots/prices.pdf",
-        generation=RESOURCES + "plots/generation.pdf",
+        # generation=RESOURCES + "plots/generation.pdf",
     log:
         RESOURCES + "logs/gather_model_plots.log"
     resources:

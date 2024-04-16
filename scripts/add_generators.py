@@ -18,6 +18,8 @@ import yaml
 import pypsa
 import pandas as pd
 import geopandas as gpd
+from scipy import stats
+from sklearn.preprocessing import MinMaxScaler
 
 from _helpers import configure_logging, check_network_consistency
 from _elexon_helpers import fill_interconnector_locations
@@ -38,6 +40,7 @@ if __name__ == "__main__":
     offshore = gpd.read_file(snakemake.input["regions_offshore"]).set_index("name")
 
     if nds == "ENTSO-E":
+
         # gb_shape = gpd.read_file(snakemake.input["gb_shape"]).geometry[0]
         # 
         # buses_geom = gpd.GeoDataFrame(
@@ -122,6 +125,49 @@ if __name__ == "__main__":
 
     bmu_costs = pd.read_csv(snakemake.input["bmu_cost_estimates"], index_col=0)
     inter = n.generators.index.intersection(bmu_costs.index)
-    n.generators.loc[inter, ["marginal_cost"]] = bmu_costs.loc[inter].values
+    inter = bmu_costs.loc[inter].loc[bmu_costs.loc[inter, bmu_costs.columns[0]] != 68.].index
+
+    inserted_costs = bmu_costs.loc[inter].values
+
+    def change_cost_spread(costs, factor):
+        costs = costs.copy()
+        min_cost = costs.min()
+
+        return (costs - min_cost) * factor + min_cost    
+
+
+    logger.info(f"Applying spread factor: {(f:= snakemake.params['elexon']['cost_spread'])}.")
+    inserted_costs = change_cost_spread(
+        inserted_costs, f
+        )
+
+    n.generators.loc[inter, ["marginal_cost"]] = inserted_costs
+
+    def sample_more(data, n):
+        '''Fits beta distribution to data, samples n values from it and scales them back to original range.'''
+
+        scaler = MinMaxScaler()
+        data = (
+            scaler.fit_transform(
+                data.copy()
+                .values
+                .reshape(-1, 1)
+                )
+            .flatten()
+        )
+
+        a, b, loc, scale = stats.beta.fit(data)
+        new = stats.beta.rvs(a, b, loc=loc, scale=scale, size=n)
+
+        return scaler.inverse_transform(new.reshape(-1, 1)).flatten()
+    
+
+    logger.warning("Assuming default marginal cost for generators without cost estimates as 68 £/MWh.")
+    replacers = n.generators.loc[n.generators.marginal_cost == 68.].index
+
+    n.generators.loc[replacers, "marginal_cost"] = sample_more(
+        n.generators.loc[inter, ["marginal_cost"]],
+        len(replacers)
+        )
 
     n.export_to_netcdf(snakemake.output["gen_network"])

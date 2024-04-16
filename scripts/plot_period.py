@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
         regions = gpd.read_file(snakemake.input["regions_{}".format(layout)]).set_index("name")
         
-        get_price = lambda x: inner_data[x]["variables"]["marginal_price"]
+        get_price = lambda x: inner_data[x]["variables"]["post_balancing_price"]
         regions["price"] = list(map(get_price, regions.index))
 
         regions.plot(
@@ -63,7 +63,6 @@ if __name__ == "__main__":
             linewidth=0.5,
             legend_kwds={'label': "Price [£/MWh]"}
             )
-        # print(cbar)
         
         ax1_divider = make_axes_locatable(ax)
         if i == 3:
@@ -92,8 +91,5 @@ if __name__ == "__main__":
         "Plotting {}, ".format(to_datetime(snakemake.wildcards.date, snakemake.wildcards.period)),
         fontsize=8)
 
-    # plt.tight_layout()
     plt.savefig(snakemake.output["plot"], bbox_inches='tight')
     plt.show()
-
-    pd.DataFrame().to_csv(snakemake.output["plot"])

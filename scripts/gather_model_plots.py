@@ -19,11 +19,9 @@ import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
-from itertools import product
-
 logger = logging.getLogger(__name__)
 
-from _helpers import configure_logging, process_scenarios
+from _helpers import configure_logging, process_scenarios, to_datetime
 
 
 def price_to_zones(n, regions):
@@ -61,7 +59,7 @@ if __name__ == "__main__":
     axs_dict = {
         output:
         plt.subplots(1, len(scenarios["layouts"]), figsize=(15, 3.5*len(scenarios["layouts"])))
-        for output in ["prices", "generation"]
+        for output in ["prices"]
         }
     
     for i, layout in enumerate(layouts):
@@ -115,7 +113,7 @@ if __name__ == "__main__":
             results[output].index = (
                 results[output].index
                 .to_frame()
-                .apply(lambda row: get_date(row.date, row.period), axis=1)
+                .apply(lambda row: to_datetime(row.date, row.period), axis=1)
             )
             real_prices.index = results[output].index
 
@@ -143,5 +141,3 @@ if __name__ == "__main__":
                     )
 
             ax.legend()
-        
-    

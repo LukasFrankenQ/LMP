@@ -38,7 +38,7 @@ enable:
 
 elexon:
   bmu_date: '2024-02-02' # determines the date of the BMU list, retrieved from a snapshot of the Physical Data
-  cost_spread: 2 # spreads the estimated costs of dispatchable generators; essentially a tuning parameter to capture the wholesale cost curve more accurately
+  cost_spread: 1.2 # spreads the estimated costs of dispatchable generators; essentially a tuning parameter to capture the wholesale cost curve more accurately
 
 boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of lines representing the boundary
   # Warning! Only functional for dataset "ENTSO-E"

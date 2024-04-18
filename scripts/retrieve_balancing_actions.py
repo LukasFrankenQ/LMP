@@ -49,15 +49,68 @@ if __name__ == "__main__":
     )
     unit_insert = "bmUnit={}"
     accepted_units = accepts["NationalGridBmUnit"].unique().tolist()
+    
+    print('accepted units')
+    print(list(accepted_units))
+    print('N accepted units')
+    print(len(list(accepted_units)))
+    
+
+    # print('first ours then real')
+
+    # accepted_units = ["PEMB-41", "GRAI-6"]
 
     insertion = "&".join(unit_insert.format(unit) for unit in accepted_units)
 
+    # print(bidsoffers_url.format('offer', date, period, insertion))
+    # url = 'https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/offer/2023-11-10/46?bmUnit=PEMB-41&bmUnit=GRAI-6&format=json'
+    # print(url)
+
+    # print(requests.get(url).json()['data'])
+
+    bids_offers_url = "https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/{}/{}/{}?format=json"
+
+
+    offers = json_normalize(
+        # requests.get("https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/offer/2024-02-01/2?format=json").json()['data']
+        requests.get(bids_offers_url.format('offer', date, period)).json()['data']
+    )
+    bids = json_normalize(
+        # requests.get("https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/bid/2024-02-01/2?format=json").json()['data']
+        requests.get(bids_offers_url.format('bid', date, period)).json()['data']
+    )
+
+    # print('all in there')
+    # col = 'nationalGridBmUnit'
+    # total = set(offers[col].tolist() + bids["nationalGridBmUnit"].tolist())
+
+    # print(pd.Series(accepted_units).isin(total).all())
+
+    print('bids')
+    print(bids)
+    print('offers')
+    print(offers)
+
+    # import sys
+    # sys.exit()
+
     def get_trades(mode, date, period, insertion):
+        print(f"Getting trades {mode}")
+        print(bidsoffers_url.format(mode, date, period, insertion))
+
         response = requests.get(bidsoffers_url.format(mode, date, period, insertion))    
+        print('response')
+        print(response)
+        print(response.json())
         return json_normalize(response.json()["data"])
     
-    bids = get_trades("bid", date, period, insertion)
-    offers = get_trades("offer", date, period, insertion)
+    # bids = get_trades("bid", date, period, insertion)
+    # offers = get_trades("offer", date, period, insertion)
+
+    # print('bids')
+    # print(bids)
+    # print('offers')
+    # print(offers)
 
     # data on all bid offers: Used to calculate the cost of in 
     trades_url = (
@@ -68,6 +121,8 @@ if __name__ == "__main__":
     response = requests.get(trades_url)
     trades = pd.read_csv(StringIO(response.text))
 
+    print(offers)
+
     def get_balancing_summary(bm):
         # accepts.loc[accepts["SoFlag"]]["NationalGridBmUnit"].value_counts()
 
@@ -77,6 +132,18 @@ if __name__ == "__main__":
         # print('------------------')
         # print(trades.loc[trades['NationalGridBmUnit'] == bm])
         # print("=============================================")
+
+        if bm == 'DUNGW-1':
+            print('================================')
+            print(offers.loc[offers['nationalGridBmUnit'] == bm, ["totalVolumeAccepted"]])
+            print('--------------------------------')
+            print(trades.loc[trades['NationalGridBmUnit'] == bm, 'Offer'])
+            print('--------------------------------')
+            print(bids.loc[bids['nationalGridBmUnit'] == bm, ["totalVolumeAccepted"]])
+            print('--------------------------------')
+            print(trades.loc[trades['NationalGridBmUnit'] == bm, 'Bid'])
+            print('================================')
+
 
         bm_summary = pd.Series({
             "offer volume": offers.loc[offers['nationalGridBmUnit'] == bm, ["totalVolumeAccepted"]].max().max(),
@@ -95,11 +162,17 @@ if __name__ == "__main__":
     # Only these are considered here
     so_units = accepts.loc[accepts.SoFlag]["NationalGridBmUnit"].unique()
 
+
+    print('offers')
+    print(offers)
+    print('bids')
+    print(bids)
+
     if len(so_units) > 0:
-        for bm in so_units:
-            print('---------------------------------------------')
-            print(bm)
-            print(get_balancing_summary(bm))
+        # for bm in so_units:
+            # print('---------------------------------------------')
+            # print(bm)
+            # print(get_balancing_summary(bm))
 
         so_actions = pd.concat((get_balancing_summary(bm) for bm in so_units), axis=1).T
         print('final so actions')

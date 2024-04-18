@@ -7,8 +7,8 @@ run:
 
 scenario:
   date:
-    start: "2024-03-05"
-    end: "2024-03-07"
+    start: "2023-10-01"
+    end: "2024-03-31"
     # - "2024-03-06"
 
   period:
@@ -74,11 +74,9 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     ESTEX: []
     SEIMP: []
 
-
 balancing:
   extra_cost:
     default: 100 # £/MWh; assumed default extra cost for BM trades vs wholesale
-
 
 load:
   load_distribution_scenario: 'lw' # can be 'lw' (Leading the Way) or 'fs' (Falling Short)

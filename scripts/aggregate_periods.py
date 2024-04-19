@@ -61,9 +61,12 @@ if __name__ == "__main__":
 
         for layout in list(layout_dicts):
 
-            prices = [get_stat(fn, layout, 'marginal_price') for fn in filelist]
-            prices = pd.concat(prices, axis=1)
+            whole_prices = [get_stat(fn, layout, 'wholesale_price') for fn in filelist]
+            whole_prices = pd.concat(whole_prices, axis=1)
 
+            pb_prices = [get_stat(fn, layout, 'post_balancing_price') for fn in filelist]
+            pb_prices = pd.concat(pb_prices, axis=1)
+        
             loads = [get_stat(fn, layout, 'load') for fn in filelist]
             loads = pd.concat(loads, axis=1)
 
@@ -74,16 +77,16 @@ if __name__ == "__main__":
             dispatch = pd.concat(dispatch, axis=1)
 
             normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
-            avg_prices = prices.mul(normalized_loads).mean(axis=1)
 
             results = pd.concat([
-                avg_prices,
+                whole_prices.mul(normalized_loads).mean(axis=1),
+                pb_prices.mul(normalized_loads).mean(axis=1),
                 loads.mean(axis=1),
                 capacity.mean(axis=1),
                 dispatch.mean(axis=1)
                 ], axis=1)
 
-            results.columns = ['marginal_price', 'load', 'available_capacity', 'dispatch']
+            results.columns = ['wholesale_price', 'post_balancing_price', 'load', 'available_capacity', 'dispatch']
 
             for region in results.index:
 

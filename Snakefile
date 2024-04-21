@@ -319,6 +319,7 @@ rule add_generators:
         bmu_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
     output:
         gen_network=RESOURCES + "networks/gen.nc",
+        cost_estimated_generators=RESOURCES + "cost_estimated_generators.csv",
     log:
         LOGS + "add_generators.log",
     threads: 1
@@ -336,6 +337,8 @@ rule prepare_live_network:
         load_weights=RESOURCES + "load_weights.csv",
         elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
         real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
+        cost_estimated_generators=RESOURCES + "cost_estimated_generators.csv",
+        price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network.nc",
     log:

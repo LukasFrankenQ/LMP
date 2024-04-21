@@ -117,8 +117,21 @@ if __name__ == "__main__":
     n.generators.loc[export.index, 'p_max_pu'] = pu
     n.generators.loc[export.index, 'p_min_pu'] = pu
 
-    logger.warning("No sensible cost estimations yet for some types of generators!")
-    bus_ids = n.buses.index
+    logger.info("Adjusting marginal costs for dispatchable generators according to wholesale price.")
+    real_price = pd.read_csv(snakemake.input["price_stats"], index_col=0).iloc[0,0]
+    cost_estimated_generators = pd.Index(
+        pd.read_csv(snakemake.input["cost_estimated_generators"], index_col=0).iloc[:,0].tolist()
+        )
+
+    above_price = (
+        (m := n.generators[['marginal_cost', 'p_nom']].sort_values(by='marginal_cost'))
+        .loc[m['p_nom'].cumsum() >= n.loads.p_set.sum()]
+    )
+
+    if (price_setter := above_price.index[0]) in cost_estimated_generators:
+
+        factor = real_price / above_price.at[price_setter, 'marginal_cost']
+        n.generators.loc[cost_estimated_generators, 'marginal_cost'] *= factor
 
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))

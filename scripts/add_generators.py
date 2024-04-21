@@ -144,7 +144,7 @@ if __name__ == "__main__":
     n.generators.loc[inter, ["marginal_cost"]] = inserted_costs
 
     def sample_more(data, n):
-        '''Fits beta distribution to data, samples n values from it and scales them back to original range.'''
+        '''Fits distribution to data, samples n values from it.'''
 
         scaler = MinMaxScaler()
         data = (
@@ -169,5 +169,14 @@ if __name__ == "__main__":
         n.generators.loc[inter, ["marginal_cost"]],
         len(replacers)
         )
+
+    # these costs will later be tuned according to wholesale prices to match the real market
+    (
+        pd.Series(
+            replacers.tolist() + inter.tolist(),
+            name='cost_esimated_generators'
+            )
+            .to_csv(snakemake.output['cost_estimated_generators'])
+    )
 
     n.export_to_netcdf(snakemake.output["gen_network"])

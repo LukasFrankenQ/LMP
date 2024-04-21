@@ -18,7 +18,6 @@ import pypsa
 import pandas as pd
 
 from _helpers import configure_logging, check_network_consistency
-from _elexon_helpers import find_other_interconnectors
 
 logger = logging.getLogger(__name__)
 
@@ -75,8 +74,8 @@ if __name__ == "__main__":
     others_idx = n.generators.index[~mask].intersection(bmu.loc[bmu['PN'] > 0.].index)
 
     logger.info("Inserting Export Limit as p_nom for non-wind BMUs.")
-    diff = others_idx.difference(bmu.loc[bmu['PN'] > 0.].index)
-
+    
+    # these carriers need cleaning up
     melp_plants = [
         'gas-fired',
         'gas',
@@ -94,9 +93,18 @@ if __name__ == "__main__":
     disp_idx = n.generators.index[n.generators.carrier.isin(melp_plants)].intersection(bmu.index)
     n.generators.loc[disp_idx, 'p_nom'] = bmu.loc[disp_idx].max(axis=1)
 
-    logger.info("Inserting Physical Notification as p_nom for wind BMUs.")
+    logger.info("Inserting Physical Notification as p_nom for wind BMUs. To these bid volumes are added.")
     n.generators.loc[wind_idx, 'p_nom'] = bmu.loc[wind_idx, "PN"]
 
+    # adding bid volumes to respective wind BMUs
+    balancing_actions = pd.read_csv(snakemake.input["real_balancing_actions"], index_col=0)
+
+    inside = balancing_actions.index.intersection(n.generators.index)
+    outside = balancing_actions.index.difference(n.generators.index)
+
+    n.generators.loc[inside, 'p_nom'] += balancing_actions.loc[inside, 'bid volume']
+    
+    # Simulate export by enforcing negative generation at interconnectors
     missing = export.loc[export.index.difference(n.generators.index)]
     if len(missing):
         logger.info("Dropping missing exporting BMUs {}.".format(",".join(missing.index)))

@@ -54,6 +54,14 @@ if __name__ == "__main__":
     print(list(accepted_units))
     print('N accepted units')
     print(len(list(accepted_units)))
+
+    so_units = accepts.loc[accepts.SoFlag]
+    print('so accepted units')
+    print(so_units[['NationalGridBmUnit']])
+    print('N so accepted units')
+    print(len(so_units))
+
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     
 
     # print('first ours then real')

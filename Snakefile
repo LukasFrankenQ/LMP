@@ -335,6 +335,7 @@ rule prepare_live_network:
         network=RESOURCES + "networks/gen.nc",
         load_weights=RESOURCES + "load_weights.csv",
         elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
+        real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network.nc",
     log:

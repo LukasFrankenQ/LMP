@@ -69,10 +69,33 @@ if __name__ == "__main__":
 
     bmu = bmu.loc[n.generators.index]
 
-    logger.warning("Just deleting BMUS with negative Physical Notification for now.")
-    bmu = bmu.loc[bmu["PN"] > 0].max(axis=1)
+    mask = n.generators.carrier.str.contains('wind')
 
-    n.generators.loc[bmu.index, 'p_nom'] = bmu
+    wind_idx = n.generators.index[mask].intersection(bmu.loc[bmu['PN'] > 0.].index)
+    others_idx = n.generators.index[~mask].intersection(bmu.loc[bmu['PN'] > 0.].index)
+
+    logger.info("Inserting Export Limit as p_nom for non-wind BMUs.")
+    diff = others_idx.difference(bmu.loc[bmu['PN'] > 0.].index)
+
+    melp_plants = [
+        'gas-fired',
+        'gas',
+        'biomass',
+        'battery',
+        'CHP',
+        'CCGT',
+        'coal',
+        'gas turbine',
+        'powerstation',
+        ]
+
+    n.generators.loc[others_idx, 'p_nom'] = bmu.loc[bmu["PN"] > 0].max(axis=1).loc[others_idx]
+
+    disp_idx = n.generators.index[n.generators.carrier.isin(melp_plants)].intersection(bmu.index)
+    n.generators.loc[disp_idx, 'p_nom'] = bmu.loc[disp_idx].max(axis=1)
+
+    logger.info("Inserting Physical Notification as p_nom for wind BMUs.")
+    n.generators.loc[wind_idx, 'p_nom'] = bmu.loc[wind_idx, "PN"]
 
     missing = export.loc[export.index.difference(n.generators.index)]
     if len(missing):

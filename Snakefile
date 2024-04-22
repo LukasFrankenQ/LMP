@@ -332,6 +332,8 @@ rule add_generators:
 
 
 rule prepare_live_network:
+    params:
+        elexon=config["elexon"],
     input:
         network=RESOURCES + "networks/gen.nc",
         load_weights=RESOURCES + "load_weights.csv",

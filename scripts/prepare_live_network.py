@@ -130,7 +130,7 @@ if __name__ == "__main__":
         .loc[m['p_nom'].cumsum() >= n.loads.p_set.sum() + export_volume]
     )
 
-    if (price_setter := above_price.index[0]) in cost_estimated_generators:
+    if (price_setter := above_price.index[0]) in cost_estimated_generators and real_price > 0.:
 
         factor = real_price / above_price.at[price_setter, 'marginal_cost']
         n.generators.loc[cost_estimated_generators, 'marginal_cost'] *= factor

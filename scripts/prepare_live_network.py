@@ -123,9 +123,11 @@ if __name__ == "__main__":
         pd.read_csv(snakemake.input["cost_estimated_generators"], index_col=0).iloc[:,0].tolist()
         )
 
+    export_volume = n.generators.loc[export.index, 'p_nom'].sum()
+
     above_price = (
-        (m := n.generators[['marginal_cost', 'p_nom']].sort_values(by='marginal_cost'))
-        .loc[m['p_nom'].cumsum() >= n.loads.p_set.sum()]
+        (m := n.generators.drop(export.index)[['marginal_cost', 'p_nom']].sort_values(by='marginal_cost'))
+        .loc[m['p_nom'].cumsum() >= n.loads.p_set.sum() + export_volume]
     )
 
     if (price_setter := above_price.index[0]) in cost_estimated_generators:

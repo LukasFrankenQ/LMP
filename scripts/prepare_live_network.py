@@ -119,6 +119,11 @@ if __name__ == "__main__":
 
     logger.info("Adjusting marginal costs for dispatchable generators according to wholesale price.")
     real_price = pd.read_csv(snakemake.input["price_stats"], index_col=0).iloc[0,0]
+
+    method_cutoff = snakemake.params["elexon"]["cost_assignment_method_cutoff"]
+    
+    method = 'adjust_' + ['dispatch_only', 'all'][int(real_price < method_cutoff)]
+
     cost_estimated_generators = pd.Index(
         pd.read_csv(snakemake.input["cost_estimated_generators"], index_col=0).iloc[:,0].tolist()
         )
@@ -129,11 +134,18 @@ if __name__ == "__main__":
         (m := n.generators.drop(export.index)[['marginal_cost', 'p_nom']].sort_values(by='marginal_cost'))
         .loc[m['p_nom'].cumsum() >= n.loads.p_set.sum() + export_volume]
     )
+    price_setter = above_price.index[0]
 
-    if (price_setter := above_price.index[0]) in cost_estimated_generators and real_price > 0.:
+    if method == 'adjust_dispatch_only':
 
         factor = real_price / above_price.at[price_setter, 'marginal_cost']
         n.generators.loc[cost_estimated_generators, 'marginal_cost'] *= factor
+    
+    elif method == 'adjust_all':
+
+        cost_subtraction = n.generators.loc[price_setter, 'marginal_cost'] - real_price
+        n.generators['marginal_cost'] -= cost_subtraction
+
 
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))

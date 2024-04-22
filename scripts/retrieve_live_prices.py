@@ -43,6 +43,8 @@ if __name__ == "__main__":
     for col1, col2 in zip(df.columns[:-1], df.columns[1:]):
         if not ('price' in col1 and 'volume' in col2):
             continue
+
         results.loc['market_index'] = float(col1.split(':')[-1])
+        break
     
     results.to_csv(snakemake.output["price_stats"])

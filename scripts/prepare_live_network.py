@@ -96,14 +96,6 @@ if __name__ == "__main__":
     logger.info("Inserting Physical Notification as p_nom for wind BMUs. To these bid volumes are added.")
     n.generators.loc[wind_idx, 'p_nom'] = bmu.loc[wind_idx, "PN"]
 
-    # adding bid volumes to respective wind BMUs
-    balancing_actions = pd.read_csv(snakemake.input["real_balancing_actions"], index_col=0)
-
-    inside = balancing_actions.index.intersection(n.generators.index)
-    outside = balancing_actions.index.difference(n.generators.index)
-
-    n.generators.loc[inside, 'p_nom'] += balancing_actions.loc[inside, 'bid volume']
-    
     # Simulate export by enforcing negative generation at interconnectors
     missing = export.loc[export.index.difference(n.generators.index)]
     if len(missing):

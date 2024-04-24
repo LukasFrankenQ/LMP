@@ -39,22 +39,22 @@ if __name__ == "__main__":
 
     configure_logging(snakemake)
 
-    layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
-    filelist = list(snakemake.input)
-
-    # outfile = snakemake.output[0]
+    infiles = list(snakemake.input)
     outfiles = snakemake.output
 
     for outfile in outfiles:
 
         if 'half-hourly' in outfile:
+
+            layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
+
             logger.info(f"Aggregating to half-hourly resolution to {outfile}.")
 
             total_dict = {}
 
             date = outfile.split('/')[-1].split('.')[0]
 
-            for fn in [file for file in filelist if date in file]:
+            for fn in [file for file in infiles if date in file]:
                 with open(fn) as f:
                     data = json.load(f)
 
@@ -72,10 +72,9 @@ if __name__ == "__main__":
             # print(filelist)
 
             for date in tqdm(get_datelist(snakemake.params.date)):
-                date_files = [fn for fn in filelist if date in fn]
 
-                # print('data: ', date)
-                # print('date files: ', date_files)
+                layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
+                date_files = [fn for fn in infiles if date in fn]
 
                 for layout in list(layout_dicts):
 
@@ -123,5 +122,6 @@ if __name__ == "__main__":
 
                 daily_results[total_seconds] = layout_dicts
 
-            with open(snakemake.output[0], "w") as f:
+            # with open(snakemake.output[0], "w") as f:
+            with open(outfile, "w") as f:
                 json.dump(daily_results, f)

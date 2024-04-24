@@ -68,9 +68,6 @@ if __name__ == "__main__":
 
             daily_results = {}
 
-            # print('filelist')
-            # print(filelist)
-
             for date in tqdm(get_datelist(snakemake.params.date)):
 
                 layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
@@ -117,11 +114,9 @@ if __name__ == "__main__":
                             "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
                         }
 
-                # total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
                 total_seconds = int(pd.Timestamp(date).timestamp())
 
                 daily_results[total_seconds] = layout_dicts
 
-            # with open(snakemake.output[0], "w") as f:
             with open(outfile, "w") as f:
                 json.dump(daily_results, f)

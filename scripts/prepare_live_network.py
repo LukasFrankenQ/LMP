@@ -66,7 +66,7 @@ if __name__ == "__main__":
         p_set=load_weights.loc[loads] * total_load,
     )
 
-    bmu = bmu.loc[n.generators.index]
+    bmu = bmu.loc[n.generators.index.intersection(bmu.index)]
 
     mask = n.generators.carrier.str.contains('wind')
 

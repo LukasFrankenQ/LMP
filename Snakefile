@@ -503,12 +503,12 @@ rule aggregate_periods:
             RESULTS + "periods/{date}_{period}.json",
             date=get_datelist(config["scenario"]["aggregate"][0]),
             period=list(range(1, 49))),
+    output:
+        RESULTS + get_outfiles(config["scenario"]["aggregate"][0]),
         expand(
             RESULTS + "half-hourly/{date}.json",
             date=get_datelist(config["scenario"]["aggregate"][0]),
             ),
-    output:
-        RESULTS + get_outfiles(config["scenario"]["aggregate"][0]),
     log:
         LOGS + "aggregate_periods.log",
     resources:

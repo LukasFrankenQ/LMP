@@ -42,81 +42,86 @@ if __name__ == "__main__":
     layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
     filelist = list(snakemake.input)
 
-    outfile = snakemake.output[0]
+    # outfile = snakemake.output[0]
+    outfiles = snakemake.output
 
-    if 'half-hourly' in outfile:
-        logger.info("Aggregating to half-hourly resolution by merging into single file.")
+    for outfile in outfiles:
 
-        total_dict = {}
+        if 'half-hourly' in outfile:
+            logger.info(f"Aggregating to half-hourly resolution to {outfile}.")
 
-        for fn in filelist:
-            with open(fn) as f:
-                data = json.load(f)
+            total_dict = {}
 
-            ts = list(data)[0]
-            total_dict[ts] = data[ts]
+            date = outfile.split('/')[-1].split('.')[0]
 
-        with open(outfile, "w") as f:
-            json.dump(total_dict, f)
+            for fn in [file for file in filelist if date in file]:
+                with open(fn) as f:
+                    data = json.load(f)
 
-    elif "daily" in outfile:
+                ts = list(data)[0]
+                total_dict[ts] = data[ts]
 
-        daily_results = {}
+            with open(outfile, "w") as f:
+                json.dump(total_dict, f)
 
-        # print('filelist')
-        # print(filelist)
+        elif "daily" in outfile:
 
-        for date in tqdm(get_datelist(snakemake.params.date)):
-            date_files = [fn for fn in filelist if date in fn]
+            daily_results = {}
 
-            # print('data: ', date)
-            # print('date files: ', date_files)
+            # print('filelist')
+            # print(filelist)
 
-            for layout in list(layout_dicts):
+            for date in tqdm(get_datelist(snakemake.params.date)):
+                date_files = [fn for fn in filelist if date in fn]
 
-                whole_prices = [get_stat(fn, layout, 'wholesale_price') for fn in date_files]
-                whole_prices = pd.concat(whole_prices, axis=1)
+                # print('data: ', date)
+                # print('date files: ', date_files)
 
-                pb_prices = [get_stat(fn, layout, 'post_balancing_price') for fn in date_files]
-                pb_prices = pd.concat(pb_prices, axis=1)
+                for layout in list(layout_dicts):
 
-                loads = [get_stat(fn, layout, 'load') for fn in date_files]
-                loads = pd.concat(loads, axis=1)
+                    whole_prices = [get_stat(fn, layout, 'wholesale_price') for fn in date_files]
+                    whole_prices = pd.concat(whole_prices, axis=1)
 
-                capacity = [get_stat(fn, layout, 'available_capacity') for fn in date_files]
-                capacity = pd.concat(capacity, axis=1)
+                    pb_prices = [get_stat(fn, layout, 'post_balancing_price') for fn in date_files]
+                    pb_prices = pd.concat(pb_prices, axis=1)
 
-                dispatch = [get_stat(fn, layout, 'dispatch') for fn in date_files]
-                dispatch = pd.concat(dispatch, axis=1)
+                    loads = [get_stat(fn, layout, 'load') for fn in date_files]
+                    loads = pd.concat(loads, axis=1)
 
-                normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
+                    capacity = [get_stat(fn, layout, 'available_capacity') for fn in date_files]
+                    capacity = pd.concat(capacity, axis=1)
 
-                results = pd.concat([
-                    whole_prices.mul(normalized_loads).mean(axis=1),
-                    pb_prices.mul(normalized_loads).mean(axis=1),
-                    loads.mean(axis=1),
-                    capacity.mean(axis=1),
-                    dispatch.mean(axis=1)
-                    ], axis=1)
+                    dispatch = [get_stat(fn, layout, 'dispatch') for fn in date_files]
+                    dispatch = pd.concat(dispatch, axis=1)
 
-                results.columns = [
-                    'wholesale_price',
-                    'post_balancing_price',
-                    'load',
-                    'available_capacity',
-                    'dispatch',
-                    ]
+                    normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
 
-                for region in results.index:
+                    results = pd.concat([
+                        whole_prices.mul(normalized_loads).mean(axis=1),
+                        pb_prices.mul(normalized_loads).mean(axis=1),
+                        loads.mean(axis=1),
+                        capacity.mean(axis=1),
+                        dispatch.mean(axis=1)
+                        ], axis=1)
 
-                    layout_dicts[layout]["geographies"][region] = {
-                        "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
-                    }
+                    results.columns = [
+                        'wholesale_price',
+                        'post_balancing_price',
+                        'load',
+                        'available_capacity',
+                        'dispatch',
+                        ]
 
-            # total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
-            total_seconds = int(pd.Timestamp(date).timestamp())
+                    for region in results.index:
 
-            daily_results[total_seconds] = layout_dicts
+                        layout_dicts[layout]["geographies"][region] = {
+                            "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
+                        }
 
-        with open(snakemake.output[0], "w") as f:
-            json.dump(daily_results, f)
+                # total_seconds = int(pd.Timestamp(snakemake.params.date).timestamp())
+                total_seconds = int(pd.Timestamp(date).timestamp())
+
+                daily_results[total_seconds] = layout_dicts
+
+            with open(snakemake.output[0], "w") as f:
+                json.dump(daily_results, f)

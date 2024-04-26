@@ -517,3 +517,20 @@ rule aggregate_periods:
         "envs/environment.yaml"
     script:
         "scripts/aggregate_periods.py"
+
+
+rule add_end_consumer_prices:
+    input:
+        network_allowances="data/price_postprocessing/Annex_3.xlsx",
+        policy_allowances="data/price_postprocessing/Annex_4.xlsx",
+        periods=RESULTS + "periods/{date}_{period}.json",
+    output:
+        RESULTS + "periods_final/{date}_{period}.json",
+    log:
+        LOGS + "add_end_consumer_prices_{date}_{period}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/add_consumer_prices.py"

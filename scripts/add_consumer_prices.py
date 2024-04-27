@@ -63,13 +63,14 @@ def get_ro(fn, date):
 
     series = pd.read_excel(
         fn,
-        sheet_name='3e ECO',
+        sheet_name='3b RO',
         header=8,
     ).iloc[-1, 8:].dropna()
+
     series.name = 'RO cost estimate'
 
     series.index = series.index.map(clean_date)
-    return series.loc[date].values[0]
+    return series.loc[date]
 
 
 def get_fit(fn, date):
@@ -85,7 +86,9 @@ def get_fit(fn, date):
     series = series.loc[~series.index.str.contains('Unnamed')].fillna(0.)
     series.index = series.index.map(clean_date)
 
-    return series.loc[date].values[0]
+    # return series.loc[date].values[0]
+    print(series.loc[date])
+    return series.loc[date]
 
 
 def get_old_fit(fn, date):
@@ -102,7 +105,7 @@ def get_old_fit(fn, date):
     series.index = series.index.map(clean_date)
     
     try:
-        return series.loc[date].values[0]
+        return series.loc[date]
     except KeyError:
         return 0.
 
@@ -134,23 +137,72 @@ def get_whd(fn, date):
 
     series.index = series.index.map(clean_date)
 
-    return series.loc[date].values[0]
+    return series.loc[date]
 
 
-def get_aahedc(fn, date):
+def get_aahedc(fn, date, mode):
     """Obtains Assistance for Areas with High Electricity Distribution
     Costs (AAHEDC) from OFGEM price cap Annex 4. Unit: £/MWh supplied"""
 
     series = pd.read_excel(
         fn,
         sheet_name='3g AAHEDC',
-        header=7,
+        header=8,
         index_col=1,
     ).iloc[-1,6:].dropna()
 
     series.index = series.index.map(clean_date)
+    flat_value = series.loc[date]
 
-    return series.loc[date].values[0]
+    losses = pd.read_excel(
+        fn,
+        sheet_name='3h Losses',
+        header=11,
+        index_col=[1,3],
+    ).iloc[2:,6:].dropna(axis=1)
+
+    losses.columns = losses.columns.map(clean_date)
+    
+    keys = {'multi': 'Multi-Register', 'single': 'Single Rate'}
+    aa = (losses.loc[idx[keys[mode], :], pd.Timestamp(date)] * flat_value)
+
+    aa.index = aa.index.get_level_values(1)
+
+    return aa
+
+
+def get_demand(fn, mode):
+    """Obtains demand from OFGEM price cap Annex 4. Unit: MWh supplied"""
+
+    df = pd.read_excel(
+        fn,
+        sheet_name='3a Demand',
+    )
+
+    if mode == 'single':
+        return df.iloc[7, 2]
+    elif mode == 'multi':
+        return df.iloc[8, 2]
+
+
+def get_weights(fn, mode):
+    """Obtains share of electricity usages winter vs summer"""
+
+    df = pd.read_excel(
+        fn,
+        sheet_name='3a Demand',
+    )
+
+    if mode == 'single':
+        return {
+            "summer": df.iloc[15, 2],
+            "winter": df.iloc[15, 3],
+        }
+    elif mode == 'multi':
+        return {
+            "summer": df.iloc[16, 2],
+            "winter": df.iloc[16, 3],
+        }
 
 
 def get_policy_summary(fn, date, mode='multi'):
@@ -186,9 +238,6 @@ if __name__ == "__main__":
 
     price_config = snakemake.params["consumer_price"]
 
-    print('imported regions')
-    print(regions.head())
-
     date, period = pd.Timestamp(snakemake.wildcards["date"]), int(snakemake.wildcards["period"])
 
     nice_modes = {
@@ -196,6 +245,37 @@ if __name__ == "__main__":
         'multi': 'Electricity - Multi-Register Metering Arrangement',
     }
     assert price_config['metering'] in nice_modes, f"Mode {price_config['mode']} not in {nice_modes.keys()}"
+    
+    logger.info("Retrieving policy cost allowances: RO, FIT, ECO, WHD, AAHEDC.")
+
+    regions.loc[:, 'renewable obligation'] = get_ro(policy_file, date)
+
+    regions.loc[:, 'feed-in tariffs'] = get_fit(policy_file, date)
+
+    regions.loc[:, 'old feed-in tariffs'] = get_old_fit(policy_file, date)
+
+    regions.loc[:, 'energy company obligation'] = get_eco(policy_file, date)
+
+    regions.loc[:, 'warm home discount'] = get_whd(policy_file, date)
+
+    regions.loc[:, 'aahedc'] = get_aahedc(policy_file, date, price_config['metering'])
+
+    regions.loc[:, 'total policy price check'] = get_policy_summary(policy_file, date, mode=price_config['metering'])
+
+    per_delivered = [
+        "renewable obligation",
+        "feed-in tariffs",
+        "old feed-in tariffs",
+        "energy company obligation",
+        "aahedc"
+        ]
+
+    demand = get_demand(policy_file, price_config['metering'])
+
+    regions.loc[:, 'computed total'] = (
+        regions[per_delivered].sum(axis=1) * demand 
+        + regions['warm home discount']
+    )
 
     logger.info("Retrieving network cost allowances: TNUoS, DUoS, BSUoS.")
     tnuos, duos, bsuos = (
@@ -248,8 +328,14 @@ if __name__ == "__main__":
             idx[modes[price_config["metering"]], consumptions[price_config["metering"]]],
             ]
         
-        regions = add_network_allowance(regions, consumption_df, quant + consumptions[price_config["metering"]])
+        regions = add_network_allowance(
+            regions,
+            consumption_df,
+            quant + " " + consumptions[price_config["metering"]])
         
-    print('final regions with all network costs')
-    print(regions.head())
 
+    print('policy part')
+    print(regions.iloc[:,:7].head())
+
+    print('n part')
+    print(regions.iloc[:,7:].head())

@@ -79,6 +79,10 @@ balancing:
   extra_cost:
     default: 100 # £/MWh; assumed default extra cost for BM trades vs wholesale
 
+
+consumer_price:
+  metering: 'multi' # 'single' or 'multi' for Single-Rate or Multi-Register Metering
+
 load:
   load_distribution_scenario: 'lw' # can be 'lw' (Leading the Way) or 'fs' (Falling Short)
   load_distribution_year: 2021     # only implemented for 2021 so far

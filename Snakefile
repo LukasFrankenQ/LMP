@@ -519,8 +519,15 @@ rule aggregate_periods:
         "scripts/aggregate_periods.py"
 
 
-rule add_end_consumer_prices:
+rule add_consumer_prices:
+    params:
+        consumer_price=config["consumer_price"],
     input:
+        dno_regions="data/price_postprocessing/charge_restriction_regions.geojson",
+        nodal_regions="data/nodal_zones.geojson",
+        eso_regions="data/eso_zones.geojson",
+        fti_regions="data/fti_zones.geojson",
+        national_regions="data/national_zones.geojson",
         network_allowances="data/price_postprocessing/Annex_3.xlsx",
         policy_allowances="data/price_postprocessing/Annex_4.xlsx",
         periods=RESULTS + "periods/{date}_{period}.json",

@@ -32,6 +32,24 @@ def mute_print():
             yield
 
 
+def to_quarter(date, *args):
+
+    if isinstance(date, str):
+        date = pd.Timestamp(date)
+    
+    date = date.replace(month=(date.month - 1) // 3 * 3 + 1)
+    return date.strftime('%Y-%m')
+
+
+def get_quarters(date):
+
+    if len(date.split("-")) == 1:
+        return [f"{date}-{str(m).zfill(2)}" for m in [1, 4, 7, 10]]
+    else:
+        print([to_quarter(date)])
+        return [to_quarter(date)]
+
+
 def to_datetime(date, period):
     """
     Takes settlement period defined by date 'yyyy-mm-dd' and number [1, 48] and

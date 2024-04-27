@@ -21,7 +21,6 @@ and policy costs, in total adding up to the end consumer price.
 
 import logging
 
-import numpy as np
 import pandas as pd
 import geopandas as gpd
 
@@ -70,7 +69,7 @@ def get_ro(fn, date):
     series.name = 'RO cost estimate'
 
     series.index = series.index.map(clean_date)
-    return series.loc[date]
+    return series.loc[pd.Timestamp(date)]
 
 
 def get_fit(fn, date):
@@ -84,11 +83,9 @@ def get_fit(fn, date):
     ).iloc[-1, 2:]
 
     series = series.loc[~series.index.str.contains('Unnamed')].fillna(0.)
-    series.index = series.index.map(clean_date)
 
-    # return series.loc[date].values[0]
-    print(series.loc[date])
-    return series.loc[date]
+    series.index = series.index.map(clean_date)
+    return series.loc[pd.Timestamp(date)]
 
 
 def get_old_fit(fn, date):
@@ -116,13 +113,12 @@ def get_eco(fn, date):
     series = pd.read_excel(
         fn,
         sheet_name='3e ECO',
-        header=7,
+        header=8,
         index_col=1,
     ).iloc[-1,6:].dropna()
 
     series.index = series.index.map(clean_date)
-
-    return series.loc[date].values[0]
+    return series.loc[pd.Timestamp(date)]
 
 
 def get_whd(fn, date):
@@ -131,13 +127,13 @@ def get_whd(fn, date):
     series = pd.read_excel(
         fn,
         sheet_name='3f WHD',
-        header=7,
+        header=8,
         index_col=1,
     ).iloc[-1,6:].dropna()
 
     series.index = series.index.map(clean_date)
 
-    return series.loc[date]
+    return series.loc[pd.Timestamp(date)]
 
 
 def get_aahedc(fn, date, mode):
@@ -152,7 +148,7 @@ def get_aahedc(fn, date, mode):
     ).iloc[-1,6:].dropna()
 
     series.index = series.index.map(clean_date)
-    flat_value = series.loc[date]
+    flat_value = series.loc[date].values[0]
 
     losses = pd.read_excel(
         fn,
@@ -238,7 +234,9 @@ if __name__ == "__main__":
 
     price_config = snakemake.params["consumer_price"]
 
-    date, period = pd.Timestamp(snakemake.wildcards["date"]), int(snakemake.wildcards["period"])
+    date = snakemake.wildcards["quarter"]
+
+    logger.info(f"Preparing allowances for {date}.")
 
     nice_modes = {
         'single': 'Electricity - Single-Rate Metering Arrangement',
@@ -246,7 +244,7 @@ if __name__ == "__main__":
     }
     assert price_config['metering'] in nice_modes, f"Mode {price_config['mode']} not in {nice_modes.keys()}"
     
-    logger.info("Retrieving policy cost allowances: RO, FIT, ECO, WHD, AAHEDC.")
+    logger.info("Gathering policy cost allowances: RO, FIT, ECO, WHD, AAHEDC.")
 
     regions.loc[:, 'renewable obligation'] = get_ro(policy_file, date)
 
@@ -277,7 +275,8 @@ if __name__ == "__main__":
         + regions['warm home discount']
     )
 
-    logger.info("Retrieving network cost allowances: TNUoS, DUoS, BSUoS.")
+    logger.info("Gathering network cost allowances: TNUoS, DUoS, BSUoS.")
+
     tnuos, duos, bsuos = (
         get_network_sheet(network_file, sheet_name)
         for sheet_name in ['2a TNUoS', '2b DUoS', '2c BSUoS']
@@ -334,8 +333,124 @@ if __name__ == "__main__":
             quant + " " + consumptions[price_config["metering"]])
         
 
-    print('policy part')
-    print(regions.iloc[:,:7].head())
+    logger.info("Gathering wholesale allowance: Direct Fuel, Backwardation, CFD.")
 
-    print('n part')
-    print(regions.iloc[:,7:].head())
+    def quarter_to_date(q):
+        return q.split(' ')[1] + "-" + str(3 * (int(q.split(' ')[0][-1]) - 1) + 1).zfill(2)
+
+    wholesale_slide = pd.read_excel(
+        snakemake.input["wholesale_allowances"],
+        sheet_name='1a Wholesale allowance',
+        header=7,
+        index_col=[1,2,3],
+    )
+
+
+    def get_direct_fuel(sheet, date, mode):
+        """Takes Annex 2, 1a Wholesale Allowance, and returns direct fuel cost for requested date and mode."""
+
+        modes = {
+            "single": "Single-Rate Metering Arrangement",
+            "multi": "Multi-Register Metering Arrangement",
+        }
+
+        df = sheet.copy().loc[idx["Electricity", modes[mode]]].iloc[:14,22:]
+
+        df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+        df.columns = df.columns.map(quarter_to_date).map(pd.Timestamp)
+
+        return df[pd.Timestamp(date)]
+
+
+    def get_backwardation(sheet, date, mode):
+        """Takes Annex 2, 1a Wholesale Allowance, and returns backwardation cost for requested date and mode."""
+
+        modes = {
+            "single": "Single-Rate Metering Arrangement",
+            "multi": "Multi-Register Metering Arrangement",
+        }
+
+        df = sheet.copy().loc[idx["Electricity", modes[mode]]].iloc[14:28,22:]
+
+        df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+        df.columns = df.columns.map(quarter_to_date).map(pd.Timestamp)
+
+        return df[pd.Timestamp(date)]
+
+
+    def get_cfd(sheet, date, mode):
+        """Takes Annex 2, 1a Wholesale Allowance, and returns CFD cost for requested date and mode."""
+
+        modes = {
+            "single": "Single-Rate Metering Arrangement",
+            "multi": "Multi-Register Metering Arrangement",
+        }
+
+        df = sheet.copy().loc[idx["Electricity", modes[mode]]].iloc[28:42,22:]
+
+        df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+        df.columns = df.columns.map(quarter_to_date).map(pd.Timestamp)
+
+        return df[pd.Timestamp(date)]
+    
+
+    regions.loc[:, 'direct fuel'] = get_direct_fuel(wholesale_slide, date, price_config['metering'])
+    regions.loc[:, 'backwardation'] = get_backwardation(wholesale_slide, date, price_config['metering'])
+    regions.loc[:, 'cfd'] = get_cfd(wholesale_slide, date, price_config['metering'])
+
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+
+    pdf = regions.drop(columns=['geometry', 'total policy price check', 'computed total'])
+    pos = pdf.loc[:, pdf.mean() > 0.]
+    neg = pdf.loc[:, pdf.mean() <= 0.]
+
+    pos.plot.bar(stacked=True, ax=ax, legend=True)
+    neg.plot.bar(stacked=True, ax=ax, legend=True)
+
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(
+        handles[::-1],
+        labels[::-1],
+        title='Cost Factor',
+        bbox_to_anchor=(0.9, 1.1),
+        ncols=5,
+    )
+    ax.set_ylabel('Cost per year per person (£)')
+    ax.set_xlabel('Region')
+    ax.grid(axis='y', linestyle='--', alpha=0.5)
+    ax.xaxis.set_tick_params(rotation=45)
+
+    plt.tight_layout()
+    plt.show()
+
+    demand = get_demand(policy_file, price_config['metering'])
+
+    linear_cols = [
+        "renewable obligation",
+        "feed-in tariffs",
+        "old feed-in tariffs",
+        "energy company obligation",
+        "aahedc",
+        "direct fuel",
+        "backwardation",
+        "cfd",
+        ] + [col for col in regions.columns if ' m ' in col]
+
+    standing_cols = [
+        "warm home discount"
+    ] + [col for col in regions.columns if 'standing charge' in col]
+
+    print('demand')
+    print(demand)
+    print('linear')
+    print(linear_cols)
+    print((regions[linear_cols].head() / demand).iloc[:,:len(linear_cols)//2])
+    print((regions[linear_cols].head() / demand).iloc[:,len(linear_cols)//2:])
+
+    print('standing')
+    print(standing_cols)
+    print(regions[standing_cols].head())
+
+    regions[standing_cols].to_csv(snakemake.output["zeroth_order"])
+    (regions[linear_cols] / demand).to_csv(snakemake.output["first_order"])

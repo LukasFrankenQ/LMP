@@ -10,7 +10,14 @@ from snakemake.remote.HTTP import RemoteProvider as HTTPRemoteProvider
 from snakemake.utils import min_version
 from datetime import datetime, timedelta
 
-from scripts._helpers import get_scenarios, to_total_seconds, get_outfiles, get_datelist
+from scripts._helpers import (
+    get_scenarios,
+    to_total_seconds,
+    get_outfiles,
+    get_datelist,
+    to_quarter,
+    get_quarters,
+)
 
 HTTP = HTTPRemoteProvider()
 
@@ -519,25 +526,30 @@ rule aggregate_periods:
         "scripts/aggregate_periods.py"
 
 
-rule add_consumer_prices:
+rule prepare_allowances:
     params:
         consumer_price=config["consumer_price"],
     input:
         dno_regions="data/price_postprocessing/charge_restriction_regions.geojson",
-        nodal_regions="data/nodal_zones.geojson",
-        eso_regions="data/eso_zones.geojson",
-        fti_regions="data/fti_zones.geojson",
-        national_regions="data/national_zones.geojson",
+        wholesale_allowances="data/price_postprocessing/Annex_2.xlsx",
         network_allowances="data/price_postprocessing/Annex_3.xlsx",
         policy_allowances="data/price_postprocessing/Annex_4.xlsx",
-        periods=RESULTS + "periods/{date}_{period}.json",
     output:
-        RESULTS + "periods_final/{date}_{period}.json",
+        zeroth_order=RESOURCES + "zeroth_order_allowances_{quarter}.csv",
+        first_order=RESOURCES + "first_order_allowances_{quarter}.csv",
     log:
-        LOGS + "add_end_consumer_prices_{date}_{period}.log",
+        LOGS + "prepare_allowances_{quarter}.log",
     resources:
         mem_mb=1500,
     conda:
         "envs/environment.yaml"
     script:
-        "scripts/add_consumer_prices.py"
+        "scripts/prepare_allowances.py"
+
+
+rule prepare_all_allowances:
+    input:
+        expand(
+            RESOURCES + "zeroth_order_allowances_{quarter}.csv",
+            quarter=get_quarters(config["scenario"]["aggregate"][0]),
+            ),

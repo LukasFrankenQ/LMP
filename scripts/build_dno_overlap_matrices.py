@@ -45,4 +45,3 @@ if __name__ == "__main__":
 
         overlap.to_csv(snakemake.output[layout])
         logger.info(f"Computed overlap between DNO regions and {layout} layout.")
-

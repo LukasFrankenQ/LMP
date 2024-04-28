@@ -232,8 +232,6 @@ if __name__ == "__main__":
 
     regions = gpd.read_file(snakemake.input["dno_regions"]).set_index('LongName')
 
-    price_config = snakemake.params["consumer_price"]
-
     date = snakemake.wildcards["quarter"]
 
     logger.info(f"Preparing allowances for {date}.")
@@ -242,7 +240,7 @@ if __name__ == "__main__":
         'single': 'Electricity - Single-Rate Metering Arrangement',
         'multi': 'Electricity - Multi-Register Metering Arrangement',
     }
-    assert price_config['metering'] in nice_modes, f"Mode {price_config['mode']} not in {nice_modes.keys()}"
+    mode = snakemake.wildcards["rate"]
     
     logger.info("Gathering policy cost allowances: RO, FIT, ECO, WHD, AAHEDC.")
 
@@ -256,9 +254,9 @@ if __name__ == "__main__":
 
     regions.loc[:, 'warm home discount'] = get_whd(policy_file, date)
 
-    regions.loc[:, 'aahedc'] = get_aahedc(policy_file, date, price_config['metering'])
+    regions.loc[:, 'aahedc'] = get_aahedc(policy_file, date, mode)
 
-    regions.loc[:, 'total policy price check'] = get_policy_summary(policy_file, date, mode=price_config['metering'])
+    regions.loc[:, 'total policy price check'] = get_policy_summary(policy_file, date, mode=mode)
 
     per_delivered = [
         "renewable obligation",
@@ -268,7 +266,7 @@ if __name__ == "__main__":
         "aahedc"
         ]
 
-    demand = get_demand(policy_file, price_config['metering'])
+    demand = get_demand(policy_file, mode)
 
     regions.loc[:, 'computed total'] = (
         regions[per_delivered].sum(axis=1) * demand 
@@ -308,13 +306,13 @@ if __name__ == "__main__":
 
         try:
             standing_df = df.copy().loc[
-                idx[modes[price_config["metering"]], "Nil"],
+                idx[modes[mode], "Nil"],
                 ]
         except KeyError:
             # No standing charge for BSUoS, effectively replacing lack of values with 0
             standing_df = (
                 tnuos.copy().loc[
-                    idx[modes[price_config["metering"]], "Nil"], :date
+                    idx[modes[mode], "Nil"], :date
                 ]
                 .iloc[:,[-1]]
             )
@@ -324,13 +322,13 @@ if __name__ == "__main__":
         regions = add_network_allowance(regions, standing_df, quant + ' standing charge')
 
         consumption_df = df.copy().loc[
-            idx[modes[price_config["metering"]], consumptions[price_config["metering"]]],
+            idx[modes[mode], consumptions[mode]],
             ]
         
         regions = add_network_allowance(
             regions,
             consumption_df,
-            quant + " " + consumptions[price_config["metering"]])
+            quant + " " + consumptions[mode])
         
 
     logger.info("Gathering wholesale allowance: Direct Fuel, Backwardation, CFD.")
@@ -394,9 +392,9 @@ if __name__ == "__main__":
         return df[pd.Timestamp(date)]
     
 
-    regions.loc[:, 'direct fuel'] = get_direct_fuel(wholesale_slide, date, price_config['metering'])
-    regions.loc[:, 'backwardation'] = get_backwardation(wholesale_slide, date, price_config['metering'])
-    regions.loc[:, 'cfd'] = get_cfd(wholesale_slide, date, price_config['metering'])
+    regions.loc[:, 'direct fuel'] = get_direct_fuel(wholesale_slide, date, mode)
+    regions.loc[:, 'backwardation'] = get_backwardation(wholesale_slide, date, mode)
+    regions.loc[:, 'cfd'] = get_cfd(wholesale_slide, date, mode)
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(1, 1, figsize=(10, 10))
@@ -413,7 +411,7 @@ if __name__ == "__main__":
         handles[::-1],
         labels[::-1],
         title='Cost Factor',
-        bbox_to_anchor=(0.9, 1.1),
+        bbox_to_anchor=(0.9, 1.2),
         ncols=5,
     )
     ax.set_ylabel('Cost per year per person (£)')
@@ -421,10 +419,12 @@ if __name__ == "__main__":
     ax.grid(axis='y', linestyle='--', alpha=0.5)
     ax.xaxis.set_tick_params(rotation=45)
 
+    ax.set_title(f"Costs per year per person for {date} ({mode})")
+
     plt.tight_layout()
     plt.show()
 
-    demand = get_demand(policy_file, price_config['metering'])
+    demand = get_demand(policy_file, mode)
 
     linear_cols = [
         "renewable obligation",

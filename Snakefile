@@ -527,18 +527,16 @@ rule aggregate_periods:
 
 
 rule prepare_allowances:
-    params:
-        consumer_price=config["consumer_price"],
     input:
         dno_regions="data/price_postprocessing/charge_restriction_regions.geojson",
         wholesale_allowances="data/price_postprocessing/Annex_2.xlsx",
         network_allowances="data/price_postprocessing/Annex_3.xlsx",
         policy_allowances="data/price_postprocessing/Annex_4.xlsx",
     output:
-        zeroth_order=RESOURCES + "zeroth_order_allowances_{quarter}.csv",
-        first_order=RESOURCES + "first_order_allowances_{quarter}.csv",
+        zeroth_order=RESOURCES + "allowances/zeroth_order_allowances_{quarter}_{rate}.csv",
+        first_order=RESOURCES + "allowances/first_order_allowances_{quarter}_{rate}.csv",
     log:
-        LOGS + "prepare_allowances_{quarter}.log",
+        LOGS + "prepare_allowances_{quarter}_{rate}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -550,6 +548,7 @@ rule prepare_allowances:
 rule prepare_all_allowances:
     input:
         expand(
-            RESOURCES + "zeroth_order_allowances_{quarter}.csv",
+            RESOURCES + "allowances/zeroth_order_allowances_{quarter}_{rate}.csv",
             quarter=get_quarters(config["scenario"]["aggregate"][0]),
+            rate=["single", "multi"],
             ),

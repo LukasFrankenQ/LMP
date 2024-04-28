@@ -26,7 +26,7 @@ scenario:
     - national
   
   aggregate:
-    - "2023-10"
+    - "2024-04"
 
 
 countries: ['GB']
@@ -80,8 +80,8 @@ balancing:
     default: 100 # £/MWh; assumed default extra cost for BM trades vs wholesale
 
 
-consumer_price:
-  metering: 'multi' # 'single' or 'multi' for Single-Rate or Multi-Register Metering
+# consumer_price:
+#   metering: 'multi' # 'single' or 'multi' for Single-Rate or Multi-Register Metering
 
 load:
   load_distribution_scenario: 'lw' # can be 'lw' (Leading the Way) or 'fs' (Falling Short)

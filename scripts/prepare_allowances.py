@@ -21,6 +21,10 @@ and policy costs, in total adding up to the end consumer price.
 
 import logging
 
+# otherwise throws unsorted index related warnings that are not relevant here
+import warnings
+warnings.filterwarnings("ignore")
+
 import pandas as pd
 import geopandas as gpd
 

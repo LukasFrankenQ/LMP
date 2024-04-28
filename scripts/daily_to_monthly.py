@@ -19,7 +19,7 @@ if __name__ == "__main__":
     configure_logging(snakemake)
 
     infiles = snakemake.input
-    
+
     months = [fn.split('/')[-1].split('.')[0] for fn in infiles]
     layouts = ['nodal', 'national', 'eso', 'fti']
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     assert len(date.split('-')) == 1, 'Provided date should be year'
 
     logger.info(f"Aggregating to monthly resolution for year {date}, and months {months}.")
-    
+
     months = [str(n).zfill(2) for n in range(1, 13)]
     monthly_results = {}
 
@@ -53,7 +53,7 @@ if __name__ == "__main__":
                     "variables": results.T[region].fillna(0.).astype(np.float16).to_dict()
                 }
 
-        total_seconds = int(pd.Timestamp(date).timestamp())
+        total_seconds = int(pd.Timestamp(f"{date}-{month}").timestamp())
 
         monthly_results[total_seconds] = layout_dicts
 

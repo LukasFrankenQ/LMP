@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# SPDX-FileCopyrightText: : 2017-2023 The PyPSA-Eur Authors
+# SPDX-FileCopyrightText: : 2017-2023 The PyPSA-Eur Authors, updated 2024 Lukas Franken
 #
 # SPDX-License-Identifier: MIT
 
@@ -46,7 +46,6 @@ def get_quarters(date):
     if len(date.split("-")) == 1:
         return [f"{date}-{str(m).zfill(2)}" for m in [1, 4, 7, 10]]
     else:
-        print([to_quarter(date)])
         return [to_quarter(date)]
 
 

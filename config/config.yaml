@@ -6,10 +6,10 @@ run:
   name: "pypsa-lmp"
 
 scenario:
-  date:
-    start: "2023-10-01"
-    end: "2024-04-24"
-    # - "2024-03-06"
+  date: 
+    - "2024-04-01"
+    # start: "2023-10-01"
+    # end: "2024-04-24"
 
   period:
     start: 1

@@ -43,10 +43,12 @@ run = config["run"]
 scenarios = get_scenarios(run)
 
 wildcard_constraints:
+    year = r"\d{4}",
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
 
 include: "rules/gather.smk"
+include: "rules/testing.smk"
 
 
 # Check if the workflow has access to the internet by trying to access the HEAD of specified url
@@ -552,3 +554,4 @@ rule prepare_all_allowances:
             quarter=get_quarters(config["scenario"]["aggregate"][0]),
             rate=["single", "multi"],
             ),
+

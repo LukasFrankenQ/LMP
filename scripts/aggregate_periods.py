@@ -35,6 +35,44 @@ def get_stat(fn, layout, variable):
     return pd.Series({geo: data[ts][layout]["geographies"][geo]['variables'][variable] for geo in geos})
 
 
+def aggregate_stats(layout, source_files):
+
+    whole_prices = [get_stat(fn, layout, 'wholesale_price') for fn in source_files]
+    whole_prices = pd.concat(whole_prices, axis=1)
+
+    pb_prices = [get_stat(fn, layout, 'post_balancing_price') for fn in source_files]
+    pb_prices = pd.concat(pb_prices, axis=1)
+
+    loads = [get_stat(fn, layout, 'load') for fn in source_files]
+    loads = pd.concat(loads, axis=1)
+
+    capacity = [get_stat(fn, layout, 'available_capacity') for fn in source_files]
+    capacity = pd.concat(capacity, axis=1)
+
+    dispatch = [get_stat(fn, layout, 'dispatch') for fn in source_files]
+    dispatch = pd.concat(dispatch, axis=1)
+
+    normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
+
+    results = pd.concat([
+        whole_prices.mul(normalized_loads).mean(axis=1),
+        pb_prices.mul(normalized_loads).mean(axis=1),
+        loads.mean(axis=1),
+        capacity.mean(axis=1),
+        dispatch.mean(axis=1)
+        ], axis=1)
+
+    results.columns = [
+        'wholesale_price',
+        'post_balancing_price',
+        'load',
+        'available_capacity',
+        'dispatch',
+        ]
+    
+    return results
+
+
 if __name__ == "__main__":
 
     configure_logging(snakemake)
@@ -73,40 +111,10 @@ if __name__ == "__main__":
                 layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
                 date_files = [fn for fn in infiles if date in fn]
 
+
                 for layout in list(layout_dicts):
 
-                    whole_prices = [get_stat(fn, layout, 'wholesale_price') for fn in date_files]
-                    whole_prices = pd.concat(whole_prices, axis=1)
-
-                    pb_prices = [get_stat(fn, layout, 'post_balancing_price') for fn in date_files]
-                    pb_prices = pd.concat(pb_prices, axis=1)
-
-                    loads = [get_stat(fn, layout, 'load') for fn in date_files]
-                    loads = pd.concat(loads, axis=1)
-
-                    capacity = [get_stat(fn, layout, 'available_capacity') for fn in date_files]
-                    capacity = pd.concat(capacity, axis=1)
-
-                    dispatch = [get_stat(fn, layout, 'dispatch') for fn in date_files]
-                    dispatch = pd.concat(dispatch, axis=1)
-
-                    normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
-
-                    results = pd.concat([
-                        whole_prices.mul(normalized_loads).mean(axis=1),
-                        pb_prices.mul(normalized_loads).mean(axis=1),
-                        loads.mean(axis=1),
-                        capacity.mean(axis=1),
-                        dispatch.mean(axis=1)
-                        ], axis=1)
-
-                    results.columns = [
-                        'wholesale_price',
-                        'post_balancing_price',
-                        'load',
-                        'available_capacity',
-                        'dispatch',
-                        ]
+                    results = aggregate_stats(layout, date_files)
 
                     for region in results.index:
 

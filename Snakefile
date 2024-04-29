@@ -311,6 +311,23 @@ rule build_dispatchable_costs:
         "scripts/build_dispatchable_costs.py"
 
 
+rule build_redispatch_costs:
+    input:
+        balancing_actions="data/winter_2024_balancing_actions.csv",
+        wholesale_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
+        network=RESOURCES + "networks/gen.nc",
+    output:
+        redispatch_cost=RESOURCES + "redispatch_cost.csv",
+    log:
+        LOGS + "build_dispatchable_costs.log",
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/build_redispatch_cost.py"
+
+
 rule add_generators:
     params:
         elexon=config["elexon"],

@@ -31,7 +31,8 @@ rule soft_aggregate:
 def get_available_months(wildcards):
 
     year = wildcards.year
-    path = Path.cwd() / 'results' / 'daily'
+    # path = Path.cwd() / 'results' / 'daily'
+    path = RESULTS / 'daily'
 
     return [path / fn for fn in os.listdir(path) if year in fn]
 

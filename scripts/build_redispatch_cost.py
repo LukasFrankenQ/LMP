@@ -116,4 +116,3 @@ if __name__ == "__main__":
     )
 
     total.groupby('carrier').median().to_csv(snakemake.output[0])
-

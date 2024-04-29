@@ -59,6 +59,7 @@ def get_generation_stack(n):
     )
 
 
+
 if __name__ == "__main__":
 
     configure_logging(snakemake)
@@ -76,7 +77,15 @@ if __name__ == "__main__":
             pypsa.Network(snakemake.input["network_nodal"]))
     )
 
-    balancing_cost = snakemake.params["balancing"]
+    carrier_mapper = {
+        "PHS": "hydro",
+        "floating wind": "offwind",
+    }
+
+    redispatch_costs = pd.read_csv(snakemake.input["redispatch_cost"], index_col=0)
+
+    offer_costs = redispatch_costs["offer_cost"].fillna(50.)
+    bid_costs = redispatch_costs["bid_cost"].fillna(50.)
 
     logger.warning("Unsolved issue with dispatch and p_nom for nodal layout.")
 
@@ -88,16 +97,47 @@ if __name__ == "__main__":
         n = pypsa.Network(snakemake.input["network_{}".format(layout)])
 
         genstack = get_generation_stack(n)
-        diff = (genstack - nodal_generation_stack).abs().iloc[:,0]
-        
-        bcost = pd.Series(
-                    map(
-                        lambda carrier: balancing_cost.get(carrier, balancing_cost['default']),
-                        diff.index  
-                    ),
-                    index=diff.index
-                ).mul(diff, axis=0).sum()
-        bvol = diff.sum()
+        diff = (genstack - nodal_generation_stack).iloc[:,0]
+
+        def clean_carriers(d):
+
+            d = (
+                d.loc[
+                    d.index.isin(redispatch_costs.index) + 
+                    d.index.isin(carrier_mapper.keys())
+                    ]
+            )
+
+            for origin, target in carrier_mapper.items():
+                if origin not in d.index:
+                    continue
+
+                try:
+                    d.loc[target] += d.loc[origin]
+                except KeyError:
+                    d.loc[target] = d.loc[origin]
+
+                d.drop(index=origin, inplace=True)
+
+            return d
+
+        bids = clean_carriers(diff.loc[diff > 0].abs())
+        offers = clean_carriers(diff.loc[diff < 0].abs())
+
+        if not bids.index.isin(redispatch_costs.index).all():
+            logger.warning("Some carriers in bids not found in redispatch costs.")
+        if not offers.index.isin(redispatch_costs.index).all():
+            logger.warning("Some carriers in offers not found in redispatch costs.")
+
+        bids = bids.loc[bids.index.intersection(redispatch_costs.index)]
+        offers = offers.loc[offers.index.intersection(redispatch_costs.index)]
+
+        bcost = (
+            bids.mul(bid_costs.loc[bids.index], axis=0).sum() +
+            offers.mul(offer_costs.loc[offers.index], axis=0).sum()
+        )
+
+        bvol = diff.abs().sum()
 
         regions_file = snakemake.input["regions_{}".format(layout)]
         regions = gpd.read_file(regions_file).set_index("name")

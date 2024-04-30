@@ -59,8 +59,14 @@ if __name__ == "__main__":
             continue
 
         lines = pd.Series(lines).astype(str).tolist()
+        current_capacity = n.lines.loc[lines, "s_nom"].sum()
+
+        if boundary in ['SCOTEX', 'SSHARN']:
+            # Western HVDC counts towards these boundaries, scaling accordingly
+            current_capacity = current_capacity + n.links.loc['8009', 'p_nom']
+
         constraint_factor = np.around(
-            constraints.loc[boundary] / n.lines.loc[lines, "s_nom"].sum(),
+            constraints.loc[boundary] / current_capacity,
             decimals=3)
 
         verdict = "Accepted" if constraint_factor < 1 else "Skipped"
@@ -71,7 +77,10 @@ if __name__ == "__main__":
 
         n.lines.loc[lines, "s_nom"] *= constraint_factor
 
-
+        if boundary in ['SCOTEX', 'SSHARN']:
+            # also reduce HVDC capacity
+            n.links.loc['8009', 'p_nom'] *= constraint_factor
+        
     isolated_buses = check_network_consistency(n)
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 

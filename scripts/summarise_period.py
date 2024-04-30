@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
         layout_results = pd.DataFrame(index=regions.index)
 
-        layout_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
+        layout_results.loc[:, "wholesale_price"] =price_to_zones(n, regions)
         layout_results.loc[:, "load"] = load_to_zones(n, regions)# .values
         layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
         layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values

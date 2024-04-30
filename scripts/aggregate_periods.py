@@ -54,6 +54,11 @@ def aggregate_stats(layout, source_files):
 
     normalized_loads = loads.sum() / loads.sum().sum() * loads.shape[1]
 
+    print('normalized_loads')
+    print(normalized_loads)
+
+    import sys
+
     results = pd.concat([
         whole_prices.mul(normalized_loads).mean(axis=1),
         pb_prices.mul(normalized_loads).mean(axis=1),
@@ -79,6 +84,15 @@ if __name__ == "__main__":
 
     infiles = list(snakemake.input)
     outfiles = snakemake.output
+
+    print('infilre')
+    print(infiles)
+
+    print('outfiles')
+    print(outfiles)
+
+    import sys
+    sys.exit()
 
     for outfile in outfiles:
 
@@ -110,7 +124,6 @@ if __name__ == "__main__":
 
                 layout_dicts = {layout: {"geographies": {}} for layout in ['nodal', 'national', 'eso', 'fti']}
                 date_files = [fn for fn in infiles if date in fn]
-
 
                 for layout in list(layout_dicts):
 

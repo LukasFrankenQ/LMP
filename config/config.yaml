@@ -31,7 +31,7 @@ scenario:
   year:
     - 2024
 
-aggregation: hard # 'hard' or 'soft', when soft only uses input files that already exist, else all input files are created
+aggregation: soft # 'hard' or 'soft', when soft only uses input files that already exist, else all input files are created
 
 countries: ['GB']
 

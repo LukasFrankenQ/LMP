@@ -28,32 +28,6 @@ rule soft_aggregate:
         'results/summaries/{date}.csv'
 
 
-def get_available_months(wildcards):
-
-    year = wildcards.year
-    # path = Path.cwd() / 'results' / 'daily'
-    path = RESULTS / 'daily'
-
-    return [path / fn for fn in os.listdir(path) if year in fn]
-
-
-# daily to monthly is SOFT, i.e. only gathers for available months, instead of forcing
-# more files to be created.
-rule daily_to_monthly:
-    input:
-        get_available_months
-    output:
-        monthly_aggregate='results/monthly/{year}.json'
-    log:
-        '../logs/daily_to_monthly_{year}.log'
-    resources:
-        mem_mb=1500,
-    conda:
-        '../envs/environment.yaml'
-    script:
-        '../scripts/daily_to_monthly.py'
-
-
 rule build_dno_overlap_matrices:
     input:
         dno_regions="data/price_postprocessing/charge_restriction_regions.geojson",

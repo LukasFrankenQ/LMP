@@ -543,7 +543,7 @@ def get_halfhourly_input(path, template, date, mode):
     return infiles
 
 
-rule periods_to_halfhourly:
+rule aggregate_periods_to_halfhourly:
     params:
         mode=config["aggregation"],
     input:
@@ -562,7 +562,102 @@ rule periods_to_halfhourly:
     conda:
         "envs/environment.yaml"
     script:
-        "scripts/periods_to_halfhourly.py"
+        "scripts/aggregate_periods_to_halfhourly.py"
+
+
+def get_daily_input(source_path, template, date, mode):
+    import pandas as pd
+
+    infiles = pd.Index([
+        source_path + template.format(date=day.strftime('%Y-%m-%d'))
+        for day in pd.date_range(
+            start=date,
+            end=pd.to_datetime(date) + pd.offsets.MonthEnd(1),
+            freq='d')
+        ])
+
+    if mode == 'soft':
+        import os
+        infiles = [
+            fn for fn in infiles 
+            if fn.split('/')[-1] in os.listdir(source_path)
+            ]
+
+    elif mode == 'hard':
+        pass
+
+    else:
+        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
+
+    return infiles
+
+
+rule halfhourly_to_daily:
+    params:
+        mode=config["aggregation"],
+    input:
+        ancient(lambda wildcards: get_daily_input(
+            RESULTS + "half-hourly/",
+            "{date}.json",
+            wildcards.month,
+            config["aggregation"]
+            )),
+    output:
+        RESULTS + "daily/{month}.json",
+    log:
+        LOGS + "halfhourly_to_daily_{month}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/aggregate_halfhourly_to_daily.py"
+
+
+def get_monthly_input(source_path, template, date, mode):
+    import pandas as pd
+
+    infiles = pd.Index([
+        source_path + template.format(date=month.strftime('%Y-%m'))
+        for month in pd.date_range(year, str(int(year) + 1), freq='MS')
+        ])
+
+    if mode == 'soft':
+        import os
+        infiles = [
+            fn for fn in infiles 
+            if fn.split('/')[-1] in os.listdir(source_path)
+            ]
+
+    elif mode == 'hard':
+        pass
+
+    else:
+        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
+
+    return infiles
+
+
+rule daily_to_monthly:
+    params:
+        mode=config["aggregation"],
+    input:
+        lambda wildcards: get_monthly_input(
+            RESULTS + "daily/",
+            "{date}.json",
+            wildcards.month,
+            config["aggregation"]
+            ),
+    output:
+        RESULTS + "monthly/{year}.json",
+    log:
+        LOGS + "daily_to_monthly_{year}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/aggregate_daily_to_monthly.py"
 
 
 """

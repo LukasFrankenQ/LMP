@@ -522,6 +522,50 @@ rule plot_period:
         "scripts/plot_period.py"
 
 
+def get_halfhourly_input(path, template, date, mode):
+    import pandas as pd
+
+    infiles = pd.Index([
+        path + template.format(date=date, period=period)
+        for period in range(1, 49)
+        ])
+
+    if mode == 'soft':
+        import os
+        infiles = [fn for fn in infiles if fn.split('/')[-1] in os.listdir(path)]
+
+    elif mode == 'hard':
+        pass
+
+    else:
+        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
+
+    return infiles
+
+
+rule periods_to_halfhourly:
+    params:
+        mode=config["aggregation"],
+    input:
+        lambda wildcards: get_halfhourly_input(
+            RESULTS + "periods/",
+            "{date}_{period}.json",
+            wildcards.date,
+            config["aggregation"]
+            ),
+    output:
+        RESULTS + "half-hourly/{date}.json",
+    log:
+        LOGS + "periods_to_halfhourly_{date}.log",
+    resources:
+        mem_mb=1500,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/periods_to_halfhourly.py"
+
+
+"""
 rule aggregate_periods:
     params:
         date=config["scenario"]["aggregate"][0],
@@ -544,6 +588,7 @@ rule aggregate_periods:
         "envs/environment.yaml"
     script:
         "scripts/aggregate_periods.py"
+"""
 
 
 rule prepare_allowances:

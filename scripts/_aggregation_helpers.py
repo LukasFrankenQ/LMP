@@ -46,12 +46,10 @@ def set_nested_value(target_dict, keys, value):
     current_level[keys[-1]] = value
 
 
-def group_quantity(data, keys, method, weights=None):
+def aggregate_variable(data, keys, method, weights=None):
     """Group the data by a certain variable and aggregate using a certain method."""
 
-    if method == 'mean' and weights is None:
-        weights = pd.Series(1/len(data), index=data.keys())
-    elif method == 'sum' and weights is None:
+    if weights is None:
         weights = pd.Series(1, index=data.keys())
     elif method == 'mean' and not weights is None:
         weights = weights.copy() / weights.sum() * len(weights)
@@ -63,12 +61,9 @@ def group_quantity(data, keys, method, weights=None):
         ]), method)()
 
 
-def aggregate_stats(
-        origin_data,
-        layouts
-        ):
+def aggregate_stats(origin_data):
     """Aggregates the statistics from the origin data.
-    returns a key, item pair where the key is the first timestep in origin data.
+    Returns a (key, item) pair where the key is the first timestep in origin data.
     """
 
     layouts = ['national', 'eso', 'fti', 'nodal']
@@ -101,12 +96,16 @@ def aggregate_stats(
     for layout, (variable, method) in product(layouts, method_mapper.items()):
         for region in region_mapper[layout]:
 
-            keychain = keys_template.format(layout=layout, region=region, variable=variable).split(',')
+            keychain = (
+                keys_template
+                .format(layout=layout, region=region, variable=variable)
+                .split(',')
+            )
 
             set_nested_value(
                 target_data,
                 keychain,
-                group_quantity(
+                aggregate_variable(
                     origin_data,
                     keychain,
                     method,

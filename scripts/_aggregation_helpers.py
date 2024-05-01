@@ -24,7 +24,7 @@ def get_demand(demand, date, period):
 
     season_mapper = pd.concat((
         pd.Series('Aut', pd.date_range('2022-08-25', '2022-10-27', freq='D')),
-        pd.Series('Wtr', pd.date_range('2022-10-28', '2022-03-31', freq='D')),
+        pd.Series('Wtr', pd.date_range('2022-10-28', '2023-03-31', freq='D')),
         pd.Series('Spr', pd.date_range('2023-04-01', '2023-05-02', freq='D')),
         pd.Series('Smr', pd.date_range('2023-05-03', '2023-07-16', freq='D')),
         pd.Series('Hsr', pd.date_range('2023-07-17', '2023-08-24', freq='D')),

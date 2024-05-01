@@ -96,7 +96,8 @@ if __name__ == "__main__":
 
     logger.warning("Solver configuration not yet taken from gurobi!")
 
-    n.optimize(solver_name="gurobi")
+    # n.optimize(solver_name="gurobi")
+    n.optimize(solver_name="highs")
     logger.warning("Solver does not yet check for infeasibility!")
 
     n.export_to_netcdf(snakemake.output["network"])

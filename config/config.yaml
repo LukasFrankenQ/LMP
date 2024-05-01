@@ -31,7 +31,7 @@ scenario:
   year:
     - 2024
 
-aggregation: soft # 'hard' or 'soft', when soft only uses input files that already exist, else all input files are created
+aggregation: hard # 'hard' or 'soft', when soft only uses input files that already exist, else all input files are created
 
 countries: ['GB']
 
@@ -82,7 +82,6 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
 balancing:
   extra_cost:
     default: 100 # £/MWh; assumed default extra cost for BM trades vs wholesale
-
 
 # consumer_price:
 #   metering: 'multi' # 'single' or 'multi' for Single-Rate or Multi-Register Metering

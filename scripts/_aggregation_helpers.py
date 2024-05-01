@@ -108,17 +108,25 @@ def aggregate_stats(origin_data):
         "wholesale_price": "mean",
         "post_balancing_price": "mean",
         "load": "sum",
-        "dispatch": "mean",
-        "available_capacity": "mean",
+        # "dispatch": "mean",
+        # "available_capacity": "mean",
+        "single-rate-domestic_wholesale_savings": "sum",
+        "multi-rate-domestic_wholesale_savings": "sum",
+        "single-rate-nondomestic_wholesale_savings": "sum",
+        "multi-rate-nondomestic_wholesale_savings": "sum",
+        "single-rate-domestic_total_savings": "sum",
+        "multi-rate-domestic_total_savings": "sum",
+        "single-rate-nondomestic_total_savings": "sum",
+        "multi-rate-nondomestic_total_savings": "sum",
     }
 
     weights = get_timestep_weights(origin_data)
     weights_mapper = {
         "wholesale_price": weights,
         "post_balancing_price": weights,
-        "load": None,
-        "dispatch": None,
-        "available_capacity": None,
+        # "load": None,
+        # "dispatch": None,
+        # "available_capacity": None,
     }
 
     target_data = {}
@@ -141,7 +149,7 @@ def aggregate_stats(origin_data):
                     origin_data,
                     keychain,
                     method,
-                    weights_mapper[variable]
+                    weights_mapper.get(variable, None)
                     )
                 )
     

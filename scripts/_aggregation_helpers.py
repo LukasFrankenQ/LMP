@@ -12,6 +12,38 @@ import pandas as pd
 from itertools import product
 
 
+def get_demand(demand, date, period):
+    """Retrieve the demand for a specific date and period from the demand data."""
+
+    day_mapper = {
+        i: 'Wd' for i in range(5)
+    }
+    day_mapper.update({
+        5: 'Sat', 6: 'Sun'
+    })
+
+    season_mapper = pd.concat((
+        pd.Series('Aut', pd.date_range('2022-08-25', '2022-10-27', freq='D')),
+        pd.Series('Wtr', pd.date_range('2022-10-28', '2022-03-31', freq='D')),
+        pd.Series('Spr', pd.date_range('2023-04-01', '2023-05-02', freq='D')),
+        pd.Series('Smr', pd.date_range('2023-05-03', '2023-07-16', freq='D')),
+        pd.Series('Hsr', pd.date_range('2023-07-17', '2023-08-24', freq='D')),
+        pd.Series('Aut', pd.date_range('2023-08-25', '2023-10-27', freq='D')),
+        pd.Series('Wtr', pd.date_range('2023-10-28', '2024-03-31', freq='D')),
+        pd.Series('Spr', pd.date_range('2024-04-01', '2024-05-02', freq='D')),
+        pd.Series('Smr', pd.date_range('2024-05-03', '2024-07-16', freq='D')),
+        pd.Series('Hsr', pd.date_range('2024-07-17', '2024-08-24', freq='D')),
+    ))
+
+    if isinstance(date, str):
+        date = pd.Timestamp(date)
+    if isinstance(period, str):
+        period = int(period)
+
+    col = f"{season_mapper.loc[date]} {day_mapper[date.weekday()]}"
+    return demand[col].iloc[period-1]
+
+
 def get_timestep_weights(data):
     """Averaging over time should be weighted by load and not by time.
     This function calculates the weights for each timestep based on the load."""    

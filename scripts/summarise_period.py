@@ -24,6 +24,7 @@ import geopandas as gpd
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging, to_datetime
+from _aggregation_helpers import get_demand
     
 
 def price_to_zones(n, regions):
@@ -72,11 +73,84 @@ if __name__ == "__main__":
     print(snakemake.input['allowance_multi_linear'])
     
 
+    cost_factors = [
+        "renewable obligation",
+        "feed-in tariffs",
+        "old feed-in tariffs",
+        "energy company obligation",
+        "aahedc",
+        "backwardation",
+        "cfd",
+    ]
+    cost_factor_mapper = {}
+
+    """
+    for rate in ['single', 'multi']:
+
+        print("===============================================")
+
+        allow_linear = pd.read_csv(
+            snakemake.input['allowance_{}_linear'.format(rate)],
+            index_col=0
+            )
+        cost_factor_mapper.update({
+            rate:
+            cost_factors + [col for col in allow_linear.columns.tolist() if ' m ' in col]
+            })
+
+        allow_standing = pd.read_csv(
+            snakemake.input['allowance_{}_standing'.format(rate)],
+            index_col=0
+            )
+        print(allow_linear.head())
+        print(allow_linear.columns)
+        print(allow_standing.head())
+        print(allow_standing.columns)
+
+        print(allow_standing/365)
+        print('====================================')
+        print((allow_standing/365).sum(axis=1) * 1.05)
+
+        print('===========================')
+        print(allow_linear.sum(axis=1).mul(1e-3)*1.05)
+
+        print('wholesale stuff')
+        print(allow_linear[['cfd', 'direct fuel', 'backwardation']].sum(axis=1)/1000)
+
+        print('w/o wholesale')
+        print(allow_linear[cost_factors].sum(axis=1)/1000*1.05)
+
     import sys
     sys.exit()
+    """
+
+    index_mapper = {
+        'domestic single': slice(0,48),
+        'domestic multi': slice(52,100),
+        'non-domestic single': slice(104,152),
+        'non-domestic multi': slice(156,204),
+    }
+
+    single_rate_domestic = pd.read_excel(
+        snakemake.input["elexon_demand_profiles"],
+        index_col=0,
+        header=2).iloc[index_mapper['domestic single']]
+    multi_rate_domestic = pd.read_excel(
+        snakemake.input["elexon_demand_profiles"],
+        index_col=0,
+        header=2).iloc[index_mapper['domestic multi']]
+
+    single_rate_nondomestic = pd.read_excel(
+        snakemake.input["elexon_demand_profiles"],
+        index_col=0,
+        header=2).iloc[index_mapper['non-domestic single']]
+    multi_rate_nondomestic = pd.read_excel(
+        snakemake.input["elexon_demand_profiles"],
+        index_col=0,
+        header=2).iloc[index_mapper['non-domestic multi']]
 
 
-    layouts = ['national', 'nodal', 'fti', 'eso']
+    layouts = ['national', 'fti', 'nodal', 'eso']
     results = {layout: {'geographies': {}} for layout in layouts}
 
     # treating nodal differently, as it is assumed to be the layout
@@ -98,8 +172,11 @@ if __name__ == "__main__":
 
     logger.warning("Unsolved issue with dispatch and p_nom for nodal layout.")
 
+    result_store = {}
+
     assert layouts[0] == 'national', "Assumes national layout is first in list."
-    for layout in set(layouts):
+    # for layout in set(layouts):
+    for layout in layouts:
 
         logger.info("Summarising layout {} for {} {}.".format(layout, date, period))
 
@@ -153,7 +230,7 @@ if __name__ == "__main__":
 
         layout_results = pd.DataFrame(index=regions.index)
 
-        layout_results.loc[:, "wholesale_price"] =price_to_zones(n, regions)
+        layout_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
         layout_results.loc[:, "load"] = load_to_zones(n, regions)# .values
         layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
         layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
@@ -163,8 +240,43 @@ if __name__ == "__main__":
         layout_results.loc[:, "post_balancing_price"] = (
             (layout_results['wholesale_price'] * G + bcost) / G
         )
+        layout_results.loc[:, "redispatch_cost"] = bcost
+
+        result_store[layout] = layout_results
+        
+        # cost savings
+
+        srd = get_demand(single_rate_domestic, date, period)
+        mrd = get_demand(multi_rate_domestic, date, period)
+        srn = get_demand(single_rate_nondomestic, date, period)
+        mrn = get_demand(multi_rate_nondomestic, date, period)
+
+        national_ws = result_store['national']['wholesale_price'].iloc[0]
+        national_pb = result_store['national']['post_balancing_price'].iloc[0]
+
+        for name, demand in zip(
+            ['single-rate-domestic', 'multi-rate-domestic', 'single-rate-nondomestic', 'multi-rate-nondomestic'],
+            [srd, mrd, srn, mrn]):
+
+            layout_results.loc[:, name + "_wholesale_savings"] = (
+                (national_ws - 
+                layout_results['wholesale_price']) * demand 
+                )
+            layout_results.loc[:, name + "_total_savings"] = (
+                (national_pb - 
+                layout_results['post_balancing_price']) * demand 
+                )
+
+        print(f'-=------------------------ LAYOUT {layout} -------------------------')
+        print(layout_results.head())
+        
+
+        if layout == 'fti':
+            import sys
+            sys.exit()
 
         for region in regions.index:
+
 
             results[layout]['geographies'][region] = {
                 "variables": layout_results.T[region].fillna(0.).astype(np.float16).to_dict()

@@ -504,6 +504,8 @@ rule summarise_period:
         network_national=RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
         regions_national="data/national_zones.geojson",
         redispatch_cost=RESOURCES + "redispatch_cost.csv",
+        tariffs="data/octopus_12m_fixed_april_2024_v1.csv",
+        elexon_demand_profiles="data/elexon_profiling_data_201314.xlsx",
         allowance_single_standing=(
             lambda wildcards:
             RESOURCES +

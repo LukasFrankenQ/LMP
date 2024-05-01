@@ -400,6 +400,7 @@ if __name__ == "__main__":
     regions.loc[:, 'backwardation'] = get_backwardation(wholesale_slide, date, mode)
     regions.loc[:, 'cfd'] = get_cfd(wholesale_slide, date, mode)
 
+    """
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(1, 1, figsize=(10, 10))
 
@@ -427,6 +428,7 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
+    """
 
     demand = get_demand(policy_file, mode)
 

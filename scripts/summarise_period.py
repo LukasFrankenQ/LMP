@@ -66,6 +66,16 @@ if __name__ == "__main__":
     date = snakemake.wildcards.date
     period = int(snakemake.wildcards.period)
 
+    print(snakemake.input)
+    print('===========================')
+    print(snakemake.input['network_nodal'])
+    print(snakemake.input['allowance_multi_linear'])
+    
+
+    import sys
+    sys.exit()
+
+
     layouts = ['national', 'nodal', 'fti', 'eso']
     results = {layout: {'geographies': {}} for layout in layouts}
 

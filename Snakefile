@@ -491,30 +491,10 @@ rule prepare_allowances:
         "scripts/prepare_allowances.py"
 
 
-"""
-rule prepare_all_allowances:
-    input:
-        expand(
-            RESOURCES + "allowances/zeroth_order_allowances_{quarter}_{rate}.csv",
-            quarter=get_quarters(config["scenario"]["aggregate"][0]),
-            rate=["single", "multi"],
-            ),
-"""
-
-def get_allowance_infiles(date):
-    return list({
-        f"allowance_{quarter}_{rate}": 
-        RESOURCES + f"allowances/zeroth_order_allowances_{quarter}_{rate}.csv"
-            for quarter in get_quarters(date)
-            for rate in ["single", "multi"]
-        }.values())
-
-
 rule summarise_period:
     params:
         balancing=config["balancing"]["extra_cost"],
     input:
-        lambda wildcards: get_allowance_infiles(wildcards.date),
         network_nodal=RESOURCES + "live_data/{date}_{period}/network_s_nodal_solved.nc",
         regions_nodal=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
         network_fti=RESOURCES + "live_data/{date}_{period}/network_s_fti_solved.nc",
@@ -524,17 +504,28 @@ rule summarise_period:
         network_national=RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
         regions_national="data/national_zones.geojson",
         redispatch_cost=RESOURCES + "redispatch_cost.csv",
-        # expand(RESOURCES + "allowances/zeroth_order_allowances_{quarter}_{rate}.csv",
-        # quarter=get_quarters(config["scenario"]["aggregate"][0]),
-        # rate=["single", "multi"],
-
+        allowance_single_standing=(
+            lambda wildcards:
+            RESOURCES +
+            f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_single.csv"
+        ),
+        allowance_multi_standing=(
+            lambda wildcards:
+            RESOURCES +
+            f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
+        ),
+        allowance_single_linear=(
+            lambda wildcards:
+            RESOURCES +
+            f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_single.csv"
+        ),
+        allowance_multi_linear=(
+            lambda wildcards:
+            RESOURCES +
+            f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
+        ),
     output:
         summary=RESULTS + "periods/{date}_{period}.json",
-        # maps=RESOURCES + "live_data/{date}_{period}/maps.pdf",
-        # price_map=RESOURCES + "live_data/{date}_{period}/price_map.pdf",
-        # load_map=RESOURCES + "live_data/{date}_{period}/load_map.pdf",
-        # p_nom_map=RESOURCES + "live_data/{date}_{period}/p_nom_map.pdf",
-        # dispatch_map=RESOURCES + "live_data/{date}_{period}/dispatch_map.pdf",
     log:
         LOGS + "summarise_period_{date}_{period}.log",
     resources:

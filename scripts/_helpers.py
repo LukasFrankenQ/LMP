@@ -37,6 +37,7 @@ def to_quarter(date, *args):
     if isinstance(date, str):
         date = pd.Timestamp(date)
     
+    date = pd.Timestamp(date.strftime('%Y-%m'))
     date = date.replace(month=(date.month - 1) // 3 * 3 + 1)
     return date.strftime('%Y-%m')
 

@@ -255,8 +255,6 @@ rule build_load_weights:
 rule retrieve_live_bmu_data:
     output:
         elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
-    log:
-        LOGS + "retrieve_live_bmu_data_{date}_{period}.log",
     threads: 1
     resources:
         mem_mb=1000,
@@ -269,8 +267,6 @@ rule retrieve_live_bmu_data:
 rule retrieve_balancing_actions:
     output:
         real_balancing_actions=RESOURCES + "live_data/{date}_{period}/real_balancing_actions.csv",
-    log:
-        LOGS + "retrieve_balancing_actions_{date}_{period}.log",
     threads: 1
     resources:
         mem_mb=1000,
@@ -284,8 +280,6 @@ rule retrieve_balancing_actions:
 rule retrieve_live_prices:
     output:
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
-    log:
-        LOGS + "retrieve_live_prices_{date}_{period}.log",
     threads: 1
     resources:
         mem_mb=1000,
@@ -347,8 +341,6 @@ rule add_generators:
     output:
         gen_network=RESOURCES + "networks/gen.nc",
         cost_estimated_generators=RESOURCES + "cost_estimated_generators.csv",
-    log:
-        LOGS + "add_generators.log",
     threads: 1
     resources:
         mem_mb=1000,
@@ -369,8 +361,6 @@ rule prepare_live_network:
         price_stats=RESOURCES + "live_data/{date}_{period}/price_stats.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network.nc",
-    log:
-        LOGS + "prepare_live_network_{date}_{period}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -384,8 +374,6 @@ rule retrieve_live_constraint_flows:
         RESOURCES=RESOURCES,
     output:
         constraint_flows=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
-    log:
-        LOGS + "retrieve_live_constraint_flows_{date}_{period}.log",
     threads: 1
     resources:
         mem_mb=1000,
@@ -415,8 +403,6 @@ rule simplify_network:
         regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s.geojson",
         busmap=RESOURCES + "live_data/{date}_{period}/busmap_s.csv",
         connection_costs=RESOURCES + "live_data/{date}_{period}/connection_costs_s.csv",
-    log:
-        LOGS + "simplify_network_{date}_{period}_s.log",
     resources:
         mem_mb=1500,
     conda:
@@ -443,8 +429,6 @@ rule cluster_network:
         tech_costs="data/costs_2020.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}.nc",
-    log:
-        LOGS + "cluster_network_{date}_{period}_s_{layout}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -463,8 +447,6 @@ rule solve_network:
         network_constraints=RESOURCES + "live_data/{date}_{period}/constraint_flows.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s_{layout}_solved.nc",
-    log:
-        LOGS + "solve_network_{date}_{period}_s_{layout}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -482,8 +464,6 @@ rule prepare_allowances:
     output:
         zeroth_order=RESOURCES + "allowances/zeroth_order_allowances_{quarter}_{rate}.csv",
         first_order=RESOURCES + "allowances/first_order_allowances_{quarter}_{rate}.csv",
-    log:
-        LOGS + "prepare_allowances_{quarter}_{rate}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -530,8 +510,6 @@ rule summarise_period:
         ),
     output:
         summary=RESULTS + "periods/{date}_{period}.json",
-    log:
-        LOGS + "summarise_period_{date}_{period}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -549,8 +527,6 @@ rule plot_period:
         regions_national="data/national_zones.geojson",
     output:
         plot=RESULTS + "plots/{date}_{period}.pdf",
-    log:
-        LOGS + "plot_period_{date}_{period}.log",
     resources:
         mem_mb=1500,
     conda:
@@ -592,8 +568,6 @@ rule aggregate_periods_to_halfhourly:
             ),
     output:
         RESULTS + "half-hourly/{date}.json",
-    log:
-        LOGS + "periods_to_halfhourly_{date}.log",
     resources:
         mem_mb=1500,
     conda:

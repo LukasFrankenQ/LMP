@@ -31,7 +31,11 @@ scenario:
   year:
     - 2024
 
-aggregation: hard # 'hard' or 'soft', when soft only uses input files that already exist, else all input files are created
+ # 'hard', 'soft', 'missing', 
+ # when soft only uses input files that already exist
+ # when hard creates all input files if dictaded by snakemake's assessment
+ # when missing only creates missing input files
+aggregation: hard
 
 countries: ['GB']
 

@@ -16,10 +16,12 @@ be used for web visualisation.
 import os
 import json
 import pypsa
+import shutil
 import logging
 import numpy as np
 import pandas as pd
 import geopandas as gpd
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -229,3 +231,7 @@ if __name__ == "__main__":
 
     with open(snakemake.output[0], "w") as f:
         json.dump({int(to_datetime(date, period).timestamp()): results}, f)
+
+    # clean up resources to reduce disk space
+    resource_path = Path(snakemake.input["network_nodal"]).parent
+    shutil.rmtree(resource_path)

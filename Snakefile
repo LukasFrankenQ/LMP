@@ -520,7 +520,7 @@ rule summarise_period:
 
 rule plot_period:
     input:
-        data=RESULTS + "periods/{date}_{period}.json",
+        data=ancient(RESULTS + "periods/{date}_{period}.json"),
         regions_nodal="data/regions_onshore_s.geojson",
         regions_fti="data/fti_zones.geojson",
         regions_eso="data/eso_zones.geojson",
@@ -535,6 +535,22 @@ rule plot_period:
         "scripts/plot_period.py"
 
 
+def apply_aggregation_mode(filelist, mode):
+    
+    assert mode in ['soft', 'hard', 'missing'], f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'"
+    if mode == 'hard':
+        return filelist
+    
+    import os
+    path = Path(filelist[0]).parent
+
+    if mode == 'soft':
+        return [fn for fn in filelist if fn.split('/')[-1] in os.listdir(path)]
+
+    elif mode == 'missing':
+        return [fn for fn in filelist if not fn.split('/')[-1] in os.listdir(path)]
+
+
 def get_halfhourly_input(path, template, date, mode):
     import pandas as pd
 
@@ -543,29 +559,21 @@ def get_halfhourly_input(path, template, date, mode):
         for period in range(1, 49)
         ])
 
-    if mode == 'soft':
-        import os
-        infiles = [fn for fn in infiles if fn.split('/')[-1] in os.listdir(path)]
-
-    elif mode == 'hard':
-        pass
-
-    else:
-        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
-
-    return infiles
+    return apply_aggregation_mode(infiles, mode)
 
 
 rule aggregate_periods_to_halfhourly:
     params:
         mode=config["aggregation"],
     input:
-        lambda wildcards: get_halfhourly_input(
-            RESULTS + "periods/",
-            "{date}_{period}.json",
-            wildcards.date,
-            config["aggregation"]
-            ),
+        lambda wildcards: [
+            snakemake.io.ancient(file) for file in
+                get_halfhourly_input(
+                RESULTS + "periods/",
+                "{date}_{period}.json",
+                wildcards.date,
+                config["aggregation"]
+            )],
     output:
         RESULTS + "half-hourly/{date}.json",
     resources:
@@ -587,32 +595,19 @@ def get_daily_input(source_path, template, date, mode):
             freq='d')
         ])
 
-    if mode == 'soft':
-        import os
-        infiles = [
-            fn for fn in infiles 
-            if fn.split('/')[-1] in os.listdir(source_path)
-            ]
-
-    elif mode == 'hard':
-        pass
-
-    else:
-        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
-
-    return infiles
+    return apply_aggregation_mode(infiles, mode)
 
 
 rule halfhourly_to_daily:
     params:
         mode=config["aggregation"],
     input:
-        ancient(lambda wildcards: get_daily_input(
+        lambda wildcards: get_daily_input(
             RESULTS + "half-hourly/",
             "{date}.json",
             wildcards.month,
             config["aggregation"]
-            )),
+            ),
     output:
         RESULTS + "daily/{month}.json",
     log:
@@ -633,20 +628,7 @@ def get_monthly_input(source_path, template, date, mode):
         for month in pd.date_range(year, str(int(year) + 1), freq='MS')
         ])
 
-    if mode == 'soft':
-        import os
-        infiles = [
-            fn for fn in infiles 
-            if fn.split('/')[-1] in os.listdir(source_path)
-            ]
-
-    elif mode == 'hard':
-        pass
-
-    else:
-        raise ValueError(f"Unknown aggregation mode: {mode}, should be 'soft' or 'hard'")
-
-    return infiles
+    return apply_aggregation_mode(infiles, mode)
 
 
 rule daily_to_monthly:

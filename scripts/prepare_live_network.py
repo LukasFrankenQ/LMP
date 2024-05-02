@@ -12,6 +12,7 @@ This rule collects live and other data to prepare the network for live operation
 
 """
 
+
 import logging
 
 import pypsa

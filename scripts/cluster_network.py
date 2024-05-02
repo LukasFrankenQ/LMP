@@ -373,7 +373,9 @@ def cluster_regions(busmaps, input=None, output=None):
         regions_c = regions.dissolve(busmap)
         regions_c.index.name = "name"
         regions_c = regions_c.reset_index()
-        regions_c.to_file(getattr(output, which))
+        
+        if not which == "regions_onshore":
+            regions_c.to_file(getattr(output, which))
 
 
 def make_busmap(n, zones):

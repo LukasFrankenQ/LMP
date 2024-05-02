@@ -411,7 +411,7 @@ rule simplify_network:
         tech_costs="data/costs_2020.csv",
     output:
         network=RESOURCES + "live_data/{date}_{period}/network_s.nc",
-        regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        # regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
         regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s.geojson",
         busmap=RESOURCES + "live_data/{date}_{period}/busmap_s.csv",
         connection_costs=RESOURCES + "live_data/{date}_{period}/connection_costs_s.csv",
@@ -436,7 +436,8 @@ rule cluster_network:
         costs=config["costs"],
     input:
         target_regions="data/{layout}_zones.geojson",
-        regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        # regions_onshore=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        regions_onshore="data/regions_onshore_s.geojson",
         regions_offshore=RESOURCES + "live_data/{date}_{period}/regions_offshore_s.geojson",
         network=RESOURCES + "live_data/{date}_{period}/network_s.nc",
         tech_costs="data/costs_2020.csv",
@@ -496,7 +497,8 @@ rule summarise_period:
         balancing=config["balancing"]["extra_cost"],
     input:
         network_nodal=RESOURCES + "live_data/{date}_{period}/network_s_nodal_solved.nc",
-        regions_nodal=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        # regions_nodal=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",
+        regions_nodal="data/regions_onshore_s.geojson",
         network_fti=RESOURCES + "live_data/{date}_{period}/network_s_fti_solved.nc",
         regions_fti="data/fti_zones.geojson",
         network_eso=RESOURCES + "live_data/{date}_{period}/network_s_eso_solved.nc",

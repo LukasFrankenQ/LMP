@@ -1,0 +1,74 @@
+name: Run Model
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+
+env:
+  CACHE_NUMBER: 0
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Run Model
+    strategy:
+      max-parallel: 1
+    
+    defaults:
+      run:
+        shell: bash -l {0}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+      - name: Setup Micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: latest
+          environment-file: envs/environment.yaml
+          log-level: debug
+          init-shell: bash
+          cache-environment: true
+          cache-downloads: true
+
+      - name: Print environment
+        run: conda list --explicit > actions_environment.txt
+      
+      - name: Show current env
+        run: conda list
+      
+      - name: Show currently available envs
+        run: conda env list
+      
+      - name: Activate environment
+        run: micromamba activate pypsa-eur
+
+      - name: Run Python script
+        run:
+          conda info --envs
+          
+          python .github/scipts/run_live_model.py
+
+      - name: Set up Git config
+        run: |
+          git config --global user.name "LukasFrankenQ"
+          git config --global user.email "lukas.franken@ed.ac.uk"
+
+      - name: Commit and push environment
+        run: |
+          git add .
+          git commit -m "Ran live model" -a || echo "No changes to commit"
+          git push git@github.com:${{ github.repository }}.git HEAD:main

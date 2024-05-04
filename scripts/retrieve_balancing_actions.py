@@ -17,6 +17,7 @@ indicates the action being caused by transmission constraints
 import logging
 
 from _helpers import configure_logging
+from _elexon_helpers import robust_request
 
 import requests
 import pandas as pd
@@ -39,7 +40,7 @@ if __name__ == "__main__":
         'all?settlementDate={}&settlementPeriod={}&format=csv'.format(date, period)
         )
 
-    response = requests.get(accepts_url)
+    response = robust_request(requests.get, accepts_url)
     accepts = pd.read_csv(StringIO(response.text))
     logger.info(f"Retrieved {len(accepts)} balancing actions.")
 
@@ -81,11 +82,11 @@ if __name__ == "__main__":
 
     offers = json_normalize(
         # requests.get("https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/offer/2024-02-01/2?format=json").json()['data']
-        requests.get(bids_offers_url.format('offer', date, period)).json()['data']
+        robust_request(requests.get, bids_offers_url.format('offer', date, period)).json()['data']
     )
     bids = json_normalize(
         # requests.get("https://data.elexon.co.uk/bmrs/api/v1/balancing/settlement/indicative/volumes/all/bid/2024-02-01/2?format=json").json()['data']
-        requests.get(bids_offers_url.format('bid', date, period)).json()['data']
+        robust_request(requests.get, bids_offers_url.format('bid', date, period)).json()['data']
     )
 
     # print('all in there')

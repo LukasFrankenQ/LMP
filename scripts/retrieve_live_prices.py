@@ -22,6 +22,8 @@ from io import StringIO
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging
+from _elexon_helpers import robust_request
+
 
 template = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index?from={}T00:00Z&to={}T00:00Z&settlementPeriodFrom={}&settlementPeriodTo={}"
 
@@ -37,7 +39,7 @@ if __name__ == "__main__":
     results = pd.Series()
 
     url = template.format(date, date, period, period)
-    response = requests.get(url)
+    response = robust_request(requests.get, url)
     df = pd.read_csv(StringIO(response.text))
 
     for col1, col2 in zip(df.columns[:-1], df.columns[1:]):

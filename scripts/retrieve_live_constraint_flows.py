@@ -15,6 +15,7 @@ settlement period.
 import logging
 
 from _helpers import configure_logging, to_datetime, to_date_period
+from _elexon_helpers import robust_request
 
 import requests
 import pandas as pd
@@ -38,7 +39,8 @@ def retrieve_constraints(date, period):
 
     params = {'sql': sql_query}
 
-    response = requests.get(
+    response = robust_request(
+        requests.get,
         'https://api.nationalgrideso.com/api/3/action/datastore_search_sql',
         params=parse.urlencode(params)
         )

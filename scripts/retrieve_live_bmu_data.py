@@ -21,7 +21,7 @@ from io import StringIO
 logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging, to_datetime, to_date_period
-from _elexon_helpers import process_multiples
+from _elexon_helpers import process_multiples, robust_request
 
 
 prep_time = lambda x: str(x).zfill(2)
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     for i in range(max_tries):
 
-        response = requests.get(pn_url.format(try_date, try_period))
+        response = robust_request(requests.get, pn_url.format(try_date, try_period))
         df = pd.read_csv(StringIO(response.text))
 
         if df.empty:
@@ -70,7 +70,8 @@ if __name__ == "__main__":
     start = to_datetime(date, period)
     end = start + pd.Timedelta("30min")
 
-    response = requests.get(
+    response = robust_request(
+        requests.get,
         mels_url.format(
             start.strftime('%Y-%m-%d'),
             prep_time(start.hour),

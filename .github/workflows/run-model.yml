@@ -54,7 +54,7 @@ jobs:
         run: conda env list
       
       - name: Activate environment
-        run: micromamba activate pypsa-eur
+        run: micromamba activate pypsa-lmp
 
       - name: Run Python script
         run:

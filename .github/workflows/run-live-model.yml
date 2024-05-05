@@ -41,10 +41,8 @@ jobs:
           environment-file: envs/environment.yaml
           log-level: debug
           init-shell: bash
-          # cache-environment: true
-          cache-environment: false
-          # cache-downloads: true
-          cache-downloads: false
+          cache-environment: true
+          cache-downloads: true
 
       - name: Print environment
         run: conda list --explicit > actions_environment.txt

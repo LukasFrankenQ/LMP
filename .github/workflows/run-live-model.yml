@@ -42,6 +42,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Setup Micromamba
         uses: mamba-org/setup-micromamba@v1
@@ -75,9 +76,9 @@ jobs:
         run: |
           git config --global user.name "LukasFrankenQ"
           git config --global user.email "lukas.franken@ed.ac.uk"
+          git remote set-url origin git@github.com:LukasFrankenQ/LMP.git
 
-      - name: Commit and push environment
+      - name: Commit and push environment # git push git@github.com:${{ github.repository }}.git HEAD:main
         run: |
           git add .
           git commit -m "Ran live model" -a || echo "No changes to commit"
-          git push git@github.com:${{ github.repository }}.git HEAD:main

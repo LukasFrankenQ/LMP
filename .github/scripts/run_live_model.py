@@ -15,11 +15,11 @@ if __name__ == "__main__":
 
     outfile = path.format(day, period)
 
-    os.system(template.format(" --touch", outfile))
-    os.system(template.format("", outfile))
+    # os.system(template.format(" --touch", outfile))
+    # os.system(template.format("", outfile))
 
-    shutil.copy(outfile, "results/live/latest.json")
-    os.remove(outfile)
+    # shutil.copy(outfile, "results/live/latest.json")
+    # os.remove(outfile)
 
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(1, 1, figsize=(10, 3.5))

@@ -18,16 +18,9 @@ if __name__ == "__main__":
     os.system(template.format(" --touch", outfile))
     os.system(template.format("", outfile))
 
-    print('================================================')
-    print('target:', target)
-    print('before')
-    os.system('echo before')
-    os.system("ls -la live/")
     shutil.copy(outfile, target)
-    print('after')
     os.system('echo after')
     os.system("ls -la live/")
-    print('================================================')
 
     os.remove(outfile)
 

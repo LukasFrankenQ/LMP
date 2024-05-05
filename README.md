@@ -1,1 +1,1 @@
-![](results/live/current_period.png?raw=true)
+![](live/current_period.png?raw=true)

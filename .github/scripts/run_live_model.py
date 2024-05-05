@@ -5,7 +5,7 @@ import pandas as pd
 path = "results/periods/{}_{}.json"
 template = "snakemake -call{} --configfile config/config.yaml -- {}"
 
-target = "results/live/now.json"
+target = "live/now.json"
 
 if __name__ == "__main__":
 
@@ -18,7 +18,17 @@ if __name__ == "__main__":
     os.system(template.format(" --touch", outfile))
     os.system(template.format("", outfile))
 
-    shutil.copy(outfile, "results/live/latest.json")
+    print('================================================')
+    print('target:', target)
+    print('before')
+    os.system('echo before')
+    os.system("ls -la live/")
+    shutil.copy(outfile, target)
+    print('after')
+    os.system('echo after')
+    os.system("ls -la live/")
+    print('================================================')
+
     os.remove(outfile)
 
     import matplotlib.pyplot as plt
@@ -34,5 +44,5 @@ if __name__ == "__main__":
     ax.set_xticks([])
     ax.set_yticks([])
 
-    plt.savefig('results/live/current_period.png')
+    plt.savefig('live/current_period.png')
     plt.show()

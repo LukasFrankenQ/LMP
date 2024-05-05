@@ -2,7 +2,7 @@ import os
 import shutil
 import pandas as pd
 
-path = "results/daily/{}_{}.json"
+path = "results/periods/{}_{}.json"
 template = "snakemake -call{} --configfile config/config.yaml -- {}"
 
 target = "results/live/now.json"

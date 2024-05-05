@@ -28,8 +28,8 @@ if __name__ == '__main__':
 
         with open(infile) as f:
             data = json.load(f)
-        
+
         halfhourly.update(data)
-    
+
     with open(snakemake.output[0], 'w') as f:
         json.dump(halfhourly, f)

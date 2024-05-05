@@ -69,7 +69,7 @@ jobs:
         run:
           conda info --envs
           
-          python .github/scipts/run_live_model.py
+          python .github/scripts/run_live_model.py
 
       - name: Set up Git config
         run: |

@@ -586,7 +586,7 @@ if __name__ == "__main__":
             technology_costs,
             params.renewable_carriers,
             params.length_factor,
-            params.simplify_ork,
+            params.simplify_network,
             snakemake.output,
             aggregation_strategies=params.aggregation_strategies,
         )

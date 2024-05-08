@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 from scipy.signal import argrelextrema
 from sklearn.preprocessing import MinMaxScaler
@@ -177,7 +178,6 @@ if __name__ == "__main__":
 
     avg_prices = {}
 
-    from tqdm import tqdm
     for unit in tqdm(dispatchers.index):
 
         generator_prices = get_bmu_price_distribution(

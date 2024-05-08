@@ -29,12 +29,13 @@ scenario:
     - "2024-03-13"
   
   year:
-    - 2024
+    - 2023
 
  # 'hard', 'soft', 'missing', 
  # when soft only uses input files that already exist
  # when hard creates all input files if dictaded by snakemake's assessment
  # when missing only creates missing input files
+# aggregation: hard
 aggregation: hard
 
 countries: ['GB']

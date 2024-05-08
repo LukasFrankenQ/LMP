@@ -43,7 +43,7 @@ run = config["run"]
 scenarios = get_scenarios(run)
 
 wildcard_constraints:
-    year = r"\d{4}",
+    # year = r"\d{4}",
     date = r"\d{4}-\d{2}-\d{2}",
     period="[0-9]*",
 
@@ -638,9 +638,15 @@ rule daily_to_monthly:
         lambda wildcards: get_monthly_input(
             RESULTS + "daily/",
             "{date}.json",
-            wildcards.month,
+            wildcards.year,
             config["aggregation"]
             ),
+        # lambda wildcards: get_daily_input(
+        #     RESULTS + "half-hourly/",
+        #     "{date}.json",
+        #     wildcards.month,
+        #     config["aggregation"]
+        #     ),
     output:
         RESULTS + "monthly/{year}.json",
     log:

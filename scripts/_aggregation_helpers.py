@@ -12,6 +12,25 @@ import pandas as pd
 from itertools import product
 
 
+method_mapper = {
+    "wholesale_price": "mean",
+    "post_balancing_price": "mean",
+    "load": "sum",
+    # "dispatch": "mean",
+    # "available_capacity": "mean",
+    "single-rate-domestic_wholesale_savings": "sum",
+    "multi-rate-domestic_wholesale_savings": "sum",
+    "single-rate-nondomestic_wholesale_savings": "sum",
+    "multi-rate-nondomestic_wholesale_savings": "sum",
+    "single-rate-domestic_total_savings": "sum",
+    "multi-rate-domestic_total_savings": "sum",
+    "single-rate-nondomestic_total_savings": "sum",
+    "multi-rate-nondomestic_total_savings": "sum",
+}
+
+layouts = ['national', 'eso', 'fti', 'nodal']
+
+
 def get_demand(demand, date, period):
     """Retrieve the demand for a specific date and period from the demand data."""
 
@@ -22,6 +41,7 @@ def get_demand(demand, date, period):
         5: 'Sat', 6: 'Sun'
     })
 
+    '''Seasons according to OFGEM (passive aggressive tone accidental)'''
     season_mapper = pd.concat((
         pd.Series('Aut', pd.date_range('2022-08-25', '2022-10-27', freq='D')),
         pd.Series('Wtr', pd.date_range('2022-10-28', '2023-03-31', freq='D')),
@@ -98,27 +118,10 @@ def aggregate_stats(origin_data):
     Returns a (key, item) pair where the key is the first timestep in origin data.
     """
 
-    layouts = ['national', 'eso', 'fti', 'nodal']
     region_mapper = {
         l: list(list(origin_data.values())[0][l]["geographies"])
         for l in layouts
         }
-
-    method_mapper = {
-        "wholesale_price": "mean",
-        "post_balancing_price": "mean",
-        "load": "sum",
-        # "dispatch": "mean",
-        # "available_capacity": "mean",
-        "single-rate-domestic_wholesale_savings": "sum",
-        "multi-rate-domestic_wholesale_savings": "sum",
-        "single-rate-nondomestic_wholesale_savings": "sum",
-        "multi-rate-nondomestic_wholesale_savings": "sum",
-        "single-rate-domestic_total_savings": "sum",
-        "multi-rate-domestic_total_savings": "sum",
-        "single-rate-nondomestic_total_savings": "sum",
-        "multi-rate-nondomestic_total_savings": "sum",
-    }
 
     weights = get_timestep_weights(origin_data)
     weights_mapper = {
@@ -154,3 +157,38 @@ def aggregate_stats(origin_data):
                 )
     
     return target_data
+
+
+def scale_stats(data, factor, inplace=False):
+    """scales variables in data by factor. Only does so for variables that
+    have aggregation method 'sum' in the method_mapper.
+    Tailored for dicts as they are passed from .github/scripts/_live_helpers.py"""
+
+    region_mapper = {
+        l: list(data[l]["geographies"])
+        for l in layouts
+        }
+
+    keys_template = "{layout},geographies,{region},variables,{variable}"
+
+    for layout, (variable, method) in product(layouts, method_mapper.items()):
+
+        if method != 'sum':
+            continue
+
+        for region in region_mapper[layout]:
+
+            keychain = (
+                keys_template
+                .format(layout=layout, region=region, variable=variable)
+                .split(',')
+            )
+
+            set_nested_value(
+                data,
+                keychain,
+                get_nested_value(data, keychain) * factor
+                )
+    
+    if not inplace:
+        return data

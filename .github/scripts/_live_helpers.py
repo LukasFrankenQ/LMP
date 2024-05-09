@@ -30,7 +30,7 @@ def to_last_month(dt):
     return pd.Timestamp(year=dt.year, month=dt.month, day=1, hour=1)
 
 
-def update_monthly(now, monthly):
+def update_monthly(now: dict, monthly: dict) -> dict:
     """
     Updates 'monthly' data to by absorbing 'now' data into the
     latest month, and cutting back the values in the oldest month.  

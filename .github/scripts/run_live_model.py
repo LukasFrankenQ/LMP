@@ -40,8 +40,6 @@ if __name__ == "__main__":
     os.system(template.format("", outfile))
 
     shutil.copy(outfile, target)
-    os.system('echo after')
-    os.system("ls -la live/")
 
     # load new data
     with open(target, 'r') as f:
@@ -60,6 +58,10 @@ if __name__ == "__main__":
         ):
 
         data = prepare_frontend_dict(data, func)
+
+        if 'total' in fn:
+            # indicates last timestep at which total data was updated
+            data[list(data)[0]]['last_update'] = list(new_step)[0]
 
         with open(fn, 'w') as f:
             json.dump(data, f)

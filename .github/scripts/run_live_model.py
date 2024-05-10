@@ -10,6 +10,7 @@ sys.path.append(str(Path.cwd() / '.github' / 'scripts'))
 
 from _live_helpers import update_monthly
 from _aggregation_helpers import aggregate_stats
+from _helpers import to_date_period
 
 
 path = "results/periods/{}_{}.json"
@@ -25,8 +26,7 @@ max_periods = 24
 if __name__ == "__main__":
 
     now = pd.Timestamp.now()
-    day = now.strftime("%Y-%m-%d")
-    period = now.hour * 2 + now.minute // 30
+    day, period = to_date_period(now)
 
     outfile = path.format(day, period)
     target = target.format(day, period)

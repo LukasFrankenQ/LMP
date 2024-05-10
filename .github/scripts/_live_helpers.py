@@ -7,6 +7,7 @@
 import sys
 import json
 import collections
+import numpy as np
 import pandas as pd
 from pathlib import Path
 from copy import deepcopy
@@ -26,7 +27,7 @@ def to_last_month(dt):
 
     if isinstance(dt, str):
         dt = pd.Timestamp.fromtimestamp(int(dt))
-    
+
     return pd.Timestamp(year=dt.year, month=dt.month, day=1, hour=1)
 
 
@@ -111,3 +112,61 @@ def update_monthly(now: dict, monthly: dict) -> dict:
 
     monthly = collections.OrderedDict(sorted(monthly.items()))
     return monthly
+
+
+hh_keepers = ['post_balancing_price', 'wholesale_price', 'load']    
+def half_hourly_func(d, key):
+    """
+    Modify the given dictionary 'd' by converting the value associated with 'key' to np.float16.
+    If 'key' is not in the list of hh_keepers, remove it from the dictionary.
+    """
+    if key in hh_keepers:
+        pass
+    else:
+        del d[key]
+
+
+with open(
+    Path(__file__).parent.parent.parent /
+    'data' /
+    'demand_totals.json', 'r'
+    ) as f:
+    demand_totals = json.load(f)
+key_mapper = {}
+
+
+def summary_func(d, old_key):
+    """
+    Modify the given dictionary 'd' by replacing the 'old_key' with a new key based on the key_mapper dictionary.
+    If the new key exists in demand_totals, calculate the new value based on the old value and demand_totals[new_key].
+    Finally, remove the 'old_key' from the dictionary.
+    """
+    if not old_key in key_mapper:
+        key_mapper[old_key] = old_key.split('_')[0].replace('-', '_')
+    
+    new_key = key_mapper[old_key]
+
+    if new_key in demand_totals:
+        d[new_key] = d[old_key] / demand_totals[new_key] * 1e3
+
+    del d[old_key]
+
+
+def prepare_frontend_dict(data, prep_func):
+    """
+    Apply the given 'prep_func' to each key-value pair in the 'data' dictionary.
+    The 'prep_func' should modify the dictionary in place.
+    """
+
+    hold = deepcopy(data)
+
+    def traverse_n_apply(d, target):
+        for key in d.keys():
+            if isinstance(d[key], dict):
+                traverse_n_apply(d[key], target[key])
+            else:
+                prep_func(target, key)
+
+    traverse_n_apply(data, hold)
+
+    return hold

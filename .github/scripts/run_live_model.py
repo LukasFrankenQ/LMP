@@ -8,7 +8,12 @@ from pathlib import Path
 sys.path.append(str(Path.cwd() / 'scripts'))
 sys.path.append(str(Path.cwd() / '.github' / 'scripts'))
 
-from _live_helpers import update_monthly
+from _live_helpers import (
+    update_monthly,
+    prepare_frontend_dict,
+    half_hourly_func,
+    summary_func,
+)
 from _aggregation_helpers import aggregate_stats
 from _helpers import to_date_period
 
@@ -48,11 +53,16 @@ if __name__ == "__main__":
     monthly = update_monthly(new_step, monthly)
     total = {list(monthly)[0]: aggregate_stats(monthly)}
 
-    with open(monthly_file, 'w') as f:
-        json.dump(monthly, f)
+    for data, func, fn in zip(
+        [new_step, total, monthly],
+        [half_hourly_func, summary_func, summary_func],
+        [target, total_file, monthly_file]
+        ):
 
-    with open(total_file, 'w') as f:
-        json.dump(total, f)
+        data = prepare_frontend_dict(data, func)
+
+        with open(fn, 'w') as f:
+            json.dump(data, f)
 
     os.remove(outfile)
 

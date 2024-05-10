@@ -49,6 +49,7 @@ wildcard_constraints:
 
 include: "rules/gather.smk"
 include: "rules/testing.smk"
+include: "rules/misc.smk"
 
 
 # Check if the workflow has access to the internet by trying to access the HEAD of specified url

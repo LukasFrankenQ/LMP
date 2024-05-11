@@ -39,6 +39,7 @@ if __name__ == "__main__":
     os.system(template.format(" --touch", outfile))
     os.system(template.format("", outfile))
 
+    Path(target).parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(outfile, target)
 
     # load new data

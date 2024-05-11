@@ -13,8 +13,8 @@ from _live_helpers import (
     prepare_frontend_dict,
     half_hourly_func,
     summary_func,
+    easy_aggregate,
 )
-from _aggregation_helpers import aggregate_stats
 from _helpers import to_date_period
 
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
-    total = {list(monthly)[0]: aggregate_stats(monthly)}
+    total = easy_aggregate(monthly)
 
     for data, func, fn in zip(
         [new_step, total, monthly],

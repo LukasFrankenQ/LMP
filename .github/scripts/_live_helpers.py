@@ -15,12 +15,11 @@ from itertools import product
 
 sys.path.append(str(Path.cwd() / 'scripts'))
 from _aggregation_helpers import (
-    get_nested_value,
     set_nested_value,
     layouts,
-    method_mapper,
     scale_stats,
     aggregate_stats,
+    aggregate_variable,
 )
 
 def to_last_month(dt):
@@ -29,6 +28,56 @@ def to_last_month(dt):
         dt = pd.Timestamp.fromtimestamp(int(dt))
 
     return pd.Timestamp(year=dt.year, month=dt.month, day=1, hour=1)
+
+
+def get_variables(data):
+
+    def deeper(key, item):
+        if key == 'variables':
+            return list(item)
+        else:
+            return deeper(list(item)[0], item[list(item)[0]])
+
+    return deeper(list(data)[0], data[list(data)[0]])
+
+
+def easy_aggregate(data):
+    """Just sums over all timesteps"""
+
+    data = collections.OrderedDict(sorted(data.items()))
+
+    target_data = deepcopy(data[list(data)[0]])
+
+    keys_template = "{layout},geographies,{region},variables,{variable}"
+
+    region_mapper = {
+        l: list(list(data.values())[0][l]["geographies"])
+        for l in layouts
+        }
+    
+    variables = get_variables(data)
+
+    for layout, variable in product(layouts, variables):
+        for region in region_mapper[layout]:
+
+            keychain = (
+                keys_template
+                .format(layout=layout, region=region, variable=variable)
+                .split(',')
+            )
+
+            set_nested_value(
+                target_data,
+                keychain,
+                aggregate_variable(
+                    data,
+                    keychain,
+                    "sum",
+                    None,
+                    )
+                )
+
+    return {list(data)[0]: target_data}
 
 
 def update_monthly(now: dict, monthly: dict) -> dict:

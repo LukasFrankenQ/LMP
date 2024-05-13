@@ -34,7 +34,6 @@ if __name__ == "__main__":
 
     now = pd.Timestamp.now()
     day, period = to_date_period(now)
-    period = 32
 
     outfile = path.format(day, period)
     target = target.format(day, period)

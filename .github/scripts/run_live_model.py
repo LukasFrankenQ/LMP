@@ -22,7 +22,9 @@ path = "results/periods/{}_{}.json"
 template = "snakemake -call{} --configfile config/config.yaml -- {}"
 
 target = "live/periods/{}_{}.json"
-monthly_file = "live/monthly.json"
+
+monthly_raw = "live/monthly_raw.json"
+monthly_target = "live/monthly.json"
 total_file = "live/total.json"
 
 max_periods = 24
@@ -32,6 +34,7 @@ if __name__ == "__main__":
 
     now = pd.Timestamp.now()
     day, period = to_date_period(now)
+    period = 32
 
     outfile = path.format(day, period)
     target = target.format(day, period)
@@ -46,16 +49,19 @@ if __name__ == "__main__":
     with open(target, 'r') as f:
         new_step = json.load(f)
 
-    with open(monthly_file, 'r') as f:
+    with open(monthly_raw, 'r') as f:
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
     total = easy_aggregate(monthly)
 
+    with open(monthly_raw, 'w') as f:
+        json.dump(monthly, f)
+
     for data, func, fn in zip(
         [new_step, total, monthly],
         [half_hourly_func, summary_func, summary_func],
-        [target, total_file, monthly_file]
+        [target, total_file, monthly_target]
         ):
 
         data = prepare_frontend_dict(data, func)
@@ -63,6 +69,7 @@ if __name__ == "__main__":
         if 'total' in fn:
             # indicates last timestep at which total data was updated
             data[list(data)[0]]['last_update'] = list(new_step)[0]
+
 
         with open(fn, 'w') as f:
             json.dump(data, f)
@@ -87,4 +94,3 @@ if __name__ == "__main__":
     ax.set_yticks([])
 
     plt.savefig('live/current_period.png')
-    plt.show()

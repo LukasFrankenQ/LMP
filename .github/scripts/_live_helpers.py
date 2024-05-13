@@ -114,7 +114,7 @@ def update_monthly(now: dict, monthly: dict) -> dict:
         else:
             mstart = (now_dt - pd.offsets.MonthBegin(1)).floor('d')
 
-        monthly[str(int(mstart.timestamp()))] = now.pop(now_ts)
+        monthly[str(int(mstart.timestamp()))] = now[now_ts]
 
     now_ts = list(now)[0]
     now_dt = pd.Timestamp.fromtimestamp(int(now_ts))

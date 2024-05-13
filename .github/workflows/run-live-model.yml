@@ -81,5 +81,7 @@ jobs:
       - name: Commit and push environment # git push git@github.com:${{ github.repository }}.git HEAD:main
         run: |
           git add .
+          git add live/monthly.json
+          git add live/monthly_raw.json
           git commit -m "Ran live model" -a || echo "No changes to commit"
           git push

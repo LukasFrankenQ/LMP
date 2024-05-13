@@ -69,7 +69,6 @@ if __name__ == "__main__":
             # indicates last timestep at which total data was updated
             data[list(data)[0]]['last_update'] = list(new_step)[0]
 
-
         with open(fn, 'w') as f:
             json.dump(data, f)
 

@@ -65,7 +65,7 @@ if __name__ == "__main__":
     except FileNotFoundError:
         shutil.copy(outfile, daily_filename)
 
-    Path(daily_target_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(daily_target_path).mkdir(parents=True, exist_ok=True)
 
     print('this is inside live')
     print(os.listdir(Path.cwd() / 'live'))

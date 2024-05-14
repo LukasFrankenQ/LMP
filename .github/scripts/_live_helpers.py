@@ -240,7 +240,7 @@ def summary_func(d, old_key):
         d[new_key] = d[old_key] / demand_totals[new_key] * 1e3
 
     # if old_key != 'load':
-    if old_key != new_key:
+    if old_key != new_key and new_key in demand_totals:
         del d[old_key]
 
 

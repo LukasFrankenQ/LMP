@@ -296,7 +296,7 @@ rule build_dispatchable_costs:
         bmus_data=RESOURCES + "bmunits_loc.csv",
         market_prices="data/market_index_winter.csv",
     output:
-        bmu_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
+        # bmu_cost_estimates=RESOURCES + "bmu_cost_estimates.csv",
     log:
         LOGS + "build_dispatchable_costs.log",
     resources:

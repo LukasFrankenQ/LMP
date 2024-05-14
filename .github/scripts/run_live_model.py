@@ -38,7 +38,7 @@ if __name__ == "__main__":
     now = pd.Timestamp.now()
     day, period = to_date_period(now)
 
-    daily_filename = daily_path / f'{"-".join(day.split("-")[:-1])}.json'
+    daily_filename = str(Path(daily_path / f'{"-".join(day.split("-")[:-1])}.json'))
 
     outfile = path.format(day, period)
     target = target.format(day, period)

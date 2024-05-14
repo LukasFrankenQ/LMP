@@ -26,6 +26,10 @@ method_mapper = {
     "multi-rate-domestic_total_savings": "sum",
     "single-rate-nondomestic_total_savings": "sum",
     "multi-rate-nondomestic_total_savings": "sum",
+    "single_rate_domestic": "sum",
+    "multi_rate_domestic": "sum",
+    "single_rate_nondomestic": "sum",
+    "multi_rate_nondomestic": "sum",
 }
 
 layouts = ['national', 'eso', 'fti', 'nodal']
@@ -145,16 +149,19 @@ def aggregate_stats(origin_data):
                 .split(',')
             )
 
-            set_nested_value(
-                target_data,
-                keychain,
-                aggregate_variable(
-                    origin_data,
+            try:
+                set_nested_value(
+                    target_data,
                     keychain,
-                    method,
-                    weights_mapper.get(variable, None)
+                    aggregate_variable(
+                        origin_data,
+                        keychain,
+                        method,
+                        weights_mapper.get(variable, None)
+                        )
                     )
-                )
+            except KeyError:
+                pass
     
     return target_data
 

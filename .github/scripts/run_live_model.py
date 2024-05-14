@@ -18,6 +18,7 @@ from _live_helpers import (
     daily_func,
 )
 from _helpers import to_date_period
+from _aggregation_helpers import aggregate_stats
 
 
 path = "results/periods/{}_{}.json"
@@ -67,13 +68,6 @@ if __name__ == "__main__":
 
     Path(daily_target_path).mkdir(parents=True, exist_ok=True)
 
-    print('this is inside live')
-    print(os.listdir(Path.cwd() / 'live'))
-    print('this is inside daily')
-    print(os.listdir(daily_raw_path))
-    print('this is inside raw')
-    print(os.listdir(Path.cwd() / 'live' / 'daily'))
-
     for fn in os.listdir(daily_raw_path):
         with open(Path(daily_raw_path) / fn, 'r') as f:        
             daily = json.load(f)
@@ -88,7 +82,8 @@ if __name__ == "__main__":
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
-    total = easy_aggregate(monthly)
+    # total = easy_aggregate(monthly)
+    total = {list(monthly)[0]: aggregate_stats(monthly)}
 
     with open(monthly_raw, 'w') as f:
         json.dump(monthly, f)

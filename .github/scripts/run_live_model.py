@@ -15,6 +15,7 @@ from _live_helpers import (
     summary_func,
     easy_aggregate,
     update_daily,
+    daily_func,
 )
 from _helpers import to_date_period
 
@@ -26,9 +27,10 @@ target = "live/periods/{}_{}.json"
 
 monthly_raw = "live/monthly_raw.json"
 monthly_target = "live/monthly.json"
-daily_path = "live/daily"
-total_file = "live/total.json"
 
+daily_raw_path = "live/daily_raw"
+daily_target_path = "live/daily"
+total_file = "live/total.json"
 
 max_periods = 24
 
@@ -38,7 +40,7 @@ if __name__ == "__main__":
     now = pd.Timestamp.now()
     day, period = to_date_period(now)
 
-    daily_filename = str(Path(daily_path) / f'{"-".join(day.split("-")[:-1])}.json')
+    daily_filename = str(Path(daily_raw_path) / f'{"-".join(day.split("-")[:-1])}.json')
 
     outfile = path.format(day, period)
     target = target.format(day, period)
@@ -53,9 +55,6 @@ if __name__ == "__main__":
     with open(target, 'r') as f:
         new_step = json.load(f)
 
-    with open(monthly_raw, 'r') as f:
-        monthly = json.load(f)
-    
     try:
         with open(daily_filename, 'r') as f:
             daily = json.load(f)
@@ -65,6 +64,19 @@ if __name__ == "__main__":
 
     except FileNotFoundError:
         shutil.copy(outfile, daily_filename)
+
+    for fn in os.listdir(daily_raw_path):
+        with open(Path(daily_raw_path) / fn, 'r') as f:        
+            daily = json.load(f)
+        
+        daily = prepare_frontend_dict(daily, daily_func)
+
+        with open(Path(daily_target_path) / fn, 'w') as f:
+            json.dump(daily, f)
+
+
+    with open(monthly_raw, 'r') as f:
+        monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
     total = easy_aggregate(monthly)

@@ -203,11 +203,13 @@ with open(
 key_mapper = {}
 
 
-def summary_func(d, old_key):
+def daily_func(d, old_key):
     """
-    Modify the given dictionary 'd' by replacing the 'old_key' with a new key based on the key_mapper dictionary.
-    If the new key exists in demand_totals, calculate the new value based on the old value and demand_totals[new_key].
-    Finally, remove the 'old_key' from the dictionary.
+    Modify the given dictionary 'd' by replacing the 'old_key' with a new key based
+    on the key_mapper dictionary.
+    If the new key exists in demand_totals, calculate the new value based on the old
+    value and demand_totals[new_key]. Finally, remove the 'old_key' from the dictionary.
+    (unless it is 'load')
     """
     if not old_key in key_mapper:
         key_mapper[old_key] = old_key.split('_')[0].replace('-', '_')
@@ -217,7 +219,28 @@ def summary_func(d, old_key):
     if new_key in demand_totals:
         d[new_key] = d[old_key] / demand_totals[new_key] * 1e3
 
-    del d[old_key]
+    if old_key != new_key:
+        del d[old_key]
+
+
+def summary_func(d, old_key):
+    """
+    Modify the given dictionary 'd' by replacing the 'old_key' with a new key based
+    on the key_mapper dictionary.
+    If the new key exists in demand_totals, calculate the new value based on the old
+    value and demand_totals[new_key]. Finally, remove the 'old_key' from the dictionary.
+    (unless it is 'load')
+    """
+    if not old_key in key_mapper:
+        key_mapper[old_key] = old_key.split('_')[0].replace('-', '_')
+    
+    new_key = key_mapper[old_key]
+
+    if new_key in demand_totals:
+        d[new_key] = d[old_key] / demand_totals[new_key] * 1e3
+
+    if old_key != 'load':
+        del d[old_key]
 
 
 def prepare_frontend_dict(data, prep_func):

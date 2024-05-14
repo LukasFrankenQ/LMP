@@ -163,6 +163,25 @@ def update_monthly(now: dict, monthly: dict) -> dict:
     return monthly
 
 
+def update_daily(daily, new, date):
+
+    daily = deepcopy(daily)
+    new = deepcopy(new)
+
+    day_td = str(int(pd.Timestamp(date).timestamp()))
+
+    if not day_td in daily:
+        daily[day_td] = new[list(new)[0]]
+        return daily
+
+    to_agg = {day_td: daily[day_td]}
+    to_agg.update(new)
+
+    daily.update({day_td: aggregate_stats(to_agg)})
+
+    return daily
+
+
 hh_keepers = ['post_balancing_price', 'wholesale_price', 'load']    
 def half_hourly_func(d, key):
     """

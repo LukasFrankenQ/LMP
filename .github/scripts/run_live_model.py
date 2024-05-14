@@ -14,6 +14,7 @@ from _live_helpers import (
     half_hourly_func,
     summary_func,
     easy_aggregate,
+    update_daily,
 )
 from _helpers import to_date_period
 
@@ -25,7 +26,9 @@ target = "live/periods/{}_{}.json"
 
 monthly_raw = "live/monthly_raw.json"
 monthly_target = "live/monthly.json"
+daily_path = "live/daily"
 total_file = "live/total.json"
+
 
 max_periods = 24
 
@@ -34,6 +37,8 @@ if __name__ == "__main__":
 
     now = pd.Timestamp.now()
     day, period = to_date_period(now)
+
+    daily_filename = daily_path / f'{"-".join(day.split("-")[:-1])}.json'
 
     outfile = path.format(day, period)
     target = target.format(day, period)
@@ -50,6 +55,16 @@ if __name__ == "__main__":
 
     with open(monthly_raw, 'r') as f:
         monthly = json.load(f)
+    
+    try:
+        with open(daily_filename, 'r') as f:
+            daily = json.load(f)
+            daily = update_daily(daily, new_step, day)
+            with open(daily_filename, 'w') as f:
+                json.dump(daily, f)
+
+    except FileNotFoundError:
+        shutil.copy(outfile, daily_filename)
 
     monthly = update_monthly(new_step, monthly)
     total = easy_aggregate(monthly)

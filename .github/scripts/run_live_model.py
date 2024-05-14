@@ -45,8 +45,8 @@ if __name__ == "__main__":
     outfile = path.format(day, period)
     target = target.format(day, period)
 
-    os.system(template.format(" --touch", outfile))
-    os.system(template.format("", outfile))
+    #os.system(template.format(" --touch", outfile))
+    #os.system(template.format("", outfile))
 
     Path(target).parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(outfile, target)
@@ -66,6 +66,14 @@ if __name__ == "__main__":
         shutil.copy(outfile, daily_filename)
 
     Path(daily_target_path).parent.mkdir(parents=True, exist_ok=True)
+
+    print('this is inside live')
+    print(os.listdir(Path.cwd() / 'live'))
+    print('this is inside daily')
+    print(os.listdir(daily_raw_path))
+    print('this is inside raw')
+    print(os.listdir(Path.cwd() / 'live' / 'daily'))
+
     for fn in os.listdir(daily_raw_path):
         with open(Path(daily_raw_path) / fn, 'r') as f:        
             daily = json.load(f)

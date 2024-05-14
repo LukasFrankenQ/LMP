@@ -45,8 +45,8 @@ if __name__ == "__main__":
     outfile = path.format(day, period)
     target = target.format(day, period)
 
-    #os.system(template.format(" --touch", outfile))
-    #os.system(template.format("", outfile))
+    os.system(template.format(" --touch", outfile))
+    os.system(template.format("", outfile))
 
     Path(target).parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(outfile, target)

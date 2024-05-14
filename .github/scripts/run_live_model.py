@@ -65,6 +65,7 @@ if __name__ == "__main__":
     except FileNotFoundError:
         shutil.copy(outfile, daily_filename)
 
+    Path(daily_target_path).parent.mkdir(parents=True, exist_ok=True)
     for fn in os.listdir(daily_raw_path):
         with open(Path(daily_raw_path) / fn, 'r') as f:        
             daily = json.load(f)

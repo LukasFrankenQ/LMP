@@ -98,11 +98,6 @@ if __name__ == "__main__":
         data = prepare_frontend_dict(data, func)
         fix_zonal_remote_regions(data)
 
-        from pprint import pprint
-        print('======================')
-        print(fn)
-        pprint(data[list(data)[0]]['eso'])
-
         if 'total' in fn:
             # indicates last timestep at which total data was updated
             data[list(data)[0]]['last_update'] = list(new_step)[0]

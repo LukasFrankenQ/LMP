@@ -95,10 +95,11 @@ if __name__ == "__main__":
         [target, total_file, monthly_target]
         ):
 
-        data = fix_zonal_remote_regions(prepare_frontend_dict(data, func))
+        data = prepare_frontend_dict(data, func)
+        fix_zonal_remote_regions(data)
 
         from pprint import pprint
-        print('==========================')
+        print('======================')
         print(fn)
         pprint(data[list(data)[0]]['eso'])
 

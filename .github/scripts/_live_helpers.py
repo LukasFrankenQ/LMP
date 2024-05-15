@@ -212,7 +212,11 @@ def daily_func(d, old_key):
     (unless it is 'load')
     """
     if not old_key in key_mapper:
-        key_mapper[old_key] = old_key.split('_')[0].replace('-', '_')
+
+        if 'post_balancing_price' == old_key:
+            key_mapper[old_key] = 'post_balancing_price'
+        else:
+            key_mapper[old_key] = old_key.split('_')[0].replace('-', '_')
     
     new_key = key_mapper[old_key]
 

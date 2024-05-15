@@ -13,7 +13,7 @@ from _live_helpers import (
     prepare_frontend_dict,
     half_hourly_func,
     summary_func,
-    easy_aggregate,
+    fix_zonal_remote_regions,
     update_daily,
     daily_func,
 )
@@ -73,6 +73,7 @@ if __name__ == "__main__":
             daily = json.load(f)
         
         daily = prepare_frontend_dict(daily, daily_func)
+        fix_zonal_remote_regions(daily)
 
         with open(Path(daily_target_path) / fn, 'w') as f:
             json.dump(daily, f)
@@ -94,7 +95,12 @@ if __name__ == "__main__":
         [target, total_file, monthly_target]
         ):
 
-        data = prepare_frontend_dict(data, func)
+        data = fix_zonal_remote_regions(prepare_frontend_dict(data, func))
+
+        from pprint import pprint
+        print('==========================')
+        print(fn)
+        pprint(data[list(data)[0]]['eso'])
 
         if 'total' in fn:
             # indicates last timestep at which total data was updated

@@ -262,3 +262,29 @@ def prepare_frontend_dict(data, prep_func):
     traverse_n_apply(data, hold)
 
     return hold
+
+
+region_assignment = {
+    "GB0 Z1_1": "GB0 Z1_3",
+    "GB0 Z4": "GB0 Z3",
+    "GB0 Z1_2": "GB0 Z1_3",
+}
+
+def fix_zonal_remote_regions(data):
+
+    def traverse_n_apply(d, target):
+        for key in d.keys():
+
+            if not key == 'geographies':
+                traverse_n_apply(d[key], target[key])
+            else:
+                for remote_region, source_region in region_assignment.items():
+                    target[key][remote_region] = target[key][source_region]
+                    target[key][remote_region]['variables']['load'] = 0.
+
+    for key in data.keys():
+
+        hold = deepcopy(data[key]['eso'])
+
+        traverse_n_apply(data[key]['eso'], hold)
+        data[key]['eso'] = hold

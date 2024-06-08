@@ -53,7 +53,9 @@ elexon:
 boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of lines representing the boundary
   # Warning! Only functional for dataset "ENTSO-E"
   nodal:
+    # SSEN-S: [13160, 6153, 6146, 6239, 6238]
     SSE-SP: [13161, 6241, 6146, 6145, 6149, 6150]
+    # NKILGRMO: [6148, 6246, 6159, 6428, 6396]
     SCOTEX: [14109, 6139, 11758]
     SSHARN: [11778, 11780, 5225]
     SWALEX: [11515, 11519]
@@ -61,7 +63,9 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SEIMP: [6121, 12746, 11742]
     FLOWSTH: [5203, 11528, 11764, 6203, 5207]
   fti:
+    # SSEN-S: [0]
     SSE-SP: [0]
+    # NKILGRMO: [1]
     SCOTEX: [1]
     SSHARN: [2]
     SWALEX: []
@@ -69,15 +73,19 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SEIMP: []
     FlOWSTH: [5, 4]
   eso:
+    # SSEN-S: [20, 21]
     SSE-SP: [20, 21]
     SCOTEX: [23]
+    # NKILGRMO: [23]
     SSHARN: [24, 25]
     SWALEX: [4, 6, 10, 11]
     ESTEX: [1, 3, 6, 10, 15]
     SEIMP: [8, 12, 14]
     FLOWSTH: [1, 3, 4]
   national:
+    # NKILGRMO: []
     SSE-SP: []
+    # SSEN-S: []
     SCOTEX: []
     SSHARN: []
     SWALEX: []

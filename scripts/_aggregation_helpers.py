@@ -166,6 +166,10 @@ def aggregate_stats(origin_data):
     return target_data
 
 
+def get_variables(data):
+    return list(data['national']['geographies']['GB']['variables'])
+
+
 def scale_stats(data, factor, inplace=False):
     """scales variables in data by factor. Only does so for variables that
     have aggregation method 'sum' in the method_mapper.
@@ -175,12 +179,16 @@ def scale_stats(data, factor, inplace=False):
         l: list(data[l]["geographies"])
         for l in layouts
         }
+    data_vars = get_variables(data)
 
     keys_template = "{layout},geographies,{region},variables,{variable}"
 
     for layout, (variable, method) in product(layouts, method_mapper.items()):
 
         if method != 'sum':
+            continue
+    
+        if variable not in data_vars:
             continue
 
         for region in region_mapper[layout]:

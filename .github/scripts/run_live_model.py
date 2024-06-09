@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import shutil
+import argparse
 import pandas as pd
 from pathlib import Path
 
@@ -38,8 +39,20 @@ max_periods = 24
 
 if __name__ == "__main__":
 
-    now = pd.Timestamp.now()
-    day, period = to_date_period(now)
+    parser = argparse.ArgumentParser(
+        description="argparse to run day, periods that are not now"
+        )
+
+    parser.add_argument("--day", type=str, help="day to run", default=None)
+    parser.add_argument("--period", type=int, help="period to run", default=None)
+
+    args = parser.parse_args()
+    day, period = args.day, args.period
+
+    assert (int(day is None) + int(period is None)) % 2 == 0, "day and period must be both None or not None"
+
+    if day is None:
+        day, period = to_date_period(pd.Timestamp.now())
 
     daily_filename = str(Path(daily_raw_path) / f'{"-".join(day.split("-")[:-1])}.json')
 
@@ -77,7 +90,6 @@ if __name__ == "__main__":
 
         with open(Path(daily_target_path) / fn, 'w') as f:
             json.dump(daily, f)
-
 
     with open(monthly_raw, 'r') as f:
         monthly = json.load(f)

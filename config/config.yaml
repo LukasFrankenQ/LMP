@@ -99,6 +99,10 @@ balancing:
 # consumer_price:
 #   metering: 'multi' # 'single' or 'multi' for Single-Rate or Multi-Register Metering
 
+policy_settings:
+  strike_price: 80 # assumed cfd strike price in £/MWh
+  consumer_rent_share: 0.8 # assumed share of conjestion rent that profits consumers
+
 load:
   load_distribution_scenario: 'lw' # can be 'lw' (Leading the Way) or 'fs' (Falling Short)
   load_distribution_year: 2021     # only implemented for 2021 so far

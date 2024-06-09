@@ -59,14 +59,14 @@ rule gather_models:
             RESOURCES + "live_data/{date}_{period}/network_s_nodal_solved.nc",
             **process_scenarios(config["scenario"])
         ),
-        expand(
-            RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
-            **process_scenarios(config["scenario"])
-        ),
-        expand(
-            RESOURCES + "live_data/{date}_{period}/network_s_eso_solved.nc",
-            **process_scenarios(config["scenario"])
-        ),
+        # expand(
+        #    RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
+        #     **process_scenarios(config["scenario"])
+        # ),
+        # expand(
+        # RESOURCES + "live_data/{date}_{period}/network_s_eso_solved.nc",
+        #     **process_scenarios(config["scenario"])
+        # ),
 
 rule gather_model_plots:
     params:

@@ -476,6 +476,7 @@ rule prepare_allowances:
 rule summarise_period:
     params:
         balancing=config["balancing"]["extra_cost"],
+        policy_settings=config["policy_settings"],
     input:
         network_nodal=RESOURCES + "live_data/{date}_{period}/network_s_nodal_solved.nc",
         # regions_nodal=RESOURCES + "live_data/{date}_{period}/regions_onshore_s.geojson",

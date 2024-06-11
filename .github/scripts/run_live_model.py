@@ -137,3 +137,59 @@ if __name__ == "__main__":
     ax.set_yticks([])
 
     plt.savefig('live/current_period.png')
+
+    # add constituency totals
+    with open('live/total.json', 'r') as f:
+        data = json.load(f)
+
+    total_nodal = total[list(total)[0]]['nodal']['geographies']
+    total_nodal = pd.DataFrame(
+        {key: item['variables'] for key, item in total_nodal.items()}
+        ).T.reset_index()
+    total_nodal['index'] = total_nodal['index'].astype(str)
+
+    total_zonal = total[list(total)[0]]['eso']['geographies']
+    total_zonal = pd.DataFrame(
+        {key: item['variables'] for key, item in total_zonal.items()}
+        ).T
+
+    const = pd.read_csv('data/constituency_mapper.csv')
+    const['nodal_region'] = const['nodal_region'].astype(str)
+
+    const = const.merge(
+        total_zonal[['single_rate_domestic']].reset_index(),
+        left_on='zonal_region',
+        right_on='index',
+        how='left'
+    ).drop(columns='index').rename(columns={'single_rate_domestic': 'single_rate_domestic_zonal'})
+
+    const = (
+            const.merge(
+            total_nodal[['index', 'single_rate_domestic']],
+            left_on='nodal_region',
+            right_on='index',
+            how='left'
+        )
+        .drop(columns='index')
+        .rename(columns={'single_rate_domestic': 'single_rate_domestic_nodal'})
+    )
+
+    const_results = {}
+    for l in ['nodal', 'zonal']:
+        const[f'savings_{l}'] = const[f'single_rate_domestic_{l}'].mul(const['demand'])
+        const_results[f'const_savings_{l}'] = const.groupby('constituency_code')[f'savings_{l}'].sum()
+
+    f = pd.concat((
+        const_results['const_savings_nodal'],
+        const_results['const_savings_zonal'],
+        ), axis=1)
+        
+    fdict = dict(f.T)
+
+    for key, item in fdict.items():
+        fdict[key] = {'variables': item.to_dict()}
+
+    fdict = {list(total)[0]: {'constituencies': {'geographies': fdict}}}
+
+    with open('live/constituency_total.json', 'w') as f:
+        json.dump(fdict, f)

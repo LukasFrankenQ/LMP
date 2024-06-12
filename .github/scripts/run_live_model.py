@@ -98,6 +98,10 @@ if __name__ == "__main__":
     monthly = update_monthly(new_step, monthly)
     # total = easy_aggregate(monthly)
     total = {list(monthly)[0]: aggregate_stats(monthly)}
+    print('=====================================================')
+    print('total raw')
+    from pprint import pprint
+    pprint(total[list(total)[0]]['national'])
 
     with open(monthly_raw, 'w') as f:
         json.dump(monthly, f)

@@ -33,6 +33,7 @@ monthly_target = "live/monthly.json"
 daily_raw_path = "live/daily_raw"
 daily_target_path = "live/daily"
 total_file = "live/total.json"
+total_raw_file = "live/total_raw.json"
 
 max_periods = 24
 
@@ -101,6 +102,9 @@ if __name__ == "__main__":
     with open(monthly_raw, 'w') as f:
         json.dump(monthly, f)
 
+    with open(total_raw_file, 'w') as f:
+        json.dump(total, f)
+
     for data, func, fn in zip(
         [new_step, total, monthly],
         [half_hourly_func, summary_func, summary_func],
@@ -139,7 +143,7 @@ if __name__ == "__main__":
     plt.savefig('live/current_period.png')
 
     # add constituency totals
-    with open('live/total.json', 'r') as f:
+    with open(total_raw_file, 'r') as f:
         data = json.load(f)
 
     total_nodal = total[list(total)[0]]['nodal']['geographies']
@@ -153,8 +157,6 @@ if __name__ == "__main__":
         {key: item['variables'] for key, item in total_zonal.items()}
         ).T
     
-    print('total zoning', total_zonal)
-
     const = pd.read_csv('data/constituency_mapper.csv')
     const['nodal_region'] = const['nodal_region'].astype(str)
 

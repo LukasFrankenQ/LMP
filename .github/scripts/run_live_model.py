@@ -33,7 +33,6 @@ monthly_target = "live/monthly.json"
 daily_raw_path = "live/daily_raw"
 daily_target_path = "live/daily"
 total_file = "live/total.json"
-total_raw_file = "live/total_raw.json"
 
 max_periods = 24
 
@@ -98,16 +97,9 @@ if __name__ == "__main__":
     monthly = update_monthly(new_step, monthly)
     # total = easy_aggregate(monthly)
     total = {list(monthly)[0]: aggregate_stats(monthly)}
-    print('=====================================================')
-    print('total raw')
-    from pprint import pprint
-    pprint(total[list(total)[0]]['national'])
 
     with open(monthly_raw, 'w') as f:
         json.dump(monthly, f)
-
-    with open(total_raw_file, 'w') as f:
-        json.dump(total, f)
 
     for data, func, fn in zip(
         [new_step, total, monthly],
@@ -147,8 +139,8 @@ if __name__ == "__main__":
     plt.savefig('live/current_period.png')
 
     # add constituency totals
-    with open(total_raw_file, 'r') as f:
-        data = json.load(f)
+    with open(total_file, 'r') as f:
+        total = json.load(f)
 
     total_nodal = total[list(total)[0]]['nodal']['geographies']
     total_nodal = pd.DataFrame(

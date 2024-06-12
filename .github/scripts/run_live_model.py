@@ -152,6 +152,8 @@ if __name__ == "__main__":
     total_zonal = pd.DataFrame(
         {key: item['variables'] for key, item in total_zonal.items()}
         ).T
+    
+    print('total zoning', total_zonal)
 
     const = pd.read_csv('data/constituency_mapper.csv')
     const['nodal_region'] = const['nodal_region'].astype(str)

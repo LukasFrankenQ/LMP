@@ -160,6 +160,7 @@ if __name__ == "__main__":
     const = pd.read_csv('data/constituency_mapper.csv')
     const['nodal_region'] = const['nodal_region'].astype(str)
 
+    print(total_zonal.columns)
     const = const.merge(
         total_zonal[['single_rate_domestic']].reset_index(),
         left_on='zonal_region',

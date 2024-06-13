@@ -116,6 +116,7 @@ def update_monthly(now: dict, monthly: dict) -> dict:
 
         monthly[str(int(mstart.timestamp()))] = now[now_ts]
 
+    '''
     now_ts = list(now)[0]
     now_dt = pd.Timestamp.fromtimestamp(int(now_ts))
 
@@ -158,6 +159,7 @@ def update_monthly(now: dict, monthly: dict) -> dict:
                 monthly.pop(monthly_ts),
                 reduction_factor
                 )
+    '''
 
     monthly = collections.OrderedDict(sorted(monthly.items()))
     return monthly
@@ -243,7 +245,6 @@ def summary_func(d, old_key):
     if new_key in demand_totals:
         d[new_key] = d[old_key] / demand_totals[new_key] * 1e3
 
-    # if old_key != 'load':
     if old_key != new_key and new_key in demand_totals:
         del d[old_key]
 

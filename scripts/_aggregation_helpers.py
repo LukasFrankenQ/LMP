@@ -9,6 +9,7 @@ Provides helper functions for aggregation of front-end friendly result data
 """
 
 import pandas as pd
+from functools import reduce
 from itertools import product
 
 
@@ -30,6 +31,14 @@ method_mapper = {
     "multi_rate_domestic": "sum",
     "single_rate_nondomestic": "sum",
     "multi_rate_nondomestic": "sum",
+    "wholesale_cost": "sum",
+    "balancing_cost": "sum",
+    "congestion_rent": "sum",
+    "cfd_cost": "sum",
+    "wholesale_cost_savings": "sum",
+    "balancing_cost_savings": "sum",
+    "congestion_rent_savings": "sum",
+    "cfd_cost_savings": "sum",
 }
 
 layouts = ['national', 'eso', 'fti', 'nodal']
@@ -207,3 +216,39 @@ def scale_stats(data, factor, inplace=False):
     
     if not inplace:
         return data
+
+
+def flexible_aggregate(data):
+
+    def get_key_chains(nested_dict, current_chain=None):
+        if current_chain is None:
+            current_chain = []
+
+        if isinstance(nested_dict, dict):
+            key_chains = []
+            for key, value in nested_dict.items():
+                key_chains.extend(get_key_chains(value, current_chain + [key]))
+            return key_chains
+        else:
+            return [current_chain]
+
+    def add_to_nested_dict(d, keys, value):
+        reduce(lambda d, key: d.setdefault(key, {}), keys[:-1], d)[keys[-1]] = value
+
+    
+    keychains = get_key_chains(data[list(data)[0]])
+
+    agg = {}
+
+    for keychain in keychains:
+        method = method_mapper.get(keychain[-1], None)
+    
+        assert method is not None, f"Method for {keychain[-1]} not defined in method_mapper."
+
+        add_to_nested_dict(
+            agg,
+            keychain,
+            aggregate_variable(data, keychain, method)
+        )
+
+    return agg

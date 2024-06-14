@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 import geopandas as gpd
 from pathlib import Path
+from copy import deepcopy
 
 logger = logging.getLogger(__name__)
 
@@ -115,9 +116,6 @@ if __name__ == "__main__":
     strike_prices = pd.read_csv(
         snakemake.input["strike_prices"], index_col=0
     )
-
-    print('retrieved strike prices')
-    print(strike_prices)
 
     consumer_rent_share = policy_settings["consumer_rent_share"]
 
@@ -297,10 +295,14 @@ if __name__ == "__main__":
                 "variables": regional_results.T[region].fillna(0.).astype(np.float32).to_dict()
             }
 
+        global_hold = deepcopy(global_results)
+
         for cost_factor, value in global_results.items():
 
-            national_value = result_store_global[cost_factor]
-            global_results[cost_factor + '_savings'] = national_value - value
+            national_value = result_store_global["national"][cost_factor]
+            global_hold[cost_factor + '_savings'] = national_value - value
+        
+        global_results = global_hold
 
         results[layout]['globals'] = {'variables': global_results}
 

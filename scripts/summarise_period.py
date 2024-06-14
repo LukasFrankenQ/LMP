@@ -13,7 +13,6 @@ be used for web visualisation.
 
 """
 
-import os
 import json
 import pypsa
 import shutil
@@ -27,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 from _helpers import configure_logging, to_datetime
 from _aggregation_helpers import get_demand
-    
+
 
 def price_to_zones(n, regions):
     c = n.buses_t.marginal_price.columns
@@ -50,7 +49,6 @@ def dispatch_to_zones(n, regions):
     con = con.groupby('bus').sum()['dispatch']
     return con.loc[regions.index.intersection(con.index)]
 
-
 def get_generation_stack(n):
     return (
         pd.concat((
@@ -61,6 +59,48 @@ def get_generation_stack(n):
         [["dispatch"]]
     )
 
+def get_gen_revenue(n):
+
+    m = n.buses_t.marginal_price.iloc[0]
+
+    gen = pd.concat([
+        n.generators[['bus']],
+        n.generators_t.p.T.rename(columns={n.generators_t.p.index[0]: 'dispatch'}),
+        ], axis=1).groupby('bus').sum()
+    
+    return gen.multiply(m, axis=0).fillna(0).sum().sum()
+
+
+def get_consumer_cost(n):
+
+    m = n.buses_t.marginal_price.iloc[0]
+    load = n.loads.p_set
+    return load.multiply(m, axis=0).fillna(0).sum()
+
+
+def get_cfd_cost(n, strike_prices):
+
+    cfd_gens = n.generators.loc[
+        n.generators.index.intersection(strike_prices.index),
+        ['bus', 'carrier']
+        ].copy()
+
+    cfd_gens = pd.concat([
+        cfd_gens,
+        n.generators_t.p[cfd_gens.index].iloc[0].rename('dispatch'),
+        cfd_gens['bus'].apply(
+            lambda x: n.buses_t.marginal_price.iloc[0].loc[x]
+            ).rename('marginal_price'),
+        strike_prices.loc[cfd_gens.index, 'strike_price']
+    ], axis=1)
+
+    wholesale_cost = (cfd_gens['dispatch'] * cfd_gens['marginal_price']).sum()
+    strike_price_cost = (cfd_gens['dispatch'] * cfd_gens['strike_price']).sum()
+
+    cfd_cost = strike_price_cost - wholesale_cost
+
+    return cfd_cost
+
 
 if __name__ == "__main__":
 
@@ -68,6 +108,18 @@ if __name__ == "__main__":
 
     date = snakemake.wildcards.date
     period = int(snakemake.wildcards.period)
+
+    policy_settings = snakemake.params["policy_settings"]
+    
+    # strike_price = policy_settings["strike_price"]
+    strike_prices = pd.read_csv(
+        snakemake.input["strike_prices"], index_col=0
+    )
+
+    print('retrieved strike prices')
+    print(strike_prices)
+
+    consumer_rent_share = policy_settings["consumer_rent_share"]
 
     cost_factors = [
         "renewable obligation",
@@ -105,7 +157,6 @@ if __name__ == "__main__":
         index_col=0,
         header=2).iloc[index_mapper['non-domestic multi']]
 
-
     layouts = ['national', 'fti', 'nodal', 'eso']
     results = {layout: {'geographies': {}} for layout in layouts}
 
@@ -115,6 +166,9 @@ if __name__ == "__main__":
         get_generation_stack(
             pypsa.Network(snakemake.input["network_nodal"]))
     )
+
+    national_model = pypsa.Network(snakemake.input["network_{}".format('national')])
+    national_cfd_cost = get_cfd_cost(national_model, strike_prices)
 
     carrier_mapper = {
         "PHS": "hydro",
@@ -128,7 +182,8 @@ if __name__ == "__main__":
 
     logger.warning("Unsolved issue with dispatch and p_nom for nodal layout.")
 
-    result_store = {}
+    result_store_regional = {}
+    result_store_global = {}
 
     assert layouts[0] == 'national', "Assumes national layout is first in list."
     # for layout in set(layouts):
@@ -179,55 +234,76 @@ if __name__ == "__main__":
             offers.mul(offer_costs.loc[offers.index], axis=0).sum()
         )
 
-        bvol = diff.abs().sum()
+        congestion_rent = get_gen_revenue(n) - get_consumer_cost(n) # is negative as it reduces consumer payment
+        cfd_cost = get_cfd_cost(n, strike_prices) # should (mostly) be positive, increasing consumers payment
 
         regions_file = snakemake.input["regions_{}".format(layout)]
         regions = gpd.read_file(regions_file).set_index("name")
 
-        layout_results = pd.DataFrame(index=regions.index)
+        regional_results = pd.DataFrame(index=regions.index)
 
-        layout_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
-        layout_results.loc[:, "load"] = load_to_zones(n, regions)# .values
+        # object to store wholesale cost, balancing cost, congestion rents and cfd payments
+        global_results = {
+            "wholesale_cost": get_consumer_cost(n),
+            "balancing_cost": bcost,
+            "congestion_rent": congestion_rent,
+            "cfd_cost": cfd_cost,
+        }
+
+        regional_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
+        regional_results.loc[:, "load"] = load_to_zones(n, regions)# .values
         # layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
         # layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
 
-        G = layout_results["load"].sum()
+        G = regional_results["load"].sum()
 
-        layout_results.loc[:, "post_balancing_price"] = (
-            (layout_results['wholesale_price'] * G + bcost) / G
+        regional_results.loc[:, "post_policy_price"] = (
+            (
+                regional_results["wholesale_price"] * G
+                + global_results["balancing_cost"]
+                + global_results["congestion_rent"]
+                + global_results["cfd_cost"]
+            ) / G
         )
-        layout_results.loc[:, "redispatch_cost"] = bcost
 
-        result_store[layout] = layout_results
+        result_store_regional[layout] = regional_results
+        result_store_global[layout] = global_results
         
         # cost savings
-
         srd = get_demand(single_rate_domestic, date, period)
         mrd = get_demand(multi_rate_domestic, date, period)
         srn = get_demand(single_rate_nondomestic, date, period)
         mrn = get_demand(multi_rate_nondomestic, date, period)
 
-        national_ws = result_store['national']['wholesale_price'].iloc[0]
-        national_pb = result_store['national']['post_balancing_price'].iloc[0]
+        national_ws = result_store_regional['national']['wholesale_price'].iloc[0]
+        national_pb = result_store_regional['national']['post_policy_price'].iloc[0]
         
         for name, demand in zip(
             ['single-rate-domestic', 'multi-rate-domestic', 'single-rate-nondomestic', 'multi-rate-nondomestic'],
             [srd, mrd, srn, mrn]):
 
-            layout_results.loc[:, name + "_wholesale_savings"] = (
+            regional_results.loc[:, name + "_wholesale_savings"] = (
                 (national_ws - 
-                layout_results['wholesale_price']) * demand * 1e-3
+                regional_results['wholesale_price']) * demand * 1e-3
                 )
-            layout_results.loc[:, name + "_total_savings"] = (
+            regional_results.loc[:, name + "_total_savings"] = (
                 (national_pb - 
-                layout_results['post_balancing_price']) * demand * 1e-3
+                regional_results['post_policy_price']) * demand * 1e-3
                 )
 
         for region in regions.index:
 
             results[layout]['geographies'][region] = {
-                "variables": layout_results.T[region].fillna(0.).astype(np.float32).to_dict()
+                "variables": regional_results.T[region].fillna(0.).astype(np.float32).to_dict()
             }
+
+        for cost_factor, value in global_results.items():
+
+            national_value = result_store_global[cost_factor]
+            global_results[cost_factor + '_savings'] = national_value - value
+
+        results[layout]['globals'] = {'variables': global_results}
+
 
     with open(snakemake.output[0], "w") as f:
         json.dump({int(to_datetime(date, period).timestamp()): results}, f)

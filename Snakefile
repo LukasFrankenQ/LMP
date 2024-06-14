@@ -253,6 +253,23 @@ rule build_load_weights:
         "scripts/build_load_weights.py"
 
 
+rule build_bmu_strike_prices:
+    input:
+        cfd_register="data/cfd/CfD Register 6-Jun-2024.xlsx",
+        cfd_bmu_mapping="data/cfd/cfd_to_bm_unit_mapping.csv",
+    output:
+        strike_prices=RESOURCES + "bmu_strike_prices.csv",
+    log:
+        LOGS + "build_bmu_strike_prices.log",
+    threads: 1
+    resources:
+        mem_mb=1000,
+    conda:
+        "envs/environment.yaml"
+    script:
+        "scripts/build_bmu_strike_prices.py"
+
+
 rule retrieve_live_bmu_data:
     output:
         elexon_bmus=RESOURCES + "live_data/{date}_{period}/elexon_bmus.csv",
@@ -510,6 +527,7 @@ rule summarise_period:
             RESOURCES +
             f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
         ),
+        strike_prices=RESOURCES + "bmu_strike_prices.csv",
     output:
         summary=RESULTS + "periods/{date}_{period}.json",
     resources:

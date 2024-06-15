@@ -19,6 +19,7 @@ from _aggregation_helpers import (
     layouts,
     scale_stats,
     aggregate_stats,
+    flexible_aggregate,
     aggregate_variable,
 )
 
@@ -95,12 +96,14 @@ def update_monthly(now: dict, monthly: dict) -> dict:
     # indicates that new month data is already present; updates it
     if to_last_month(list(monthly)[-1]) == to_last_month(list(now)[0]):
 
-        monthly[list(monthly)[-1]] = aggregate_stats({
+        # monthly[list(monthly)[-1]] = aggregate_stats({
+        monthly[list(monthly)[-1]] = flexible_aggregate({
             list(monthly)[-1]: monthly[list(monthly)[-1]],
             list(now)[0]: now[list(now)[0]]
             })
     # indicates that month data is not present; adds it
     else:
+
         now_ts = list(now)[0]
         now_dt = pd.Timestamp.fromtimestamp(int(now_ts))
 
@@ -179,7 +182,8 @@ def update_daily(daily, new, date):
     to_agg = {day_td: daily[day_td]}
     to_agg.update(new)
 
-    daily.update({day_td: aggregate_stats(to_agg)})
+    # daily.update({day_td: aggregate_stats(to_agg)})
+    daily.update({day_td: flexible_aggregate(to_agg)})
 
     return daily
 
@@ -279,6 +283,8 @@ def fix_zonal_remote_regions(data):
 
     def traverse_n_apply(d, target):
         for key in d.keys():
+            if key == 'globals':
+                continue
 
             if not key == 'geographies':
                 traverse_n_apply(d[key], target[key])

@@ -15,7 +15,7 @@ from itertools import product
 
 method_mapper = {
     "wholesale_price": "mean",
-    "post_balancing_price": "mean",
+    "post_policy_price": "mean",
     "load": "sum",
     # "dispatch": "mean",
     # "available_capacity": "mean",
@@ -41,7 +41,8 @@ method_mapper = {
     "cfd_cost_savings": "sum",
 }
 
-layouts = ['national', 'eso', 'fti', 'nodal']
+# layouts = ['national', 'eso', 'fti', 'nodal']
+layouts = ['national', 'eso', 'nodal']
 
 
 def get_demand(demand, date, period):
@@ -234,7 +235,6 @@ def flexible_aggregate(data):
 
     def add_to_nested_dict(d, keys, value):
         reduce(lambda d, key: d.setdefault(key, {}), keys[:-1], d)[keys[-1]] = value
-
     
     keychains = get_key_chains(data[list(data)[0]])
 

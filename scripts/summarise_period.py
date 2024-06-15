@@ -155,7 +155,9 @@ if __name__ == "__main__":
         index_col=0,
         header=2).iloc[index_mapper['non-domestic multi']]
 
-    layouts = ['national', 'fti', 'nodal', 'eso']
+    # layouts = ['national', 'fti', 'nodal', 'eso']
+    layouts = ['national', 'nodal', 'eso']
+
     results = {layout: {'geographies': {}} for layout in layouts}
 
     # treating nodal differently, as it is assumed to be the layout

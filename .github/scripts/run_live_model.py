@@ -19,7 +19,7 @@ from _live_helpers import (
     daily_func,
 )
 from _helpers import to_date_period
-from _aggregation_helpers import aggregate_stats
+from _aggregation_helpers import aggregate_stats, flexible_aggregate
 
 
 path = "results/periods/{}_{}.json"
@@ -27,12 +27,12 @@ template = "snakemake -call{} --configfile config/config.yaml -- {}"
 
 target = "live/periods/{}_{}.json"
 
-monthly_raw = "live/monthly_raw.json"
-monthly_target = "live/monthly.json"
+monthly_raw_path = "live/monthly_raw.json"
+monthly_path = "live/monthly.json"
 
 daily_raw_path = "live/daily_raw"
-daily_target_path = "live/daily"
-total_file = "live/total.json"
+daily_path = "live/daily"
+total_path = "live/total.json"
 
 max_periods = 24
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     outfile = path.format(day, period)
     target = target.format(day, period)
 
-    os.system(template.format(" --touch", outfile))
+    # os.system(template.format(" --touch", outfile))
     os.system(template.format("", outfile))
 
     Path(target).parent.mkdir(parents=True, exist_ok=True)
@@ -68,18 +68,18 @@ if __name__ == "__main__":
     # load new data
     with open(target, 'r') as f:
         new_step = json.load(f)
-
+    
     try:
         with open(daily_filename, 'r') as f:
             daily = json.load(f)
             daily = update_daily(daily, new_step, day)
             with open(daily_filename, 'w') as f:
-                json.dump(daily, f)
+                json.dump(daily, f, indent=4)
 
     except FileNotFoundError:
         shutil.copy(outfile, daily_filename)
 
-    Path(daily_target_path).mkdir(parents=True, exist_ok=True)
+    Path(daily_path).mkdir(parents=True, exist_ok=True)
 
     for fn in os.listdir(daily_raw_path):
         with open(Path(daily_raw_path) / fn, 'r') as f:        
@@ -88,23 +88,23 @@ if __name__ == "__main__":
         daily = prepare_frontend_dict(daily, daily_func)
         fix_zonal_remote_regions(daily)
 
-        with open(Path(daily_target_path) / fn, 'w') as f:
-            json.dump(daily, f)
+        with open(Path(daily_path) / fn, 'w') as f:
+            json.dump(daily, f, indent=4)
 
-    with open(monthly_raw, 'r') as f:
+    with open(monthly_raw_path, 'r') as f:
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
     # total = easy_aggregate(monthly)
-    total = {list(monthly)[0]: aggregate_stats(monthly)}
+    total = {list(monthly)[0]: flexible_aggregate(monthly)}
 
-    with open(monthly_raw, 'w') as f:
-        json.dump(monthly, f)
+    with open(monthly_raw_path, 'w') as f:
+        json.dump(monthly, f, indent=4)
 
     for data, func, fn in zip(
         [new_step, total, monthly],
         [half_hourly_func, summary_func, summary_func],
-        [target, total_file, monthly_target]
+        [target, total_path, monthly_path]
         ):
 
         data = prepare_frontend_dict(data, func)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
             data[list(data)[0]]['last_update'] = list(new_step)[0]
 
         with open(fn, 'w') as f:
-            json.dump(data, f)
+            json.dump(data, f, indent=4)
 
     os.remove(outfile)
 
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     plt.savefig('live/current_period.png')
 
     # add constituency totals
-    with open(total_file, 'r') as f:
+    with open(total_path, 'r') as f:
         total = json.load(f)
 
     total_nodal = total[list(total)[0]]['nodal']['geographies']
@@ -156,7 +156,6 @@ if __name__ == "__main__":
     const = pd.read_csv('data/constituency_mapper.csv')
     const['nodal_region'] = const['nodal_region'].astype(str)
 
-    print(total_zonal.columns)
     const = const.merge(
         total_zonal[['single_rate_domestic']].reset_index(),
         left_on='zonal_region',
@@ -193,4 +192,4 @@ if __name__ == "__main__":
     fdict = {list(total)[0]: {'constituencies': {'geographies': fdict}}}
 
     with open('live/constituency_total.json', 'w') as f:
-        json.dump(fdict, f)
+        json.dump(fdict, f, indent=4)

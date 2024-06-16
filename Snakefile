@@ -504,7 +504,8 @@ rule summarise_period:
         regions_eso="data/eso_zones.geojson",
         network_national=RESOURCES + "live_data/{date}_{period}/network_s_national_solved.nc",
         regions_national="data/national_zones.geojson",
-        redispatch_cost=RESOURCES + "redispatch_cost.csv",
+        # redispatch_cost=RESOURCES + "redispatch_cost.csv",
+        redispatch_cost="data/d_balancing_cost_2022_2023_2024.csv",
         tariffs="data/octopus_12m_fixed_april_2024_v1.csv",
         elexon_demand_profiles="data/elexon_profiling_data_201314.xlsx",
         allowance_single_standing=(

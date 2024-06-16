@@ -175,12 +175,24 @@ if __name__ == "__main__":
         "floating wind": "offwind",
     }
 
-    redispatch_costs = pd.read_csv(snakemake.input["redispatch_cost"], index_col=0)
+    redispatch_costs = pd.read_csv(
+        snakemake.input["redispatch_cost"],
+        index_col=0,
+        parse_dates=True
+        )
 
-    offer_costs = redispatch_costs["offer_cost"].fillna(50.)
-    bid_costs = redispatch_costs["bid_cost"].fillna(50.)
+    if (ts := pd.Timestamp(date)) in redispatch_costs.index:
 
-    logger.warning("Unsolved issue with dispatch and p_nom for nodal layout.")
+        offer_costs = redispatch_costs.loc[pd.Timestamp(date), "offers"]
+        bid_costs = redispatch_costs.loc[pd.Timestamp(date), "bids"]
+    
+    elif ts > redispatch_costs.index.max():
+        logger.warning("Date is beyond redispatch costs data. Taking average of last 31 days.")
+        offer_costs, bid_costs = redispatch_costs.iloc[-31:].mean().values
+
+    elif ts < redispatch_costs.index.min():
+        logger.warning("Date is before redispatch costs data. Taking average of first 31 days.")
+        offer_costs, bid_costs = redispatch_costs.iloc[:31].mean().values
 
     result_store_regional = {}
     result_store_global = {}
@@ -230,8 +242,8 @@ if __name__ == "__main__":
         offers = offers.loc[offers.index.intersection(redispatch_costs.index)]
 
         bcost = (
-            bids.mul(bid_costs.loc[bids.index], axis=0).sum() +
-            offers.mul(offer_costs.loc[offers.index], axis=0).sum()
+            (bids * bid_costs).sum() +
+            (offers * offer_costs).sum()
         )
 
         congestion_rent = get_gen_revenue(n) - get_consumer_cost(n) # is negative as it reduces consumer payment

@@ -111,7 +111,11 @@ if __name__ == "__main__":
     n.generators.loc[export.index, 'p_min_pu'] = pu
 
     logger.info("Adjusting marginal costs for dispatchable generators according to wholesale price.")
-    real_price = pd.read_csv(snakemake.input["price_stats"], index_col=0).iloc[0,0]
+    try:
+        real_price = pd.read_csv(snakemake.input["price_stats"], index_col=0).iloc[0,0]
+    except IndexError:
+        real_price = snakemake.params["elexon"]["default_day_ahead_price"]
+        logger.warning(f"No price data available. Using default price {real_price} £/MWh.")
 
     method_cutoff = snakemake.params["elexon"]["cost_assignment_method_cutoff"]
     

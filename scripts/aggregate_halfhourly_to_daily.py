@@ -10,7 +10,7 @@ import json
 from tqdm import tqdm
 
 from _helpers import configure_logging
-from _aggregation_helpers import aggregate_stats
+from _aggregation_helpers import aggregate_stats, flexible_aggregate
 
 
 if __name__ == '__main__':
@@ -26,7 +26,8 @@ if __name__ == '__main__':
             hh_data = json.load(f)
 
         daily.update(
-            {list(hh_data)[0]: aggregate_stats(hh_data)}
+            # {list(hh_data)[0]: aggregate_stats(hh_data)}
+            {list(hh_data)[0]: flexible_aggregate(hh_data)}
             )
     
     with open(snakemake.output[0], 'w') as f:

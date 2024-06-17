@@ -194,6 +194,9 @@ if __name__ == "__main__":
         logger.warning("Date is before redispatch costs data. Taking average of first 31 days.")
         offer_costs, bid_costs = redispatch_costs.iloc[:31].mean().values
 
+    print('received redispatch cost')
+    print(offer_costs, bid_costs)
+
     result_store_regional = {}
     result_store_global = {}
 
@@ -230,21 +233,21 @@ if __name__ == "__main__":
 
             return d
 
-        bids = clean_carriers(diff.loc[diff > 0].abs())
-        offers = clean_carriers(diff.loc[diff < 0].abs())
+        # bids = clean_carriers(diff.loc[diff > 0].abs())
+        # offers = clean_carriers(diff.loc[diff < 0].abs())
+        bid_volume = diff.loc[diff > 0].sum()
+        offer_volume = diff.loc[diff < 0].abs().sum()
 
+        '''
         if not bids.index.isin(redispatch_costs.index).all():
             logger.warning("Some carriers in bids not found in redispatch costs.")
         if not offers.index.isin(redispatch_costs.index).all():
             logger.warning("Some carriers in offers not found in redispatch costs.")
+        '''
 
-        bids = bids.loc[bids.index.intersection(redispatch_costs.index)]
-        offers = offers.loc[offers.index.intersection(redispatch_costs.index)]
-
-        bcost = (
-            (bids * bid_costs).sum() +
-            (offers * offer_costs).sum()
-        )
+        # bids = bids.loc[bids.index.intersection(redispatch_costs.index)]
+        # offers = offers.loc[offers.index.intersection(redispatch_costs.index)]
+        bcost = bid_volume * bid_costs + offer_volume * offer_costs
 
         congestion_rent = get_gen_revenue(n) - get_consumer_cost(n) # is negative as it reduces consumer payment
         cfd_cost = get_cfd_cost(n, strike_prices) # should (mostly) be positive, increasing consumers payment

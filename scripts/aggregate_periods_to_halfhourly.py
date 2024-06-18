@@ -32,4 +32,4 @@ if __name__ == '__main__':
         halfhourly.update(data)
 
     with open(snakemake.output[0], 'w') as f:
-        json.dump(halfhourly, f)
+        json.dump(halfhourly, f, indent=4)

@@ -20,8 +20,74 @@ from _aggregation_helpers import (
     scale_stats,
     aggregate_stats,
     flexible_aggregate,
+    flexible_scale,
     aggregate_variable,
+    remove_leaves,
 )
+
+
+def prepare_system_total(
+        data,
+        now_timestamp,
+        cfd_consumer_benefit_share=1.
+        ):
+
+    agg = flexible_aggregate(data)
+
+    if isinstance(now_timestamp, pd.Timestamp):
+        now_timestamp = str(int(now_timestamp.timestamp()))
+
+    total_savings = {
+        list(data)[-1]: {'last_update': now_timestamp}
+    }
+
+    def _get_total_savings(d):
+        return (
+            d['balancing_cost_savings'] +
+            d['congestion_rent_savings'] * cfd_consumer_benefit_share +
+            d['wholesale_cost_savings'] +
+            d['cfd_cost_savings']
+        )
+
+    for l in ['nodal', 'eso']:
+            total_savings[list(total_savings)[-1]][f'{l}_total_savings'] = (
+            _get_total_savings(agg[l]['globals']['variables'])
+        )
+
+    return total_savings
+
+
+def prepare_household_total(
+    regional_total,
+    now_datetime,
+    ):
+
+    remove_leaves(
+        regional_total,
+        [
+            'load',
+            'wholesale_price',
+            'post_policy_price',
+        ]
+    )
+
+    start_datetime = pd.Timestamp.fromtimestamp(int(list(regional_total)[0]))
+    
+    # if savings are accumulated over more than a year, they are scaled down to one year
+    scaling_factor = min(365 / (now_datetime - start_datetime).days, 1.)
+
+    agg = flexible_aggregate(regional_total)
+
+    hh = {
+        str(int((now_datetime - pd.Timedelta(days=365)).timestamp()))
+        : agg
+    }
+
+    hh = flexible_scale(hh, scaling_factor)
+    hh['last_update'] = str(int(now_datetime.timestamp()))
+
+    return hh
+
 
 def to_last_month(dt):
 
@@ -299,3 +365,68 @@ def fix_zonal_remote_regions(data):
 
         traverse_n_apply(data[key]['eso'], hold)
         data[key]['eso'] = hold
+
+
+def prepare_constituency_total(hh_total, const_mapper_file):
+    '''Aggregates household data to constituency level'''
+
+    total_nodal = hh_total[list(hh_total)[0]]['nodal']['geographies']
+    total_nodal = pd.DataFrame(
+        {key: item['variables'] for key, item in total_nodal.items()}
+        ).T.reset_index()
+    total_nodal['index'] = total_nodal['index'].astype(str)
+
+    total_zonal = hh_total[list(hh_total)[0]]['eso']['geographies']
+    total_zonal = pd.DataFrame(
+        {key: item['variables'] for key, item in total_zonal.items()}
+        ).T
+    
+    const = pd.read_csv(const_mapper_file)
+    const['nodal_region'] = const['nodal_region'].astype(str)
+
+    const = (
+        const.merge(
+            total_zonal[['single-rate-domestic_total_savings']].reset_index(),
+            left_on='zonal_region',
+            right_on='index',
+            how='left'
+        )
+        .drop(columns='index') 
+        .rename(columns={
+            'single-rate-domestic_total_savings': 'single_rate_domestic_zonal'
+            })
+    )
+
+    const = (
+            const.merge(
+            total_nodal[['index', 'single-rate-domestic_total_savings']],
+            left_on='nodal_region',
+            right_on='index',
+            how='left'
+        )
+        .drop(columns='index')
+        .rename(columns={
+            'single-rate-domestic_total_savings': 'single_rate_domestic_nodal'
+            })
+    )
+
+    const_results = {}
+    for l in ['nodal', 'zonal']:
+
+        # single-rate-domestic assumes yearly consumption of 1.8MWh
+        const[f'savings_{l}'] = const[f'single_rate_domestic_{l}'].mul(const['demand'] / 1.8)
+        const_results[f'const_savings_{l}'] = const.groupby('constituency_code')[f'savings_{l}'].sum()
+
+    f = pd.concat((
+        const_results['const_savings_nodal'],
+        const_results['const_savings_zonal'],
+        ), axis=1)
+        
+    fdict = dict(f.T)
+
+    for key, item in fdict.items():
+        fdict[key] = {'variables': item.to_dict()}
+
+    fdict = {list(hh_total)[0]: {'constituencies': {'geographies': fdict}}}
+
+    return fdict

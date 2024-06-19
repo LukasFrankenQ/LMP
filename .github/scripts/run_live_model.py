@@ -12,11 +12,14 @@ sys.path.append(str(Path.cwd() / '.github' / 'scripts'))
 from _live_helpers import (
     update_monthly,
     prepare_frontend_dict,
-    half_hourly_func,
-    summary_func,
+    # half_hourly_func,
+    # summary_func,
     fix_zonal_remote_regions,
     update_daily,
     daily_func,
+    prepare_system_total,
+    prepare_household_total,
+    prepare_constituency_total,
 )
 from _helpers import to_date_period
 from _aggregation_helpers import aggregate_stats, flexible_aggregate
@@ -33,6 +36,9 @@ monthly_path = "live/monthly.json"
 daily_raw_path = "live/daily_raw"
 daily_path = "live/daily"
 total_path = "live/total.json"
+
+system_total_path = "live/system_total.json"
+household_total_path = "live/household_total.json"
 
 max_periods = 24
 
@@ -95,27 +101,38 @@ if __name__ == "__main__":
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
-    # total = easy_aggregate(monthly)
-    total = {list(monthly)[0]: flexible_aggregate(monthly)}
 
     with open(monthly_raw_path, 'w') as f:
         json.dump(monthly, f, indent=4)
 
-    for data, func, fn in zip(
-        [new_step, total, monthly],
-        [half_hourly_func, summary_func, summary_func],
-        [target, total_path, monthly_path]
-        ):
+    # total = easy_aggregate(monthly)
+    regional_total = {list(monthly)[0]: flexible_aggregate(monthly)}
 
-        data = prepare_frontend_dict(data, func)
-        fix_zonal_remote_regions(data)
+    system_total = prepare_system_total(
+        regional_total,
+        pd.Timestamp.now(),
+        cfd_consumer_benefit_share=1.
+        )
 
-        if 'total' in fn:
-            # indicates last timestep at which total data was updated
-            data[list(data)[0]]['last_update'] = list(new_step)[0]
+    with open(system_total_path, 'w') as f:
+        json.dump(system_total, f, indent=4)
 
-        with open(fn, 'w') as f:
-            json.dump(data, f, indent=4)
+    household_total = prepare_household_total(
+        regional_total,
+        pd.Timestamp.now(),
+        )
+    
+    with open(household_total_path, 'w') as f:
+        json.dump(household_total, f, indent=4)
+
+    const_total = prepare_constituency_total(
+        household_total,
+        'data/constituency_mapper.csv'
+    )
+
+    with open('live/constituency_total_raw.json', 'w') as f:
+        json.dump(const_total, f, indent=4)
+
 
     os.remove(outfile)
 
@@ -137,59 +154,3 @@ if __name__ == "__main__":
     ax.set_yticks([])
 
     plt.savefig('live/current_period.png')
-
-    # add constituency totals
-    with open(total_path, 'r') as f:
-        total = json.load(f)
-
-    total_nodal = total[list(total)[0]]['nodal']['geographies']
-    total_nodal = pd.DataFrame(
-        {key: item['variables'] for key, item in total_nodal.items()}
-        ).T.reset_index()
-    total_nodal['index'] = total_nodal['index'].astype(str)
-
-    total_zonal = total[list(total)[0]]['eso']['geographies']
-    total_zonal = pd.DataFrame(
-        {key: item['variables'] for key, item in total_zonal.items()}
-        ).T
-    
-    const = pd.read_csv('data/constituency_mapper.csv')
-    const['nodal_region'] = const['nodal_region'].astype(str)
-
-    const = const.merge(
-        total_zonal[['single_rate_domestic']].reset_index(),
-        left_on='zonal_region',
-        right_on='index',
-        how='left'
-    ).drop(columns='index').rename(columns={'single_rate_domestic': 'single_rate_domestic_zonal'})
-
-    const = (
-            const.merge(
-            total_nodal[['index', 'single_rate_domestic']],
-            left_on='nodal_region',
-            right_on='index',
-            how='left'
-        )
-        .drop(columns='index')
-        .rename(columns={'single_rate_domestic': 'single_rate_domestic_nodal'})
-    )
-
-    const_results = {}
-    for l in ['nodal', 'zonal']:
-        const[f'savings_{l}'] = const[f'single_rate_domestic_{l}'].mul(const['demand'])
-        const_results[f'const_savings_{l}'] = const.groupby('constituency_code')[f'savings_{l}'].sum()
-
-    f = pd.concat((
-        const_results['const_savings_nodal'],
-        const_results['const_savings_zonal'],
-        ), axis=1)
-        
-    fdict = dict(f.T)
-
-    for key, item in fdict.items():
-        fdict[key] = {'variables': item.to_dict()}
-
-    fdict = {list(total)[0]: {'constituencies': {'geographies': fdict}}}
-
-    with open('live/constituency_total.json', 'w') as f:
-        json.dump(fdict, f, indent=4)

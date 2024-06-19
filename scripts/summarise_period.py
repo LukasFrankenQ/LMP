@@ -194,9 +194,6 @@ if __name__ == "__main__":
         logger.warning("Date is before redispatch costs data. Taking average of first 31 days.")
         offer_costs, bid_costs = redispatch_costs.iloc[:31].mean().values
 
-    print('received redispatch cost')
-    print(offer_costs, bid_costs)
-
     result_store_regional = {}
     result_store_global = {}
 
@@ -267,8 +264,6 @@ if __name__ == "__main__":
 
         regional_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
         regional_results.loc[:, "load"] = load_to_zones(n, regions)# .values
-        # layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
-        # layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
 
         G = regional_results["load"].sum()
 

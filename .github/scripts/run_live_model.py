@@ -39,6 +39,7 @@ total_path = "live/total.json"
 
 system_total_path = "live/system_total.json"
 household_total_path = "live/household_total.json"
+constituency_total_path = "live/constituency_total.json"
 
 max_periods = 24
 
@@ -105,7 +106,6 @@ if __name__ == "__main__":
     with open(monthly_raw_path, 'w') as f:
         json.dump(monthly, f, indent=4)
 
-    # total = easy_aggregate(monthly)
     regional_total = {list(monthly)[0]: flexible_aggregate(monthly)}
 
     system_total = prepare_system_total(
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         'data/constituency_mapper.csv'
     )
 
-    with open('live/constituency_total_raw.json', 'w') as f:
+    with open(constituency_total_path, 'w') as f:
         json.dump(const_total, f, indent=4)
 
 

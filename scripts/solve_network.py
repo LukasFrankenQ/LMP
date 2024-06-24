@@ -86,14 +86,6 @@ if __name__ == "__main__":
 
     factor = snakemake.params["solving"]["p_nom_multiplier"]
 
-    '''
-    n.generators.loc[:, "p_nom"] *= (
-        n.loads.p_set.sum() / 
-        n.generators.p_nom.sum() 
-        * factor
-    )
-    '''
-
     logger.warning("Solver configuration not yet taken from gurobi!")
 
     # n.optimize(solver_name="gurobi")

@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
             logger.warning(f"Data unavailable; taking PN data for earlier {try_date} period {try_period}.")
             continue
-        
+
         else:
 
             pn = (

@@ -508,26 +508,26 @@ rule summarise_period:
         redispatch_cost="data/d_balancing_cost_2022_2023_2024.csv",
         tariffs="data/octopus_12m_fixed_april_2024_v1.csv",
         elexon_demand_profiles="data/elexon_profiling_data_201314.xlsx",
-        allowance_single_standing=(
-            lambda wildcards:
-            RESOURCES +
-            f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_single.csv"
-        ),
-        allowance_multi_standing=(
-            lambda wildcards:
-            RESOURCES +
-            f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
-        ),
-        allowance_single_linear=(
-            lambda wildcards:
-            RESOURCES +
-            f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_single.csv"
-        ),
-        allowance_multi_linear=(
-            lambda wildcards:
-            RESOURCES +
-            f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
-        ),
+        #allowance_single_standing=(
+        #    lambda wildcards:
+        #    RESOURCES +
+        #    f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_single.csv"
+        #),
+        #allowance_multi_standing=(
+        #    lambda wildcards:
+        #    RESOURCES +
+        #    f"allowances/zeroth_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
+        #),
+        #allowance_single_linear=(
+        #    lambda wildcards:
+        #    RESOURCES +
+        #    f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_single.csv"
+        #),
+        #allowance_multi_linear=(
+        #    lambda wildcards:
+        #    RESOURCES +
+        #    f"allowances/first_order_allowances_{to_quarter(wildcards.date)}_multi.csv"
+        #),
         strike_prices=RESOURCES + "bmu_strike_prices.csv",
     output:
         summary=RESULTS + "periods/{date}_{period}.json",

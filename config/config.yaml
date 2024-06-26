@@ -60,7 +60,7 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SCOTEX: [14109, 6139, 11758]
     SSHARN: [11778, 11780, 5225]
     SWALEX: [11515, 11519]
-    ESTEX: [8705, 5185, 5194, 10414, 6329, 6326, 11743]
+    # ESTEX: [8705, 5185, 5194, 10414, 6329, 6326, 11743]
     SEIMP: [6121, 12746, 11742]
     FLOWSTH: [5203, 11528, 11764, 6203, 5207]
   fti:
@@ -70,7 +70,7 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SCOTEX: [1]
     SSHARN: [2]
     SWALEX: []
-    ESTEX: []
+    # ESTEX: []
     SEIMP: []
     FlOWSTH: [5, 4]
   eso:
@@ -80,7 +80,7 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     # NKILGRMO: [23]
     SSHARN: [24, 25]
     SWALEX: [4, 6, 10, 11]
-    ESTEX: [1, 3, 6, 10, 15]
+    # ESTEX: [1, 3, 6, 10, 15]
     SEIMP: [8, 12, 14]
     FLOWSTH: [1, 3, 4]
   national:
@@ -90,7 +90,7 @@ boundaries: # for the network layouts 'nodal', 'fti', 'eso' gives the indices of
     SCOTEX: []
     SSHARN: []
     SWALEX: []
-    ESTEX: []
+    # ESTEX: []
     SEIMP: []
 
 balancing:

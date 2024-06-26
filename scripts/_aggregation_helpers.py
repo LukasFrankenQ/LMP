@@ -9,6 +9,7 @@ Provides helper functions for aggregation of front-end friendly result data
 """
 
 import pandas as pd
+from copy import deepcopy
 from functools import reduce
 from itertools import product
 
@@ -221,24 +222,26 @@ def scale_stats(data, factor, inplace=False):
         return data
 
 
+def _get_key_chains(nested_dict, current_chain=None):
+    if current_chain is None:
+        current_chain = []
+
+    if isinstance(nested_dict, dict):
+        key_chains = []
+        for key, value in nested_dict.items():
+            key_chains.extend(_get_key_chains(value, current_chain + [key]))
+        return key_chains
+    else:
+        return [current_chain]
+
+
+def _add_to_nested_dict(d, keys, value):
+    reduce(lambda d, key: d.setdefault(key, {}), keys[:-1], d)[keys[-1]] = value
+
+
 def flexible_aggregate(data):
-
-    def get_key_chains(nested_dict, current_chain=None):
-        if current_chain is None:
-            current_chain = []
-
-        if isinstance(nested_dict, dict):
-            key_chains = []
-            for key, value in nested_dict.items():
-                key_chains.extend(get_key_chains(value, current_chain + [key]))
-            return key_chains
-        else:
-            return [current_chain]
-
-    def add_to_nested_dict(d, keys, value):
-        reduce(lambda d, key: d.setdefault(key, {}), keys[:-1], d)[keys[-1]] = value
     
-    keychains = get_key_chains(data[list(data)[0]])
+    keychains = _get_key_chains(data[list(data)[0]])
 
     agg = {}
 
@@ -247,10 +250,50 @@ def flexible_aggregate(data):
     
         assert method is not None, f"Method for {keychain[-1]} not defined in method_mapper."
 
-        add_to_nested_dict(
+        _add_to_nested_dict(
             agg,
             keychain,
             aggregate_variable(data, keychain, method)
         )
 
     return agg
+
+
+def flexible_scale(data, factor):
+    """Scales all leaves in a nested dictionary by a factor."""
+
+    key_chains = _get_key_chains(data)
+    hold = deepcopy(data)
+
+    for k in key_chains:
+        set_nested_value(hold, k, get_nested_value(hold, k) * factor)
+
+    return hold
+
+
+def _remove_key_from_nested_dict(data, key_chain):
+    if not key_chain:
+        return
+
+    current = data
+    for key in key_chain[:-1]:
+        if key in current:
+            current = current[key]
+        else:
+            print(f"Key {key} not found in the dictionary")
+            return
+    
+    final_key = key_chain[-1]
+    if final_key in current:
+        del current[final_key]
+
+
+def remove_leaves(d, leavers):
+    '''Removes from d all leaves that end in any of the strings in leavers'''
+
+    _key_chain = _get_key_chains(d)
+
+    for k in _key_chain:
+        if k[-1] in leavers:
+
+            _remove_key_from_nested_dict(d, k)

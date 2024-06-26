@@ -172,7 +172,19 @@ if __name__ == "__main__":
 
     carrier_mapper = {
         "PHS": "hydro",
-        "floating wind": "offwind",
+        "hydro-scheme": "hydro",
+        "PHS": "hydro",
+        "floating wind": "wind",
+        "onwind": "wind",
+        "offwind": "wind",
+        "CCGT": "thermal",
+        "CHP": "thermal",
+        "biomass": "thermal",
+        "gas": "thermal",
+        "gas-fired": "thermal",
+        "gas turbine": "thermal",
+        "coal": "thermal",
+        "powerstation": "thermal",
     }
 
     redispatch_costs = pd.read_csv(
@@ -194,9 +206,6 @@ if __name__ == "__main__":
         logger.warning("Date is before redispatch costs data. Taking average of first 31 days.")
         offer_costs, bid_costs = redispatch_costs.iloc[:31].mean().values
 
-    print('received redispatch cost')
-    print(offer_costs, bid_costs)
-
     result_store_regional = {}
     result_store_global = {}
 
@@ -209,16 +218,10 @@ if __name__ == "__main__":
         n = pypsa.Network(snakemake.input["network_{}".format(layout)])
 
         genstack = get_generation_stack(n)
+
         diff = (genstack - nodal_generation_stack).iloc[:,0]
 
         def clean_carriers(d):
-
-            d = (
-                d.loc[
-                    d.index.isin(redispatch_costs.index) + 
-                    d.index.isin(carrier_mapper.keys())
-                    ]
-            )
 
             for origin, target in carrier_mapper.items():
                 if origin not in d.index:
@@ -233,24 +236,21 @@ if __name__ == "__main__":
 
             return d
 
-        # bids = clean_carriers(diff.loc[diff > 0].abs())
-        # offers = clean_carriers(diff.loc[diff < 0].abs())
+        diff = clean_carriers(diff)
+
         bid_volume = diff.loc[diff > 0].sum()
         offer_volume = diff.loc[diff < 0].abs().sum()
 
-        '''
-        if not bids.index.isin(redispatch_costs.index).all():
-            logger.warning("Some carriers in bids not found in redispatch costs.")
-        if not offers.index.isin(redispatch_costs.index).all():
-            logger.warning("Some carriers in offers not found in redispatch costs.")
-        '''
+        bcost = bid_volume * bid_costs + offer_volume * offer_costs
+
+        if layout != 'national':
+            bcost = min(bcost, result_store_global['national']['balancing_cost'])
 
         # bids = bids.loc[bids.index.intersection(redispatch_costs.index)]
         # offers = offers.loc[offers.index.intersection(redispatch_costs.index)]
-        bcost = bid_volume * bid_costs + offer_volume * offer_costs
 
         congestion_rent = get_gen_revenue(n) - get_consumer_cost(n) # is negative as it reduces consumer payment
-        cfd_cost = get_cfd_cost(n, strike_prices) # should (mostly) be positive, increasing consumers payment
+        cfd_cost = get_cfd_cost(n, strike_prices) # should be positive (in most cases), increasing consumers payment
 
         regions_file = snakemake.input["regions_{}".format(layout)]
         regions = gpd.read_file(regions_file).set_index("name")
@@ -267,8 +267,6 @@ if __name__ == "__main__":
 
         regional_results.loc[:, "wholesale_price"] = price_to_zones(n, regions)
         regional_results.loc[:, "load"] = load_to_zones(n, regions)# .values
-        # layout_results.loc[:, "available_capacity"] = p_nom_to_zones(n, regions)
-        # layout_results.loc[:, "dispatch"] = dispatch_to_zones(n, regions)# .values
 
         G = regional_results["load"].sum()
 

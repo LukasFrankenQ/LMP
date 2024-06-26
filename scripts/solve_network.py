@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 import pypsa
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 from _helpers import configure_logging, check_network_consistency
 
@@ -32,21 +31,22 @@ if __name__ == "__main__":
     configure_logging(snakemake)
 
     n = pypsa.Network(snakemake.input["network"])
-    nodal_n = pypsa.Network(snakemake.input["network"])
+    nodal_n = pypsa.Network(snakemake.input["nodal_network"])
 
     constraints = pd.read_csv(snakemake.input["network_constraints"], index_col=0)
-    
+
     constraints = constraints["limit"]
 
     layout = snakemake.wildcards.layout
     boundaries = snakemake.params["boundaries"][layout]
+    boundaries_nodal = snakemake.params["boundaries"]['nodal']
 
     no_data = pd.Index(boundaries).difference(constraints.index)
 
     logger.info(f"No day-head constraint flow data for boundaries {','.join(no_data)}. Filling in from nodal layout.")
     
     def get_nodal_constraints(n, boundary):
-        return n.lines.loc[pd.Index(boundaries[boundary], dtype=str), "s_nom"].sum()
+        return n.lines.loc[pd.Index(boundaries_nodal[boundary], dtype=str), "s_nom"].sum()
 
     no_data = pd.Series(no_data, no_data).apply(lambda x: get_nodal_constraints(nodal_n, x))
 
@@ -85,14 +85,6 @@ if __name__ == "__main__":
     logger.info(f"A total of {len(isolated_buses)} isolated buses:\n" + ",".join(isolated_buses))
 
     factor = snakemake.params["solving"]["p_nom_multiplier"]
-
-    '''
-    n.generators.loc[:, "p_nom"] *= (
-        n.loads.p_set.sum() / 
-        n.generators.p_nom.sum() 
-        * factor
-    )
-    '''
 
     logger.warning("Solver configuration not yet taken from gurobi!")
 

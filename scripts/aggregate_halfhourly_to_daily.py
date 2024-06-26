@@ -31,4 +31,4 @@ if __name__ == '__main__':
             )
     
     with open(snakemake.output[0], 'w') as f:
-        json.dump(daily, f)
+        json.dump(daily, f, indent=4)

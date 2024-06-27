@@ -12,8 +12,6 @@ sys.path.append(str(Path.cwd() / '.github' / 'scripts'))
 from _live_helpers import (
     update_monthly,
     prepare_frontend_dict,
-    # half_hourly_func,
-    # summary_func,
     fix_zonal_remote_regions,
     update_daily,
     daily_func,
@@ -21,8 +19,8 @@ from _live_helpers import (
     prepare_household_total,
     prepare_constituency_total,
 )
-from _helpers import to_date_period
-from _aggregation_helpers import aggregate_stats, flexible_aggregate
+from _helpers import to_date_period, to_datetime
+from _aggregation_helpers import flexible_aggregate
 
 
 path = "results/periods/{}_{}.json"
@@ -60,6 +58,8 @@ if __name__ == "__main__":
 
     if day is None:
         day, period = to_date_period(pd.Timestamp.now())
+
+    now_time = to_datetime(day, period)
 
     daily_filename = str(Path(daily_raw_path) / f'{"-".join(day.split("-")[:-1])}.json')
 
@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     system_total = prepare_system_total(
         regional_total,
-        pd.Timestamp.now(),
+        now_time,
         cfd_consumer_benefit_share=1.
         )
 
@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     household_total = prepare_household_total(
         regional_total,
-        pd.Timestamp.now(),
+        now_time,
         )
     
     with open(household_total_path, 'w') as f:
@@ -133,8 +133,8 @@ if __name__ == "__main__":
     with open(constituency_total_path, 'w') as f:
         json.dump(const_total, f, indent=4)
 
-
     os.remove(outfile)
+
 
     # clean up periods, leaving only the last <max_periods> periods
     for fn in sorted(os.listdir("live/periods"))[:-max_periods]:

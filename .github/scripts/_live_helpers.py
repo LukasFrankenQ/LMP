@@ -17,8 +17,6 @@ sys.path.append(str(Path.cwd() / 'scripts'))
 from _aggregation_helpers import (
     set_nested_value,
     layouts,
-    scale_stats,
-    aggregate_stats,
     flexible_aggregate,
     flexible_scale,
     aggregate_variable,
@@ -162,7 +160,6 @@ def update_monthly(now: dict, monthly: dict) -> dict:
     # indicates that new month data is already present; updates it
     if to_last_month(list(monthly)[-1]) == to_last_month(list(now)[0]):
 
-        # monthly[list(monthly)[-1]] = aggregate_stats({
         monthly[list(monthly)[-1]] = flexible_aggregate({
             list(monthly)[-1]: monthly[list(monthly)[-1]],
             list(now)[0]: now[list(now)[0]]
@@ -248,7 +245,6 @@ def update_daily(daily, new, date):
     to_agg = {day_td: daily[day_td]}
     to_agg.update(new)
 
-    # daily.update({day_td: aggregate_stats(to_agg)})
     daily.update({day_td: flexible_aggregate(to_agg)})
 
     return daily

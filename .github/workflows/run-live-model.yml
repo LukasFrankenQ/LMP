@@ -1,17 +1,8 @@
 name: Run Model
 
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true              
-        default: 'warning'         
-      tags:
-        description: 'Test scenario tags'
-        required: false
-  # schedule:
-  #   - cron: '*/30 * * * *'
+  schedule:
+    - cron: '*/30 * * * *'
 
 env:
   CACHE_NUMBER: 0

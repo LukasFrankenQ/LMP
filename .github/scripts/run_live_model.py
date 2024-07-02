@@ -91,7 +91,7 @@ if __name__ == "__main__":
     for fn in os.listdir(daily_raw_path):
         with open(Path(daily_raw_path) / fn, 'r') as f:        
             daily = json.load(f)
-        
+
         daily = prepare_frontend_dict(daily, daily_func)
         fix_zonal_remote_regions(daily)
 
@@ -102,6 +102,7 @@ if __name__ == "__main__":
         monthly = json.load(f)
 
     monthly = update_monthly(new_step, monthly)
+    fix_zonal_remote_regions(monthly)
 
     with open(monthly_raw_path, 'w') as f:
         json.dump(monthly, f, indent=4)

@@ -63,7 +63,7 @@ def prepare_household_total(
     remove_leaves(
         regional_total,
         [
-            'load',
+            # 'load',
             'wholesale_price',
             'post_policy_price',
         ]
@@ -73,6 +73,7 @@ def prepare_household_total(
     
     # if savings are accumulated over more than a year, they are scaled down to one year
     scaling_factor = min(365 / (now_datetime - start_datetime).days, 1.)
+    print('scaling factor to obtain one-yearly numbers: ', scaling_factor)
 
     agg = flexible_aggregate(regional_total)
 

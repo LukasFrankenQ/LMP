@@ -106,6 +106,7 @@ if __name__ == "__main__":
     with open(monthly_raw_path, 'w') as f:
         json.dump(monthly, f, indent=4)
 
+    print([pd.Timestamp.fromtimestamp(int(ts)) for ts in list(monthly)])
     regional_total = {list(monthly)[0]: flexible_aggregate(monthly)}
 
     system_total = prepare_system_total(

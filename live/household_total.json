@@ -1,10 +1,10 @@
 {
-    "1688934600": {
+    "1688936400": {
         "national": {
             "geographies": {
                 "GB": {
                     "variables": {
-                        "load": 451929103.65250915,
+                        "load": 451943060.36531776,
                         "single-rate-domestic_wholesale_savings": 0.0,
                         "single-rate-domestic_total_savings": 0.0,
                         "multi-rate-domestic_wholesale_savings": 0.0,
@@ -18,10 +18,10 @@
             },
             "globals": {
                 "variables": {
-                    "wholesale_cost": 53030738352.81673,
-                    "balancing_cost": 1638495014.9023252,
-                    "congestion_rent": -0.0002986075654851403,
-                    "cfd_cost": 2555427243.6221704,
+                    "wholesale_cost": 53032125231.370674,
+                    "balancing_cost": 1638495014.9023254,
+                    "congestion_rent": -0.0002986105594726854,
+                    "cfd_cost": 2555452977.155843,
                     "wholesale_cost_savings": 0.0,
                     "balancing_cost_savings": 0.0,
                     "congestion_rent_savings": 0.0,
@@ -33,24 +33,24 @@
             "geographies": {
                 "4950": {
                     "variables": {
-                        "load": 1440167.4052903194,
+                        "load": 1440211.8812990577,
                         "single-rate-domestic_wholesale_savings": -13.056852757214145,
                         "single-rate-domestic_total_savings": 40.86028805027372,
                         "multi-rate-domestic_wholesale_savings": -19.535556435769745,
                         "multi-rate-domestic_total_savings": 54.508908935384426,
                         "single-rate-nondomestic_wholesale_savings": -48.02456434822308,
-                        "single-rate-nondomestic_total_savings": 159.98744188706698,
+                        "single-rate-nondomestic_total_savings": 159.987441887067,
                         "multi-rate-nondomestic_wholesale_savings": -79.10759696537536,
                         "multi-rate-nondomestic_total_savings": 247.33327411179928
                     }
                 },
                 "4951": {
                     "variables": {
-                        "load": 1304340.1526048966,
+                        "load": 1304380.4339250189,
                         "single-rate-domestic_wholesale_savings": -12.734756327955775,
                         "single-rate-domestic_total_savings": 41.182384506032356,
                         "multi-rate-domestic_wholesale_savings": -19.008714414595843,
-                        "multi-rate-domestic_total_savings": 55.03575096803549,
+                        "multi-rate-domestic_total_savings": 55.035750968035494,
                         "single-rate-nondomestic_wholesale_savings": -46.81678823211944,
                         "single-rate-nondomestic_total_savings": 161.19521797978814,
                         "multi-rate-nondomestic_wholesale_savings": -77.09977718838732,
@@ -59,9 +59,9 @@
                 },
                 "4952": {
                     "variables": {
-                        "load": 1295359.4370386337,
+                        "load": 1295399.4410103124,
                         "single-rate-domestic_wholesale_savings": -17.89393915937738,
-                        "single-rate-domestic_total_savings": 36.023201677013645,
+                        "single-rate-domestic_total_savings": 36.02320167701365,
                         "multi-rate-domestic_wholesale_savings": -26.96113595341012,
                         "multi-rate-domestic_total_savings": 47.08332938705812,
                         "single-rate-nondomestic_wholesale_savings": -66.21365941647653,
@@ -72,7 +72,7 @@
                 },
                 "4953": {
                     "variables": {
-                        "load": 1277166.9052948733,
+                        "load": 1277206.347438042,
                         "single-rate-domestic_wholesale_savings": -16.756190622731157,
                         "single-rate-domestic_total_savings": 37.16095021194271,
                         "multi-rate-domestic_wholesale_savings": -25.17657341277506,
@@ -85,7 +85,7 @@
                 },
                 "4955": {
                     "variables": {
-                        "load": 2285437.552489537,
+                        "load": 2285508.1325781443,
                         "single-rate-domestic_wholesale_savings": -14.885075768577783,
                         "single-rate-domestic_total_savings": 39.03206504807366,
                         "multi-rate-domestic_wholesale_savings": -22.310826594111106,
@@ -93,25 +93,25 @@
                         "single-rate-nondomestic_wholesale_savings": -54.91254461839809,
                         "single-rate-nondomestic_total_savings": 153.09946151705756,
                         "multi-rate-nondomestic_wholesale_savings": -90.20068255220082,
-                        "multi-rate-nondomestic_total_savings": 236.24018870716765
+                        "multi-rate-nondomestic_total_savings": 236.24018870716768
                     }
                 },
                 "4956": {
                     "variables": {
-                        "load": 3594711.0770634394,
+                        "load": 3594822.0908285417,
                         "single-rate-domestic_wholesale_savings": -13.59497496358243,
                         "single-rate-domestic_total_savings": 40.32216584772797,
                         "multi-rate-domestic_wholesale_savings": -20.34458713126224,
                         "multi-rate-domestic_total_savings": 53.69987818936693,
                         "single-rate-nondomestic_wholesale_savings": -50.053174333562986,
-                        "single-rate-nondomestic_total_savings": 157.9588319363604,
+                        "single-rate-nondomestic_total_savings": 157.95883193636044,
                         "multi-rate-nondomestic_wholesale_savings": -82.36168837346509,
-                        "multi-rate-nondomestic_total_savings": 244.07918261395676
+                        "multi-rate-nondomestic_total_savings": 244.0791826139568
                     }
                 },
                 "4958": {
                     "variables": {
-                        "load": 1926699.872717431,
+                        "load": 1926759.3740786577,
                         "single-rate-domestic_wholesale_savings": -17.44166344673179,
                         "single-rate-domestic_total_savings": 36.47547737616975,
                         "multi-rate-domestic_wholesale_savings": -26.25686740883216,
@@ -124,7 +124,7 @@
                 },
                 "4960": {
                     "variables": {
-                        "load": 1122566.0356056916,
+                        "load": 1122600.70328193,
                         "single-rate-domestic_wholesale_savings": -16.89957506370311,
                         "single-rate-domestic_total_savings": 37.017565768936485,
                         "multi-rate-domestic_wholesale_savings": -25.440149305123658,
@@ -132,12 +132,12 @@
                         "single-rate-nondomestic_wholesale_savings": -62.45696100011074,
                         "single-rate-nondomestic_total_savings": 145.55504528195937,
                         "multi-rate-nondomestic_wholesale_savings": -102.4648118752201,
-                        "multi-rate-nondomestic_total_savings": 223.9760592435043
+                        "multi-rate-nondomestic_total_savings": 223.97605924350432
                     }
                 },
                 "4961": {
                     "variables": {
-                        "load": 781265.4099143425,
+                        "load": 781289.5373648874,
                         "single-rate-domestic_wholesale_savings": -16.980075189232128,
                         "single-rate-domestic_total_savings": 36.937065654358044,
                         "multi-rate-domestic_wholesale_savings": -25.543261102401097,
@@ -150,22 +150,22 @@
                 },
                 "4962": {
                     "variables": {
-                        "load": 1989388.4733174746,
+                        "load": 1989449.9106615477,
                         "single-rate-domestic_wholesale_savings": -16.946928790114818,
                         "single-rate-domestic_total_savings": 36.970212022850745,
                         "multi-rate-domestic_wholesale_savings": -25.497895613461534,
                         "multi-rate-domestic_total_savings": 48.54656975794532,
                         "single-rate-nondomestic_wholesale_savings": -62.61040386096901,
                         "single-rate-nondomestic_total_savings": 145.401602366422,
-                        "multi-rate-nondomestic_wholesale_savings": -102.70759978638071,
+                        "multi-rate-nondomestic_wholesale_savings": -102.7075997863807,
                         "multi-rate-nondomestic_total_savings": 223.73327142834992
                     }
                 },
                 "4963": {
                     "variables": {
-                        "load": 728943.8364268771,
+                        "load": 728966.3480553976,
                         "single-rate-domestic_wholesale_savings": -16.88000420086162,
-                        "single-rate-domestic_total_savings": 37.03713663772506,
+                        "single-rate-domestic_total_savings": 37.03713663772507,
                         "multi-rate-domestic_wholesale_savings": -25.411180402312798,
                         "multi-rate-domestic_total_savings": 48.63328495192469,
                         "single-rate-nondomestic_wholesale_savings": -62.38311794820123,
@@ -176,7 +176,7 @@
                 },
                 "4964": {
                     "variables": {
-                        "load": 2580066.6356445975,
+                        "load": 2580146.3146201447,
                         "single-rate-domestic_wholesale_savings": -16.735893043345317,
                         "single-rate-domestic_total_savings": 37.181247777518,
                         "multi-rate-domestic_wholesale_savings": -25.21356571589899,
@@ -189,11 +189,11 @@
                 },
                 "4965": {
                     "variables": {
-                        "load": 1454453.535037338,
+                        "load": 1454498.4522369562,
                         "single-rate-domestic_wholesale_savings": -16.56142020130761,
                         "single-rate-domestic_total_savings": 37.355720615465955,
                         "multi-rate-domestic_wholesale_savings": -24.877600623195278,
-                        "multi-rate-domestic_total_savings": 49.1668647115982,
+                        "multi-rate-domestic_total_savings": 49.16686471159821,
                         "single-rate-nondomestic_wholesale_savings": -61.22496365186014,
                         "single-rate-nondomestic_total_savings": 146.78704258233427,
                         "multi-rate-nondomestic_wholesale_savings": -100.40332228652487,
@@ -202,11 +202,11 @@
                 },
                 "4967": {
                     "variables": {
-                        "load": 2647402.5810830444,
+                        "load": 2647484.3395644086,
                         "single-rate-domestic_wholesale_savings": -16.901688254723002,
                         "single-rate-domestic_total_savings": 37.01545259032335,
                         "multi-rate-domestic_wholesale_savings": -25.398610025263018,
-                        "multi-rate-domestic_total_savings": 48.64585532628204,
+                        "multi-rate-domestic_total_savings": 48.645855326282046,
                         "single-rate-nondomestic_wholesale_savings": -62.506272235383804,
                         "single-rate-nondomestic_total_savings": 145.5057340320684,
                         "multi-rate-nondomestic_wholesale_savings": -102.47427641274834,
@@ -215,7 +215,7 @@
                 },
                 "4968": {
                     "variables": {
-                        "load": 2303539.300803699,
+                        "load": 2303610.439920994,
                         "single-rate-domestic_wholesale_savings": -16.071520936975496,
                         "single-rate-domestic_total_savings": 37.84561992145811,
                         "multi-rate-domestic_wholesale_savings": -24.127479850085724,
@@ -228,11 +228,11 @@
                 },
                 "4969": {
                     "variables": {
-                        "load": 978184.5810819125,
+                        "load": 978214.7898938404,
                         "single-rate-domestic_wholesale_savings": -16.88712976431187,
                         "single-rate-domestic_total_savings": 37.03001105063866,
                         "multi-rate-domestic_wholesale_savings": -25.416052291891486,
-                        "multi-rate-domestic_total_savings": 48.62841306679436,
+                        "multi-rate-domestic_total_savings": 48.628413066794366,
                         "single-rate-nondomestic_wholesale_savings": -62.32387360583854,
                         "single-rate-nondomestic_total_savings": 145.68813269010093,
                         "multi-rate-nondomestic_wholesale_savings": -102.28333115852988,
@@ -241,11 +241,11 @@
                 },
                 "4970": {
                     "variables": {
-                        "load": 822188.385415439,
+                        "load": 822213.776670717,
                         "single-rate-domestic_wholesale_savings": -16.475446804187992,
-                        "single-rate-domestic_total_savings": 37.44169402630351,
+                        "single-rate-domestic_total_savings": 37.441694026303516,
                         "multi-rate-domestic_wholesale_savings": -24.9669865094834,
-                        "multi-rate-domestic_total_savings": 49.07747883312181,
+                        "multi-rate-domestic_total_savings": 49.077478833121816,
                         "single-rate-nondomestic_wholesale_savings": -60.77885157592978,
                         "single-rate-nondomestic_total_savings": 147.23315469043098,
                         "multi-rate-nondomestic_wholesale_savings": -99.99393305054414,
@@ -254,7 +254,7 @@
                 },
                 "4971": {
                     "variables": {
-                        "load": 2066528.176021731,
+                        "load": 2066591.9956335467,
                         "single-rate-domestic_wholesale_savings": -16.26335652099259,
                         "single-rate-domestic_total_savings": 37.65378432246604,
                         "multi-rate-domestic_wholesale_savings": -24.53817371458877,
@@ -267,7 +267,7 @@
                 },
                 "4972": {
                     "variables": {
-                        "load": 1805632.3857949679,
+                        "load": 1805688.1482877189,
                         "single-rate-domestic_wholesale_savings": -16.435817020766958,
                         "single-rate-domestic_total_savings": 37.48132381999999,
                         "multi-rate-domestic_wholesale_savings": -24.935075196226,
@@ -280,10 +280,10 @@
                 },
                 "4974": {
                     "variables": {
-                        "load": 569645.5621674132,
+                        "load": 569663.154262734,
                         "single-rate-domestic_wholesale_savings": -16.446222800713493,
                         "single-rate-domestic_total_savings": 37.4709180203611,
-                        "multi-rate-domestic_wholesale_savings": -24.90790019434954,
+                        "multi-rate-domestic_wholesale_savings": -24.907900194349537,
                         "multi-rate-domestic_total_savings": 49.13656517053234,
                         "single-rate-nondomestic_wholesale_savings": -60.67462395913371,
                         "single-rate-nondomestic_total_savings": 147.33738224670014,
@@ -293,9 +293,9 @@
                 },
                 "4975": {
                     "variables": {
-                        "load": 373162.54694673105,
+                        "load": 373174.07114962576,
                         "single-rate-domestic_wholesale_savings": -16.42398275224854,
-                        "single-rate-domestic_total_savings": 37.49315809808024,
+                        "single-rate-domestic_total_savings": 37.493158098080244,
                         "multi-rate-domestic_wholesale_savings": -24.862934382108495,
                         "multi-rate-domestic_total_savings": 49.18153096468469,
                         "single-rate-nondomestic_wholesale_savings": -60.59530484835722,
@@ -306,20 +306,20 @@
                 },
                 "4977": {
                     "variables": {
-                        "load": 566825.2109714058,
+                        "load": 566842.7159665917,
                         "single-rate-domestic_wholesale_savings": -16.34474417560535,
                         "single-rate-domestic_total_savings": 37.57239666057857,
                         "multi-rate-domestic_wholesale_savings": -24.702726569100662,
-                        "multi-rate-domestic_total_savings": 49.341738777408075,
+                        "multi-rate-domestic_total_savings": 49.34173877740808,
                         "single-rate-nondomestic_wholesale_savings": -60.31270018680563,
                         "single-rate-nondomestic_total_savings": 147.69930597480484,
                         "multi-rate-nondomestic_wholesale_savings": -99.14818515478429,
-                        "multi-rate-nondomestic_total_savings": 227.29268597345086
+                        "multi-rate-nondomestic_total_savings": 227.2926859734509
                     }
                 },
                 "4979": {
                     "variables": {
-                        "load": 936205.5121730531,
+                        "load": 936234.424565336,
                         "single-rate-domestic_wholesale_savings": -16.322643895353774,
                         "single-rate-domestic_total_savings": 37.594496921442186,
                         "multi-rate-domestic_wholesale_savings": -24.65804335699513,
@@ -332,7 +332,7 @@
                 },
                 "5183": {
                     "variables": {
-                        "load": 1694913.2171926782,
+                        "load": 1694965.5603966804,
                         "single-rate-domestic_wholesale_savings": -15.827980734084484,
                         "single-rate-domestic_total_savings": 38.089160110952925,
                         "multi-rate-domestic_wholesale_savings": -23.72246964197073,
@@ -345,7 +345,7 @@
                 },
                 "5185": {
                     "variables": {
-                        "load": 5801747.394735755,
+                        "load": 5801926.567354384,
                         "single-rate-domestic_wholesale_savings": -15.828123393940968,
                         "single-rate-domestic_total_savings": 38.08901743655565,
                         "multi-rate-domestic_wholesale_savings": -23.722714965688283,
@@ -358,7 +358,7 @@
                 },
                 "5187": {
                     "variables": {
-                        "load": 1454125.6955780764,
+                        "load": 1454170.6026538084,
                         "single-rate-domestic_wholesale_savings": -15.833065483813582,
                         "single-rate-domestic_total_savings": 38.084075349674656,
                         "multi-rate-domestic_wholesale_savings": -23.731209829536507,
@@ -371,7 +371,7 @@
                 },
                 "5188": {
                     "variables": {
-                        "load": 1571964.3181507504,
+                        "load": 1572012.864380529,
                         "single-rate-domestic_wholesale_savings": -15.813639182286455,
                         "single-rate-domestic_total_savings": 38.10350163378588,
                         "multi-rate-domestic_wholesale_savings": -23.69781816918878,
@@ -384,7 +384,7 @@
                 },
                 "5189": {
                     "variables": {
-                        "load": 608901.4412203585,
+                        "load": 608920.2456349991,
                         "single-rate-domestic_wholesale_savings": -15.84433271569968,
                         "single-rate-domestic_total_savings": 38.07280809553209,
                         "multi-rate-domestic_wholesale_savings": -23.750576961192987,
@@ -397,7 +397,7 @@
                 },
                 "5193": {
                     "variables": {
-                        "load": 3470300.775668964,
+                        "load": 3470407.94733063,
                         "single-rate-domestic_wholesale_savings": -15.838048500814185,
                         "single-rate-domestic_total_savings": 38.079092334074424,
                         "multi-rate-domestic_wholesale_savings": -23.73977510281148,
@@ -410,7 +410,7 @@
                 },
                 "5194": {
                     "variables": {
-                        "load": 1089008.8851193814,
+                        "load": 1089042.5164651354,
                         "single-rate-domestic_wholesale_savings": -15.964199520812782,
                         "single-rate-domestic_total_savings": 37.9529412864724,
                         "multi-rate-domestic_wholesale_savings": -23.964130873417258,
@@ -423,7 +423,7 @@
                 },
                 "5195": {
                     "variables": {
-                        "load": 578634.6810501184,
+                        "load": 578652.5507504701,
                         "single-rate-domestic_wholesale_savings": -15.834666354405911,
                         "single-rate-domestic_total_savings": 38.082474492451645,
                         "multi-rate-domestic_wholesale_savings": -23.73396155294453,
@@ -436,7 +436,7 @@
                 },
                 "5198": {
                     "variables": {
-                        "load": 636888.7774554178,
+                        "load": 636908.4461906997,
                         "single-rate-domestic_wholesale_savings": -15.848849108044234,
                         "single-rate-domestic_total_savings": 38.06829174670516,
                         "multi-rate-domestic_wholesale_savings": -23.75834012511365,
@@ -449,7 +449,7 @@
                 },
                 "5200": {
                     "variables": {
-                        "load": 2199486.366958773,
+                        "load": 2199554.2926572785,
                         "single-rate-domestic_wholesale_savings": -15.85026758184428,
                         "single-rate-domestic_total_savings": 38.066873227144946,
                         "multi-rate-domestic_wholesale_savings": -23.76077836462811,
@@ -462,11 +462,11 @@
                 },
                 "5202": {
                     "variables": {
-                        "load": 2448337.243706463,
+                        "load": 2448412.85454763,
                         "single-rate-domestic_wholesale_savings": -15.940037367811813,
                         "single-rate-domestic_total_savings": 37.977103480465125,
                         "multi-rate-domestic_wholesale_savings": -23.92051843043143,
-                        "multi-rate-domestic_total_savings": 50.123946952227385,
+                        "multi-rate-domestic_total_savings": 50.12394695222739,
                         "single-rate-nondomestic_wholesale_savings": -58.84968939516441,
                         "single-rate-nondomestic_total_savings": 149.16231687421916,
                         "multi-rate-nondomestic_wholesale_savings": -96.54747722279937,
@@ -475,7 +475,7 @@
                 },
                 "5203": {
                     "variables": {
-                        "load": 1542573.277828377,
+                        "load": 1542620.9163912074,
                         "single-rate-domestic_wholesale_savings": -15.979189519219677,
                         "single-rate-domestic_total_savings": 37.93795132662869,
                         "multi-rate-domestic_wholesale_savings": -23.991187581006233,
@@ -488,7 +488,7 @@
                 },
                 "5204": {
                     "variables": {
-                        "load": 1016269.0532498503,
+                        "load": 1016300.4382060344,
                         "single-rate-domestic_wholesale_savings": -15.959117323962081,
                         "single-rate-domestic_total_savings": 37.958023513230565,
                         "multi-rate-domestic_wholesale_savings": -23.95495751298158,
@@ -501,7 +501,7 @@
                 },
                 "5206": {
                     "variables": {
-                        "load": 927311.5376749013,
+                        "load": 927340.1753978161,
                         "single-rate-domestic_wholesale_savings": -15.996698254592273,
                         "single-rate-domestic_total_savings": 37.920442588441965,
                         "multi-rate-domestic_wholesale_savings": -24.022790634157033,
@@ -514,7 +514,7 @@
                 },
                 "5207": {
                     "variables": {
-                        "load": 2031699.4432873714,
+                        "load": 2031762.1872994958,
                         "single-rate-domestic_wholesale_savings": -15.969986318221999,
                         "single-rate-domestic_total_savings": 37.94715452293041,
                         "multi-rate-domestic_wholesale_savings": -23.974575905108328,
@@ -527,7 +527,7 @@
                 },
                 "5208": {
                     "variables": {
-                        "load": 1201312.5327476643,
+                        "load": 1201349.632314912,
                         "single-rate-domestic_wholesale_savings": -15.973105603637666,
                         "single-rate-domestic_total_savings": 37.94403523038997,
                         "multi-rate-domestic_wholesale_savings": -23.980206153600037,
@@ -540,7 +540,7 @@
                 },
                 "5209": {
                     "variables": {
-                        "load": 1130715.4839074258,
+                        "load": 1130750.4032582643,
                         "single-rate-domestic_wholesale_savings": -15.974523312599382,
                         "single-rate-domestic_total_savings": 37.94261752353751,
                         "multi-rate-domestic_wholesale_savings": -23.98276511900969,
@@ -553,9 +553,9 @@
                 },
                 "5212": {
                     "variables": {
-                        "load": 4764894.188323086,
+                        "load": 4765041.340301327,
                         "single-rate-domestic_wholesale_savings": -15.614967295783236,
-                        "single-rate-domestic_total_savings": 38.302173546559416,
+                        "single-rate-domestic_total_savings": 38.30217354655942,
                         "multi-rate-domestic_wholesale_savings": -23.296701333019197,
                         "multi-rate-domestic_total_savings": 50.747764032752734,
                         "single-rate-nondomestic_wholesale_savings": -57.66957816413292,
@@ -566,7 +566,7 @@
                 },
                 "5213": {
                     "variables": {
-                        "load": 2598499.970229389,
+                        "load": 2598580.218474484,
                         "single-rate-domestic_wholesale_savings": -15.561673341001796,
                         "single-rate-domestic_total_savings": 38.35546747387627,
                         "multi-rate-domestic_wholesale_savings": -23.224522135739683,
@@ -579,9 +579,9 @@
                 },
                 "5214": {
                     "variables": {
-                        "load": 2239000.0747217266,
+                        "load": 2239069.220705084,
                         "single-rate-domestic_wholesale_savings": -15.600039247629981,
-                        "single-rate-domestic_total_savings": 38.31710158618278,
+                        "single-rate-domestic_total_savings": 38.31710158618279,
                         "multi-rate-domestic_wholesale_savings": -23.287479938946174,
                         "multi-rate-domestic_total_savings": 50.75698541163819,
                         "single-rate-nondomestic_wholesale_savings": -57.608561619981025,
@@ -592,9 +592,9 @@
                 },
                 "5215": {
                     "variables": {
-                        "load": 2251560.088656149,
+                        "load": 2251629.622524334,
                         "single-rate-domestic_wholesale_savings": -15.77314205148851,
-                        "single-rate-domestic_total_savings": 38.14399874273409,
+                        "single-rate-domestic_total_savings": 38.1439987427341,
                         "multi-rate-domestic_wholesale_savings": -23.628208048422312,
                         "multi-rate-domestic_total_savings": 50.4162572951001,
                         "single-rate-nondomestic_wholesale_savings": -58.229890381909534,
@@ -605,7 +605,7 @@
                 },
                 "5217": {
                     "variables": {
-                        "load": 3360293.302673144,
+                        "load": 3360397.0770257986,
                         "single-rate-domestic_wholesale_savings": -15.554907234851667,
                         "single-rate-domestic_total_savings": 38.362233630165065,
                         "multi-rate-domestic_wholesale_savings": -23.213324134367618,
@@ -618,9 +618,9 @@
                 },
                 "5218": {
                     "variables": {
-                        "load": 2033555.7697604732,
+                        "load": 2033618.5711010364,
                         "single-rate-domestic_wholesale_savings": -15.5743819962675,
-                        "single-rate-domestic_total_savings": 38.34275885251587,
+                        "single-rate-domestic_total_savings": 38.34275885251588,
                         "multi-rate-domestic_wholesale_savings": -23.245195933653573,
                         "multi-rate-domestic_total_savings": 50.79926943018119,
                         "single-rate-nondomestic_wholesale_savings": -57.51119940947496,
@@ -631,7 +631,7 @@
                 },
                 "5219": {
                     "variables": {
-                        "load": 1833787.135887999,
+                        "load": 1833843.767868988,
                         "single-rate-domestic_wholesale_savings": -15.517306544497353,
                         "single-rate-domestic_total_savings": 38.39983428465272,
                         "multi-rate-domestic_wholesale_savings": -23.15201472285639,
@@ -644,7 +644,7 @@
                 },
                 "5221": {
                     "variables": {
-                        "load": 3441744.85236124,
+                        "load": 3441851.142139228,
                         "single-rate-domestic_wholesale_savings": -15.625308796623578,
                         "single-rate-domestic_total_savings": 38.29183199483746,
                         "multi-rate-domestic_wholesale_savings": -23.339603697208666,
@@ -657,9 +657,9 @@
                 },
                 "5222": {
                     "variables": {
-                        "load": 1606857.6883318366,
+                        "load": 1606907.3121574062,
                         "single-rate-domestic_wholesale_savings": -15.541336921465792,
-                        "single-rate-domestic_total_savings": 38.375803891700016,
+                        "single-rate-domestic_total_savings": 38.37580389170002,
                         "multi-rate-domestic_wholesale_savings": -23.191328725028896,
                         "multi-rate-domestic_total_savings": 50.853136628102035,
                         "single-rate-nondomestic_wholesale_savings": -57.38301011330411,
@@ -670,7 +670,7 @@
                 },
                 "5223": {
                     "variables": {
-                        "load": 2040484.2549454554,
+                        "load": 2040547.2702573503,
                         "single-rate-domestic_wholesale_savings": -15.525192777351837,
                         "single-rate-domestic_total_savings": 38.39194807238876,
                         "multi-rate-domestic_wholesale_savings": -23.162350504767414,
@@ -683,7 +683,7 @@
                 },
                 "5224": {
                     "variables": {
-                        "load": 1604907.1440488924,
+                        "load": 1604956.7076367738,
                         "single-rate-domestic_wholesale_savings": -15.858636089044417,
                         "single-rate-domestic_total_savings": 38.05850474601723,
                         "multi-rate-domestic_wholesale_savings": -23.775162885716203,
@@ -696,7 +696,7 @@
                 },
                 "5225": {
                     "variables": {
-                        "load": 2425666.508003845,
+                        "load": 2425741.4187158416,
                         "single-rate-domestic_wholesale_savings": -15.863233432081426,
                         "single-rate-domestic_total_savings": 38.05390740979586,
                         "multi-rate-domestic_wholesale_savings": -23.783065159043712,
@@ -709,7 +709,7 @@
                 },
                 "5226": {
                     "variables": {
-                        "load": 2115314.6846349714,
+                        "load": 2115380.010898378,
                         "single-rate-domestic_wholesale_savings": -15.83111277255898,
                         "single-rate-domestic_total_savings": 38.08602806282976,
                         "multi-rate-domestic_wholesale_savings": -23.72785331739174,
@@ -722,7 +722,7 @@
                 },
                 "5228": {
                     "variables": {
-                        "load": 4689609.223732315,
+                        "load": 4689754.05071088,
                         "single-rate-domestic_wholesale_savings": -15.876903081824674,
                         "single-rate-domestic_total_savings": 38.04023774918382,
                         "multi-rate-domestic_wholesale_savings": -23.806561845578784,
@@ -735,20 +735,20 @@
                 },
                 "5229": {
                     "variables": {
-                        "load": 3074657.0163292615,
+                        "load": 3074751.9695056616,
                         "single-rate-domestic_wholesale_savings": -16.057106382753812,
                         "single-rate-domestic_total_savings": 37.86003445184738,
                         "multi-rate-domestic_wholesale_savings": -24.131826521573554,
                         "multi-rate-domestic_total_savings": 49.91263882364213,
                         "single-rate-nondomestic_wholesale_savings": -59.28103711124981,
                         "single-rate-nondomestic_total_savings": 148.73096915405822,
-                        "multi-rate-nondomestic_wholesale_savings": -97.29228495442919,
+                        "multi-rate-nondomestic_wholesale_savings": -97.29228495442918,
                         "multi-rate-nondomestic_total_savings": 229.14858624884383
                     }
                 },
                 "5230": {
                     "variables": {
-                        "load": 2397706.144719008,
+                        "load": 2397780.191946159,
                         "single-rate-domestic_wholesale_savings": -16.102271907395107,
                         "single-rate-domestic_total_savings": 37.81486891034206,
                         "multi-rate-domestic_wholesale_savings": -24.213349775948682,
@@ -761,7 +761,7 @@
                 },
                 "5231": {
                     "variables": {
-                        "load": 2064364.842490452,
+                        "load": 2064428.5952914117,
                         "single-rate-domestic_wholesale_savings": -16.101210567842816,
                         "single-rate-domestic_total_savings": 37.815930238828436,
                         "multi-rate-domestic_wholesale_savings": -24.21143405418441,
@@ -774,7 +774,7 @@
                 },
                 "5233": {
                     "variables": {
-                        "load": 3130487.654527132,
+                        "load": 3130584.33189604,
                         "single-rate-domestic_wholesale_savings": -14.760644994872768,
                         "single-rate-domestic_total_savings": 39.156495834578884,
                         "multi-rate-domestic_wholesale_savings": -22.154894817509685,
@@ -787,7 +787,7 @@
                 },
                 "5234": {
                     "variables": {
-                        "load": 1286036.7121271067,
+                        "load": 1286076.4281925212,
                         "single-rate-domestic_wholesale_savings": -15.732670347838408,
                         "single-rate-domestic_total_savings": 38.18447049529497,
                         "multi-rate-domestic_wholesale_savings": -23.591776770922763,
@@ -800,7 +800,7 @@
                 },
                 "5236": {
                     "variables": {
-                        "load": 1201592.7542201485,
+                        "load": 1201629.8624396778,
                         "single-rate-domestic_wholesale_savings": -15.53419968889449,
                         "single-rate-domestic_total_savings": 38.38294114672983,
                         "multi-rate-domestic_wholesale_savings": -23.28772841876403,
@@ -813,11 +813,11 @@
                 },
                 "5238": {
                     "variables": {
-                        "load": 730024.6300431901,
+                        "load": 730047.1750488385,
                         "single-rate-domestic_wholesale_savings": -15.894289298226335,
                         "single-rate-domestic_total_savings": 38.02285151529089,
                         "multi-rate-domestic_wholesale_savings": -23.851671323102043,
-                        "multi-rate-domestic_total_savings": 50.19279403587965,
+                        "multi-rate-domestic_total_savings": 50.19279403587966,
                         "single-rate-nondomestic_wholesale_savings": -58.68986248170268,
                         "single-rate-nondomestic_total_savings": 149.32214383769494,
                         "multi-rate-nondomestic_wholesale_savings": -96.29418242385364,
@@ -826,20 +826,20 @@
                 },
                 "5240": {
                     "variables": {
-                        "load": 2970967.335170653,
+                        "load": 2971059.0861501927,
                         "single-rate-domestic_wholesale_savings": -14.886099166304056,
                         "single-rate-domestic_total_savings": 39.03104166146847,
                         "multi-rate-domestic_wholesale_savings": -22.324659194284816,
                         "multi-rate-domestic_total_savings": 51.71980619637795,
                         "single-rate-nondomestic_wholesale_savings": -54.90169997002461,
-                        "single-rate-nondomestic_total_savings": 153.1103062516939,
+                        "single-rate-nondomestic_total_savings": 153.11030625169394,
                         "multi-rate-nondomestic_wholesale_savings": -90.19913273036798,
                         "multi-rate-nondomestic_total_savings": 236.24173858318252
                     }
                 },
                 "5241": {
                     "variables": {
-                        "load": 827244.5172176129,
+                        "load": 827270.064619589,
                         "single-rate-domestic_wholesale_savings": -16.239202896892063,
                         "single-rate-domestic_total_savings": 37.67793790732735,
                         "multi-rate-domestic_wholesale_savings": -24.387624458467673,
@@ -852,7 +852,7 @@
                 },
                 "5242": {
                     "variables": {
-                        "load": 1880087.7722083975,
+                        "load": 1880145.8340684897,
                         "single-rate-domestic_wholesale_savings": -15.917926560237017,
                         "single-rate-domestic_total_savings": 37.99921423167293,
                         "multi-rate-domestic_wholesale_savings": -23.91551735902667,
@@ -865,7 +865,7 @@
                 },
                 "5243": {
                     "variables": {
-                        "load": 1486036.834084348,
+                        "load": 1486082.7266560532,
                         "single-rate-domestic_wholesale_savings": -14.04050025277984,
                         "single-rate-domestic_total_savings": 39.8766405838374,
                         "multi-rate-domestic_wholesale_savings": -21.02926599784017,
@@ -878,11 +878,11 @@
                 },
                 "5245": {
                     "variables": {
-                        "load": 1613035.633616047,
+                        "load": 1613085.4482332866,
                         "single-rate-domestic_wholesale_savings": -21.235981920222194,
                         "single-rate-domestic_total_savings": 32.68115892291699,
                         "multi-rate-domestic_wholesale_savings": -32.149790948031395,
-                        "multi-rate-domestic_total_savings": 41.89467444195346,
+                        "multi-rate-domestic_total_savings": 41.89467444195347,
                         "single-rate-nondomestic_wholesale_savings": -78.77726122013402,
                         "single-rate-nondomestic_total_savings": 129.23474512690504,
                         "multi-rate-nondomestic_wholesale_savings": -128.95453770501246,
@@ -891,11 +891,11 @@
                 },
                 "5247": {
                     "variables": {
-                        "load": 3543368.98205155,
+                        "load": 3543478.4102417654,
                         "single-rate-domestic_wholesale_savings": -19.894232016563446,
                         "single-rate-domestic_total_savings": 34.02290880590507,
                         "multi-rate-domestic_wholesale_savings": -30.067372257034673,
-                        "multi-rate-domestic_total_savings": 43.9770930389633,
+                        "multi-rate-domestic_total_savings": 43.977093038963304,
                         "single-rate-nondomestic_wholesale_savings": -73.7329540186593,
                         "single-rate-nondomestic_total_savings": 134.27905228944374,
                         "multi-rate-nondomestic_wholesale_savings": -120.75728979493341,
@@ -904,22 +904,22 @@
                 },
                 "5248": {
                     "variables": {
-                        "load": 1391300.3954876536,
+                        "load": 1391343.3623581657,
                         "single-rate-domestic_wholesale_savings": -18.23335784662251,
                         "single-rate-domestic_total_savings": 35.683782992074796,
                         "multi-rate-domestic_wholesale_savings": -27.489667391250578,
-                        "multi-rate-domestic_total_savings": 46.554797950796484,
+                        "multi-rate-domestic_total_savings": 46.55479795079649,
                         "single-rate-nondomestic_wholesale_savings": -67.48889942522995,
-                        "single-rate-nondomestic_total_savings": 140.52310667458443,
+                        "single-rate-nondomestic_total_savings": 140.52310667458445,
                         "multi-rate-nondomestic_wholesale_savings": -110.61039327728035,
-                        "multi-rate-nondomestic_total_savings": 215.8304779473286
+                        "multi-rate-nondomestic_total_savings": 215.83047794732863
                     }
                 },
                 "5249": {
                     "variables": {
-                        "load": 2490123.8606985346,
+                        "load": 2490200.7620163276,
                         "single-rate-domestic_wholesale_savings": -15.850357997191313,
-                        "single-rate-domestic_total_savings": 38.06678283176988,
+                        "single-rate-domestic_total_savings": 38.066782831769885,
                         "multi-rate-domestic_wholesale_savings": -23.780665748599557,
                         "multi-rate-domestic_total_savings": 50.26379959809875,
                         "single-rate-nondomestic_wholesale_savings": -58.518494627909895,
@@ -930,7 +930,7 @@
                 },
                 "5250": {
                     "variables": {
-                        "load": 3111064.168528735,
+                        "load": 3111160.246048904,
                         "single-rate-domestic_wholesale_savings": -16.059553901178404,
                         "single-rate-domestic_total_savings": 37.85758693644355,
                         "multi-rate-domestic_wholesale_savings": -24.116425572356725,
@@ -943,7 +943,7 @@
                 },
                 "5251": {
                     "variables": {
-                        "load": 3131035.0992061133,
+                        "load": 3131131.7934796093,
                         "single-rate-domestic_wholesale_savings": -16.079038267514235,
                         "single-rate-domestic_total_savings": 37.838102555428975,
                         "multi-rate-domestic_wholesale_savings": -24.159863523416636,
@@ -951,12 +951,12 @@
                         "single-rate-nondomestic_wholesale_savings": -59.36813416746023,
                         "single-rate-nondomestic_total_savings": 148.64387214617295,
                         "multi-rate-nondomestic_wholesale_savings": -97.42603120509027,
-                        "multi-rate-nondomestic_total_savings": 229.01484011711162
+                        "multi-rate-nondomestic_total_savings": 229.01484011711165
                     }
                 },
                 "5252": {
                     "variables": {
-                        "load": 1387372.9390227827,
+                        "load": 1387415.7846066493,
                         "single-rate-domestic_wholesale_savings": -16.10156435799219,
                         "single-rate-domestic_total_savings": 37.81557646301236,
                         "multi-rate-domestic_wholesale_savings": -24.212072635921093,
@@ -969,7 +969,7 @@
                 },
                 "5253": {
                     "variables": {
-                        "load": 911263.7931417838,
+                        "load": 911291.9352697228,
                         "single-rate-domestic_wholesale_savings": -16.098727172300062,
                         "single-rate-domestic_total_savings": 37.81841364324719,
                         "multi-rate-domestic_wholesale_savings": -24.20695158811975,
@@ -982,7 +982,7 @@
                 },
                 "5254": {
                     "variables": {
-                        "load": 2644964.86784643,
+                        "load": 2645046.5510495505,
                         "single-rate-domestic_wholesale_savings": -16.106253710429257,
                         "single-rate-domestic_total_savings": 37.81088712441963,
                         "multi-rate-domestic_wholesale_savings": -24.22053686436104,
@@ -995,7 +995,7 @@
                 },
                 "5256": {
                     "variables": {
-                        "load": 2846850.6116051404,
+                        "load": 2846938.52954482,
                         "single-rate-domestic_wholesale_savings": -16.133824249283663,
                         "single-rate-domestic_total_savings": 37.78331659350855,
                         "multi-rate-domestic_wholesale_savings": -24.226811368769347,
@@ -1008,20 +1008,20 @@
                 },
                 "5257": {
                     "variables": {
-                        "load": 2864019.3030384756,
+                        "load": 2864107.7511935765,
                         "single-rate-domestic_wholesale_savings": -16.37887696035091,
                         "single-rate-domestic_total_savings": 37.53826384868915,
                         "multi-rate-domestic_wholesale_savings": -24.61565768420481,
                         "multi-rate-domestic_total_savings": 49.428807704471666,
                         "single-rate-nondomestic_wholesale_savings": -60.507091998332434,
-                        "single-rate-nondomestic_total_savings": 147.50491419101888,
+                        "single-rate-nondomestic_total_savings": 147.5049141910189,
                         "multi-rate-nondomestic_wholesale_savings": -99.26618334539633,
                         "multi-rate-nondomestic_total_savings": 227.1746878561687
                     }
                 },
                 "5258": {
                     "variables": {
-                        "load": 991681.6096508084,
+                        "load": 991712.2352853507,
                         "single-rate-domestic_wholesale_savings": -17.004422128518446,
                         "single-rate-domestic_total_savings": 36.91271871108719,
                         "multi-rate-domestic_wholesale_savings": -25.59193538779703,
@@ -1034,9 +1034,9 @@
                 },
                 "5259": {
                     "variables": {
-                        "load": 1318354.9321317545,
+                        "load": 1318395.646262156,
                         "single-rate-domestic_wholesale_savings": -16.62547962063384,
-                        "single-rate-domestic_total_savings": 37.29166122692408,
+                        "single-rate-domestic_total_savings": 37.291661226924084,
                         "multi-rate-domestic_wholesale_savings": -25.000526254844257,
                         "multi-rate-domestic_total_savings": 49.043939125301705,
                         "single-rate-nondomestic_wholesale_savings": -61.4352209313304,
@@ -1047,7 +1047,7 @@
                 },
                 "5261": {
                     "variables": {
-                        "load": 5700242.907965022,
+                        "load": 5700418.945869301,
                         "single-rate-domestic_wholesale_savings": -16.331188983635183,
                         "single-rate-domestic_total_savings": 37.585951850630515,
                         "multi-rate-domestic_wholesale_savings": -24.54599726489409,
@@ -1060,7 +1060,7 @@
                 },
                 "5262": {
                     "variables": {
-                        "load": 2028199.2856590922,
+                        "load": 2028261.9215799607,
                         "single-rate-domestic_wholesale_savings": -16.547414801650085,
                         "single-rate-domestic_total_savings": 37.369726019383876,
                         "multi-rate-domestic_wholesale_savings": -24.89704543101525,
@@ -1073,7 +1073,7 @@
                 },
                 "5264": {
                     "variables": {
-                        "load": 2597452.7454137416,
+                        "load": 2597532.961321265,
                         "single-rate-domestic_wholesale_savings": -17.263209047145484,
                         "single-rate-domestic_total_savings": 36.65393180861084,
                         "multi-rate-domestic_wholesale_savings": -25.989656498881235,
@@ -1086,7 +1086,7 @@
                 },
                 "5265": {
                     "variables": {
-                        "load": 1152491.023102918,
+                        "load": 1152526.6149393977,
                         "single-rate-domestic_wholesale_savings": -16.820856265070795,
                         "single-rate-domestic_total_savings": 37.09628456184932,
                         "multi-rate-domestic_wholesale_savings": -25.323629329938314,
@@ -1099,33 +1099,33 @@
                 },
                 "5266": {
                     "variables": {
-                        "load": 1876597.3200021656,
+                        "load": 1876655.2740690962,
                         "single-rate-domestic_wholesale_savings": -17.419231662945705,
                         "single-rate-domestic_total_savings": 36.49790916344426,
                         "multi-rate-domestic_wholesale_savings": -26.22767252269513,
-                        "multi-rate-domestic_total_savings": 47.81679283644727,
+                        "multi-rate-domestic_total_savings": 47.81679283644728,
                         "single-rate-nondomestic_wholesale_savings": -64.42748300770907,
                         "single-rate-nondomestic_total_savings": 143.5845232880104,
                         "multi-rate-nondomestic_wholesale_savings": -105.63756410128809,
-                        "multi-rate-nondomestic_total_savings": 220.80330714075063
+                        "multi-rate-nondomestic_total_savings": 220.80330714075066
                     }
                 },
                 "5268": {
                     "variables": {
-                        "load": 3509119.47628564,
+                        "load": 3509227.8467618227,
                         "single-rate-domestic_wholesale_savings": -17.70237316816343,
                         "single-rate-domestic_total_savings": 36.21476768515068,
                         "multi-rate-domestic_wholesale_savings": -26.66415633281136,
-                        "multi-rate-domestic_total_savings": 47.380309055966016,
+                        "multi-rate-domestic_total_savings": 47.38030905596602,
                         "single-rate-nondomestic_wholesale_savings": -65.49331365183467,
-                        "single-rate-nondomestic_total_savings": 142.5186926173567,
+                        "single-rate-nondomestic_total_savings": 142.51869261735672,
                         "multi-rate-nondomestic_wholesale_savings": -107.3655223160667,
                         "multi-rate-nondomestic_total_savings": 219.07534903797034
                     }
                 },
                 "5269": {
                     "variables": {
-                        "load": 1297990.566095983,
+                        "load": 1298030.6513266577,
                         "single-rate-domestic_wholesale_savings": -17.54648848372413,
                         "single-rate-domestic_total_savings": 36.370652368841974,
                         "multi-rate-domestic_wholesale_savings": -26.42180559551666,
@@ -1138,7 +1138,7 @@
                 },
                 "5270": {
                     "variables": {
-                        "load": 1534831.4553980324,
+                        "load": 1534878.85487037,
                         "single-rate-domestic_wholesale_savings": -16.84839802911956,
                         "single-rate-domestic_total_savings": 37.068742822490194,
                         "multi-rate-domestic_wholesale_savings": -25.364396786204725,
@@ -1151,7 +1151,7 @@
                 },
                 "5272": {
                     "variables": {
-                        "load": 4259596.998497775,
+                        "load": 4259728.5456244415,
                         "single-rate-domestic_wholesale_savings": -16.710314084300954,
                         "single-rate-domestic_total_savings": 37.206826770340726,
                         "multi-rate-domestic_wholesale_savings": -25.161516587746494,
@@ -1164,11 +1164,11 @@
                 },
                 "5273": {
                     "variables": {
-                        "load": 3926593.8559737895,
+                        "load": 3926715.1191188847,
                         "single-rate-domestic_wholesale_savings": -16.195408827952384,
                         "single-rate-domestic_total_savings": 37.7217320222496,
                         "multi-rate-domestic_wholesale_savings": -24.40079430367593,
-                        "multi-rate-domestic_total_savings": 49.643671061069824,
+                        "multi-rate-domestic_total_savings": 49.64367106106983,
                         "single-rate-nondomestic_wholesale_savings": -59.78009523904925,
                         "single-rate-nondomestic_total_savings": 148.23191097803902,
                         "multi-rate-nondomestic_wholesale_savings": -98.18186915132056,
@@ -1177,20 +1177,20 @@
                 },
                 "5274": {
                     "variables": {
-                        "load": 993411.7008404616,
+                        "load": 993442.37990369,
                         "single-rate-domestic_wholesale_savings": -16.02390400150436,
-                        "single-rate-domestic_total_savings": 37.89323683116317,
+                        "single-rate-domestic_total_savings": 37.89323683116318,
                         "multi-rate-domestic_wholesale_savings": -24.071896643291794,
                         "multi-rate-domestic_total_savings": 49.97256872754528,
                         "single-rate-nondomestic_wholesale_savings": -59.15870088621305,
                         "single-rate-nondomestic_total_savings": 148.85330540763454,
                         "multi-rate-nondomestic_wholesale_savings": -97.08104719423098,
-                        "multi-rate-nondomestic_total_savings": 229.3598238768494
+                        "multi-rate-nondomestic_total_savings": 229.35982387684942
                     }
                 },
                 "5888": {
                     "variables": {
-                        "load": 2220475.4057271956,
+                        "load": 2220543.979618543,
                         "single-rate-domestic_wholesale_savings": -13.400540561999964,
                         "single-rate-domestic_total_savings": 40.51660027684699,
                         "multi-rate-domestic_wholesale_savings": -20.097714700110867,
@@ -1203,7 +1203,7 @@
                 },
                 "5889": {
                     "variables": {
-                        "load": 1394585.7562609934,
+                        "load": 1394628.8245929936,
                         "single-rate-domestic_wholesale_savings": -13.503521731554727,
                         "single-rate-domestic_total_savings": 40.4136191222748,
                         "multi-rate-domestic_wholesale_savings": -20.22846937528298,
@@ -1216,7 +1216,7 @@
                 },
                 "5896": {
                     "variables": {
-                        "load": 89298.86941910759,
+                        "load": 89301.62719392519,
                         "single-rate-domestic_wholesale_savings": 79.54623700937888,
                         "single-rate-domestic_total_savings": 133.4633778391465,
                         "multi-rate-domestic_wholesale_savings": 97.6241338797226,
@@ -1229,7 +1229,7 @@
                 },
                 "5898": {
                     "variables": {
-                        "load": 185428.9689128735,
+                        "load": 185434.69542789913,
                         "single-rate-domestic_wholesale_savings": 79.59936638674444,
                         "single-rate-domestic_total_savings": 133.51650727028277,
                         "multi-rate-domestic_wholesale_savings": 97.68850040245121,
@@ -1242,7 +1242,7 @@
                 },
                 "5901": {
                     "variables": {
-                        "load": 434173.31176386296,
+                        "load": 434186.72013307974,
                         "single-rate-domestic_wholesale_savings": 79.6592794613542,
                         "single-rate-domestic_total_savings": 133.57642029593507,
                         "multi-rate-domestic_wholesale_savings": 97.76108501685684,
@@ -1255,7 +1255,7 @@
                 },
                 "5902": {
                     "variables": {
-                        "load": 469618.1491428081,
+                        "load": 469632.6521378675,
                         "single-rate-domestic_wholesale_savings": 79.50638016800671,
                         "single-rate-domestic_total_savings": 133.42352097486713,
                         "multi-rate-domestic_wholesale_savings": 97.57584729529354,
@@ -1268,7 +1268,7 @@
                 },
                 "5904": {
                     "variables": {
-                        "load": 804269.7965735925,
+                        "load": 804294.6344583145,
                         "single-rate-domestic_wholesale_savings": 79.23036374781779,
                         "single-rate-domestic_total_savings": 133.14750456872872,
                         "multi-rate-domestic_wholesale_savings": 97.24145277710916,
@@ -1281,7 +1281,7 @@
                 },
                 "5910": {
                     "variables": {
-                        "load": 520660.34509277606,
+                        "load": 520676.42439915886,
                         "single-rate-domestic_wholesale_savings": 79.08040829185897,
                         "single-rate-domestic_total_savings": 132.9975491032653,
                         "multi-rate-domestic_wholesale_savings": 97.05977098496831,
@@ -1294,7 +1294,7 @@
                 },
                 "5912": {
                     "variables": {
-                        "load": 526849.5604346826,
+                        "load": 526865.8308798834,
                         "single-rate-domestic_wholesale_savings": 78.84147090716729,
                         "single-rate-domestic_total_savings": 132.75861169518814,
                         "multi-rate-domestic_wholesale_savings": 96.77030820001627,
@@ -1307,7 +1307,7 @@
                 },
                 "5913": {
                     "variables": {
-                        "load": 247889.23409513343,
+                        "load": 247896.88954109422,
                         "single-rate-domestic_wholesale_savings": 76.61542160936264,
                         "single-rate-domestic_total_savings": 130.5325625183835,
                         "multi-rate-domestic_wholesale_savings": 94.00677191012163,
@@ -1320,7 +1320,7 @@
                 },
                 "5914": {
                     "variables": {
-                        "load": 216099.92061057713,
+                        "load": 216106.59432211868,
                         "single-rate-domestic_wholesale_savings": 80.58313780950763,
                         "single-rate-domestic_total_savings": 134.5002787153658,
                         "multi-rate-domestic_wholesale_savings": 98.96758979560114,
@@ -1333,7 +1333,7 @@
                 },
                 "5917": {
                     "variables": {
-                        "load": 923486.1258488296,
+                        "load": 923514.6454339558,
                         "single-rate-domestic_wholesale_savings": 82.29666626629337,
                         "single-rate-domestic_total_savings": 136.2138070846197,
                         "multi-rate-domestic_wholesale_savings": 101.12937181028069,
@@ -1346,7 +1346,7 @@
                 },
                 "5919": {
                     "variables": {
-                        "load": 284890.23282312765,
+                        "load": 284899.0309536748,
                         "single-rate-domestic_wholesale_savings": 103.23890307002091,
                         "single-rate-domestic_total_savings": 157.15604391319667,
                         "multi-rate-domestic_wholesale_savings": 127.5297118912961,
@@ -1359,7 +1359,7 @@
                 },
                 "5920": {
                     "variables": {
-                        "load": 536121.6221738379,
+                        "load": 536138.1789650245,
                         "single-rate-domestic_wholesale_savings": 25.912051754474664,
                         "single-rate-domestic_total_savings": 79.82919257560698,
                         "multi-rate-domestic_wholesale_savings": 30.054861731290963,
@@ -1372,7 +1372,7 @@
                 },
                 "5922": {
                     "variables": {
-                        "load": 1483482.9401292775,
+                        "load": 1483528.7538305144,
                         "single-rate-domestic_wholesale_savings": -15.415768861308388,
                         "single-rate-domestic_total_savings": 38.501371971720125,
                         "multi-rate-domestic_wholesale_savings": -22.6212000953301,
@@ -1385,7 +1385,7 @@
                 },
                 "5924": {
                     "variables": {
-                        "load": 191850.218742149,
+                        "load": 191856.1435615758,
                         "single-rate-domestic_wholesale_savings": -17.246303381239237,
                         "single-rate-domestic_total_savings": 36.670837470788044,
                         "multi-rate-domestic_wholesale_savings": -25.397011272608687,
@@ -1398,7 +1398,7 @@
                 },
                 "5926": {
                     "variables": {
-                        "load": 1058505.7889695542,
+                        "load": 1058538.4783033691,
                         "single-rate-domestic_wholesale_savings": -16.03569069514251,
                         "single-rate-domestic_total_savings": 37.8814501079144,
                         "multi-rate-domestic_wholesale_savings": -23.829602957259333,
@@ -1411,7 +1411,7 @@
                 },
                 "5927": {
                     "variables": {
-                        "load": 1427655.3549547119,
+                        "load": 1427699.4445615474,
                         "single-rate-domestic_wholesale_savings": -16.167221476681142,
                         "single-rate-domestic_total_savings": 37.74991935339176,
                         "multi-rate-domestic_wholesale_savings": -23.999651493626086,
@@ -1424,11 +1424,11 @@
                 },
                 "5928": {
                     "variables": {
-                        "load": 651852.13481717,
+                        "load": 651872.2656589859,
                         "single-rate-domestic_wholesale_savings": -16.295817982861962,
                         "single-rate-domestic_total_savings": 37.62132284416582,
                         "multi-rate-domestic_wholesale_savings": -24.165906472743423,
-                        "multi-rate-domestic_total_savings": 49.87855887178894,
+                        "multi-rate-domestic_total_savings": 49.87855887178895,
                         "single-rate-nondomestic_wholesale_savings": -60.27767312554888,
                         "single-rate-nondomestic_total_savings": 147.73433320258195,
                         "multi-rate-nondomestic_wholesale_savings": -98.38190465046469,
@@ -1437,7 +1437,7 @@
                 },
                 "5929": {
                     "variables": {
-                        "load": 1454144.3744233244,
+                        "load": 1454189.2820763784,
                         "single-rate-domestic_wholesale_savings": -15.791990362831854,
                         "single-rate-domestic_total_savings": 38.125150440046845,
                         "multi-rate-domestic_wholesale_savings": -23.514918964745533,
@@ -1450,8 +1450,8 @@
                 },
                 "5934": {
                     "variables": {
-                        "load": 1895130.047198712,
-                        "single-rate-domestic_wholesale_savings": -15.782786343437827,
+                        "load": 1895188.5736029195,
+                        "single-rate-domestic_wholesale_savings": -15.782786343437829,
                         "single-rate-domestic_total_savings": 38.134354497606395,
                         "multi-rate-domestic_wholesale_savings": -23.50347424430923,
                         "multi-rate-domestic_total_savings": 50.540991146036994,
@@ -1463,7 +1463,7 @@
                 },
                 "5939": {
                     "variables": {
-                        "load": 725737.9753621549,
+                        "load": 725760.3879856353,
                         "single-rate-domestic_wholesale_savings": -15.799724554843287,
                         "single-rate-domestic_total_savings": 38.1174162697219,
                         "multi-rate-domestic_wholesale_savings": -23.524535997021054,
@@ -1476,7 +1476,7 @@
                 },
                 "5941": {
                     "variables": {
-                        "load": 2924240.8684223974,
+                        "load": 2924331.1763689513,
                         "single-rate-domestic_wholesale_savings": -15.925545268786287,
                         "single-rate-domestic_total_savings": 37.99159554250988,
                         "multi-rate-domestic_wholesale_savings": -23.687202317669023,
@@ -1489,7 +1489,7 @@
                 },
                 "5942": {
                     "variables": {
-                        "load": 1463700.6763455926,
+                        "load": 1463745.8791233208,
                         "single-rate-domestic_wholesale_savings": -15.749689855306281,
                         "single-rate-domestic_total_savings": 38.16745099116498,
                         "multi-rate-domestic_wholesale_savings": -23.462320501993002,
@@ -1502,7 +1502,7 @@
                 },
                 "5943": {
                     "variables": {
-                        "load": 653032.7507792967,
+                        "load": 653052.9180810639,
                         "single-rate-domestic_wholesale_savings": 64.65634297493342,
                         "single-rate-domestic_total_savings": 118.57348371792443,
                         "multi-rate-domestic_wholesale_savings": 79.05732954150245,
@@ -1515,9 +1515,9 @@
                 },
                 "5944": {
                     "variables": {
-                        "load": 481203.11092274624,
+                        "load": 481217.9716913358,
                         "single-rate-domestic_wholesale_savings": -12.185559656475604,
-                        "single-rate-domestic_total_savings": 41.731581157848815,
+                        "single-rate-domestic_total_savings": 41.73158115784882,
                         "multi-rate-domestic_wholesale_savings": -18.64392246761616,
                         "multi-rate-domestic_total_savings": 55.40054285783663,
                         "single-rate-nondomestic_wholesale_savings": -45.161437995980805,
@@ -1528,7 +1528,7 @@
                 },
                 "5946": {
                     "variables": {
-                        "load": 2066840.5318085225,
+                        "load": 2066904.3610650091,
                         "single-rate-domestic_wholesale_savings": -10.18530878114174,
                         "single-rate-domestic_total_savings": 43.73183206896593,
                         "multi-rate-domestic_wholesale_savings": -16.18106249399734,
@@ -1541,7 +1541,7 @@
                 },
                 "5949": {
                     "variables": {
-                        "load": 1398604.6282851729,
+                        "load": 1398647.8207300543,
                         "single-rate-domestic_wholesale_savings": -9.978584434430934,
                         "single-rate-domestic_total_savings": 43.93855640543302,
                         "multi-rate-domestic_wholesale_savings": -15.932506185933597,
@@ -1554,7 +1554,7 @@
                 },
                 "5950": {
                     "variables": {
-                        "load": 1809773.1437077562,
+                        "load": 1809829.034075414,
                         "single-rate-domestic_wholesale_savings": -10.166868171232053,
                         "single-rate-domestic_total_savings": 43.75027266201061,
                         "multi-rate-domestic_wholesale_savings": -16.17902024142935,
@@ -1567,7 +1567,7 @@
                 },
                 "5951": {
                     "variables": {
-                        "load": 1145965.9650943596,
+                        "load": 1146001.3554190944,
                         "single-rate-domestic_wholesale_savings": -10.361937587570074,
                         "single-rate-domestic_total_savings": 43.55520322899052,
                         "multi-rate-domestic_wholesale_savings": -16.434418635841638,
@@ -1580,9 +1580,9 @@
                 },
                 "5952": {
                     "variables": {
-                        "load": 877365.4272805967,
-                        "single-rate-domestic_wholesale_savings": -18.475331614312253,
-                        "single-rate-domestic_total_savings": 35.441809221334445,
+                        "load": 877392.5225428708,
+                        "single-rate-domestic_wholesale_savings": -18.475331614312257,
+                        "single-rate-domestic_total_savings": 35.44180922133445,
                         "multi-rate-domestic_wholesale_savings": -26.99110541693303,
                         "multi-rate-domestic_total_savings": 47.05335996410774,
                         "single-rate-nondomestic_wholesale_savings": -68.54839228446048,
@@ -1593,7 +1593,7 @@
                 },
                 "5953": {
                     "variables": {
-                        "load": 817401.2997663829,
+                        "load": 817426.5431838694,
                         "single-rate-domestic_wholesale_savings": -10.56233022673347,
                         "single-rate-domestic_total_savings": 43.35481059087739,
                         "multi-rate-domestic_wholesale_savings": -16.696786461950328,
@@ -1606,7 +1606,7 @@
                 },
                 "5954": {
                     "variables": {
-                        "load": 755774.9119396779,
+                        "load": 755798.2521797842,
                         "single-rate-domestic_wholesale_savings": -10.991472179301052,
                         "single-rate-domestic_total_savings": 42.92566867670544,
                         "multi-rate-domestic_wholesale_savings": -17.20103189753197,
@@ -1619,11 +1619,11 @@
                 },
                 "5955": {
                     "variables": {
-                        "load": 1334527.7058569074,
+                        "load": 1334568.9194461906,
                         "single-rate-domestic_wholesale_savings": -11.00342525937672,
                         "single-rate-domestic_total_savings": 42.91371554598438,
                         "multi-rate-domestic_wholesale_savings": -17.236434835496624,
-                        "multi-rate-domestic_total_savings": 56.80803054684477,
+                        "multi-rate-domestic_total_savings": 56.808030546844776,
                         "single-rate-nondomestic_wholesale_savings": -40.30821686628357,
                         "single-rate-nondomestic_total_savings": 167.70378933837003,
                         "multi-rate-nondomestic_wholesale_savings": -67.8044780629928,
@@ -1632,11 +1632,11 @@
                 },
                 "5957": {
                     "variables": {
-                        "load": 3783714.5749048167,
+                        "load": 3783831.425575112,
                         "single-rate-domestic_wholesale_savings": -11.351219071310295,
                         "single-rate-domestic_total_savings": 42.565921753139804,
                         "multi-rate-domestic_wholesale_savings": -17.685089743582868,
-                        "multi-rate-domestic_total_savings": 56.359375621109756,
+                        "multi-rate-domestic_total_savings": 56.35937562110976,
                         "single-rate-nondomestic_wholesale_savings": -41.60318002125072,
                         "single-rate-nondomestic_total_savings": 166.40882619445279,
                         "multi-rate-nondomestic_wholesale_savings": -69.78926766583558,
@@ -1645,7 +1645,7 @@
                 },
                 "5959": {
                     "variables": {
-                        "load": 1059258.5087301545,
+                        "load": 1059291.2213115513,
                         "single-rate-domestic_wholesale_savings": -11.209794242452594,
                         "single-rate-domestic_total_savings": 42.70734658234452,
                         "multi-rate-domestic_wholesale_savings": -17.49557333321851,
@@ -1658,7 +1658,7 @@
                 },
                 "5960": {
                     "variables": {
-                        "load": 461873.2034558785,
+                        "load": 461887.4672679979,
                         "single-rate-domestic_wholesale_savings": -11.292865630388022,
                         "single-rate-domestic_total_savings": 42.62427522534685,
                         "multi-rate-domestic_wholesale_savings": -17.61013103205604,
@@ -1671,7 +1671,7 @@
                 },
                 "5961": {
                     "variables": {
-                        "load": 867672.3442052051,
+                        "load": 867699.1401204314,
                         "single-rate-domestic_wholesale_savings": -11.324902217745267,
                         "single-rate-domestic_total_savings": 42.592238640597344,
                         "multi-rate-domestic_wholesale_savings": -17.65431036245436,
@@ -1684,11 +1684,11 @@
                 },
                 "5962": {
                     "variables": {
-                        "load": 1652167.330561899,
+                        "load": 1652218.3536647395,
                         "single-rate-domestic_wholesale_savings": -11.334975959793786,
                         "single-rate-domestic_total_savings": 42.582164860084866,
                         "multi-rate-domestic_wholesale_savings": -17.666092323940077,
-                        "multi-rate-domestic_total_savings": 56.378373037926615,
+                        "multi-rate-domestic_total_savings": 56.37837303792662,
                         "single-rate-nondomestic_wholesale_savings": -41.54642125324544,
                         "single-rate-nondomestic_total_savings": 166.4655849262201,
                         "multi-rate-nondomestic_wholesale_savings": -69.70289526440831,
@@ -1697,9 +1697,9 @@
                 },
                 "5963": {
                     "variables": {
-                        "load": 949002.1676143786,
+                        "load": 949031.4752004592,
                         "single-rate-domestic_wholesale_savings": -11.548321912278189,
-                        "single-rate-domestic_total_savings": 42.36881891576704,
+                        "single-rate-domestic_total_savings": 42.368818915767044,
                         "multi-rate-domestic_wholesale_savings": -17.94311195307285,
                         "multi-rate-domestic_total_savings": 56.10135341894407,
                         "single-rate-nondomestic_wholesale_savings": -42.356263804841205,
@@ -1710,20 +1710,20 @@
                 },
                 "5966": {
                     "variables": {
-                        "load": 4714831.299916141,
+                        "load": 4714976.905818878,
                         "single-rate-domestic_wholesale_savings": -11.837868355243101,
                         "single-rate-domestic_total_savings": 42.079272494930414,
                         "multi-rate-domestic_wholesale_savings": -18.317391674173244,
                         "multi-rate-domestic_total_savings": 55.72707366731129,
                         "single-rate-nondomestic_wholesale_savings": -43.45141964212866,
-                        "single-rate-nondomestic_total_savings": 164.56058658074295,
+                        "single-rate-nondomestic_total_savings": 164.56058658074298,
                         "multi-rate-nondomestic_wholesale_savings": -72.60379807811809,
                         "multi-rate-nondomestic_total_savings": 253.83707310076585
                     }
                 },
                 "5967": {
                     "variables": {
-                        "load": 1405504.3871924807,
+                        "load": 1405547.7927181844,
                         "single-rate-domestic_wholesale_savings": -11.740114913755987,
                         "single-rate-domestic_total_savings": 42.17702589452715,
                         "multi-rate-domestic_wholesale_savings": -18.19103153784651,
@@ -1736,7 +1736,7 @@
                 },
                 "5968": {
                     "variables": {
-                        "load": 357336.4398511122,
+                        "load": 357347.47530387994,
                         "single-rate-domestic_wholesale_savings": -17.356965783198724,
                         "single-rate-domestic_total_savings": 36.56017503959737,
                         "multi-rate-domestic_wholesale_savings": -25.54054441566949,
@@ -1749,7 +1749,7 @@
                 },
                 "5969": {
                     "variables": {
-                        "load": 1523276.96875275,
+                        "load": 1523324.0113948938,
                         "single-rate-domestic_wholesale_savings": -15.403602811017223,
                         "single-rate-domestic_total_savings": 38.51353801892692,
                         "multi-rate-domestic_wholesale_savings": -23.004406680148563,
@@ -1762,7 +1762,7 @@
                 },
                 "5971": {
                     "variables": {
-                        "load": 3443986.623578886,
+                        "load": 3444092.982590218,
                         "single-rate-domestic_wholesale_savings": -16.703332613786287,
                         "single-rate-domestic_total_savings": 37.213808224388806,
                         "multi-rate-domestic_wholesale_savings": -24.692758541546336,
@@ -1775,7 +1775,7 @@
                 },
                 "5973": {
                     "variables": {
-                        "load": 1451989.8640738335,
+                        "load": 1452034.7051914856,
                         "single-rate-domestic_wholesale_savings": -16.21336837078622,
                         "single-rate-domestic_total_savings": 37.703772441460025,
                         "multi-rate-domestic_wholesale_savings": -24.059312095136573,
@@ -1788,7 +1788,7 @@
                 },
                 "5974": {
                     "variables": {
-                        "load": 1604767.0942484073,
+                        "load": 1604816.6535120348,
                         "single-rate-domestic_wholesale_savings": -16.145110463274822,
                         "single-rate-domestic_total_savings": 37.77203034339512,
                         "multi-rate-domestic_wholesale_savings": -23.971065450286538,
@@ -1801,7 +1801,7 @@
                 },
                 "5976": {
                     "variables": {
-                        "load": 2673752.9368198467,
+                        "load": 2673835.5090684555,
                         "single-rate-domestic_wholesale_savings": -15.044314388197801,
                         "single-rate-domestic_total_savings": 38.87282645465774,
                         "multi-rate-domestic_wholesale_savings": -22.540335185675982,
@@ -1814,20 +1814,20 @@
                 },
                 "5978": {
                     "variables": {
-                        "load": 2767343.8688337645,
+                        "load": 2767429.3314046785,
                         "single-rate-domestic_wholesale_savings": -15.282552081945457,
-                        "single-rate-domestic_total_savings": 38.634588747892415,
+                        "single-rate-domestic_total_savings": 38.63458874789242,
                         "multi-rate-domestic_wholesale_savings": -22.849161658857117,
-                        "multi-rate-domestic_total_savings": 51.195303700006455,
+                        "multi-rate-domestic_total_savings": 51.19530370000646,
                         "single-rate-nondomestic_wholesale_savings": -56.44269317108886,
                         "single-rate-nondomestic_total_savings": 151.5693131337108,
                         "multi-rate-nondomestic_wholesale_savings": -92.5377392313843,
-                        "multi-rate-nondomestic_total_savings": 233.9031320906988
+                        "multi-rate-nondomestic_total_savings": 233.90313209069882
                     }
                 },
                 "5980": {
                     "variables": {
-                        "load": 3159396.6249968885,
+                        "load": 3159494.195146897,
                         "single-rate-domestic_wholesale_savings": -15.439749987153741,
                         "single-rate-domestic_total_savings": 38.477390841458195,
                         "multi-rate-domestic_wholesale_savings": -23.053459349054666,
@@ -1840,7 +1840,7 @@
                 },
                 "5981": {
                     "variables": {
-                        "load": 1454007.6017734352,
+                        "load": 1454052.5052041155,
                         "single-rate-domestic_wholesale_savings": -15.444961427667526,
                         "single-rate-domestic_total_savings": 38.47217940806027,
                         "multi-rate-domestic_wholesale_savings": -23.06015994697365,
@@ -1853,7 +1853,7 @@
                 },
                 "5982": {
                     "variables": {
-                        "load": 1298787.2317234804,
+                        "load": 1298827.3415563682,
                         "single-rate-domestic_wholesale_savings": -15.175698431806595,
                         "single-rate-domestic_total_savings": 38.7414424166161,
                         "multi-rate-domestic_wholesale_savings": -22.7106477368808,
@@ -1866,7 +1866,7 @@
                 },
                 "5983": {
                     "variables": {
-                        "load": 1583704.0164994807,
+                        "load": 1583752.9252836183,
                         "single-rate-domestic_wholesale_savings": -15.3655599788486,
                         "single-rate-domestic_total_savings": 38.55158083348643,
                         "multi-rate-domestic_wholesale_savings": -22.957520759029784,
@@ -1879,7 +1879,7 @@
                 },
                 "5984": {
                     "variables": {
-                        "load": 1421680.4799806653,
+                        "load": 1421724.385067131,
                         "single-rate-domestic_wholesale_savings": -15.198829198979821,
                         "single-rate-domestic_total_savings": 38.71831162905275,
                         "multi-rate-domestic_wholesale_savings": -22.741913284825195,
@@ -1892,7 +1892,7 @@
                 },
                 "5986": {
                     "variables": {
-                        "load": 3742746.5341767,
+                        "load": 3742862.119651784,
                         "single-rate-domestic_wholesale_savings": -14.880246975366095,
                         "single-rate-domestic_total_savings": 39.036893869064926,
                         "multi-rate-domestic_wholesale_savings": -22.32419723355615,
@@ -1905,7 +1905,7 @@
                 },
                 "5987": {
                     "variables": {
-                        "load": 1310399.5269392629,
+                        "load": 1310439.995387137,
                         "single-rate-domestic_wholesale_savings": -14.37936467908613,
                         "single-rate-domestic_total_savings": 39.537776182800826,
                         "multi-rate-domestic_wholesale_savings": -21.671184419078013,
@@ -1918,7 +1918,7 @@
                 },
                 "5988": {
                     "variables": {
-                        "load": 1873000.395755923,
+                        "load": 1873058.2387431075,
                         "single-rate-domestic_wholesale_savings": -14.728996768982594,
                         "single-rate-domestic_total_savings": 39.18814407793011,
                         "multi-rate-domestic_wholesale_savings": -22.127414270411442,
@@ -1931,11 +1931,11 @@
                 },
                 "5989": {
                     "variables": {
-                        "load": 1250240.8931555657,
+                        "load": 1250279.5037552593,
                         "single-rate-domestic_wholesale_savings": -14.583970108660202,
                         "single-rate-domestic_total_savings": 39.333170755756605,
                         "multi-rate-domestic_wholesale_savings": -21.938354590240497,
-                        "multi-rate-domestic_total_savings": 52.10611072915229,
+                        "multi-rate-domestic_total_savings": 52.1061107291523,
                         "single-rate-nondomestic_wholesale_savings": -53.80830853283128,
                         "single-rate-nondomestic_total_savings": 154.20369776693795,
                         "multi-rate-nondomestic_wholesale_savings": -88.5153893514419,
@@ -1944,7 +1944,7 @@
                 },
                 "5990": {
                     "variables": {
-                        "load": 1733978.317616083,
+                        "load": 1734031.8672492125,
                         "single-rate-domestic_wholesale_savings": -14.767338388687762,
                         "single-rate-domestic_total_savings": 39.14980244048741,
                         "multi-rate-domestic_wholesale_savings": -22.178885983954448,
@@ -1957,24 +1957,24 @@
                 },
                 "5992": {
                     "variables": {
-                        "load": 3436882.1369797625,
+                        "load": 3436988.276586145,
                         "single-rate-domestic_wholesale_savings": -14.904344476040343,
                         "single-rate-domestic_total_savings": 39.012796358289066,
                         "multi-rate-domestic_wholesale_savings": -22.36224235197178,
                         "multi-rate-domestic_total_savings": 51.68222300598818,
                         "single-rate-nondomestic_wholesale_savings": -55.011935169724275,
-                        "single-rate-nondomestic_total_savings": 153.0000710848936,
+                        "single-rate-nondomestic_total_savings": 153.00007108489362,
                         "multi-rate-nondomestic_wholesale_savings": -90.36581758577319,
                         "multi-rate-nondomestic_total_savings": 236.0750535625829
                     }
                 },
                 "5993": {
                     "variables": {
-                        "load": 2127001.7721513943,
+                        "load": 2127067.459342848,
                         "single-rate-domestic_wholesale_savings": -14.496950374830389,
                         "single-rate-domestic_total_savings": 39.4201904317358,
                         "multi-rate-domestic_wholesale_savings": -21.844326863989718,
-                        "multi-rate-domestic_total_savings": 52.20013850529877,
+                        "multi-rate-domestic_total_savings": 52.200138505298774,
                         "single-rate-nondomestic_wholesale_savings": -53.475006918585855,
                         "single-rate-nondomestic_total_savings": 154.5369993708066,
                         "multi-rate-nondomestic_wholesale_savings": -88.04355303752831,
@@ -1983,7 +1983,7 @@
                 },
                 "5995": {
                     "variables": {
-                        "load": 4663404.82554764,
+                        "load": 4663548.843279428,
                         "single-rate-domestic_wholesale_savings": -14.396336317010388,
                         "single-rate-domestic_total_savings": 39.5208045230853,
                         "multi-rate-domestic_wholesale_savings": -21.720267768182683,
@@ -1996,7 +1996,7 @@
                 },
                 "5996": {
                     "variables": {
-                        "load": 2161872.8938136837,
+                        "load": 2161939.6579104066,
                         "single-rate-domestic_wholesale_savings": -14.314073076103886,
                         "single-rate-domestic_total_savings": 39.60306775691017,
                         "multi-rate-domestic_wholesale_savings": -21.618835603996768,
@@ -2009,7 +2009,7 @@
                 },
                 "5997": {
                     "variables": {
-                        "load": 2026568.4584846343,
+                        "load": 2026631.0440388864,
                         "single-rate-domestic_wholesale_savings": -14.3406748352215,
                         "single-rate-domestic_total_savings": 39.57646601445303,
                         "multi-rate-domestic_wholesale_savings": -21.651636080703476,
@@ -2022,8 +2022,8 @@
                 },
                 "5998": {
                     "variables": {
-                        "load": 373189.92458590324,
-                        "single-rate-domestic_wholesale_savings": -14.316737524948714,
+                        "load": 373201.4496340274,
+                        "single-rate-domestic_wholesale_savings": -14.316737524948715,
                         "single-rate-domestic_total_savings": 39.60040331632244,
                         "multi-rate-domestic_wholesale_savings": -21.622120908867164,
                         "multi-rate-domestic_total_savings": 52.422344452783065,
@@ -2035,7 +2035,7 @@
                 },
                 "5999": {
                     "variables": {
-                        "load": 1859503.7996133687,
+                        "load": 1859561.225789259,
                         "single-rate-domestic_wholesale_savings": -14.29198931268421,
                         "single-rate-domestic_total_savings": 39.62515151990358,
                         "multi-rate-domestic_wholesale_savings": -21.591605913235863,
@@ -2048,7 +2048,7 @@
                 },
                 "6001": {
                     "variables": {
-                        "load": 2328752.194177607,
+                        "load": 2328824.1119322996,
                         "single-rate-domestic_wholesale_savings": -16.003270256133895,
                         "single-rate-domestic_total_savings": 37.913870573004466,
                         "multi-rate-domestic_wholesale_savings": -23.78768844768982,
@@ -2061,7 +2061,7 @@
                 },
                 "6003": {
                     "variables": {
-                        "load": 1780594.6629520613,
+                        "load": 1780649.6522146189,
                         "single-rate-domestic_wholesale_savings": -15.642601998336739,
                         "single-rate-domestic_total_savings": 38.2745388331244,
                         "multi-rate-domestic_wholesale_savings": -23.329162398309407,
@@ -2074,9 +2074,9 @@
                 },
                 "6004": {
                     "variables": {
-                        "load": 1204059.4697046669,
+                        "load": 1204096.654104269,
                         "single-rate-domestic_wholesale_savings": -15.567204052291109,
-                        "single-rate-domestic_total_savings": 38.34993677532774,
+                        "single-rate-domestic_total_savings": 38.34993677532775,
                         "multi-rate-domestic_wholesale_savings": -23.223691128006664,
                         "multi-rate-domestic_total_savings": 50.82077425310984,
                         "single-rate-nondomestic_wholesale_savings": -57.487316107193074,
@@ -2087,7 +2087,7 @@
                 },
                 "6006": {
                     "variables": {
-                        "load": 3739648.534019543,
+                        "load": 3739764.0238176775,
                         "single-rate-domestic_wholesale_savings": -15.305131012302677,
                         "single-rate-domestic_total_savings": 38.61200980961475,
                         "multi-rate-domestic_wholesale_savings": -22.87751818003028,
@@ -2100,11 +2100,11 @@
                 },
                 "6007": {
                     "variables": {
-                        "load": 1633654.4002585425,
+                        "load": 1633704.8516353876,
                         "single-rate-domestic_wholesale_savings": -14.248824355701233,
                         "single-rate-domestic_total_savings": 39.66831647627018,
                         "multi-rate-domestic_wholesale_savings": -21.538382678644115,
-                        "multi-rate-domestic_total_savings": 52.50608267393158,
+                        "multi-rate-domestic_total_savings": 52.50608267393159,
                         "single-rate-nondomestic_wholesale_savings": -52.537534370503806,
                         "single-rate-nondomestic_total_savings": 155.4744718826292,
                         "multi-rate-nondomestic_wholesale_savings": -86.64492368105316,
@@ -2113,7 +2113,7 @@
                 },
                 "6009": {
                     "variables": {
-                        "load": 4162357.737155232,
+                        "load": 4162486.281287496,
                         "single-rate-domestic_wholesale_savings": -14.213324044333596,
                         "single-rate-domestic_total_savings": 39.70381679347008,
                         "multi-rate-domestic_wholesale_savings": -21.494610120417548,
@@ -2126,9 +2126,9 @@
                 },
                 "6010": {
                     "variables": {
-                        "load": 2381712.677396449,
+                        "load": 2381786.2307002163,
                         "single-rate-domestic_wholesale_savings": -14.143580713720516,
-                        "single-rate-domestic_total_savings": 39.773560099407995,
+                        "single-rate-domestic_total_savings": 39.773560099408,
                         "multi-rate-domestic_wholesale_savings": -21.42324201111645,
                         "multi-rate-domestic_total_savings": 52.621223334556696,
                         "single-rate-nondomestic_wholesale_savings": -52.14050408128967,
@@ -2139,7 +2139,7 @@
                 },
                 "6012": {
                     "variables": {
-                        "load": 1639715.3496797816,
+                        "load": 1639765.988233432,
                         "single-rate-domestic_wholesale_savings": -15.529441000245493,
                         "single-rate-domestic_total_savings": 38.38769981657704,
                         "multi-rate-domestic_wholesale_savings": -23.164391011025785,
@@ -2152,7 +2152,7 @@
                 },
                 "6013": {
                     "variables": {
-                        "load": 1574040.130553026,
+                        "load": 1574088.740891945,
                         "single-rate-domestic_wholesale_savings": -15.509147856243349,
                         "single-rate-domestic_total_savings": 38.407992965780416,
                         "multi-rate-domestic_wholesale_savings": -23.138518570255286,
@@ -2165,7 +2165,7 @@
                 },
                 "6014": {
                     "variables": {
-                        "load": 1953641.6868995782,
+                        "load": 1953702.0202910416,
                         "single-rate-domestic_wholesale_savings": -15.451377274147518,
                         "single-rate-domestic_total_savings": 38.465763564428606,
                         "multi-rate-domestic_wholesale_savings": -23.031484480144826,
@@ -2178,7 +2178,7 @@
                 },
                 "6016": {
                     "variables": {
-                        "load": 2621822.884057518,
+                        "load": 2621903.8525739014,
                         "single-rate-domestic_wholesale_savings": -15.480718487694134,
                         "single-rate-domestic_total_savings": 38.436422329485985,
                         "multi-rate-domestic_wholesale_savings": -23.09149044614046,
@@ -2191,7 +2191,7 @@
                 },
                 "6018": {
                     "variables": {
-                        "load": 3764153.947504452,
+                        "load": 3764270.1940923138,
                         "single-rate-domestic_wholesale_savings": -15.529459036545049,
                         "single-rate-domestic_total_savings": 38.387681787698156,
                         "multi-rate-domestic_wholesale_savings": -23.17211751163763,
@@ -2204,7 +2204,7 @@
                 },
                 "6019": {
                     "variables": {
-                        "load": 734093.9556752053,
+                        "load": 734116.6263521267,
                         "single-rate-domestic_wholesale_savings": -14.37936467908613,
                         "single-rate-domestic_total_savings": 39.537776182800826,
                         "multi-rate-domestic_wholesale_savings": -21.671184419078013,
@@ -2217,9 +2217,9 @@
                 },
                 "6020": {
                     "variables": {
-                        "load": 1538726.9093421223,
+                        "load": 1538774.4291162621,
                         "single-rate-domestic_wholesale_savings": -12.984774583187923,
-                        "single-rate-domestic_total_savings": 40.93236623602232,
+                        "single-rate-domestic_total_savings": 40.932366236022325,
                         "multi-rate-domestic_wholesale_savings": -19.804398373895545,
                         "multi-rate-domestic_total_savings": 54.24006699221561,
                         "single-rate-nondomestic_wholesale_savings": -47.79983520154439,
@@ -2230,7 +2230,7 @@
                 },
                 "6021": {
                     "variables": {
-                        "load": 1897885.9990036457,
+                        "load": 1897944.610519435,
                         "single-rate-domestic_wholesale_savings": -13.27268434703631,
                         "single-rate-domestic_total_savings": 40.64445648141893,
                         "multi-rate-domestic_wholesale_savings": -20.177920812881833,
@@ -2243,7 +2243,7 @@
                 },
                 "6023": {
                     "variables": {
-                        "load": 684576.793516632,
+                        "load": 684597.9349773558,
                         "single-rate-domestic_wholesale_savings": -14.470198808056258,
                         "single-rate-domestic_total_savings": 39.446942019212116,
                         "multi-rate-domestic_wholesale_savings": -21.79004012332572,
@@ -2256,7 +2256,7 @@
                 },
                 "6025": {
                     "variables": {
-                        "load": 634138.5055760123,
+                        "load": 634158.0893751729,
                         "single-rate-domestic_wholesale_savings": -14.37936467908613,
                         "single-rate-domestic_total_savings": 39.537776182800826,
                         "multi-rate-domestic_wholesale_savings": -21.671184419078013,
@@ -2269,7 +2269,7 @@
                 },
                 "6026": {
                     "variables": {
-                        "load": 466143.0069294984,
+                        "load": 466157.4026040075,
                         "single-rate-domestic_wholesale_savings": -14.29260244919609,
                         "single-rate-domestic_total_savings": 39.624538369689496,
                         "multi-rate-domestic_wholesale_savings": -21.558196734899344,
@@ -2282,7 +2282,7 @@
                 },
                 "6028": {
                     "variables": {
-                        "load": 1539889.8468493123,
+                        "load": 1539937.402538155,
                         "single-rate-domestic_wholesale_savings": -14.18179573562776,
                         "single-rate-domestic_total_savings": 39.735345117351294,
                         "multi-rate-domestic_wholesale_savings": -21.42741232290367,
@@ -2295,20 +2295,20 @@
                 },
                 "6029": {
                     "variables": {
-                        "load": 1318810.7999767521,
+                        "load": 1318851.528185506,
                         "single-rate-domestic_wholesale_savings": -14.181039366556098,
                         "single-rate-domestic_total_savings": 39.73610146560838,
                         "multi-rate-domestic_wholesale_savings": -21.449252188714915,
                         "multi-rate-domestic_total_savings": 52.595213167758935,
                         "single-rate-nondomestic_wholesale_savings": -52.28119970746179,
-                        "single-rate-nondomestic_total_savings": 155.73080650378517,
+                        "single-rate-nondomestic_total_savings": 155.7308065037852,
                         "multi-rate-nondomestic_wholesale_savings": -86.252811451693,
                         "multi-rate-nondomestic_total_savings": 240.18805963281875
                     }
                 },
                 "6030": {
                     "variables": {
-                        "load": 566717.6811253864,
+                        "load": 566735.1828000281,
                         "single-rate-domestic_wholesale_savings": -14.188119607315024,
                         "single-rate-domestic_total_savings": 39.729021209390524,
                         "multi-rate-domestic_wholesale_savings": -21.459199488595132,
@@ -2321,7 +2321,7 @@
                 },
                 "6031": {
                     "variables": {
-                        "load": 2310470.594582209,
+                        "load": 2310541.9477538494,
                         "single-rate-domestic_wholesale_savings": -14.182364662072688,
                         "single-rate-domestic_total_savings": 39.73477615681945,
                         "multi-rate-domestic_wholesale_savings": -21.458146260923858,
@@ -2334,9 +2334,9 @@
                 },
                 "6032": {
                     "variables": {
-                        "load": 550296.1792803586,
+                        "load": 550313.1738173607,
                         "single-rate-domestic_wholesale_savings": -13.902318155084181,
-                        "single-rate-domestic_total_savings": 40.01482266565531,
+                        "single-rate-domestic_total_savings": 40.014822665655316,
                         "multi-rate-domestic_wholesale_savings": -21.037732547161518,
                         "multi-rate-domestic_total_savings": 53.00673285711618,
                         "single-rate-nondomestic_wholesale_savings": -51.238717512806716,
@@ -2347,7 +2347,7 @@
                 },
                 "6033": {
                     "variables": {
-                        "load": 1339070.3582442938,
+                        "load": 1339111.7121227905,
                         "single-rate-domestic_wholesale_savings": -13.996391018768493,
                         "single-rate-domestic_total_savings": 39.92074981799884,
                         "multi-rate-domestic_wholesale_savings": -21.1664982109774,
@@ -2360,7 +2360,7 @@
                 },
                 "6035": {
                     "variables": {
-                        "load": 4485835.815654538,
+                        "load": 4485974.349598355,
                         "single-rate-domestic_wholesale_savings": -13.42485784093681,
                         "single-rate-domestic_total_savings": 40.49228297665191,
                         "multi-rate-domestic_wholesale_savings": -20.32216854693078,
@@ -2373,7 +2373,7 @@
                 },
                 "6036": {
                     "variables": {
-                        "load": 2261746.854551233,
+                        "load": 2261816.7030107817,
                         "single-rate-domestic_wholesale_savings": -13.424857840936813,
                         "single-rate-domestic_total_savings": 40.49228297665191,
                         "multi-rate-domestic_wholesale_savings": -20.322168546930783,
@@ -2386,7 +2386,7 @@
                 },
                 "6037": {
                     "variables": {
-                        "load": 1815929.5781037349,
+                        "load": 1815985.6585989543,
                         "single-rate-domestic_wholesale_savings": -13.424857840936813,
                         "single-rate-domestic_total_savings": 40.49228297665191,
                         "multi-rate-domestic_wholesale_savings": -20.322168546930783,
@@ -2399,7 +2399,7 @@
                 },
                 "6038": {
                     "variables": {
-                        "load": 1432229.7207849913,
+                        "load": 1432273.951658337,
                         "single-rate-domestic_wholesale_savings": -14.001059563499657,
                         "single-rate-domestic_total_savings": 39.91608125983425,
                         "multi-rate-domestic_wholesale_savings": -21.19293060249332,
@@ -2412,20 +2412,20 @@
                 },
                 "6039": {
                     "variables": {
-                        "load": 1304191.758596012,
-                        "single-rate-domestic_wholesale_savings": -13.749625778152923,
-                        "single-rate-domestic_total_savings": 40.16751504224147,
+                        "load": 1304232.0353352928,
+                        "single-rate-domestic_wholesale_savings": -13.749625778152925,
+                        "single-rate-domestic_total_savings": 40.167515042241476,
                         "multi-rate-domestic_wholesale_savings": -20.77986438812216,
                         "multi-rate-domestic_total_savings": 53.26460099480353,
                         "single-rate-nondomestic_wholesale_savings": -50.705577852237305,
                         "single-rate-nondomestic_total_savings": 157.30642841451092,
                         "multi-rate-nondomestic_wholesale_savings": -83.62182067510281,
-                        "multi-rate-nondomestic_total_savings": 242.81905040303664
+                        "multi-rate-nondomestic_total_savings": 242.81905040303667
                     }
                 },
                 "6040": {
                     "variables": {
-                        "load": 527409.0465903477,
+                        "load": 527425.3343136976,
                         "single-rate-domestic_wholesale_savings": -13.424857840936813,
                         "single-rate-domestic_total_savings": 40.49228297665191,
                         "multi-rate-domestic_wholesale_savings": -20.322168546930783,
@@ -2438,7 +2438,7 @@
                 },
                 "6041": {
                     "variables": {
-                        "load": 1150281.4206294704,
+                        "load": 1150316.944224996,
                         "single-rate-domestic_wholesale_savings": -13.677491544960757,
                         "single-rate-domestic_total_savings": 40.239649282283295,
                         "multi-rate-domestic_wholesale_savings": -20.66135914379626,
@@ -2451,12 +2451,12 @@
                 },
                 "6042": {
                     "variables": {
-                        "load": 1350378.891394158,
+                        "load": 1350420.5945071038,
                         "single-rate-domestic_wholesale_savings": -13.851716866591815,
                         "single-rate-domestic_total_savings": 40.06542396840606,
                         "multi-rate-domestic_wholesale_savings": -20.94758400493023,
                         "multi-rate-domestic_total_savings": 53.09688135472857,
-                        "single-rate-nondomestic_wholesale_savings": -51.05376931765823,
+                        "single-rate-nondomestic_wholesale_savings": -51.05376931765824,
                         "single-rate-nondomestic_total_savings": 156.9582368933852,
                         "multi-rate-nondomestic_wholesale_savings": -84.24408754815539,
                         "multi-rate-nondomestic_total_savings": 242.19678356259357
@@ -2464,12 +2464,12 @@
                 },
                 "6043": {
                     "variables": {
-                        "load": 820178.7329774562,
+                        "load": 820204.0621687468,
                         "single-rate-domestic_wholesale_savings": -13.830184023259541,
                         "single-rate-domestic_total_savings": 40.086956782242716,
                         "multi-rate-domestic_wholesale_savings": -20.91220895605754,
                         "multi-rate-domestic_total_savings": 53.13225640374443,
-                        "single-rate-nondomestic_wholesale_savings": -50.98032958669641,
+                        "single-rate-nondomestic_wholesale_savings": -50.98032958669642,
                         "single-rate-nondomestic_total_savings": 157.03167672642377,
                         "multi-rate-nondomestic_wholesale_savings": -84.11284038768015,
                         "multi-rate-nondomestic_total_savings": 242.32803087608912
@@ -2477,7 +2477,7 @@
                 },
                 "6045": {
                     "variables": {
-                        "load": 3026323.2375600864,
+                        "load": 3026416.6980689135,
                         "single-rate-domestic_wholesale_savings": -13.906761609578686,
                         "single-rate-domestic_total_savings": 40.010379213852694,
                         "multi-rate-domestic_wholesale_savings": -21.18090595128145,
@@ -2490,7 +2490,7 @@
                 },
                 "6046": {
                     "variables": {
-                        "load": 984285.4094704962,
+                        "load": 984315.8066912267,
                         "single-rate-domestic_wholesale_savings": -14.248753832666464,
                         "single-rate-domestic_total_savings": 39.66838700661378,
                         "multi-rate-domestic_wholesale_savings": -21.477188409440352,
@@ -2503,7 +2503,7 @@
                 },
                 "6047": {
                     "variables": {
-                        "load": 2343832.241833979,
+                        "load": 2343904.6252949773,
                         "single-rate-domestic_wholesale_savings": -13.453123649067054,
                         "single-rate-domestic_total_savings": 40.46401719274585,
                         "multi-rate-domestic_wholesale_savings": -20.835982315667852,
@@ -2516,7 +2516,7 @@
                 },
                 "6048": {
                     "variables": {
-                        "load": 1169285.8373607206,
+                        "load": 1169321.9478624107,
                         "single-rate-domestic_wholesale_savings": -14.606889758432649,
                         "single-rate-domestic_total_savings": 39.310251079649824,
                         "multi-rate-domestic_wholesale_savings": -21.93458031356544,
@@ -2529,7 +2529,7 @@
                 },
                 "6050": {
                     "variables": {
-                        "load": 4446805.648939552,
+                        "load": 4446942.977540965,
                         "single-rate-domestic_wholesale_savings": -15.411453483896311,
                         "single-rate-domestic_total_savings": 38.505687348759,
                         "multi-rate-domestic_wholesale_savings": -22.953045250265554,
@@ -2542,7 +2542,7 @@
                 },
                 "6051": {
                     "variables": {
-                        "load": 2534480.3561165663,
+                        "load": 2534558.6272719884,
                         "single-rate-domestic_wholesale_savings": -15.456539846486466,
                         "single-rate-domestic_total_savings": 38.460600978273995,
                         "multi-rate-domestic_wholesale_savings": -23.075978983544378,
@@ -2555,7 +2555,7 @@
                 },
                 "6437": {
                     "variables": {
-                        "load": 79605.76018429062,
+                        "load": 79608.21861135282,
                         "single-rate-domestic_wholesale_savings": 331.04632480309346,
                         "single-rate-domestic_total_savings": 384.96346589168235,
                         "multi-rate-domestic_wholesale_savings": 408.52175198830554,
@@ -2568,7 +2568,7 @@
                 },
                 "6439": {
                     "variables": {
-                        "load": 102651.74253735763,
+                        "load": 102654.9126824777,
                         "single-rate-domestic_wholesale_savings": 331.0436513914552,
                         "single-rate-domestic_total_savings": 384.960792448039,
                         "multi-rate-domestic_wholesale_savings": 408.51894763059937,
@@ -2581,7 +2581,7 @@
                 },
                 "6440": {
                     "variables": {
-                        "load": 193108.20999813275,
+                        "load": 193114.1736674535,
                         "single-rate-domestic_wholesale_savings": 331.0425678011613,
                         "single-rate-domestic_total_savings": 384.9597088783198,
                         "multi-rate-domestic_wholesale_savings": 408.5178109715874,
@@ -2594,7 +2594,7 @@
                 },
                 "6441": {
                     "variables": {
-                        "load": 31524.454084620647,
+                        "load": 31525.427639429083,
                         "single-rate-domestic_wholesale_savings": 331.04405517719766,
                         "single-rate-domestic_total_savings": 384.9611962310177,
                         "multi-rate-domestic_wholesale_savings": 408.51936152496495,
@@ -2607,7 +2607,7 @@
                 },
                 "6442": {
                     "variables": {
-                        "load": 123013.74705300906,
+                        "load": 123017.54602828485,
                         "single-rate-domestic_wholesale_savings": 331.04405517719766,
                         "single-rate-domestic_total_savings": 384.9611962310177,
                         "multi-rate-domestic_wholesale_savings": 408.51936152496495,
@@ -2620,7 +2620,7 @@
                 },
                 "6443": {
                     "variables": {
-                        "load": 42464.98146192653,
+                        "load": 42466.29288781303,
                         "single-rate-domestic_wholesale_savings": 331.04405517719766,
                         "single-rate-domestic_total_savings": 384.9611962310177,
                         "multi-rate-domestic_wholesale_savings": 408.51936152496495,
@@ -2633,7 +2633,7 @@
                 },
                 "6447": {
                     "variables": {
-                        "load": 92166.00733045155,
+                        "load": 92168.85364965211,
                         "single-rate-domestic_wholesale_savings": 331.0328840698889,
                         "single-rate-domestic_total_savings": 384.9500251738363,
                         "multi-rate-domestic_wholesale_savings": 408.5076529313581,
@@ -2646,7 +2646,7 @@
                 },
                 "6448": {
                     "variables": {
-                        "load": 251077.40740928226,
+                        "load": 251085.1613140914,
                         "single-rate-domestic_wholesale_savings": 331.03343225101315,
                         "single-rate-domestic_total_savings": 384.9505733048343,
                         "multi-rate-domestic_wholesale_savings": 408.5082278851418,
@@ -2659,7 +2659,7 @@
                 },
                 "6451": {
                     "variables": {
-                        "load": 82213.387793246,
+                        "load": 82215.92675034108,
                         "single-rate-domestic_wholesale_savings": 331.0488459250719,
                         "single-rate-domestic_total_savings": 384.96598701106933,
                         "multi-rate-domestic_wholesale_savings": 408.52439660423084,
@@ -2672,7 +2672,7 @@
                 },
                 "6453": {
                     "variables": {
-                        "load": 165559.35754978884,
+                        "load": 165564.47044100543,
                         "single-rate-domestic_wholesale_savings": 80.61732127356608,
                         "single-rate-domestic_total_savings": 134.53446212951232,
                         "multi-rate-domestic_wholesale_savings": 98.92175492238987,
@@ -2685,7 +2685,7 @@
                 },
                 "6454": {
                     "variables": {
-                        "load": 13602.349246465943,
+                        "load": 13602.769321379907,
                         "single-rate-domestic_wholesale_savings": 80.61732127356608,
                         "single-rate-domestic_total_savings": 134.53446212951232,
                         "multi-rate-domestic_wholesale_savings": 98.92175492238987,
@@ -2698,7 +2698,7 @@
                 },
                 "6455": {
                     "variables": {
-                        "load": 94839.09252703028,
+                        "load": 94842.02139783358,
                         "single-rate-domestic_wholesale_savings": 80.25504486834986,
                         "single-rate-domestic_total_savings": 134.17218565691644,
                         "multi-rate-domestic_wholesale_savings": 98.48285612564895,
@@ -2711,7 +2711,7 @@
                 },
                 "6457": {
                     "variables": {
-                        "load": 178982.90462262585,
+                        "load": 178988.43206726116,
                         "single-rate-domestic_wholesale_savings": 80.61732127356608,
                         "single-rate-domestic_total_savings": 134.53446212951232,
                         "multi-rate-domestic_wholesale_savings": 98.92175492238987,
@@ -2724,7 +2724,7 @@
                 },
                 "6458": {
                     "variables": {
-                        "load": 568293.095205683,
+                        "load": 568310.6455319555,
                         "single-rate-domestic_wholesale_savings": 81.04325088327532,
                         "single-rate-domestic_total_savings": 134.96039170141614,
                         "multi-rate-domestic_wholesale_savings": 99.43776955336979,
@@ -2737,7 +2737,7 @@
                 },
                 "6460": {
                     "variables": {
-                        "load": 92778.48163658688,
+                        "load": 92781.34687062525,
                         "single-rate-domestic_wholesale_savings": 269.43257051971534,
                         "single-rate-domestic_total_savings": 323.3497112991985,
                         "multi-rate-domestic_wholesale_savings": 326.2210248738069,
@@ -2750,7 +2750,7 @@
                 },
                 "6462": {
                     "variables": {
-                        "load": 143681.70939799733,
+                        "load": 143686.14665235768,
                         "single-rate-domestic_wholesale_savings": 378.4981097198382,
                         "single-rate-domestic_total_savings": 432.4152506589298,
                         "multi-rate-domestic_wholesale_savings": 467.163649094841,
@@ -2763,7 +2763,7 @@
                 },
                 "6464": {
                     "variables": {
-                        "load": 280700.66464731045,
+                        "load": 280709.3333936125,
                         "single-rate-domestic_wholesale_savings": 82.13316782392137,
                         "single-rate-domestic_total_savings": 136.0503086598823,
                         "multi-rate-domestic_wholesale_savings": 100.75830839252909,
@@ -2776,7 +2776,7 @@
                 },
                 "6466": {
                     "variables": {
-                        "load": 296576.8233630586,
+                        "load": 296585.9824046727,
                         "single-rate-domestic_wholesale_savings": 79.77631243526324,
                         "single-rate-domestic_total_savings": 133.69345316615767,
                         "multi-rate-domestic_wholesale_savings": 97.90283009973945,
@@ -2789,7 +2789,7 @@
                 },
                 "6467": {
                     "variables": {
-                        "load": 307909.8123515977,
+                        "load": 307919.3213851601,
                         "single-rate-domestic_wholesale_savings": 79.54558373147223,
                         "single-rate-domestic_total_savings": 133.46272458357714,
                         "multi-rate-domestic_wholesale_savings": 97.62331175113256,
@@ -2802,7 +2802,7 @@
                 },
                 "6468": {
                     "variables": {
-                        "load": 192582.16307422981,
+                        "load": 192588.11049788303,
                         "single-rate-domestic_wholesale_savings": 63.571680340513396,
                         "single-rate-domestic_total_savings": 117.48882118057371,
                         "multi-rate-domestic_wholesale_savings": 77.99909811182798,
@@ -2815,20 +2815,20 @@
                 },
                 "6469": {
                     "variables": {
-                        "load": 343273.5857551208,
+                        "load": 343284.186910911,
                         "single-rate-domestic_wholesale_savings": 64.71726584874669,
                         "single-rate-domestic_total_savings": 118.63440663068336,
                         "multi-rate-domestic_wholesale_savings": 79.38694477730483,
                         "multi-rate-domestic_total_savings": 153.43141011882747,
                         "single-rate-nondomestic_wholesale_savings": 246.6239205475731,
-                        "single-rate-nondomestic_total_savings": 454.6359268388959,
+                        "single-rate-nondomestic_total_savings": 454.63592683889595,
                         "multi-rate-nondomestic_wholesale_savings": 376.27441544572355,
                         "multi-rate-nondomestic_total_savings": 702.7152863406674
                     }
                 },
                 "6471": {
                     "variables": {
-                        "load": 357678.180501629,
+                        "load": 357689.2265075009,
                         "single-rate-domestic_wholesale_savings": 82.24255519607834,
                         "single-rate-domestic_total_savings": 136.15969604272144,
                         "multi-rate-domestic_wholesale_savings": 100.89071570439272,
@@ -2841,7 +2841,7 @@
                 },
                 "6472": {
                     "variables": {
-                        "load": 210531.8255620565,
+                        "load": 210538.3273170537,
                         "single-rate-domestic_wholesale_savings": 82.37527590119207,
                         "single-rate-domestic_total_savings": 136.29241670886273,
                         "multi-rate-domestic_wholesale_savings": 101.05136672677374,
@@ -2854,7 +2854,7 @@
                 },
                 "6474": {
                     "variables": {
-                        "load": 171111.70131474978,
+                        "load": 171116.98567669245,
                         "single-rate-domestic_wholesale_savings": 184.58400312074647,
                         "single-rate-domestic_total_savings": 238.50114398212173,
                         "multi-rate-domestic_wholesale_savings": 229.5281449287637,
@@ -2867,7 +2867,7 @@
                 },
                 "6475": {
                     "variables": {
-                        "load": 178368.51461124938,
+                        "load": 178374.02308161667,
                         "single-rate-domestic_wholesale_savings": 154.36521622211689,
                         "single-rate-domestic_total_savings": 208.28235699656173,
                         "multi-rate-domestic_wholesale_savings": 191.5430090346419,
@@ -2880,7 +2880,7 @@
                 },
                 "6477": {
                     "variables": {
-                        "load": 444628.6714435916,
+                        "load": 444642.40270081576,
                         "single-rate-domestic_wholesale_savings": 68.3216592406709,
                         "single-rate-domestic_total_savings": 122.23880005316008,
                         "multi-rate-domestic_wholesale_savings": 83.75357234447888,
@@ -2893,7 +2893,7 @@
                 },
                 "6480": {
                     "variables": {
-                        "load": 416075.7899329979,
+                        "load": 416088.63940465095,
                         "single-rate-domestic_wholesale_savings": 68.9334764139519,
                         "single-rate-domestic_total_savings": 122.85061724144087,
                         "multi-rate-domestic_wholesale_savings": 84.49477271407787,
@@ -2906,7 +2906,7 @@
                 },
                 "6482": {
                     "variables": {
-                        "load": 1287163.152074142,
+                        "load": 1287202.902926029,
                         "single-rate-domestic_wholesale_savings": 69.77019238943441,
                         "single-rate-domestic_total_savings": 123.68733323324079,
                         "multi-rate-domestic_wholesale_savings": 85.51138909688538,
@@ -2914,12 +2914,12 @@
                         "single-rate-nondomestic_wholesale_savings": 265.79917794126976,
                         "single-rate-nondomestic_total_savings": 473.81118420312765,
                         "multi-rate-nondomestic_wholesale_savings": 405.45293984963007,
-                        "multi-rate-nondomestic_total_savings": 731.8938117438662
+                        "multi-rate-nondomestic_total_savings": 731.8938117438663
                     }
                 },
                 "6484": {
                     "variables": {
-                        "load": 406515.9218506374,
+                        "load": 406528.47609007586,
                         "single-rate-domestic_wholesale_savings": 69.49516754833037,
                         "single-rate-domestic_total_savings": 123.41230845452579,
                         "multi-rate-domestic_wholesale_savings": 85.1642384697138,
@@ -2932,7 +2932,7 @@
                 },
                 "6485": {
                     "variables": {
-                        "load": 77424.52746302132,
+                        "load": 77426.91852808322,
                         "single-rate-domestic_wholesale_savings": 331.03044918623624,
                         "single-rate-domestic_total_savings": 384.9475902394538,
                         "multi-rate-domestic_wholesale_savings": 408.505098731603,
@@ -2945,7 +2945,7 @@
                 },
                 "6486": {
                     "variables": {
-                        "load": 123096.0625775736,
+                        "load": 123099.86409514093,
                         "single-rate-domestic_wholesale_savings": 331.0299319952389,
                         "single-rate-domestic_total_savings": 384.947073062591,
                         "multi-rate-domestic_wholesale_savings": 408.5045562074151,
@@ -2958,20 +2958,20 @@
                 },
                 "7286": {
                     "variables": {
-                        "load": 2897167.899741506,
+                        "load": 2897257.3716052505,
                         "single-rate-domestic_wholesale_savings": -18.889466226275747,
                         "single-rate-domestic_total_savings": 35.02767459837775,
                         "multi-rate-domestic_wholesale_savings": -28.50795872993676,
-                        "multi-rate-domestic_total_savings": 45.53650660051981,
+                        "multi-rate-domestic_total_savings": 45.536506600519814,
                         "single-rate-nondomestic_wholesale_savings": -69.95553828969781,
-                        "single-rate-nondomestic_total_savings": 138.05646806001747,
+                        "single-rate-nondomestic_total_savings": 138.0564680600175,
                         "multi-rate-nondomestic_wholesale_savings": -114.61880294849199,
                         "multi-rate-nondomestic_total_savings": 211.82206827683694
                     }
                 },
                 "7361": {
                     "variables": {
-                        "load": 2884460.41673009,
+                        "load": 2884549.496158352,
                         "single-rate-domestic_wholesale_savings": -15.767620496772398,
                         "single-rate-domestic_total_savings": 38.14952031942294,
                         "multi-rate-domestic_wholesale_savings": -23.647871874915523,
@@ -2984,8 +2984,8 @@
                 },
                 "7412": {
                     "variables": {
-                        "load": 1485145.9320425277,
-                        "single-rate-domestic_wholesale_savings": -15.77699324731275,
+                        "load": 1485191.7971027705,
+                        "single-rate-domestic_wholesale_savings": -15.776993247312753,
                         "single-rate-domestic_total_savings": 38.14014757150199,
                         "multi-rate-domestic_wholesale_savings": -23.496270812481622,
                         "multi-rate-domestic_total_savings": 50.548194536291525,
@@ -2997,7 +2997,7 @@
                 },
                 "7454": {
                     "variables": {
-                        "load": 2943715.9369711634,
+                        "load": 2943806.8463588087,
                         "single-rate-domestic_wholesale_savings": -14.085980057952403,
                         "single-rate-domestic_total_savings": 39.83116080108639,
                         "multi-rate-domestic_wholesale_savings": -21.127086249335555,
@@ -3010,9 +3010,9 @@
                 },
                 "7455": {
                     "variables": {
-                        "load": 2156479.915001024,
+                        "load": 2156546.5125498218,
                         "single-rate-domestic_wholesale_savings": -15.61823795339676,
-                        "single-rate-domestic_total_savings": 38.29890288018724,
+                        "single-rate-domestic_total_savings": 38.29890288018725,
                         "multi-rate-domestic_wholesale_savings": -23.30106172176003,
                         "multi-rate-domestic_total_savings": 50.74340365479258,
                         "single-rate-nondomestic_wholesale_savings": -57.682257084334275,
@@ -3023,9 +3023,9 @@
                 },
                 "7456": {
                     "variables": {
-                        "load": 1514628.4850821975,
+                        "load": 1514675.2606393974,
                         "single-rate-domestic_wholesale_savings": -15.596574672327563,
-                        "single-rate-domestic_total_savings": 38.32056615857146,
+                        "single-rate-domestic_total_savings": 38.32056615857147,
                         "multi-rate-domestic_wholesale_savings": -23.268586622999564,
                         "multi-rate-domestic_total_savings": 50.775878705756924,
                         "single-rate-nondomestic_wholesale_savings": -57.599392920194596,
@@ -3036,9 +3036,9 @@
                 },
                 "7457": {
                     "variables": {
-                        "load": 1514628.4850821975,
+                        "load": 1514675.2606393974,
                         "single-rate-domestic_wholesale_savings": -15.617943017858586,
-                        "single-rate-domestic_total_savings": 38.29919782491963,
+                        "single-rate-domestic_total_savings": 38.29919782491964,
                         "multi-rate-domestic_wholesale_savings": -23.2968113203172,
                         "multi-rate-domestic_total_savings": 50.74765402938906,
                         "single-rate-nondomestic_wholesale_savings": -57.682233938829796,
@@ -3049,7 +3049,7 @@
                 },
                 "7458": {
                     "variables": {
-                        "load": 1534453.2029764699,
+                        "load": 1534500.5907703028,
                         "single-rate-domestic_wholesale_savings": -15.845174570279507,
                         "single-rate-domestic_total_savings": 38.07196622600187,
                         "multi-rate-domestic_wholesale_savings": -23.752024052775045,
@@ -3062,7 +3062,7 @@
                 },
                 "7461": {
                     "variables": {
-                        "load": 1681547.8230515148,
+                        "load": 1681599.7534967957,
                         "single-rate-domestic_wholesale_savings": -15.551527833739952,
                         "single-rate-domestic_total_savings": 38.365612989915476,
                         "multi-rate-domestic_wholesale_savings": -23.209621097498328,
@@ -3075,9 +3075,9 @@
                 },
                 "7462": {
                     "variables": {
-                        "load": 1681547.8230515148,
+                        "load": 1681599.7534967957,
                         "single-rate-domestic_wholesale_savings": -15.575308214668466,
-                        "single-rate-domestic_total_savings": 38.34183260080873,
+                        "single-rate-domestic_total_savings": 38.341832600808736,
                         "multi-rate-domestic_wholesale_savings": -23.252233595619284,
                         "multi-rate-domestic_total_savings": 50.79223182507476,
                         "single-rate-nondomestic_wholesale_savings": -57.51272155199415,
@@ -3088,9 +3088,9 @@
                 },
                 "7463": {
                     "variables": {
-                        "load": 1916181.4350062013,
+                        "load": 1916240.6115314309,
                         "single-rate-domestic_wholesale_savings": -15.603072750006627,
-                        "single-rate-domestic_total_savings": 38.31406808154746,
+                        "single-rate-domestic_total_savings": 38.31406808154747,
                         "multi-rate-domestic_wholesale_savings": -23.29622842749797,
                         "multi-rate-domestic_total_savings": 50.74823693415658,
                         "single-rate-nondomestic_wholesale_savings": -57.619008094526905,
@@ -3101,12 +3101,12 @@
                 },
                 "7464": {
                     "variables": {
-                        "load": 1916181.4350062013,
+                        "load": 1916240.6115314309,
                         "single-rate-domestic_wholesale_savings": -15.62400510289121,
                         "single-rate-domestic_total_savings": 38.29313571148415,
                         "multi-rate-domestic_wholesale_savings": -23.33249746922564,
                         "multi-rate-domestic_total_savings": 50.711967883249585,
-                        "single-rate-nondomestic_wholesale_savings": -57.69793273452454,
+                        "single-rate-nondomestic_wholesale_savings": -57.69793273452455,
                         "single-rate-nondomestic_total_savings": 150.31407350563543,
                         "multi-rate-nondomestic_wholesale_savings": -94.51365604043359,
                         "multi-rate-nondomestic_total_savings": 231.92721520778812
@@ -3114,9 +3114,9 @@
                 },
                 "7465": {
                     "variables": {
-                        "load": 2421456.112187962,
+                        "load": 2421530.8928704713,
                         "single-rate-domestic_wholesale_savings": -15.596602108009927,
-                        "single-rate-domestic_total_savings": 38.320538748694915,
+                        "single-rate-domestic_total_savings": 38.32053874869492,
                         "multi-rate-domestic_wholesale_savings": -23.277567378742084,
                         "multi-rate-domestic_total_savings": 50.76689800370968,
                         "single-rate-nondomestic_wholesale_savings": -57.59672522012771,
@@ -3127,9 +3127,9 @@
                 },
                 "7466": {
                     "variables": {
-                        "load": 2421456.112187962,
+                        "load": 2421530.8928704713,
                         "single-rate-domestic_wholesale_savings": -15.62105372947804,
-                        "single-rate-domestic_total_savings": 38.2960870889461,
+                        "single-rate-domestic_total_savings": 38.29608708894611,
                         "multi-rate-domestic_wholesale_savings": -23.31640999556128,
                         "multi-rate-domestic_total_savings": 50.7280553466591,
                         "single-rate-nondomestic_wholesale_savings": -57.68991059604653,
@@ -3140,7 +3140,7 @@
                 },
                 "7469": {
                     "variables": {
-                        "load": 224423.1128394733,
+                        "load": 224430.04359225594,
                         "single-rate-domestic_wholesale_savings": 76.31072957188066,
                         "single-rate-domestic_total_savings": 130.2278703912104,
                         "multi-rate-domestic_wholesale_savings": 93.62851099602666,
@@ -3153,7 +3153,7 @@
                 },
                 "7471": {
                     "variables": {
-                        "load": 184072.75642176956,
+                        "load": 184078.44105360308,
                         "single-rate-domestic_wholesale_savings": 69.5138866774308,
                         "single-rate-domestic_total_savings": 123.43102760419092,
                         "multi-rate-domestic_wholesale_savings": 85.18559128463419,
@@ -3166,7 +3166,7 @@
                 },
                 "7908": {
                     "variables": {
-                        "load": 3087790.861847989,
+                        "load": 3087886.220636394,
                         "single-rate-domestic_wholesale_savings": -15.656576324233614,
                         "single-rate-domestic_total_savings": 38.26056450933505,
                         "multi-rate-domestic_wholesale_savings": -23.34653876875206,
@@ -3179,7 +3179,7 @@
                 },
                 "7909": {
                     "variables": {
-                        "load": 2529414.883631471,
+                        "load": 2529492.998359081,
                         "single-rate-domestic_wholesale_savings": -13.66575569419444,
                         "single-rate-domestic_total_savings": 40.25138512980291,
                         "multi-rate-domestic_wholesale_savings": -20.595815199106596,
@@ -3192,7 +3192,7 @@
                 },
                 "7945": {
                     "variables": {
-                        "load": 578214.6896183589,
+                        "load": 578232.546349722,
                         "single-rate-domestic_wholesale_savings": -15.823967837017221,
                         "single-rate-domestic_total_savings": 38.09317300839727,
                         "multi-rate-domestic_wholesale_savings": -23.715571944983022,
@@ -3205,7 +3205,7 @@
                 },
                 "7946": {
                     "variables": {
-                        "load": 880730.6462766032,
+                        "load": 880757.8454643602,
                         "single-rate-domestic_wholesale_savings": -14.004338276706932,
                         "single-rate-domestic_total_savings": 39.91280254689105,
                         "multi-rate-domestic_wholesale_savings": -21.18842069982001,
@@ -3218,7 +3218,7 @@
                 },
                 "8013": {
                     "variables": {
-                        "load": 117721.44947731399,
+                        "load": 117725.08501319382,
                         "single-rate-domestic_wholesale_savings": 331.03078479622155,
                         "single-rate-domestic_total_savings": 384.9479258734161,
                         "multi-rate-domestic_wholesale_savings": 408.50545078938495,
@@ -3231,7 +3231,7 @@
                 },
                 "8014": {
                     "variables": {
-                        "load": 1572675.510351419,
+                        "load": 1572724.0785458419,
                         "single-rate-domestic_wholesale_savings": -16.76343462095877,
                         "single-rate-domestic_total_savings": 37.15370621786457,
                         "multi-rate-domestic_wholesale_savings": -25.26960848009422,
@@ -3244,7 +3244,7 @@
                 },
                 "8015": {
                     "variables": {
-                        "load": 273884.82909157994,
+                        "load": 273893.2873474615,
                         "single-rate-domestic_wholesale_savings": 331.0300953049473,
                         "single-rate-domestic_total_savings": 384.94723637321704,
                         "multi-rate-domestic_wholesale_savings": 408.5047275414489,
@@ -3257,7 +3257,7 @@
                 },
                 "8016": {
                     "variables": {
-                        "load": 2539532.9108249075,
+                        "load": 2539611.338015714,
                         "single-rate-domestic_wholesale_savings": -15.976353673320057,
                         "single-rate-domestic_total_savings": 37.94078719134914,
                         "multi-rate-domestic_wholesale_savings": -23.98606890324854,
@@ -3270,7 +3270,7 @@
                 },
                 "8017": {
                     "variables": {
-                        "load": 838807.9989658527,
+                        "load": 838833.9034772501,
                         "single-rate-domestic_wholesale_savings": -9.542521422540123,
                         "single-rate-domestic_total_savings": 44.374619407203014,
                         "multi-rate-domestic_wholesale_savings": -15.373844288505115,
@@ -3283,7 +3283,7 @@
                 },
                 "8019": {
                     "variables": {
-                        "load": 35091.871325181026,
+                        "load": 35092.955050889635,
                         "single-rate-domestic_wholesale_savings": 372.6009794584267,
                         "single-rate-domestic_total_savings": 426.51812031039395,
                         "multi-rate-domestic_wholesale_savings": 464.0244919854899,
@@ -3296,7 +3296,7 @@
                 },
                 "8020": {
                     "variables": {
-                        "load": 380981.452436641,
+                        "load": 380993.2181062931,
                         "single-rate-domestic_wholesale_savings": 210.85104199696843,
                         "single-rate-domestic_total_savings": 264.7681828415695,
                         "multi-rate-domestic_wholesale_savings": 261.717556774936,
@@ -3309,7 +3309,7 @@
                 },
                 "8021": {
                     "variables": {
-                        "load": 1673622.4969659718,
+                        "load": 1673674.182656968,
                         "single-rate-domestic_wholesale_savings": -13.534001565286756,
                         "single-rate-domestic_total_savings": 40.383139266900656,
                         "multi-rate-domestic_wholesale_savings": -20.425627688240287,
@@ -3322,7 +3322,7 @@
                 },
                 "8022": {
                     "variables": {
-                        "load": 1997747.4508554826,
+                        "load": 1997809.1463454436,
                         "single-rate-domestic_wholesale_savings": -16.45402960496811,
                         "single-rate-domestic_total_savings": 37.463111231330096,
                         "multi-rate-domestic_wholesale_savings": -24.370449106741567,
@@ -3335,7 +3335,7 @@
                 },
                 "8023": {
                     "variables": {
-                        "load": 1452227.6648920986,
+                        "load": 1452272.513352681,
                         "single-rate-domestic_wholesale_savings": -15.796464513494229,
                         "single-rate-domestic_total_savings": 38.12067632087045,
                         "multi-rate-domestic_wholesale_savings": -23.52048230976299,
@@ -3348,7 +3348,7 @@
                 },
                 "8024": {
                     "variables": {
-                        "load": 1824965.2825306943,
+                        "load": 1825021.6420723624,
                         "single-rate-domestic_wholesale_savings": -16.559121036420013,
                         "single-rate-domestic_total_savings": 37.3580197799844,
                         "multi-rate-domestic_wholesale_savings": -24.875835428394442,
@@ -3361,11 +3361,11 @@
                 },
                 "8025": {
                     "variables": {
-                        "load": 1824965.2825306943,
+                        "load": 1825021.6420723624,
                         "single-rate-domestic_wholesale_savings": -20.49347691420417,
                         "single-rate-domestic_total_savings": 33.42366388112036,
                         "multi-rate-domestic_wholesale_savings": -30.99741061950882,
-                        "multi-rate-domestic_total_savings": 43.047054756333495,
+                        "multi-rate-domestic_total_savings": 43.0470547563335,
                         "single-rate-nondomestic_wholesale_savings": -75.98581472287364,
                         "single-rate-nondomestic_total_savings": 132.02619167348658,
                         "multi-rate-nondomestic_wholesale_savings": -124.41829936188076,
@@ -3374,7 +3374,7 @@
                 },
                 "8026": {
                     "variables": {
-                        "load": 2068926.9366237465,
+                        "load": 2068990.8303138816,
                         "single-rate-domestic_wholesale_savings": -16.927683769089537,
                         "single-rate-domestic_total_savings": 36.98945705868913,
                         "multi-rate-domestic_wholesale_savings": -24.98375008745029,
@@ -3387,11 +3387,11 @@
                 },
                 "8027": {
                     "variables": {
-                        "load": 1015670.1724621532,
+                        "load": 1015701.5389232843,
                         "single-rate-domestic_wholesale_savings": -17.440747190201048,
                         "single-rate-domestic_total_savings": 36.47639363454843,
                         "multi-rate-domestic_wholesale_savings": -25.64921194485882,
-                        "multi-rate-domestic_total_savings": 48.39525343515536,
+                        "multi-rate-domestic_total_savings": 48.39525343515537,
                         "single-rate-nondomestic_wholesale_savings": -64.6246292413873,
                         "single-rate-nondomestic_total_savings": 143.38737694308264,
                         "multi-rate-nondomestic_wholesale_savings": -104.99829366608559,
@@ -3400,7 +3400,7 @@
                 },
                 "8029": {
                     "variables": {
-                        "load": 1766291.0757728773,
+                        "load": 1766345.6233049668,
                         "single-rate-domestic_wholesale_savings": -14.166254429497783,
                         "single-rate-domestic_total_savings": 39.750886377407596,
                         "multi-rate-domestic_wholesale_savings": -21.439171691133776,
@@ -3413,9 +3413,9 @@
                 },
                 "8030": {
                     "variables": {
-                        "load": 2779858.7103790967,
+                        "load": 2779944.5594387003,
                         "single-rate-domestic_wholesale_savings": -16.32691522861636,
-                        "single-rate-domestic_total_savings": 37.5902256233853,
+                        "single-rate-domestic_total_savings": 37.59022562338531,
                         "multi-rate-domestic_wholesale_savings": -24.533205499832754,
                         "multi-rate-domestic_total_savings": 49.511259887153585,
                         "single-rate-nondomestic_wholesale_savings": -60.312729041334215,
@@ -3426,7 +3426,7 @@
                 },
                 "8032": {
                     "variables": {
-                        "load": 179245.22730863193,
+                        "load": 179250.76285416842,
                         "single-rate-domestic_wholesale_savings": 64.42234752473114,
                         "single-rate-domestic_total_savings": 118.33948832517797,
                         "multi-rate-domestic_wholesale_savings": 79.02965899859393,
@@ -3439,7 +3439,7 @@
                 },
                 "8033": {
                     "variables": {
-                        "load": 444047.3802801458,
+                        "load": 444061.09358567855,
                         "single-rate-domestic_wholesale_savings": 69.33963286667776,
                         "single-rate-domestic_total_savings": 123.25677372396245,
                         "multi-rate-domestic_wholesale_savings": 84.98682057291191,
@@ -3452,7 +3452,7 @@
                 },
                 "8034": {
                     "variables": {
-                        "load": 231156.31498160725,
+                        "load": 231163.4536726139,
                         "single-rate-domestic_wholesale_savings": 70.31533853152378,
                         "single-rate-domestic_total_savings": 124.23247932233872,
                         "multi-rate-domestic_wholesale_savings": 86.18551269951566,
@@ -3465,7 +3465,7 @@
                 },
                 "8035": {
                     "variables": {
-                        "load": 466081.3643776886,
+                        "load": 466095.7581485449,
                         "single-rate-domestic_wholesale_savings": 79.42082070018297,
                         "single-rate-domestic_total_savings": 133.3379614527771,
                         "multi-rate-domestic_wholesale_savings": 97.47216652852192,
@@ -3478,7 +3478,7 @@
                 },
                 "8036": {
                     "variables": {
-                        "load": 223616.71944134604,
+                        "load": 223623.6252909915,
                         "single-rate-domestic_wholesale_savings": 79.55266185314295,
                         "single-rate-domestic_total_savings": 133.46980271532234,
                         "multi-rate-domestic_wholesale_savings": 97.63191767377761,
@@ -3491,7 +3491,7 @@
                 },
                 "8037": {
                     "variables": {
-                        "load": 385624.5541484634,
+                        "load": 385636.46320901916,
                         "single-rate-domestic_wholesale_savings": 79.35174029186484,
                         "single-rate-domestic_total_savings": 133.26888114369524,
                         "multi-rate-domestic_wholesale_savings": 97.38850072118093,
@@ -3504,7 +3504,7 @@
                 },
                 "8093": {
                     "variables": {
-                        "load": 1824965.2825306943,
+                        "load": 1825021.6420723624,
                         "single-rate-domestic_wholesale_savings": -16.55941391060035,
                         "single-rate-domestic_total_savings": 37.35772690931907,
                         "multi-rate-domestic_wholesale_savings": -24.87628235348713,
@@ -3517,7 +3517,7 @@
                 },
                 "8189": {
                     "variables": {
-                        "load": 963141.6301429692,
+                        "load": 963171.3743900284,
                         "single-rate-domestic_wholesale_savings": -15.822526196565613,
                         "single-rate-domestic_total_savings": 38.09461461314152,
                         "multi-rate-domestic_wholesale_savings": -23.713093951441916,
@@ -3530,7 +3530,7 @@
                 },
                 "8283": {
                     "variables": {
-                        "load": 4834071.682658881,
+                        "load": 4834220.971014803,
                         "single-rate-domestic_wholesale_savings": -13.572639490498918,
                         "single-rate-domestic_total_savings": 40.34450132781194,
                         "multi-rate-domestic_wholesale_savings": -20.43509483014397,
@@ -3543,9 +3543,9 @@
                 },
                 "8290": {
                     "variables": {
-                        "load": 1428868.7077995238,
+                        "load": 1428912.8348756807,
                         "single-rate-domestic_wholesale_savings": -15.823690930471756,
-                        "single-rate-domestic_total_savings": 38.09344988548128,
+                        "single-rate-domestic_total_savings": 38.093449885481284,
                         "multi-rate-domestic_wholesale_savings": -23.715095980225914,
                         "multi-rate-domestic_total_savings": 50.32936935463716,
                         "single-rate-nondomestic_wholesale_savings": -58.41850999874754,
@@ -3556,7 +3556,7 @@
                 },
                 "8397": {
                     "variables": {
-                        "load": 1451103.3552891647,
+                        "load": 1451148.1690274216,
                         "single-rate-domestic_wholesale_savings": -15.84662341362481,
                         "single-rate-domestic_total_savings": 38.07051739899099,
                         "multi-rate-domestic_wholesale_savings": -23.754514415375382,
@@ -3569,7 +3569,7 @@
                 },
                 "8473": {
                     "variables": {
-                        "load": 2553806.223873666,
+                        "load": 2553885.0918666977,
                         "single-rate-domestic_wholesale_savings": -15.310975727310815,
                         "single-rate-domestic_total_savings": 38.60616507763077,
                         "multi-rate-domestic_wholesale_savings": -22.956020426014092,
@@ -3582,7 +3582,7 @@
                 },
                 "8489": {
                     "variables": {
-                        "load": 186239.19764717744,
+                        "load": 186244.94918420064,
                         "single-rate-domestic_wholesale_savings": 64.95582369860523,
                         "single-rate-domestic_total_savings": 118.87296450370005,
                         "multi-rate-domestic_wholesale_savings": 79.67595136400459,
@@ -3595,7 +3595,7 @@
                 },
                 "8515": {
                     "variables": {
-                        "load": 2840712.520439851,
+                        "load": 2840800.2488217447,
                         "single-rate-domestic_wholesale_savings": -15.827606191642671,
                         "single-rate-domestic_total_savings": 38.08953464981573,
                         "multi-rate-domestic_wholesale_savings": -23.721825875214783,
@@ -3608,20 +3608,20 @@
                 },
                 "8529": {
                     "variables": {
-                        "load": 2865484.7065485204,
+                        "load": 2865573.1999611272,
                         "single-rate-domestic_wholesale_savings": -15.827832283560847,
                         "single-rate-domestic_total_savings": 38.089308538499616,
                         "multi-rate-domestic_wholesale_savings": -23.722214525850255,
                         "multi-rate-domestic_total_savings": 50.32225084020988,
                         "single-rate-nondomestic_wholesale_savings": -58.4339630755074,
                         "single-rate-nondomestic_total_savings": 149.57804321082688,
-                        "multi-rate-nondomestic_wholesale_savings": -95.83573159408961,
+                        "multi-rate-nondomestic_wholesale_savings": -95.83573159408962,
                         "multi-rate-nondomestic_total_savings": 230.60513957639267
                     }
                 },
                 "8565": {
                     "variables": {
-                        "load": 294007.4693087866,
+                        "load": 294016.54900260415,
                         "single-rate-domestic_wholesale_savings": 77.07166330361086,
                         "single-rate-domestic_total_savings": 130.988804066703,
                         "multi-rate-domestic_wholesale_savings": 94.57317452676779,
@@ -3634,7 +3634,7 @@
                 },
                 "8575": {
                     "variables": {
-                        "load": 2709392.1060364163,
+                        "load": 2709475.778909544,
                         "single-rate-domestic_wholesale_savings": -15.337059738986925,
                         "single-rate-domestic_total_savings": 38.580081099675155,
                         "multi-rate-domestic_wholesale_savings": -22.9180813251463,
@@ -3642,12 +3642,12 @@
                         "single-rate-nondomestic_wholesale_savings": -56.639283645605886,
                         "single-rate-nondomestic_total_savings": 151.37272263974148,
                         "multi-rate-nondomestic_wholesale_savings": -92.83575198142715,
-                        "multi-rate-nondomestic_total_savings": 233.60511918202226
+                        "multi-rate-nondomestic_total_savings": 233.6051191820223
                     }
                 },
                 "8578": {
                     "variables": {
-                        "load": 4473882.936093659,
+                        "load": 4474021.100898629,
                         "single-rate-domestic_wholesale_savings": -15.515604777756979,
                         "single-rate-domestic_total_savings": 38.40153601860266,
                         "multi-rate-domestic_wholesale_savings": -23.237027131146416,
@@ -3660,8 +3660,8 @@
                 },
                 "8649": {
                     "variables": {
-                        "load": 1826388.1562726868,
-                        "single-rate-domestic_wholesale_savings": -15.513451515561506,
+                        "load": 1826444.5597549635,
+                        "single-rate-domestic_wholesale_savings": -15.513451515561508,
                         "single-rate-domestic_total_savings": 38.40368932518077,
                         "multi-rate-domestic_wholesale_savings": -23.1454790508352,
                         "multi-rate-domestic_total_savings": 50.898986281821344,
@@ -3673,7 +3673,7 @@
                 },
                 "8744": {
                     "variables": {
-                        "load": 173429.85676270837,
+                        "load": 173435.21271492087,
                         "single-rate-domestic_wholesale_savings": 79.45718120145723,
                         "single-rate-domestic_total_savings": 133.37432206614622,
                         "multi-rate-domestic_wholesale_savings": 97.51624262285958,
@@ -3686,9 +3686,9 @@
                 },
                 "8747": {
                     "variables": {
-                        "load": 1860498.047657659,
+                        "load": 1860555.5045410353,
                         "single-rate-domestic_wholesale_savings": -15.75861897808738,
-                        "single-rate-domestic_total_savings": 38.15852186041137,
+                        "single-rate-domestic_total_savings": 38.158521860411376,
                         "multi-rate-domestic_wholesale_savings": -23.60324446392888,
                         "multi-rate-domestic_total_savings": 50.441220909406844,
                         "single-rate-nondomestic_wholesale_savings": -58.175698466293056,
@@ -3699,7 +3699,7 @@
                 },
                 "8838": {
                     "variables": {
-                        "load": 1160840.59974673,
+                        "load": 1160876.44943855,
                         "single-rate-domestic_wholesale_savings": -15.349167889999181,
                         "single-rate-domestic_total_savings": 38.567972947735065,
                         "multi-rate-domestic_wholesale_savings": -22.93454181078908,
@@ -3712,11 +3712,11 @@
                 },
                 "8860": {
                     "variables": {
-                        "load": 3474566.1214404637,
+                        "load": 3474673.424822076,
                         "single-rate-domestic_wholesale_savings": -11.690396601410383,
                         "single-rate-domestic_total_savings": 42.226744225978194,
                         "multi-rate-domestic_wholesale_savings": -17.38785039648683,
-                        "multi-rate-domestic_total_savings": 56.65661497907655,
+                        "multi-rate-domestic_total_savings": 56.65661497907656,
                         "single-rate-nondomestic_wholesale_savings": -42.89051907364744,
                         "single-rate-nondomestic_total_savings": 165.12148720925367,
                         "multi-rate-nondomestic_wholesale_savings": -70.71939629063095,
@@ -3726,12 +3726,12 @@
             },
             "globals": {
                 "variables": {
-                    "wholesale_cost": 53674859180.51346,
+                    "wholesale_cost": 53676246059.067406,
                     "balancing_cost": -3.124115453537063e-07,
                     "congestion_rent": -1892276922.856347,
-                    "cfd_cost": 3033427280.8297167,
+                    "cfd_cost": 3033453014.363389,
                     "wholesale_cost_savings": -644120827.6967332,
-                    "balancing_cost_savings": 1638495014.9023256,
+                    "balancing_cost_savings": 1638495014.9023259,
                     "congestion_rent_savings": 1892276922.8560483,
                     "cfd_cost_savings": -478000037.2075462
                 }
@@ -3741,24 +3741,24 @@
             "geographies": {
                 "GB0 Z7": {
                     "variables": {
-                        "load": 27026406.05285479,
+                        "load": 27027240.696601354,
                         "single-rate-domestic_wholesale_savings": -19.088818521871502,
-                        "single-rate-domestic_total_savings": 26.936985909352583,
+                        "single-rate-domestic_total_savings": 26.936985909352572,
                         "multi-rate-domestic_wholesale_savings": -25.809662314849845,
-                        "multi-rate-domestic_total_savings": 36.73335332679677,
+                        "multi-rate-domestic_total_savings": 36.73335332679675,
                         "single-rate-nondomestic_wholesale_savings": -72.49269338478896,
-                        "single-rate-nondomestic_total_savings": 105.21906683485045,
+                        "single-rate-nondomestic_total_savings": 105.21906683485044,
                         "multi-rate-nondomestic_wholesale_savings": -114.99139567067613,
-                        "multi-rate-nondomestic_total_savings": 164.0006839260683
+                        "multi-rate-nondomestic_total_savings": 164.00068392606826
                     }
                 },
                 "GB0 Z6": {
                     "variables": {
-                        "load": 2613630.6519717705,
+                        "load": 2613711.3674928825,
                         "single-rate-domestic_wholesale_savings": 40.00776445760564,
-                        "single-rate-domestic_total_savings": 86.03356887786256,
+                        "single-rate-domestic_total_savings": 86.03356887786255,
                         "multi-rate-domestic_wholesale_savings": 52.24544584637367,
-                        "multi-rate-domestic_total_savings": 114.78846140149432,
+                        "multi-rate-domestic_total_savings": 114.7884614014943,
                         "single-rate-nondomestic_wholesale_savings": 152.9090467537739,
                         "single-rate-nondomestic_total_savings": 330.6208068431873,
                         "multi-rate-nondomestic_wholesale_savings": 238.47929101821393,
@@ -3767,11 +3767,11 @@
                 },
                 "GB0 Z5": {
                     "variables": {
-                        "load": 12005364.08734226,
+                        "load": 12005734.843324285,
                         "single-rate-domestic_wholesale_savings": 40.00776445760564,
-                        "single-rate-domestic_total_savings": 86.03356887786256,
+                        "single-rate-domestic_total_savings": 86.03356887786255,
                         "multi-rate-domestic_wholesale_savings": 52.24544584637367,
-                        "multi-rate-domestic_total_savings": 114.78846140149432,
+                        "multi-rate-domestic_total_savings": 114.7884614014943,
                         "single-rate-nondomestic_wholesale_savings": 152.90904675377388,
                         "single-rate-nondomestic_total_savings": 330.62080684318727,
                         "multi-rate-nondomestic_wholesale_savings": 238.47929101821393,
@@ -3786,33 +3786,33 @@
                         "multi-rate-domestic_wholesale_savings": 404.55956975306725,
                         "multi-rate-domestic_total_savings": 467.1025853952419,
                         "single-rate-nondomestic_wholesale_savings": 1271.3491261828958,
-                        "single-rate-nondomestic_total_savings": 1449.060885870109,
+                        "single-rate-nondomestic_total_savings": 1449.0608858701087,
                         "multi-rate-nondomestic_wholesale_savings": 1919.1247475867024,
                         "multi-rate-nondomestic_total_savings": 2198.1168268881115
                     }
                 },
                 "GB0 Z2": {
                     "variables": {
-                        "load": 1028148.7652277753,
+                        "load": 1028180.517058799,
                         "single-rate-domestic_wholesale_savings": 332.9329157773959,
                         "single-rate-domestic_total_savings": 378.9587203548372,
                         "multi-rate-domestic_wholesale_savings": 406.878074859005,
                         "multi-rate-domestic_total_savings": 469.4210904866202,
                         "single-rate-nondomestic_wholesale_savings": 1277.1036788111403,
-                        "single-rate-nondomestic_total_savings": 1454.8154384422378,
+                        "single-rate-nondomestic_total_savings": 1454.8154384422376,
                         "multi-rate-nondomestic_wholesale_savings": 1928.4713708468464,
                         "multi-rate-nondomestic_total_savings": 2207.4634500102634
                     }
                 },
                 "GB0 Z1_4": {
                     "variables": {
-                        "load": 457579.1005251724,
+                        "load": 457593.2317240064,
                         "single-rate-domestic_wholesale_savings": 332.31112925073927,
                         "single-rate-domestic_total_savings": 378.3369338493793,
                         "multi-rate-domestic_wholesale_savings": 405.99434651001445,
                         "multi-rate-domestic_total_savings": 468.5373621669963,
                         "single-rate-nondomestic_wholesale_savings": 1274.9102562726282,
-                        "single-rate-nondomestic_total_savings": 1452.6220159209631,
+                        "single-rate-nondomestic_total_savings": 1452.622015920963,
                         "multi-rate-nondomestic_wholesale_savings": 1924.908783929371,
                         "multi-rate-nondomestic_total_savings": 2203.9008632429764
                     }
@@ -3825,7 +3825,7 @@
                         "multi-rate-domestic_wholesale_savings": 406.0232100847132,
                         "multi-rate-domestic_total_savings": 468.566225741695,
                         "single-rate-nondomestic_wholesale_savings": 1274.9601362027795,
-                        "single-rate-nondomestic_total_savings": 1452.6718958603265,
+                        "single-rate-nondomestic_total_savings": 1452.6718958603262,
                         "multi-rate-nondomestic_wholesale_savings": 1925.003075858244,
                         "multi-rate-nondomestic_total_savings": 2203.9951551239456
                     }
@@ -3838,7 +3838,7 @@
                         "multi-rate-domestic_wholesale_savings": 406.0232100847132,
                         "multi-rate-domestic_total_savings": 468.566225741695,
                         "single-rate-nondomestic_wholesale_savings": 1274.9601362027795,
-                        "single-rate-nondomestic_total_savings": 1452.6718958603265,
+                        "single-rate-nondomestic_total_savings": 1452.6718958603262,
                         "multi-rate-nondomestic_wholesale_savings": 1925.003075858244,
                         "multi-rate-nondomestic_total_savings": 2203.9951551239456
                     }
@@ -3851,7 +3851,7 @@
                         "multi-rate-domestic_wholesale_savings": 406.0232100847132,
                         "multi-rate-domestic_total_savings": 468.566225741695,
                         "single-rate-nondomestic_wholesale_savings": 1274.9601362027795,
-                        "single-rate-nondomestic_total_savings": 1452.6718958603265,
+                        "single-rate-nondomestic_total_savings": 1452.6718958603262,
                         "multi-rate-nondomestic_wholesale_savings": 1925.003075858244,
                         "multi-rate-nondomestic_total_savings": 2203.9951551239456
                     }
@@ -3864,55 +3864,55 @@
                         "multi-rate-domestic_wholesale_savings": 404.55956975306725,
                         "multi-rate-domestic_total_savings": 467.1025853952419,
                         "single-rate-nondomestic_wholesale_savings": 1271.3491261828958,
-                        "single-rate-nondomestic_total_savings": 1449.060885870109,
+                        "single-rate-nondomestic_total_savings": 1449.0608858701087,
                         "multi-rate-nondomestic_wholesale_savings": 1919.1247475867024,
                         "multi-rate-nondomestic_total_savings": 2198.1168268881115
                     }
                 },
                 "GB0 Z12": {
                     "variables": {
-                        "load": 33244305.197130322,
+                        "load": 33245331.865284,
                         "single-rate-domestic_wholesale_savings": -16.52936131603309,
-                        "single-rate-domestic_total_savings": 29.49644312108893,
+                        "single-rate-domestic_total_savings": 29.49644312108892,
                         "multi-rate-domestic_wholesale_savings": -23.540775471500197,
-                        "multi-rate-domestic_total_savings": 39.00224016374009,
+                        "multi-rate-domestic_total_savings": 39.002240163740076,
                         "single-rate-nondomestic_wholesale_savings": -61.08900796757386,
-                        "single-rate-nondomestic_total_savings": 116.62275216147907,
+                        "single-rate-nondomestic_total_savings": 116.62275216147906,
                         "multi-rate-nondomestic_wholesale_savings": -98.83556100630112,
-                        "multi-rate-nondomestic_total_savings": 180.15651852341063
+                        "multi-rate-nondomestic_total_savings": 180.15651852341057
                     }
                 },
                 "GB0 Z14": {
                     "variables": {
-                        "load": 52325010.707484305,
+                        "load": 52326626.63600767,
                         "single-rate-domestic_wholesale_savings": -15.15363849492251,
-                        "single-rate-domestic_total_savings": 30.8721659435892,
+                        "single-rate-domestic_total_savings": 30.872165943589188,
                         "multi-rate-domestic_wholesale_savings": -22.081766225912954,
-                        "multi-rate-domestic_total_savings": 40.46124942777298,
+                        "multi-rate-domestic_total_savings": 40.46124942777297,
                         "single-rate-nondomestic_wholesale_savings": -55.92110483851868,
-                        "single-rate-nondomestic_total_savings": 121.79065527626545,
+                        "single-rate-nondomestic_total_savings": 121.79065527626544,
                         "multi-rate-nondomestic_wholesale_savings": -90.87123695167135,
-                        "multi-rate-nondomestic_total_savings": 188.12084271103157
+                        "multi-rate-nondomestic_total_savings": 188.12084271103151
                     }
                 },
                 "GB0 Z15": {
                     "variables": {
-                        "load": 14446628.072200662,
+                        "load": 14447074.220592428,
                         "single-rate-domestic_wholesale_savings": -12.013547861909558,
-                        "single-rate-domestic_total_savings": 34.01225656695461,
+                        "single-rate-domestic_total_savings": 34.0122565669546,
                         "multi-rate-domestic_wholesale_savings": -18.950445614660502,
-                        "multi-rate-domestic_total_savings": 43.592570035514534,
+                        "multi-rate-domestic_total_savings": 43.59257003551452,
                         "single-rate-nondomestic_wholesale_savings": -42.68550005583256,
-                        "single-rate-nondomestic_total_savings": 135.0262600581756,
+                        "single-rate-nondomestic_total_savings": 135.02626005817558,
                         "multi-rate-nondomestic_wholesale_savings": -71.88732359013548,
-                        "multi-rate-nondomestic_total_savings": 207.10475601833414
+                        "multi-rate-nondomestic_total_savings": 207.1047560183341
                     }
                 },
                 "GB0 Z17": {
                     "variables": {
-                        "load": 17994829.087198976,
+                        "load": 17995384.812971495,
                         "single-rate-domestic_wholesale_savings": 66.91436948015195,
-                        "single-rate-domestic_total_savings": 112.94017386206502,
+                        "single-rate-domestic_total_savings": 112.94017386206501,
                         "multi-rate-domestic_wholesale_savings": 68.59899925379278,
                         "multi-rate-domestic_total_savings": 131.14201485797636,
                         "single-rate-nondomestic_wholesale_savings": 254.37770708158064,
@@ -3923,96 +3923,96 @@
                 },
                 "GB0 Z16": {
                     "variables": {
-                        "load": 27341136.797920372,
+                        "load": 27341981.16132204,
                         "single-rate-domestic_wholesale_savings": -10.751190744117228,
-                        "single-rate-domestic_total_savings": 35.27461367266811,
+                        "single-rate-domestic_total_savings": 35.274613672668096,
                         "multi-rate-domestic_wholesale_savings": -17.40548781945892,
-                        "multi-rate-domestic_total_savings": 45.13752783263685,
+                        "multi-rate-domestic_total_savings": 45.137527832636835,
                         "single-rate-nondomestic_wholesale_savings": -37.40539259976618,
-                        "single-rate-nondomestic_total_savings": 140.30636759167436,
+                        "single-rate-nondomestic_total_savings": 140.30636759167433,
                         "multi-rate-nondomestic_wholesale_savings": -61.78599738071212,
-                        "multi-rate-nondomestic_total_savings": 217.20608208894922
+                        "multi-rate-nondomestic_total_savings": 217.20608208894916
                     }
                 },
                 "GB0 Z13": {
                     "variables": {
-                        "load": 51287118.16704975,
+                        "load": 51288702.04290458,
                         "single-rate-domestic_wholesale_savings": -28.610597225787767,
-                        "single-rate-domestic_total_savings": 17.415207207640247,
+                        "single-rate-domestic_total_savings": 17.415207207640236,
                         "multi-rate-domestic_wholesale_savings": -37.725122830177035,
-                        "multi-rate-domestic_total_savings": 24.81789277935594,
+                        "multi-rate-domestic_total_savings": 24.81789277935593,
                         "single-rate-nondomestic_wholesale_savings": -102.36711993468734,
-                        "single-rate-nondomestic_total_savings": 75.34464007142805,
+                        "single-rate-nondomestic_total_savings": 75.34464007142802,
                         "multi-rate-nondomestic_wholesale_savings": -166.5039640415769,
-                        "multi-rate-nondomestic_total_savings": 112.48811556966078
+                        "multi-rate-nondomestic_total_savings": 112.48811556966074
                     }
                 },
                 "GB0 Z11": {
                     "variables": {
-                        "load": 77524920.83525206,
+                        "load": 77527315.00065501,
                         "single-rate-domestic_wholesale_savings": -20.872065190668412,
-                        "single-rate-domestic_total_savings": 25.153739250730986,
+                        "single-rate-domestic_total_savings": 25.153739250730975,
                         "multi-rate-domestic_wholesale_savings": -27.65689786931174,
-                        "multi-rate-domestic_total_savings": 34.886117764128464,
+                        "multi-rate-domestic_total_savings": 34.88611776412845,
                         "single-rate-nondomestic_wholesale_savings": -79.21353718898102,
-                        "single-rate-nondomestic_total_savings": 98.49822301717869,
+                        "single-rate-nondomestic_total_savings": 98.49822301717867,
                         "multi-rate-nondomestic_wholesale_savings": -125.07132949245309,
-                        "multi-rate-nondomestic_total_savings": 153.92075014742434
+                        "multi-rate-nondomestic_total_savings": 153.9207501474243
                     }
                 },
                 "GB0 Z10": {
                     "variables": {
-                        "load": 13882451.410203226,
+                        "load": 13882880.13539839,
                         "single-rate-domestic_wholesale_savings": -19.297056151695408,
-                        "single-rate-domestic_total_savings": 26.728748259113395,
+                        "single-rate-domestic_total_savings": 26.728748259113384,
                         "multi-rate-domestic_wholesale_savings": -26.170451694484033,
-                        "multi-rate-domestic_total_savings": 36.37256396467124,
+                        "multi-rate-domestic_total_savings": 36.37256396467122,
                         "single-rate-nondomestic_wholesale_savings": -72.610795513681,
-                        "single-rate-nondomestic_total_savings": 105.10096459552372,
+                        "single-rate-nondomestic_total_savings": 105.1009645955237,
                         "multi-rate-nondomestic_wholesale_savings": -115.52796251952552,
-                        "multi-rate-nondomestic_total_savings": 163.46411702668675
+                        "multi-rate-nondomestic_total_savings": 163.4641170266867
                     }
                 },
                 "GB0 Z9": {
                     "variables": {
-                        "load": 56805446.34671674,
+                        "load": 56807200.64243224,
                         "single-rate-domestic_wholesale_savings": -19.975439395289825,
-                        "single-rate-domestic_total_savings": 26.05036501828104,
+                        "single-rate-domestic_total_savings": 26.050365018281028,
                         "multi-rate-domestic_wholesale_savings": -26.793768877463695,
-                        "multi-rate-domestic_total_savings": 35.74924674584573,
+                        "multi-rate-domestic_total_savings": 35.74924674584572,
                         "single-rate-nondomestic_wholesale_savings": -75.53246805098169,
-                        "single-rate-nondomestic_total_savings": 102.17929207602492,
+                        "single-rate-nondomestic_total_savings": 102.17929207602491,
                         "multi-rate-nondomestic_wholesale_savings": -119.7131558131665,
-                        "multi-rate-nondomestic_total_savings": 159.27892376893482
+                        "multi-rate-nondomestic_total_savings": 159.27892376893476
                     }
                 },
                 "GB0 Z8": {
                     "variables": {
-                        "load": 63010208.47549728,
+                        "load": 63012154.39003053,
                         "single-rate-domestic_wholesale_savings": -19.6189229937821,
-                        "single-rate-domestic_total_savings": 26.40688142422712,
+                        "single-rate-domestic_total_savings": 26.40688142422711,
                         "multi-rate-domestic_wholesale_savings": -26.480293984491972,
-                        "multi-rate-domestic_total_savings": 36.06272164453644,
+                        "multi-rate-domestic_total_savings": 36.062721644536424,
                         "single-rate-nondomestic_wholesale_savings": -73.93220974174858,
-                        "single-rate-nondomestic_total_savings": 103.7795503429481,
+                        "single-rate-nondomestic_total_savings": 103.77955034294808,
                         "multi-rate-nondomestic_wholesale_savings": -117.4514165320728,
-                        "multi-rate-nondomestic_total_savings": 161.54066307989422
+                        "multi-rate-nondomestic_total_savings": 161.54066307989416
                     }
                 }
             },
             "globals": {
                 "variables": {
-                    "wholesale_cost": 53742836113.16134,
-                    "balancing_cost": 580164558.9239386,
-                    "congestion_rent": -2033509935.5415962,
-                    "cfd_cost": 3009311974.84857,
+                    "wholesale_cost": 53744222991.71528,
+                    "balancing_cost": 580164558.9239388,
+                    "congestion_rent": -2033509935.5415957,
+                    "cfd_cost": 3009337708.3822417,
                     "wholesale_cost_savings": -712097760.344602,
                     "balancing_cost_savings": 1058330455.9783866,
-                    "congestion_rent_savings": 2033509935.5412977,
+                    "congestion_rent_savings": 2033509935.5412972,
                     "cfd_cost_savings": -453884731.2263992
                 }
             }
         }
     },
-    "last_update": "1720470600"
+    "last_update": "1720472400"
 }

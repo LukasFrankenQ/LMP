@@ -70,6 +70,11 @@ def get_demand(demand, date, period):
         pd.Series('Spr', pd.date_range('2024-04-01', '2024-05-02', freq='D')),
         pd.Series('Smr', pd.date_range('2024-05-03', '2024-07-16', freq='D')),
         pd.Series('Hsr', pd.date_range('2024-07-17', '2024-08-24', freq='D')),
+        pd.Series('Aut', pd.date_range('2024-08-25', '2024-10-27', freq='D')),
+        pd.Series('Wtr', pd.date_range('2024-10-28', '2025-03-31', freq='D')),
+        pd.Series('Spr', pd.date_range('2025-04-01', '2025-05-02', freq='D')),
+        pd.Series('Smr', pd.date_range('2025-05-03', '2025-07-16', freq='D')),
+        pd.Series('Hsr', pd.date_range('2025-07-17', '2025-08-24', freq='D')),
     ))
 
     if isinstance(date, str):

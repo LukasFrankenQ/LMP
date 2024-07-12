@@ -16,11 +16,13 @@ from itertools import product
 sys.path.append(str(Path.cwd() / 'scripts'))
 from _aggregation_helpers import (
     set_nested_value,
+    get_nested_value,
     layouts,
     flexible_aggregate,
     flexible_scale,
     aggregate_variable,
     remove_leaves,
+    _get_key_chains,
 )
 
 
@@ -60,6 +62,13 @@ def prepare_household_total(
     now_datetime,
     ):
 
+    yearly_demands = {
+        "single-rate-domestic": 4.211,
+        "multi-rate-domestic": 5.495,
+        "single-rate-nondomestic": 16.667,
+        "multi-rate-nondomestic": 25.6824,
+    }
+
     remove_leaves(
         regional_total,
         [
@@ -83,6 +92,14 @@ def prepare_household_total(
     }
 
     hh = flexible_scale(hh, scaling_factor)
+
+    # to £/MWh
+    for k in _get_key_chains(agg):
+
+        for d in yearly_demands.keys():
+            if d in k[-1]:
+                set_nested_value(hh, k, get_nested_value(hh, k) / yearly_demands[d])
+
     hh['last_update'] = str(int(now_datetime.timestamp()))
 
     return hh

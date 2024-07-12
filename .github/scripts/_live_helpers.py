@@ -94,7 +94,7 @@ def prepare_household_total(
     hh = flexible_scale(hh, scaling_factor)
 
     # to £/MWh
-    for k in _get_key_chains(agg):
+    for k in _get_key_chains(hh):
 
         for d in yearly_demands.keys():
             if d in k[-1]:

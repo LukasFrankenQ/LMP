@@ -427,8 +427,8 @@ def prepare_constituency_total(hh_total, const_mapper_file):
     const_results = {}
     for l in ['nodal', 'zonal']:
 
-        # single-rate-domestic assumes yearly consumption of 1.8MWh
-        const[f'savings_{l}'] = const[f'single_rate_domestic_{l}'].mul(const['demand'] / 1.8)
+        # assumes household savings are already in £/MWh
+        const[f'savings_{l}'] = const[f'single_rate_domestic_{l}'].mul(const['demand'])
         const_results[f'const_savings_{l}'] = const.groupby('constituency_code')[f'savings_{l}'].sum()
 
     f = pd.concat((

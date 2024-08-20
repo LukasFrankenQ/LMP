@@ -41518,5 +41518,2773 @@
                 "variables": {}
             }
         }
+    },
+    "1724112000": {
+        "national": {
+            "geographies": {
+                "GB": {
+                    "variables": {
+                        "load": 19835.58984375,
+                        "single_rate_domestic": 0.0,
+                        "multi_rate_domestic": 0.0,
+                        "single_rate_nondomestic": 0.0,
+                        "multi_rate_nondomestic": 0.0
+                    }
+                }
+            },
+            "globals": {
+                "variables": {}
+            }
+        },
+        "nodal": {
+            "geographies": {
+                "4950": {
+                    "variables": {
+                        "load": 63.210289001464844,
+                        "single_rate_domestic": 0.0004337089019712069,
+                        "multi_rate_domestic": 0.00031270636508270907,
+                        "single_rate_nondomestic": 0.00031364055160442095,
+                        "multi_rate_nondomestic": 0.0003770218073902669
+                    }
+                },
+                "4951": {
+                    "variables": {
+                        "load": 57.24870681762695,
+                        "single_rate_domestic": 0.00043258992001352347,
+                        "multi_rate_domestic": 0.0003118995784678695,
+                        "single_rate_nondomestic": 0.0003128313521494835,
+                        "multi_rate_nondomestic": 0.00037604906398618933
+                    }
+                },
+                "4952": {
+                    "variables": {
+                        "load": 56.85453414916992,
+                        "single_rate_domestic": 0.00043145465280533773,
+                        "multi_rate_domestic": 0.00031108105538834435,
+                        "single_rate_nondomestic": 0.0003120103785544159,
+                        "multi_rate_nondomestic": 0.0003750621676282751
+                    }
+                },
+                "4953": {
+                    "variables": {
+                        "load": 56.05604553222656,
+                        "single_rate_domestic": 0.0004310575304743302,
+                        "multi_rate_domestic": 0.0003107947407308973,
+                        "single_rate_nondomestic": 0.00031172321259038407,
+                        "multi_rate_nondomestic": 0.0003747169807131628
+                    }
+                },
+                "4955": {
+                    "variables": {
+                        "load": 100.30998229980469,
+                        "single_rate_domestic": 0.0004320744047408341,
+                        "multi_rate_domestic": 0.0003115279096295231,
+                        "single_rate_nondomestic": 0.0003124585509904901,
+                        "multi_rate_nondomestic": 0.000375600923404322
+                    }
+                },
+                "4956": {
+                    "variables": {
+                        "load": 157.7752227783203,
+                        "single_rate_domestic": 0.0004329364447071472,
+                        "multi_rate_domestic": 0.00031214943381895576,
+                        "single_rate_nondomestic": 0.00031308196514166206,
+                        "multi_rate_nondomestic": 0.0003763503041651577
+                    }
+                },
+                "4958": {
+                    "variables": {
+                        "load": 84.56465148925781,
+                        "single_rate_domestic": 0.0004313530427958374,
+                        "multi_rate_domestic": 0.00031100779781635386,
+                        "single_rate_nondomestic": 0.0003119369090386863,
+                        "multi_rate_nondomestic": 0.0003749738749701098
+                    }
+                },
+                "4960": {
+                    "variables": {
+                        "load": 49.270469665527344,
+                        "single_rate_domestic": 0.0004311216484639985,
+                        "multi_rate_domestic": 0.00031084096630119325,
+                        "single_rate_nondomestic": 0.00031176955403978035,
+                        "multi_rate_nondomestic": 0.00037477272157750385
+                    }
+                },
+                "4961": {
+                    "variables": {
+                        "load": 34.29046630859375,
+                        "single_rate_domestic": 0.0004312153785135784,
+                        "multi_rate_domestic": 0.00031090854630542975,
+                        "single_rate_nondomestic": 0.000311837346238535,
+                        "multi_rate_nondomestic": 0.00037485419178612744
+                    }
+                },
+                "4962": {
+                    "variables": {
+                        "load": 87.31611633300781,
+                        "single_rate_domestic": 0.0004312014987245255,
+                        "multi_rate_domestic": 0.00031089852582204296,
+                        "single_rate_nondomestic": 0.0003118273060572838,
+                        "multi_rate_nondomestic": 0.0003748421073409285
+                    }
+                },
+                "4963": {
+                    "variables": {
+                        "load": 31.9940242767334,
+                        "single_rate_domestic": 0.0004310653827852684,
+                        "multi_rate_domestic": 0.0003108003759287427,
+                        "single_rate_nondomestic": 0.00031172886194028027,
+                        "multi_rate_nondomestic": 0.0003747238031627045
+                    }
+                },
+                "4964": {
+                    "variables": {
+                        "load": 113.24153137207031,
+                        "single_rate_domestic": 0.00043086857733013286,
+                        "multi_rate_domestic": 0.00031065847910480044,
+                        "single_rate_nondomestic": 0.00031158653747680556,
+                        "multi_rate_nondomestic": 0.00037455269757978246
+                    }
+                },
+                "4965": {
+                    "variables": {
+                        "load": 63.83732223510742,
+                        "single_rate_domestic": 0.0004313946545140137,
+                        "multi_rate_domestic": 0.0003110377957116513,
+                        "single_rate_nondomestic": 0.00031196700161536124,
+                        "multi_rate_nondomestic": 0.000375010019436831
+                    }
+                },
+                "4967": {
+                    "variables": {
+                        "load": 116.19696807861328,
+                        "single_rate_domestic": 0.00043125668609295077,
+                        "multi_rate_domestic": 0.0003109383111662298,
+                        "single_rate_nondomestic": 0.00031186721507858034,
+                        "multi_rate_nondomestic": 0.00037489008222547205
+                    }
+                },
+                "4968": {
+                    "variables": {
+                        "load": 101.10448455810547,
+                        "single_rate_domestic": 0.00043159331245095516,
+                        "multi_rate_domestic": 0.0003111810271877149,
+                        "single_rate_nondomestic": 0.0003121106405315345,
+                        "multi_rate_nondomestic": 0.0003751827217632628
+                    }
+                },
+                "4969": {
+                    "variables": {
+                        "load": 42.933433532714844,
+                        "single_rate_domestic": 0.0004311764210976911,
+                        "multi_rate_domestic": 0.00031088045505601986,
+                        "single_rate_nondomestic": 0.00031180918339028996,
+                        "multi_rate_nondomestic": 0.00037482033356579526
+                    }
+                },
+                "4970": {
+                    "variables": {
+                        "load": 36.086612701416016,
+                        "single_rate_domestic": 0.00043100618631442754,
+                        "multi_rate_domestic": 0.0003107577094307702,
+                        "single_rate_nondomestic": 0.0003116860723098782,
+                        "multi_rate_nondomestic": 0.00037467234447413964
+                    }
+                },
+                "4971": {
+                    "variables": {
+                        "load": 90.70185089111328,
+                        "single_rate_domestic": 0.000429918447706604,
+                        "multi_rate_domestic": 0.00030997344242235803,
+                        "single_rate_nondomestic": 0.00031089944228744696,
+                        "multi_rate_nondomestic": 0.0003737267457097282
+                    }
+                },
+                "4972": {
+                    "variables": {
+                        "load": 79.25088500976562,
+                        "single_rate_domestic": 0.00043105932765817167,
+                        "multi_rate_domestic": 0.0003107960118281557,
+                        "single_rate_nondomestic": 0.000311724499076004,
+                        "multi_rate_nondomestic": 0.00037471854116704733
+                    }
+                },
+                "4974": {
+                    "variables": {
+                        "load": 25.002275466918945,
+                        "single_rate_domestic": 0.0004308563011820463,
+                        "multi_rate_domestic": 0.00031064964497885475,
+                        "single_rate_nondomestic": 0.00031157767191285955,
+                        "multi_rate_nondomestic": 0.00037454202842996715
+                    }
+                },
+                "4975": {
+                    "variables": {
+                        "load": 16.37845230102539,
+                        "single_rate_domestic": 0.00043074224913056635,
+                        "multi_rate_domestic": 0.00031056740498623843,
+                        "single_rate_nondomestic": 0.0003114951969977904,
+                        "multi_rate_nondomestic": 0.0003744428851738605
+                    }
+                },
+                "4977": {
+                    "variables": {
+                        "load": 24.87848663330078,
+                        "single_rate_domestic": 0.0004303358367415473,
+                        "multi_rate_domestic": 0.0003102743958832307,
+                        "single_rate_nondomestic": 0.00031120129096779325,
+                        "multi_rate_nondomestic": 0.00037408960567232363
+                    }
+                },
+                "4979": {
+                    "variables": {
+                        "load": 41.0909309387207,
+                        "single_rate_domestic": 0.0004302225035636039,
+                        "multi_rate_domestic": 0.0003101926643295177,
+                        "single_rate_nondomestic": 0.0003111193474272193,
+                        "multi_rate_nondomestic": 0.00037399107933984573
+                    }
+                },
+                "5183": {
+                    "variables": {
+                        "load": 74.39131927490234,
+                        "single_rate_domestic": 0.000426775477306621,
+                        "multi_rate_domestic": 0.0003077073302301422,
+                        "single_rate_nondomestic": 0.00030862658576904974,
+                        "multi_rate_nondomestic": 0.0003709945724060089
+                    }
+                },
+                "5185": {
+                    "variables": {
+                        "load": 254.64410400390625,
+                        "single_rate_domestic": 0.00042677680445776545,
+                        "multi_rate_domestic": 0.00030770830473804026,
+                        "single_rate_nondomestic": 0.000308627564616804,
+                        "multi_rate_nondomestic": 0.00037099576996364123
+                    }
+                },
+                "5187": {
+                    "variables": {
+                        "load": 63.822933197021484,
+                        "single_rate_domestic": 0.0004268232547478227,
+                        "multi_rate_domestic": 0.00030774179815079827,
+                        "single_rate_nondomestic": 0.0003086611530783157,
+                        "multi_rate_nondomestic": 0.0003710361240268882
+                    }
+                },
+                "5188": {
+                    "variables": {
+                        "load": 68.99497985839844,
+                        "single_rate_domestic": 0.00042664066086952614,
+                        "multi_rate_domestic": 0.0003076101548447401,
+                        "single_rate_nondomestic": 0.0003085290925327218,
+                        "multi_rate_nondomestic": 0.0003708773932061669
+                    }
+                },
+                "5189": {
+                    "variables": {
+                        "load": 26.725252151489258,
+                        "single_rate_domestic": 0.00042692917799854265,
+                        "multi_rate_domestic": 0.0003078181487261175,
+                        "single_rate_nondomestic": 0.0003087377269397804,
+                        "multi_rate_nondomestic": 0.0003711281908060766
+                    }
+                },
+                "5193": {
+                    "variables": {
+                        "load": 152.31472778320312,
+                        "single_rate_domestic": 0.0004268700921236305,
+                        "multi_rate_domestic": 0.0003077755669679622,
+                        "single_rate_nondomestic": 0.00030869502121061437,
+                        "multi_rate_nondomestic": 0.0003710768409863874
+                    }
+                },
+                "5194": {
+                    "variables": {
+                        "load": 47.79761505126953,
+                        "single_rate_domestic": 0.00042794989547356927,
+                        "multi_rate_domestic": 0.00030855411403871174,
+                        "single_rate_nondomestic": 0.0003094758900148346,
+                        "multi_rate_nondomestic": 0.00037201550843238144
+                    }
+                },
+                "5195": {
+                    "variables": {
+                        "load": 25.39681625366211,
+                        "single_rate_domestic": 0.000426838295794127,
+                        "multi_rate_domestic": 0.00030775264484740296,
+                        "single_rate_nondomestic": 0.00030867203227192777,
+                        "multi_rate_nondomestic": 0.00037104922458159337
+                    }
+                },
+                "5198": {
+                    "variables": {
+                        "load": 27.953641891479492,
+                        "single_rate_domestic": 0.00042697161918618426,
+                        "multi_rate_domestic": 0.0003078487609850898,
+                        "single_rate_nondomestic": 0.00030876843479218664,
+                        "multi_rate_nondomestic": 0.00037116509735492747
+                    }
+                },
+                "5200": {
+                    "variables": {
+                        "load": 96.53750610351562,
+                        "single_rate_domestic": 0.00042698494599559354,
+                        "multi_rate_domestic": 0.0003078583789543448,
+                        "single_rate_nondomestic": 0.00030877808343433605,
+                        "multi_rate_nondomestic": 0.00037117667374537327
+                    }
+                },
+                "5202": {
+                    "variables": {
+                        "load": 107.45980072021484,
+                        "single_rate_domestic": 0.0004277520946550753,
+                        "multi_rate_domestic": 0.000308411496926323,
+                        "single_rate_nondomestic": 0.00030933283840731384,
+                        "multi_rate_nondomestic": 0.0003718435681880793
+                    }
+                },
+                "5203": {
+                    "variables": {
+                        "load": 67.7049789428711,
+                        "single_rate_domestic": 0.00042807260165647057,
+                        "multi_rate_domestic": 0.00030864258240789397,
+                        "single_rate_nondomestic": 0.0003095646015884525,
+                        "multi_rate_nondomestic": 0.0003721221636409091
+                    }
+                },
+                "5204": {
+                    "variables": {
+                        "load": 44.60499572753906,
+                        "single_rate_domestic": 0.00042790828375539294,
+                        "multi_rate_domestic": 0.00030852411614341424,
+                        "single_rate_nondomestic": 0.0003094457974381596,
+                        "multi_rate_nondomestic": 0.000371979327676035
+                    }
+                },
+                "5206": {
+                    "variables": {
+                        "load": 40.70056915283203,
+                        "single_rate_domestic": 0.00042821590633109374,
+                        "multi_rate_domestic": 0.0003087459014300449,
+                        "single_rate_nondomestic": 0.00030966824758209315,
+                        "multi_rate_nondomestic": 0.00037224674592429646
+                    }
+                },
+                "5207": {
+                    "variables": {
+                        "load": 89.17317962646484,
+                        "single_rate_domestic": 0.0004279972581800384,
+                        "multi_rate_domestic": 0.0003085882641850531,
+                        "single_rate_nondomestic": 0.0003095101217191563,
+                        "multi_rate_nondomestic": 0.0003720566971570085
+                    }
+                },
+                "5208": {
+                    "variables": {
+                        "load": 52.72672653198242,
+                        "single_rate_domestic": 0.00042802280583956984,
+                        "multi_rate_domestic": 0.0003086066739103452,
+                        "single_rate_nondomestic": 0.0003095286079581731,
+                        "multi_rate_nondomestic": 0.00037207887011801916
+                    }
+                },
+                "5209": {
+                    "variables": {
+                        "load": 49.62815475463867,
+                        "single_rate_domestic": 0.00042803439076310204,
+                        "multi_rate_domestic": 0.0003086150419672961,
+                        "single_rate_nondomestic": 0.00030953699808178135,
+                        "multi_rate_nondomestic": 0.0003720889586338309
+                    }
+                },
+                "5212": {
+                    "variables": {
+                        "load": 209.13565063476562,
+                        "single_rate_domestic": 0.0004179832668682427,
+                        "multi_rate_domestic": 0.00030136811398321663,
+                        "single_rate_nondomestic": 0.0003022684102633215,
+                        "multi_rate_nondomestic": 0.00036335154185873826
+                    }
+                },
+                "5213": {
+                    "variables": {
+                        "load": 114.05058288574219,
+                        "single_rate_domestic": 0.0004215639483050691,
+                        "multi_rate_domestic": 0.00030394979725477633,
+                        "single_rate_nondomestic": 0.00030485782614545815,
+                        "multi_rate_nondomestic": 0.00036646421188291095
+                    }
+                },
+                "5214": {
+                    "variables": {
+                        "load": 98.27179718017578,
+                        "single_rate_domestic": 0.0004208473419850068,
+                        "multi_rate_domestic": 0.0003034331385891589,
+                        "single_rate_nondomestic": 0.00030433959617725507,
+                        "multi_rate_nondomestic": 0.00036584130046597404
+                    }
+                },
+                "5215": {
+                    "variables": {
+                        "load": 98.82307434082031,
+                        "single_rate_domestic": 0.000426260017331896,
+                        "multi_rate_domestic": 0.00030733570376170445,
+                        "single_rate_nondomestic": 0.00030825384054421374,
+                        "multi_rate_nondomestic": 0.000370546504403392
+                    }
+                },
+                "5217": {
+                    "variables": {
+                        "load": 147.4864044189453,
+                        "single_rate_domestic": 0.00042149277982494565,
+                        "multi_rate_domestic": 0.0003038984872954469,
+                        "single_rate_nondomestic": 0.0003048063667206609,
+                        "multi_rate_nondomestic": 0.0003664023743615325
+                    }
+                },
+                "5218": {
+                    "variables": {
+                        "load": 89.2546615600586,
+                        "single_rate_domestic": 0.00042122616068981326,
+                        "multi_rate_domestic": 0.0003037062550200733,
+                        "single_rate_nondomestic": 0.0003046135337130645,
+                        "multi_rate_nondomestic": 0.00036617059252523913
+                    }
+                },
+                "5219": {
+                    "variables": {
+                        "load": 80.48662567138672,
+                        "single_rate_domestic": 0.00042230510692130454,
+                        "multi_rate_domestic": 0.0003044841877271479,
+                        "single_rate_nondomestic": 0.00030539381520863215,
+                        "multi_rate_nondomestic": 0.00036710853417872875
+                    }
+                },
+                "5221": {
+                    "variables": {
+                        "load": 151.06138610839844,
+                        "single_rate_domestic": 0.00042227541191444646,
+                        "multi_rate_domestic": 0.00030446276973834443,
+                        "single_rate_nondomestic": 0.0003053723085251163,
+                        "multi_rate_nondomestic": 0.0003670826959655707
+                    }
+                },
+                "5222": {
+                    "variables": {
+                        "load": 70.52648162841797,
+                        "single_rate_domestic": 0.0004229897233689881,
+                        "multi_rate_domestic": 0.00030497779716248024,
+                        "single_rate_nondomestic": 0.0003058888884356765,
+                        "multi_rate_nondomestic": 0.0003677036477427455
+                    }
+                },
+                "5223": {
+                    "variables": {
+                        "load": 89.55875396728516,
+                        "single_rate_domestic": 0.0004233064148108429,
+                        "multi_rate_domestic": 0.0003052061285999915,
+                        "single_rate_nondomestic": 0.0003061179108431031,
+                        "multi_rate_nondomestic": 0.0003679789408396801
+                    }
+                },
+                "5224": {
+                    "variables": {
+                        "load": 70.44087219238281,
+                        "single_rate_domestic": 0.000427063607349887,
+                        "multi_rate_domestic": 0.00030791509107702225,
+                        "single_rate_nondomestic": 0.0003088349405053214,
+                        "multi_rate_nondomestic": 0.00037124507968891684
+                    }
+                },
+                "5225": {
+                    "variables": {
+                        "load": 106.46476745605469,
+                        "single_rate_domestic": 0.00042710682270902955,
+                        "multi_rate_domestic": 0.0003079462541448065,
+                        "single_rate_nondomestic": 0.0003088662076993014,
+                        "multi_rate_nondomestic": 0.0003712826394510217
+                    }
+                },
+                "5226": {
+                    "variables": {
+                        "load": 92.84313201904297,
+                        "single_rate_domestic": 0.0004268048958236572,
+                        "multi_rate_domestic": 0.0003077285575543569,
+                        "single_rate_nondomestic": 0.000308647868715936,
+                        "multi_rate_nondomestic": 0.0003710201928814157
+                    }
+                },
+                "5228": {
+                    "variables": {
+                        "load": 205.83131408691406,
+                        "single_rate_domestic": 0.00042723530752920586,
+                        "multi_rate_domestic": 0.0003080388959499871,
+                        "single_rate_nondomestic": 0.0003089591143347235,
+                        "multi_rate_nondomestic": 0.0003713943389174553
+                    }
+                },
+                "5229": {
+                    "variables": {
+                        "load": 134.94955444335938,
+                        "single_rate_domestic": 0.00042871040837732854,
+                        "multi_rate_domestic": 0.0003091024442110167,
+                        "single_rate_nondomestic": 0.00031002583465027697,
+                        "multi_rate_nondomestic": 0.0003726766328246771
+                    }
+                },
+                "5230": {
+                    "variables": {
+                        "load": 105.23755645751953,
+                        "single_rate_domestic": 0.0004290801029180166,
+                        "multi_rate_domestic": 0.0003093689933060962,
+                        "single_rate_nondomestic": 0.0003102931999225933,
+                        "multi_rate_nondomestic": 0.00037299801374564377
+                    }
+                },
+                "5231": {
+                    "variables": {
+                        "load": 90.60689544677734,
+                        "single_rate_domestic": 0.000429071421137613,
+                        "multi_rate_domestic": 0.00030936274374457584,
+                        "single_rate_nondomestic": 0.0003102869073298871,
+                        "multi_rate_nondomestic": 0.00037299046550359755
+                    }
+                },
+                "5233": {
+                    "variables": {
+                        "load": 137.4000244140625,
+                        "single_rate_domestic": 0.00043304397159883343,
+                        "multi_rate_domestic": 0.0003122269495667618,
+                        "single_rate_nondomestic": 0.00031315971362043187,
+                        "multi_rate_nondomestic": 0.0003764437862397298
+                    }
+                },
+                "5234": {
+                    "variables": {
+                        "load": 56.445350646972656,
+                        "single_rate_domestic": 0.00042877911609803826,
+                        "multi_rate_domestic": 0.0003091519746341844,
+                        "single_rate_nondomestic": 0.0003100755321491165,
+                        "multi_rate_nondomestic": 0.0003727363292581674
+                    }
+                },
+                "5236": {
+                    "variables": {
+                        "load": 52.7390251159668,
+                        "single_rate_domestic": 0.00042992347982136024,
+                        "multi_rate_domestic": 0.0003099770862344987,
+                        "single_rate_nondomestic": 0.00031090310597475595,
+                        "multi_rate_nondomestic": 0.00037373113675438004
+                    }
+                },
+                "5238": {
+                    "variables": {
+                        "load": 32.04146194458008,
+                        "single_rate_domestic": 0.00043009296808210496,
+                        "multi_rate_domestic": 0.00031009928105093636,
+                        "single_rate_nondomestic": 0.00031102565771359386,
+                        "multi_rate_nondomestic": 0.00037387847263278167
+                    }
+                },
+                "5240": {
+                    "variables": {
+                        "load": 130.39852905273438,
+                        "single_rate_domestic": 0.00043186982992170686,
+                        "multi_rate_domestic": 0.00031138039879268967,
+                        "single_rate_nondomestic": 0.00031231060514419793,
+                        "multi_rate_nondomestic": 0.00037542310424073383
+                    }
+                },
+                "5241": {
+                    "variables": {
+                        "load": 36.30853271484375,
+                        "single_rate_domestic": 0.00043034996537143975,
+                        "multi_rate_domestic": 0.0003102845646612976,
+                        "single_rate_nondomestic": 0.00031121149895151664,
+                        "multi_rate_nondomestic": 0.0003741018715656487
+                    }
+                },
+                "5242": {
+                    "variables": {
+                        "load": 82.51880645751953,
+                        "single_rate_domestic": 0.000431640011581852,
+                        "multi_rate_domestic": 0.0003112146900801073,
+                        "single_rate_nondomestic": 0.0003121444247625971,
+                        "multi_rate_nondomestic": 0.00037522329356426106
+                    }
+                },
+                "5243": {
+                    "variables": {
+                        "load": 65.22354125976562,
+                        "single_rate_domestic": 0.0004324864298732351,
+                        "multi_rate_domestic": 0.0003118249862437577,
+                        "single_rate_nondomestic": 0.0003127565122468979,
+                        "multi_rate_nondomestic": 0.0003759591020052638
+                    }
+                },
+                "5245": {
+                    "variables": {
+                        "load": 70.79763793945312,
+                        "single_rate_domestic": 0.00043216570167998244,
+                        "multi_rate_domestic": 0.00031159373128255224,
+                        "single_rate_nondomestic": 0.0003125245812632871,
+                        "multi_rate_nondomestic": 0.00037568028881468265
+                    }
+                },
+                "5247": {
+                    "variables": {
+                        "load": 155.5217742919922,
+                        "single_rate_domestic": 0.00043188202312284687,
+                        "multi_rate_domestic": 0.0003113891905487267,
+                        "single_rate_nondomestic": 0.0003123194427410653,
+                        "multi_rate_nondomestic": 0.0003754337008112987
+                    }
+                },
+                "5248": {
+                    "variables": {
+                        "load": 61.06547164916992,
+                        "single_rate_domestic": 0.0004315308810491996,
+                        "multi_rate_domestic": 0.00031113603034476874,
+                        "single_rate_nondomestic": 0.0003120655016665221,
+                        "multi_rate_nondomestic": 0.00037512846877355585
+                    }
+                },
+                "5249": {
+                    "variables": {
+                        "load": 109.29385375976562,
+                        "single_rate_domestic": 0.00042886217364049783,
+                        "multi_rate_domestic": 0.00030921186450000776,
+                        "single_rate_nondomestic": 0.0003101356054341516,
+                        "multi_rate_nondomestic": 0.0003728085456123593
+                    }
+                },
+                "5250": {
+                    "variables": {
+                        "load": 136.54750061035156,
+                        "single_rate_domestic": 0.00042900981920532277,
+                        "multi_rate_domestic": 0.0003093183188953959,
+                        "single_rate_nondomestic": 0.00031024238374060593,
+                        "multi_rate_nondomestic": 0.0003729369020167698
+                    }
+                },
+                "5251": {
+                    "variables": {
+                        "load": 137.42404174804688,
+                        "single_rate_domestic": 0.00042905273042566144,
+                        "multi_rate_domestic": 0.0003093492701136372,
+                        "single_rate_nondomestic": 0.0003102734271979565,
+                        "multi_rate_nondomestic": 0.0003729742077514981
+                    }
+                },
+                "5252": {
+                    "variables": {
+                        "load": 60.89309310913086,
+                        "single_rate_domestic": 0.0004290743242807416,
+                        "multi_rate_domestic": 0.0003093648198700979,
+                        "single_rate_nondomestic": 0.0003102890048607891,
+                        "multi_rate_nondomestic": 0.0003729929694877379
+                    }
+                },
+                "5253": {
+                    "variables": {
+                        "load": 39.9962158203125,
+                        "single_rate_domestic": 0.00042905109913571294,
+                        "multi_rate_domestic": 0.0003093480837561961,
+                        "single_rate_nondomestic": 0.00031027222461357264,
+                        "multi_rate_nondomestic": 0.0003729727924561144
+                    }
+                },
+                "5254": {
+                    "variables": {
+                        "load": 116.08997344970703,
+                        "single_rate_domestic": 0.00042911270106800323,
+                        "multi_rate_domestic": 0.00030939248742042165,
+                        "single_rate_nondomestic": 0.00031031677616993246,
+                        "multi_rate_nondomestic": 0.000373026319653317
+                    }
+                },
+                "5256": {
+                    "variables": {
+                        "load": 124.950927734375,
+                        "single_rate_domestic": 0.00043020572063142256,
+                        "multi_rate_domestic": 0.00031018056772060893,
+                        "single_rate_nondomestic": 0.0003111072097150661,
+                        "multi_rate_nondomestic": 0.00037397649091050646
+                    }
+                },
+                "5257": {
+                    "variables": {
+                        "load": 125.70447540283203,
+                        "single_rate_domestic": 0.00043020754546424625,
+                        "multi_rate_domestic": 0.00031018190237273017,
+                        "single_rate_nondomestic": 0.0003111085241677647,
+                        "multi_rate_nondomestic": 0.0003739780876540162
+                    }
+                },
+                "5258": {
+                    "variables": {
+                        "load": 43.52582931518555,
+                        "single_rate_domestic": 0.00043103377999864016,
+                        "multi_rate_domestic": 0.00031077760210286364,
+                        "single_rate_nondomestic": 0.00031170601283698714,
+                        "multi_rate_nondomestic": 0.00037469633191641145
+                    }
+                },
+                "5259": {
+                    "variables": {
+                        "load": 57.863826751708984,
+                        "single_rate_domestic": 0.0004305332781232729,
+                        "multi_rate_domestic": 0.0003104167375912134,
+                        "single_rate_nondomestic": 0.00031134406290452704,
+                        "multi_rate_nondomestic": 0.0003742612193099988
+                    }
+                },
+                "5261": {
+                    "variables": {
+                        "load": 250.18898010253906,
+                        "single_rate_domestic": 0.00042990481675839073,
+                        "multi_rate_domestic": 0.00030996361260356,
+                        "single_rate_nondomestic": 0.00031088959787574664,
+                        "multi_rate_nondomestic": 0.0003737149152919058
+                    }
+                },
+                "5262": {
+                    "variables": {
+                        "load": 89.0195541381836,
+                        "single_rate_domestic": 0.0004303869044116281,
+                        "multi_rate_domestic": 0.00031031121533381465,
+                        "single_rate_nondomestic": 0.0003112382354787483,
+                        "multi_rate_nondomestic": 0.00037413402417359545
+                    }
+                },
+                "5264": {
+                    "variables": {
+                        "load": 114.00462341308594,
+                        "single_rate_domestic": 0.0004313403519130182,
+                        "multi_rate_domestic": 0.0003109986459160936,
+                        "single_rate_nondomestic": 0.0003119277078697959,
+                        "multi_rate_nondomestic": 0.0003749628429240423
+                    }
+                },
+                "5265": {
+                    "variables": {
+                        "load": 50.58390426635742,
+                        "single_rate_domestic": 0.0004308952862469158,
+                        "multi_rate_domestic": 0.00031067773622826464,
+                        "single_rate_nondomestic": 0.0003116058627281833,
+                        "multi_rate_nondomestic": 0.0003745759229399246
+                    }
+                },
+                "5266": {
+                    "variables": {
+                        "load": 82.36560821533203,
+                        "single_rate_domestic": 0.0004313627199395994,
+                        "multi_rate_domestic": 0.00031101478885127486,
+                        "single_rate_nondomestic": 0.00031194390080835984,
+                        "multi_rate_nondomestic": 0.0003749822941631614
+                    }
+                },
+                "5268": {
+                    "variables": {
+                        "load": 154.01852416992188,
+                        "single_rate_domestic": 0.000431415004164896,
+                        "multi_rate_domestic": 0.0003110524768849854,
+                        "single_rate_nondomestic": 0.0003119817122987544,
+                        "multi_rate_nondomestic": 0.00037502772877393936
+                    }
+                },
+                "5269": {
+                    "variables": {
+                        "load": 56.97001647949219,
+                        "single_rate_domestic": 0.00043138099591681834,
+                        "multi_rate_domestic": 0.00031102794470789895,
+                        "single_rate_nondomestic": 0.0003119571012695035,
+                        "multi_rate_nondomestic": 0.00037499815272938337
+                    }
+                },
+                "5270": {
+                    "variables": {
+                        "load": 67.36518096923828,
+                        "single_rate_domestic": 0.00043097447293187057,
+                        "multi_rate_domestic": 0.00031073485086507394,
+                        "single_rate_nondomestic": 0.00031166313930534894,
+                        "multi_rate_nondomestic": 0.00037464476435897085
+                    }
+                },
+                "5272": {
+                    "variables": {
+                        "load": 186.9576873779297,
+                        "single_rate_domestic": 0.0004307501290904868,
+                        "multi_rate_domestic": 0.0003105730825539925,
+                        "single_rate_nondomestic": 0.0003115008743147653,
+                        "multi_rate_nondomestic": 0.00037444974391302743
+                    }
+                },
+                "5273": {
+                    "variables": {
+                        "load": 172.34185791015625,
+                        "single_rate_domestic": 0.0004295699599352457,
+                        "multi_rate_domestic": 0.0003097221676793333,
+                        "single_rate_nondomestic": 0.0003106474309413338,
+                        "multi_rate_nondomestic": 0.00037342383620799955
+                    }
+                },
+                "5274": {
+                    "variables": {
+                        "load": 43.60176467895508,
+                        "single_rate_domestic": 0.0004284386188825291,
+                        "multi_rate_domestic": 0.0003089064833836852,
+                        "single_rate_nondomestic": 0.0003098293099882929,
+                        "multi_rate_nondomestic": 0.0003724403510748562
+                    }
+                },
+                "5888": {
+                    "variables": {
+                        "load": 97.45873260498047,
+                        "single_rate_domestic": 0.0004349028679685544,
+                        "multi_rate_domestic": 0.0003135672368858921,
+                        "single_rate_nondomestic": 0.00031450400719202503,
+                        "multi_rate_nondomestic": 0.0003780597269612433
+                    }
+                },
+                "5889": {
+                    "variables": {
+                        "load": 61.20966720581055,
+                        "single_rate_domestic": 0.0004338613861079129,
+                        "multi_rate_domestic": 0.00031281631499555774,
+                        "single_rate_nondomestic": 0.00031375082579571204,
+                        "multi_rate_nondomestic": 0.0003771543371015779
+                    }
+                },
+                "5896": {
+                    "variables": {
+                        "load": 3.9194107055664062,
+                        "single_rate_domestic": 0.002260575695375028,
+                        "multi_rate_domestic": 0.0016298868308522363,
+                        "single_rate_nondomestic": 0.0016347559592564862,
+                        "multi_rate_nondomestic": 0.0019651113665242748
+                    }
+                },
+                "5898": {
+                    "variables": {
+                        "load": 8.138649940490723,
+                        "single_rate_domestic": 0.0022596287730334316,
+                        "multi_rate_domestic": 0.0016292041668846762,
+                        "single_rate_nondomestic": 0.0016340713251700527,
+                        "multi_rate_nondomestic": 0.001964288317824238
+                    }
+                },
+                "5901": {
+                    "variables": {
+                        "load": 19.056270599365234,
+                        "single_rate_domestic": 0.0022585613011295437,
+                        "multi_rate_domestic": 0.0016284343903850095,
+                        "single_rate_nondomestic": 0.0016332992100614636,
+                        "multi_rate_nondomestic": 0.0019633603195280593
+                    }
+                },
+                "5902": {
+                    "variables": {
+                        "load": 20.61197853088379,
+                        "single_rate_domestic": 0.0022612859424291894,
+                        "multi_rate_domestic": 0.0016303989983075407,
+                        "single_rate_nondomestic": 0.001635269546689626,
+                        "multi_rate_nondomestic": 0.001965728725628553
+                    }
+                },
+                "5904": {
+                    "variables": {
+                        "load": 35.30015182495117,
+                        "single_rate_domestic": 0.002266204364570683,
+                        "multi_rate_domestic": 0.001633945190178749,
+                        "single_rate_nondomestic": 0.0016388265116262664,
+                        "multi_rate_nondomestic": 0.0019700045144307177
+                    }
+                },
+                "5910": {
+                    "variables": {
+                        "load": 22.85226821899414,
+                        "single_rate_domestic": 0.0022688925092138553,
+                        "multi_rate_domestic": 0.0016358833592783062,
+                        "single_rate_nondomestic": 0.0016407703354638268,
+                        "multi_rate_nondomestic": 0.001972341275978017
+                    }
+                },
+                "5912": {
+                    "variables": {
+                        "load": 23.123918533325195,
+                        "single_rate_domestic": 0.002273134526655372,
+                        "multi_rate_domestic": 0.0016389417887615705,
+                        "single_rate_nondomestic": 0.001643837988391634,
+                        "multi_rate_nondomestic": 0.0019760287373760824
+                    }
+                },
+                "5913": {
+                    "variables": {
+                        "load": 10.88008975982666,
+                        "single_rate_domestic": 0.0022281310525374457,
+                        "multi_rate_domestic": 0.0016064940653481618,
+                        "single_rate_nondomestic": 0.0016112933701251059,
+                        "multi_rate_nondomestic": 0.0019369073601186834
+                    }
+                },
+                "5914": {
+                    "variables": {
+                        "load": 9.484827041625977,
+                        "single_rate_domestic": 0.0023528060641616233,
+                        "multi_rate_domestic": 0.00169638555502094,
+                        "single_rate_nondomestic": 0.0017014533028144574,
+                        "multi_rate_nondomestic": 0.0020452870516369003
+                    }
+                },
+                "5917": {
+                    "variables": {
+                        "load": 40.53266525268555,
+                        "single_rate_domestic": 0.00243119070744143,
+                        "multi_rate_domestic": 0.0017529010813224326,
+                        "single_rate_nondomestic": 0.001758137760990024,
+                        "multi_rate_nondomestic": 0.002113426484172872
+                    }
+                },
+                "5919": {
+                    "variables": {
+                        "load": 12.504097938537598,
+                        "single_rate_domestic": 0.0029787706153572772,
+                        "multi_rate_domestic": 0.002147709143639746,
+                        "single_rate_nondomestic": 0.0021541250825090033,
+                        "multi_rate_nondomestic": 0.002589436046625758
+                    }
+                },
+                "5920": {
+                    "variables": {
+                        "load": 23.5308780670166,
+                        "single_rate_domestic": 0.0010666238543065034,
+                        "multi_rate_domestic": 0.0007690413817523513,
+                        "single_rate_nondomestic": 0.0007713387984185143,
+                        "multi_rate_nondomestic": 0.0009272127709512227
+                    }
+                },
+                "5922": {
+                    "variables": {
+                        "load": 65.1114501953125,
+                        "single_rate_domestic": 0.00023908840765218313,
+                        "multi_rate_domestic": 0.0001723839857594673,
+                        "single_rate_nondomestic": 0.00017289895486613532,
+                        "multi_rate_nondomestic": 0.00020783879437803328
+                    }
+                },
+                "5924": {
+                    "variables": {
+                        "load": 8.42048454284668,
+                        "single_rate_domestic": 0.0003550245160756198,
+                        "multi_rate_domestic": 0.0002559745192127965,
+                        "single_rate_nondomestic": 0.0002567392087335811,
+                        "multi_rate_nondomestic": 0.0003086217064763253
+                    }
+                },
+                "5926": {
+                    "variables": {
+                        "load": 46.458805084228516,
+                        "single_rate_domestic": 0.0003947002525199051,
+                        "multi_rate_domestic": 0.0002845809443415129,
+                        "single_rate_nondomestic": 0.00028543111020627764,
+                        "multi_rate_nondomestic": 0.0003431117291836331
+                    }
+                },
+                "5927": {
+                    "variables": {
+                        "load": 62.66112518310547,
+                        "single_rate_domestic": 0.0003900918307665791,
+                        "multi_rate_domestic": 0.0002812582325532798,
+                        "single_rate_nondomestic": 0.00028209846920784315,
+                        "multi_rate_nondomestic": 0.0003391056085864931
+                    }
+                },
+                "5928": {
+                    "variables": {
+                        "load": 28.610397338867188,
+                        "single_rate_domestic": 0.00038558618028000484,
+                        "multi_rate_domestic": 0.0002780096469201639,
+                        "single_rate_nondomestic": 0.00027884019267165644,
+                        "multi_rate_nondomestic": 0.00033518886933627505
+                    }
+                },
+                "5929": {
+                    "variables": {
+                        "load": 63.823753356933594,
+                        "single_rate_domestic": 0.00040358223920341195,
+                        "multi_rate_domestic": 0.00029098490180879793,
+                        "single_rate_nondomestic": 0.0002918541973016551,
+                        "multi_rate_nondomestic": 0.0003508327824251311
+                    }
+                },
+                "5934": {
+                    "variables": {
+                        "load": 83.17902374267578,
+                        "single_rate_domestic": 0.00040431344418606364,
+                        "multi_rate_domestic": 0.0002915121105816598,
+                        "single_rate_nondomestic": 0.00029238297085852594,
+                        "multi_rate_nondomestic": 0.000351468431500521
+                    }
+                },
+                "5939": {
+                    "variables": {
+                        "load": 31.853315353393555,
+                        "single_rate_domestic": 0.00040296779587249346,
+                        "multi_rate_domestic": 0.0002905418820443486,
+                        "single_rate_nondomestic": 0.00029140985635536196,
+                        "multi_rate_nondomestic": 0.00035029867172111273
+                    }
+                },
+                "5941": {
+                    "variables": {
+                        "load": 128.34765625,
+                        "single_rate_domestic": 0.00039855944215419996,
+                        "multi_rate_domestic": 0.0002873634186099858,
+                        "single_rate_nondomestic": 0.00028822188905501246,
+                        "multi_rate_nondomestic": 0.0003464664872976621
+                    }
+                },
+                "5942": {
+                    "variables": {
+                        "load": 64.2431869506836,
+                        "single_rate_domestic": 0.00040694277944414544,
+                        "multi_rate_domestic": 0.0002934078674026962,
+                        "single_rate_nondomestic": 0.0002942843966047858,
+                        "multi_rate_nondomestic": 0.0003537540972555078
+                    }
+                },
+                "5943": {
+                    "variables": {
+                        "load": 28.662216186523438,
+                        "single_rate_domestic": 0.0018560739616203389,
+                        "multi_rate_domestic": 0.0013382390730081546,
+                        "single_rate_nondomestic": 0.0013422368726259556,
+                        "multi_rate_nondomestic": 0.001613479413972503
+                    }
+                },
+                "5944": {
+                    "variables": {
+                        "load": 21.120452880859375,
+                        "single_rate_domestic": 0.0004303938996041189,
+                        "multi_rate_domestic": 0.0003103162573529395,
+                        "single_rate_nondomestic": 0.00031124329751999193,
+                        "multi_rate_nondomestic": 0.0003741400845410075
+                    }
+                },
+                "5946": {
+                    "variables": {
+                        "load": 90.71556091308594,
+                        "single_rate_domestic": 0.0005488565167209213,
+                        "multi_rate_domestic": 0.0003957284214721881,
+                        "single_rate_nondomestic": 0.0003969105986879105,
+                        "multi_rate_nondomestic": 0.00047711926290255186
+                    }
+                },
+                "5949": {
+                    "variables": {
+                        "load": 61.38605880737305,
+                        "single_rate_domestic": 0.0005610423079337346,
+                        "multi_rate_domestic": 0.00040451441520165205,
+                        "single_rate_nondomestic": 0.00040572288534905293,
+                        "multi_rate_nondomestic": 0.00048771234966337503
+                    }
+                },
+                "5950": {
+                    "variables": {
+                        "load": 79.43263244628906,
+                        "single_rate_domestic": 0.0005544297773562942,
+                        "multi_rate_domestic": 0.0003997467412350623,
+                        "single_rate_nondomestic": 0.00040094096236560736,
+                        "multi_rate_nondomestic": 0.00048196407302819914
+                    }
+                },
+                "5951": {
+                    "variables": {
+                        "load": 50.297515869140625,
+                        "single_rate_domestic": 0.0005475789125524886,
+                        "multi_rate_domestic": 0.00039480725728904993,
+                        "single_rate_nondomestic": 0.0003959867062432482,
+                        "multi_rate_nondomestic": 0.00047600865521225564
+                    }
+                },
+                "5952": {
+                    "variables": {
+                        "load": 38.508384704589844,
+                        "single_rate_domestic": 0.000318166183266184,
+                        "multi_rate_domestic": 0.0002293994769825843,
+                        "single_rate_nondomestic": 0.0002300847788614523,
+                        "multi_rate_nondomestic": 0.00027658087057525507
+                    }
+                },
+                "5953": {
+                    "variables": {
+                        "load": 35.876502990722656,
+                        "single_rate_domestic": 0.0005405411406291668,
+                        "multi_rate_domestic": 0.0003897329522938335,
+                        "single_rate_nondomestic": 0.00039089725726248147,
+                        "multi_rate_nondomestic": 0.0004698907324545677
+                    }
+                },
+                "5954": {
+                    "variables": {
+                        "load": 33.17166519165039,
+                        "single_rate_domestic": 0.0005316548683534225,
+                        "multi_rate_domestic": 0.00038332594419312837,
+                        "single_rate_nondomestic": 0.00038447106582136897,
+                        "multi_rate_nondomestic": 0.00046216590509204645
+                    }
+                },
+                "5955": {
+                    "variables": {
+                        "load": 58.573665618896484,
+                        "single_rate_domestic": 0.0005267346213791048,
+                        "multi_rate_domestic": 0.0003797783964848446,
+                        "single_rate_nondomestic": 0.000380912954234502,
+                        "multi_rate_nondomestic": 0.00045788877357374807
+                    }
+                },
+                "5957": {
+                    "variables": {
+                        "load": 166.0707550048828,
+                        "single_rate_domestic": 0.0005173302624753288,
+                        "multi_rate_domestic": 0.0003729978128999055,
+                        "single_rate_nondomestic": 0.0003741121158072023,
+                        "multi_rate_nondomestic": 0.00044971359196222096
+                    }
+                },
+                "5959": {
+                    "variables": {
+                        "load": 46.491844177246094,
+                        "single_rate_domestic": 0.0005229806084730112,
+                        "multi_rate_domestic": 0.0003770717643527875,
+                        "single_rate_nondomestic": 0.00037819821787273667,
+                        "multi_rate_nondomestic": 0.00045462542902565344
+                    }
+                },
+                "5960": {
+                    "variables": {
+                        "load": 20.272045135498047,
+                        "single_rate_domestic": 0.0005197409219333732,
+                        "multi_rate_domestic": 0.0003747359112909959,
+                        "single_rate_nondomestic": 0.0003758553877234466,
+                        "multi_rate_nondomestic": 0.00045180913637066943
+                    }
+                },
+                "5961": {
+                    "variables": {
+                        "load": 38.08294677734375,
+                        "single_rate_domestic": 0.0005184915197267609,
+                        "multi_rate_domestic": 0.00037383508466399157,
+                        "single_rate_nondomestic": 0.0003749518553120737,
+                        "multi_rate_nondomestic": 0.0004507230604670233
+                    }
+                },
+                "5962": {
+                    "variables": {
+                        "load": 72.51516723632812,
+                        "single_rate_domestic": 0.0005180469793913198,
+                        "multi_rate_domestic": 0.00037351459867524873,
+                        "single_rate_nondomestic": 0.0003746304296766415,
+                        "multi_rate_nondomestic": 0.0004503366485376587
+                    }
+                },
+                "5963": {
+                    "variables": {
+                        "load": 41.652587890625,
+                        "single_rate_domestic": 0.0005116822942901137,
+                        "multi_rate_domestic": 0.00036892559861327666,
+                        "single_rate_nondomestic": 0.00037002771973346823,
+                        "multi_rate_nondomestic": 0.00044480382340742624
+                    }
+                },
+                "5966": {
+                    "variables": {
+                        "load": 206.93833923339844,
+                        "single_rate_domestic": 0.0005028577345425884,
+                        "multi_rate_domestic": 0.00036256303654670576,
+                        "single_rate_nondomestic": 0.00036364616374995166,
+                        "multi_rate_nondomestic": 0.0004371326684006085
+                    }
+                },
+                "5967": {
+                    "variables": {
+                        "load": 61.68889617919922,
+                        "single_rate_domestic": 0.0005058369676701196,
+                        "multi_rate_domestic": 0.00036471110617352796,
+                        "single_rate_nondomestic": 0.00036580063562423646,
+                        "multi_rate_nondomestic": 0.0004397225137942067
+                    }
+                },
+                "5968": {
+                    "variables": {
+                        "load": 15.683829307556152,
+                        "single_rate_domestic": 0.0003517057534469557,
+                        "multi_rate_domestic": 0.0002535816998088758,
+                        "single_rate_nondomestic": 0.00025433924184251885,
+                        "multi_rate_nondomestic": 0.0003057367175607959
+                    }
+                },
+                "5969": {
+                    "variables": {
+                        "load": 66.85804748535156,
+                        "single_rate_domestic": 0.0004067132652430945,
+                        "multi_rate_domestic": 0.0002932423917246112,
+                        "single_rate_nondomestic": 0.00029411841199273583,
+                        "multi_rate_nondomestic": 0.00035355457689603687
+                    }
+                },
+                "5971": {
+                    "variables": {
+                        "load": 151.1597900390625,
+                        "single_rate_domestic": 0.000371308107638915,
+                        "multi_rate_domestic": 0.00026771509377951624,
+                        "single_rate_nondomestic": 0.00026851485908608013,
+                        "multi_rate_nondomestic": 0.0003227769828489469
+                    }
+                },
+                "5973": {
+                    "variables": {
+                        "load": 63.72918701171875,
+                        "single_rate_domestic": 0.0003884749735868352,
+                        "multi_rate_domestic": 0.0002800924880726776,
+                        "single_rate_nondomestic": 0.00028092922158179693,
+                        "multi_rate_nondomestic": 0.00033770007511201705
+                    }
+                },
+                "5974": {
+                    "variables": {
+                        "load": 70.43472290039062,
+                        "single_rate_domestic": 0.0003908665275981952,
+                        "multi_rate_domestic": 0.00028181679505851474,
+                        "single_rate_nondomestic": 0.00028265870572824497,
+                        "multi_rate_nondomestic": 0.0003397790714513642
+                    }
+                },
+                "5976": {
+                    "variables": {
+                        "load": 117.35350799560547,
+                        "single_rate_domestic": 0.000417843473614356,
+                        "multi_rate_domestic": 0.00030126733715558245,
+                        "single_rate_nondomestic": 0.00030216733724092073,
+                        "multi_rate_nondomestic": 0.00036323004419349476
+                    }
+                },
+                "5978": {
+                    "variables": {
+                        "load": 121.4613037109375,
+                        "single_rate_domestic": 0.00041229399110365525,
+                        "multi_rate_domestic": 0.0002972661136508334,
+                        "single_rate_nondomestic": 0.0002981541733166208,
+                        "multi_rate_nondomestic": 0.00035840588286459893
+                    }
+                },
+                "5980": {
+                    "variables": {
+                        "load": 138.6688690185547,
+                        "single_rate_domestic": 0.00040949522288279307,
+                        "multi_rate_domestic": 0.0002952482043832679,
+                        "single_rate_nondomestic": 0.0002961302237986017,
+                        "multi_rate_nondomestic": 0.0003559729175208356
+                    }
+                },
+                "5981": {
+                    "variables": {
+                        "load": 63.8177490234375,
+                        "single_rate_domestic": 0.0004102522520147981,
+                        "multi_rate_domestic": 0.0002957940135460105,
+                        "single_rate_nondomestic": 0.00029667765139696156,
+                        "multi_rate_nondomestic": 0.0003566309935846127
+                    }
+                },
+                "5982": {
+                    "variables": {
+                        "load": 57.004981994628906,
+                        "single_rate_domestic": 0.0004147830354261711,
+                        "multi_rate_domestic": 0.0002990607335000125,
+                        "single_rate_nondomestic": 0.00029995413450137814,
+                        "multi_rate_nondomestic": 0.00036056961547883964
+                    }
+                },
+                "5983": {
+                    "variables": {
+                        "load": 69.51024627685547,
+                        "single_rate_domestic": 0.00041132688500506977,
+                        "multi_rate_domestic": 0.00029656883206480213,
+                        "single_rate_nondomestic": 0.00029745480057971537,
+                        "multi_rate_nondomestic": 0.0003575651974067044
+                    }
+                },
+                "5984": {
+                    "variables": {
+                        "load": 62.39888000488281,
+                        "single_rate_domestic": 0.0004154432654715746,
+                        "multi_rate_domestic": 0.0002995367594232708,
+                        "single_rate_nondomestic": 0.00030043158846884514,
+                        "multi_rate_nondomestic": 0.0003611435359017266
+                    }
+                },
+                "5986": {
+                    "variables": {
+                        "load": 164.2726287841797,
+                        "single_rate_domestic": 0.0004201343023836453,
+                        "multi_rate_domestic": 0.00030291902211805827,
+                        "single_rate_nondomestic": 0.0003038239671473705,
+                        "multi_rate_nondomestic": 0.0003652214373775559
+                    }
+                },
+                "5987": {
+                    "variables": {
+                        "load": 57.51465606689453,
+                        "single_rate_domestic": 0.0004324009115713618,
+                        "multi_rate_domestic": 0.0003117633168417726,
+                        "single_rate_nondomestic": 0.00031269467703590507,
+                        "multi_rate_nondomestic": 0.000375884780852809
+                    }
+                },
+                "5988": {
+                    "variables": {
+                        "load": 82.20773315429688,
+                        "single_rate_domestic": 0.0004239549769857677,
+                        "multi_rate_domestic": 0.0003056737440963902,
+                        "single_rate_nondomestic": 0.00030658691875280454,
+                        "multi_rate_nondomestic": 0.0003685427364571302
+                    }
+                },
+                "5989": {
+                    "variables": {
+                        "load": 54.874237060546875,
+                        "single_rate_domestic": 0.0004275110508284566,
+                        "multi_rate_domestic": 0.00030823771674615,
+                        "single_rate_nondomestic": 0.00030915854757289173,
+                        "multi_rate_nondomestic": 0.000371634031892047
+                    }
+                },
+                "5990": {
+                    "variables": {
+                        "load": 76.10592651367188,
+                        "single_rate_domestic": 0.00042344255839908224,
+                        "multi_rate_domestic": 0.0003053042784932917,
+                        "single_rate_nondomestic": 0.00030621635496010666,
+                        "multi_rate_nondomestic": 0.0003680972813075293
+                    }
+                },
+                "5992": {
+                    "variables": {
+                        "load": 150.84796142578125,
+                        "single_rate_domestic": 0.00042144845850651595,
+                        "multi_rate_domestic": 0.0003038665403843533,
+                        "single_rate_nondomestic": 0.00030477428848139866,
+                        "multi_rate_nondomestic": 0.0003663638347795466
+                    }
+                },
+                "5993": {
+                    "variables": {
+                        "load": 93.35608673095703,
+                        "single_rate_domestic": 0.0004292335271201165,
+                        "multi_rate_domestic": 0.0003094796211374827,
+                        "single_rate_nondomestic": 0.00031040414532377305,
+                        "multi_rate_nondomestic": 0.0003731313781183349
+                    }
+                },
+                "5995": {
+                    "variables": {
+                        "load": 204.68118286132812,
+                        "single_rate_domestic": 0.0004309481511008381,
+                        "multi_rate_domestic": 0.00031071586914601567,
+                        "single_rate_nondomestic": 0.00031164409372475823,
+                        "multi_rate_nondomestic": 0.000374621901895081
+                    }
+                },
+                "5996": {
+                    "variables": {
+                        "load": 94.8866195678711,
+                        "single_rate_domestic": 0.00043235003744415625,
+                        "multi_rate_domestic": 0.0003117266456858687,
+                        "single_rate_nondomestic": 0.00031265790032742225,
+                        "multi_rate_nondomestic": 0.0003758405437996633
+                    }
+                },
+                "5997": {
+                    "variables": {
+                        "load": 88.9479751586914,
+                        "single_rate_domestic": 0.0004318967047323829,
+                        "multi_rate_domestic": 0.0003113997830258798,
+                        "single_rate_nondomestic": 0.00031233004226389034,
+                        "multi_rate_nondomestic": 0.00037544647475937687
+                    }
+                },
+                "5998": {
+                    "variables": {
+                        "load": 16.379653930664062,
+                        "single_rate_domestic": 0.0004323046378154216,
+                        "multi_rate_domestic": 0.00031169389374651146,
+                        "single_rate_nondomestic": 0.0003126250390099566,
+                        "multi_rate_nondomestic": 0.0003758010606874217
+                    }
+                },
+                "5999": {
+                    "variables": {
+                        "load": 81.6153564453125,
+                        "single_rate_domestic": 0.0004327263953895489,
+                        "multi_rate_domestic": 0.00031199798258062136,
+                        "single_rate_nondomestic": 0.0003129300479701953,
+                        "multi_rate_nondomestic": 0.0003761676947710403
+                    }
+                },
+                "6001": {
+                    "variables": {
+                        "load": 102.21110534667969,
+                        "single_rate_domestic": 0.00039583618330366304,
+                        "multi_rate_domestic": 0.00028539995467498705,
+                        "single_rate_nondomestic": 0.0002862525592416831,
+                        "multi_rate_nondomestic": 0.0003440991698859256
+                    }
+                },
+                "6003": {
+                    "variables": {
+                        "load": 78.15196228027344,
+                        "single_rate_domestic": 0.00041545026066406546,
+                        "multi_rate_domestic": 0.00029954182262734993,
+                        "single_rate_nondomestic": 0.00030043665051008884,
+                        "multi_rate_nondomestic": 0.00036114963255876395
+                    }
+                },
+                "6004": {
+                    "variables": {
+                        "load": 52.847293853759766,
+                        "single_rate_domestic": 0.00041939765055150477,
+                        "multi_rate_domestic": 0.0003023878941286498,
+                        "single_rate_nondomestic": 0.0003032912502324037,
+                        "multi_rate_nondomestic": 0.00036458107065088727
+                    }
+                },
+                "6006": {
+                    "variables": {
+                        "load": 164.13665771484375,
+                        "single_rate_domestic": 0.00041487991745971925,
+                        "multi_rate_domestic": 0.0002991305802943597,
+                        "single_rate_nondomestic": 0.00030002422000058575,
+                        "multi_rate_nondomestic": 0.0003606538074093548
+                    }
+                },
+                "6007": {
+                    "variables": {
+                        "load": 71.7026138305664,
+                        "single_rate_domestic": 0.0004334619965603668,
+                        "multi_rate_domestic": 0.0003125283479116748,
+                        "single_rate_nondomestic": 0.0003134620097740373,
+                        "multi_rate_nondomestic": 0.00037680715425707836
+                    }
+                },
+                "6009": {
+                    "variables": {
+                        "load": 182.68975830078125,
+                        "single_rate_domestic": 0.0004340669562903985,
+                        "multi_rate_domestic": 0.0003129645461208376,
+                        "single_rate_nondomestic": 0.00031389949878605036,
+                        "multi_rate_nondomestic": 0.00037733306350579664
+                    }
+                },
+                "6010": {
+                    "variables": {
+                        "load": 104.53559112548828,
+                        "single_rate_domestic": 0.00043416853865091664,
+                        "multi_rate_domestic": 0.0003130377825078738,
+                        "single_rate_nondomestic": 0.0003139729403347012,
+                        "multi_rate_nondomestic": 0.0003774213561639619
+                    }
+                },
+                "6012": {
+                    "variables": {
+                        "load": 71.96863555908203,
+                        "single_rate_domestic": 0.0004202387049403455,
+                        "multi_rate_domestic": 0.00030299429226070783,
+                        "single_rate_nondomestic": 0.00030389945029276607,
+                        "multi_rate_nondomestic": 0.0003653121977302363
+                    }
+                },
+                "6013": {
+                    "variables": {
+                        "load": 69.08609008789062,
+                        "single_rate_domestic": 0.0004222278833140843,
+                        "multi_rate_domestic": 0.0003044284924822771,
+                        "single_rate_nondomestic": 0.00030533793698540114,
+                        "multi_rate_nondomestic": 0.0003670413620824427
+                    }
+                },
+                "6014": {
+                    "variables": {
+                        "load": 85.74715423583984,
+                        "single_rate_domestic": 0.0004246571228881515,
+                        "multi_rate_domestic": 0.0003061800009494433,
+                        "single_rate_nondomestic": 0.00030709468903357607,
+                        "multi_rate_nondomestic": 0.00036915312795336545
+                    }
+                },
+                "6016": {
+                    "variables": {
+                        "load": 115.07424926757812,
+                        "single_rate_domestic": 0.00042195872047259164,
+                        "multi_rate_domestic": 0.0003042344383008332,
+                        "single_rate_nondomestic": 0.00030514331408476835,
+                        "multi_rate_nondomestic": 0.00036680740286863605
+                    }
+                },
+                "6018": {
+                    "variables": {
+                        "load": 165.21221923828125,
+                        "single_rate_domestic": 0.00042242015433614284,
+                        "multi_rate_domestic": 0.0003045671480082106,
+                        "single_rate_nondomestic": 0.0003054770172677473,
+                        "multi_rate_nondomestic": 0.0003672085483858408
+                    }
+                },
+                "6019": {
+                    "variables": {
+                        "load": 32.22006607055664,
+                        "single_rate_domestic": 0.0004324009115713618,
+                        "multi_rate_domestic": 0.0003117633168417726,
+                        "single_rate_nondomestic": 0.00031269467703590507,
+                        "multi_rate_nondomestic": 0.000375884780852809
+                    }
+                },
+                "6020": {
+                    "variables": {
+                        "load": 67.5361557006836,
+                        "single_rate_domestic": 0.00046839875275748647,
+                        "multi_rate_domestic": 0.00033771795768513044,
+                        "single_rate_nondomestic": 0.00033872685339062777,
+                        "multi_rate_nondomestic": 0.0004071775787091767
+                    }
+                },
+                "6021": {
+                    "variables": {
+                        "load": 83.29998779296875,
+                        "single_rate_domestic": 0.0004597747310776906,
+                        "multi_rate_domestic": 0.00033149998293169867,
+                        "single_rate_nondomestic": 0.0003324903067101405,
+                        "multi_rate_nondomestic": 0.0003996807227723006
+                    }
+                },
+                "6023": {
+                    "variables": {
+                        "load": 30.04671287536621,
+                        "single_rate_domestic": 0.0004303007501831647,
+                        "multi_rate_domestic": 0.0003102491010477892,
+                        "single_rate_nondomestic": 0.0003111759248274177,
+                        "multi_rate_nondomestic": 0.0003740591223871371
+                    }
+                },
+                "6025": {
+                    "variables": {
+                        "load": 27.832929611206055,
+                        "single_rate_domestic": 0.0004324009115713618,
+                        "multi_rate_domestic": 0.0003117633168417726,
+                        "single_rate_nondomestic": 0.00031269467703590507,
+                        "multi_rate_nondomestic": 0.000375884780852809
+                    }
+                },
+                "6026": {
+                    "variables": {
+                        "load": 20.45945167541504,
+                        "single_rate_domestic": 0.000434562038965259,
+                        "multi_rate_domestic": 0.00031332149141594123,
+                        "single_rate_nondomestic": 0.00031425750536041456,
+                        "multi_rate_nondomestic": 0.00037776342217130517
+                    }
+                },
+                "6028": {
+                    "variables": {
+                        "load": 67.58720397949219,
+                        "single_rate_domestic": 0.00043670903772926386,
+                        "multi_rate_domestic": 0.00031486949721204287,
+                        "single_rate_nondomestic": 0.0003158101536682793,
+                        "multi_rate_nondomestic": 0.0003796298338861014
+                    }
+                },
+                "6029": {
+                    "variables": {
+                        "load": 57.88383483886719,
+                        "single_rate_domestic": 0.00043502961090285356,
+                        "multi_rate_domestic": 0.0003136586287787686,
+                        "single_rate_nondomestic": 0.00031459565530890586,
+                        "multi_rate_nondomestic": 0.00037816990226341755
+                    }
+                },
+                "6030": {
+                    "variables": {
+                        "load": 24.873767852783203,
+                        "single_rate_domestic": 0.0004348185109239325,
+                        "multi_rate_domestic": 0.00031350641488207923,
+                        "single_rate_nondomestic": 0.00031444298302631433,
+                        "multi_rate_nondomestic": 0.00037798638562866954
+                    }
+                },
+                "6031": {
+                    "variables": {
+                        "load": 101.40870666503906,
+                        "single_rate_domestic": 0.00043446750709519603,
+                        "multi_rate_domestic": 0.00031325333941793846,
+                        "single_rate_nondomestic": 0.00031418915382008594,
+                        "multi_rate_nondomestic": 0.00037768126245980236
+                    }
+                },
+                "6032": {
+                    "variables": {
+                        "load": 24.153011322021484,
+                        "single_rate_domestic": 0.00044429293234854493,
+                        "multi_rate_domestic": 0.0003203375245830384,
+                        "single_rate_nondomestic": 0.0003212944978002079,
+                        "multi_rate_nondomestic": 0.0003862224612313192
+                    }
+                },
+                "6033": {
+                    "variables": {
+                        "load": 58.77304458618164,
+                        "single_rate_domestic": 0.000438838119952818,
+                        "multi_rate_domestic": 0.00031640458018601783,
+                        "single_rate_nondomestic": 0.0003173497972845513,
+                        "multi_rate_nondomestic": 0.000381480604772427
+                    }
+                },
+                "6035": {
+                    "variables": {
+                        "load": 196.88751220703125,
+                        "single_rate_domestic": 0.0004510243535493461,
+                        "multi_rate_domestic": 0.0003251909128747507,
+                        "single_rate_nondomestic": 0.0003261623636164807,
+                        "multi_rate_nondomestic": 0.0003920740544295024
+                    }
+                },
+                "6036": {
+                    "variables": {
+                        "load": 99.27017974853516,
+                        "single_rate_domestic": 0.0004510243535493461,
+                        "multi_rate_domestic": 0.0003251909128747507,
+                        "single_rate_nondomestic": 0.0003261623636164807,
+                        "multi_rate_nondomestic": 0.0003920740544295024
+                    }
+                },
+                "6037": {
+                    "variables": {
+                        "load": 79.70284271240234,
+                        "single_rate_domestic": 0.0004510243535493461,
+                        "multi_rate_domestic": 0.0003251909128747507,
+                        "single_rate_nondomestic": 0.0003261623636164807,
+                        "multi_rate_nondomestic": 0.0003920740544295024
+                    }
+                },
+                "6038": {
+                    "variables": {
+                        "load": 62.86189651489258,
+                        "single_rate_domestic": 0.00044328678588712554,
+                        "multi_rate_domestic": 0.0003196120881927343,
+                        "single_rate_nondomestic": 0.00032056690628090015,
+                        "multi_rate_nondomestic": 0.00038534784497384217
+                    }
+                },
+                "6039": {
+                    "variables": {
+                        "load": 57.242191314697266,
+                        "single_rate_domestic": 0.0004440735653239529,
+                        "multi_rate_domestic": 0.00032017935771418897,
+                        "single_rate_nondomestic": 0.0003211358685298545,
+                        "multi_rate_nondomestic": 0.00038603175925077727
+                    }
+                },
+                "6040": {
+                    "variables": {
+                        "load": 23.148473739624023,
+                        "single_rate_domestic": 0.0004510243535493461,
+                        "multi_rate_domestic": 0.0003251909128747507,
+                        "single_rate_nondomestic": 0.0003261623636164807,
+                        "multi_rate_nondomestic": 0.0003920740544295024
+                    }
+                },
+                "6041": {
+                    "variables": {
+                        "load": 50.48692321777344,
+                        "single_rate_domestic": 0.0004442992916144456,
+                        "multi_rate_domestic": 0.00032034210053316853,
+                        "single_rate_nondomestic": 0.00032129908440111374,
+                        "multi_rate_nondomestic": 0.000386227977254353
+                    }
+                },
+                "6042": {
+                    "variables": {
+                        "load": 59.269386291503906,
+                        "single_rate_domestic": 0.00044375410898388044,
+                        "multi_rate_domestic": 0.00031994903489097296,
+                        "single_rate_nondomestic": 0.00032090483249276185,
+                        "multi_rate_nondomestic": 0.000385754071038578
+                    }
+                },
+                "6043": {
+                    "variables": {
+                        "load": 35.998409271240234,
+                        "single_rate_domestic": 0.0004438214895534457,
+                        "multi_rate_domestic": 0.00031999761199119685,
+                        "single_rate_nondomestic": 0.00032095355114384716,
+                        "multi_rate_nondomestic": 0.0003858126424936864
+                    }
+                },
+                "6045": {
+                    "variables": {
+                        "load": 132.82814025878906,
+                        "single_rate_domestic": 0.0004345133767566276,
+                        "multi_rate_domestic": 0.0003132864091316103,
+                        "single_rate_nondomestic": 0.00031422232277541725,
+                        "multi_rate_nondomestic": 0.0003777211084682962
+                    }
+                },
+                "6046": {
+                    "variables": {
+                        "load": 43.201202392578125,
+                        "single_rate_domestic": 0.0004377362250661199,
+                        "multi_rate_domestic": 0.00031561010202963016,
+                        "single_rate_nondomestic": 0.000316552931311318,
+                        "multi_rate_nondomestic": 0.0003805227401146905
+                    }
+                },
+                "6047": {
+                    "variables": {
+                        "load": 102.87297821044922,
+                        "single_rate_domestic": 0.00043004361464891907,
+                        "multi_rate_domestic": 0.00031006369032770214,
+                        "single_rate_nondomestic": 0.00031098997172118004,
+                        "multi_rate_nondomestic": 0.00037383557829576917
+                    }
+                },
+                "6048": {
+                    "variables": {
+                        "load": 51.321044921875,
+                        "single_rate_domestic": 0.0004345636149572431,
+                        "multi_rate_domestic": 0.00031332263540347375,
+                        "single_rate_nondomestic": 0.000314258652010641,
+                        "multi_rate_nondomestic": 0.00037776480117706355
+                    }
+                },
+                "6050": {
+                    "variables": {
+                        "load": 195.1744384765625,
+                        "single_rate_domestic": 0.00042749600978215233,
+                        "multi_rate_domestic": 0.0003082268488645909,
+                        "single_rate_nondomestic": 0.000309147640412201,
+                        "multi_rate_nondomestic": 0.0003716209676269671
+                    }
+                },
+                "6051": {
+                    "variables": {
+                        "load": 111.24070739746094,
+                        "single_rate_domestic": 0.00042838766180837694,
+                        "multi_rate_domestic": 0.0003088697274879641,
+                        "single_rate_nondomestic": 0.000309792449378574,
+                        "multi_rate_nondomestic": 0.0003723960414424601
+                    }
+                },
+                "6437": {
+                    "variables": {
+                        "load": 3.493971109390259,
+                        "single_rate_domestic": 0.0022107429394341454,
+                        "multi_rate_domestic": 0.0015939571483490754,
+                        "single_rate_nondomestic": 0.0015987190359392585,
+                        "multi_rate_nondomestic": 0.0019217920054211868
+                    }
+                },
+                "6439": {
+                    "variables": {
+                        "load": 4.505480766296387,
+                        "single_rate_domestic": 0.002210128468454245,
+                        "multi_rate_domestic": 0.0015935141285846263,
+                        "single_rate_nondomestic": 0.0015982745831246506,
+                        "multi_rate_nondomestic": 0.0019212578221379179
+                    }
+                },
+                "6440": {
+                    "variables": {
+                        "load": 8.475699424743652,
+                        "single_rate_domestic": 0.002209879406422795,
+                        "multi_rate_domestic": 0.0015933344801721103,
+                        "single_rate_nondomestic": 0.00159809447513786,
+                        "multi_rate_nondomestic": 0.0019210412456545924
+                    }
+                },
+                "6441": {
+                    "variables": {
+                        "load": 1.3836376667022705,
+                        "single_rate_domestic": 0.002210128468454245,
+                        "multi_rate_domestic": 0.0015935141285846263,
+                        "single_rate_nondomestic": 0.0015982745831246506,
+                        "multi_rate_nondomestic": 0.0019212578221379179
+                    }
+                },
+                "6442": {
+                    "variables": {
+                        "load": 5.399188041687012,
+                        "single_rate_domestic": 0.002210128468454245,
+                        "multi_rate_domestic": 0.0015935141285846263,
+                        "single_rate_nondomestic": 0.0015982745831246506,
+                        "multi_rate_nondomestic": 0.0019212578221379179
+                    }
+                },
+                "6443": {
+                    "variables": {
+                        "load": 1.8638275861740112,
+                        "single_rate_domestic": 0.002210128468454245,
+                        "multi_rate_domestic": 0.0015935141285846263,
+                        "single_rate_nondomestic": 0.0015982745831246506,
+                        "multi_rate_nondomestic": 0.0019212578221379179
+                    }
+                },
+                "6447": {
+                    "variables": {
+                        "load": 4.045251846313477,
+                        "single_rate_domestic": 0.002207653331569764,
+                        "multi_rate_domestic": 0.0015917295080338793,
+                        "single_rate_nondomestic": 0.0015964845782199084,
+                        "multi_rate_nondomestic": 0.001919106137679251
+                    }
+                },
+                "6448": {
+                    "variables": {
+                        "load": 11.020021438598633,
+                        "single_rate_domestic": 0.002207779189736633,
+                        "multi_rate_domestic": 0.0015918203491179443,
+                        "single_rate_nondomestic": 0.0015965757508964514,
+                        "multi_rate_nondomestic": 0.0019192155871889207
+                    }
+                },
+                "6451": {
+                    "variables": {
+                        "load": 3.60842227935791,
+                        "single_rate_domestic": 0.0022113224621005743,
+                        "multi_rate_domestic": 0.0015943750851276264,
+                        "single_rate_nondomestic": 0.0015991380946464122,
+                        "multi_rate_nondomestic": 0.0019222958505777698
+                    }
+                },
+                "6453": {
+                    "variables": {
+                        "load": 7.266554355621338,
+                        "single_rate_domestic": 0.002241489049998633,
+                        "multi_rate_domestic": 0.0016161252540146224,
+                        "single_rate_nondomestic": 0.0016209533109743904,
+                        "multi_rate_nondomestic": 0.0019485194595557425
+                    }
+                },
+                "6454": {
+                    "variables": {
+                        "load": 0.5970197916030884,
+                        "single_rate_domestic": 0.002241489049998633,
+                        "multi_rate_domestic": 0.0016161252540146224,
+                        "single_rate_nondomestic": 0.0016209533109743904,
+                        "multi_rate_nondomestic": 0.0019485194595557425
+                    }
+                },
+                "6455": {
+                    "variables": {
+                        "load": 4.162576198577881,
+                        "single_rate_domestic": 0.0022479447555491658,
+                        "multi_rate_domestic": 0.001620779842695126,
+                        "single_rate_nondomestic": 0.0016256217994866523,
+                        "multi_rate_nondomestic": 0.0019541314323585843
+                    }
+                },
+                "6457": {
+                    "variables": {
+                        "load": 7.855726718902588,
+                        "single_rate_domestic": 0.002241489049998633,
+                        "multi_rate_domestic": 0.0016161252540146224,
+                        "single_rate_nondomestic": 0.0016209533109743904,
+                        "multi_rate_nondomestic": 0.0019485194595557425
+                    }
+                },
+                "6458": {
+                    "variables": {
+                        "load": 24.942913055419922,
+                        "single_rate_domestic": 0.002233899072603273,
+                        "multi_rate_domestic": 0.0016106529260979025,
+                        "single_rate_nondomestic": 0.0016154644921098707,
+                        "multi_rate_nondomestic": 0.0019419214250563663
+                    }
+                },
+                "6460": {
+                    "variables": {
+                        "load": 4.072134017944336,
+                        "single_rate_domestic": 0.002212550519292946,
+                        "multi_rate_domestic": 0.0015952604467379874,
+                        "single_rate_nondomestic": 0.0016000262171974246,
+                        "multi_rate_nondomestic": 0.0019233633461933025
+                    }
+                },
+                "6462": {
+                    "variables": {
+                        "load": 6.306324005126953,
+                        "single_rate_domestic": 0.0022066068728923303,
+                        "multi_rate_domestic": 0.001590974984701313,
+                        "single_rate_nondomestic": 0.0015957279009387586,
+                        "multi_rate_nondomestic": 0.001918196429354184
+                    }
+                },
+                "6464": {
+                    "variables": {
+                        "load": 12.320213317871094,
+                        "single_rate_domestic": 0.0022143213813034155,
+                        "multi_rate_domestic": 0.001596537306303925,
+                        "single_rate_nondomestic": 0.001601306661928359,
+                        "multi_rate_nondomestic": 0.0019249026069367218
+                    }
+                },
+                "6466": {
+                    "variables": {
+                        "load": 13.017033576965332,
+                        "single_rate_domestic": 0.0022565378380179054,
+                        "multi_rate_domestic": 0.0016269755096916735,
+                        "single_rate_nondomestic": 0.0016318359725041843,
+                        "multi_rate_nondomestic": 0.0019616012888142953
+                    }
+                },
+                "6467": {
+                    "variables": {
+                        "load": 13.514448165893555,
+                        "single_rate_domestic": 0.0022606340900253852,
+                        "multi_rate_domestic": 0.001629929031281214,
+                        "single_rate_nondomestic": 0.001634798133611157,
+                        "multi_rate_nondomestic": 0.0019651621719995855
+                    }
+                },
+                "6468": {
+                    "variables": {
+                        "load": 8.452610969543457,
+                        "single_rate_domestic": 0.002199540235431616,
+                        "multi_rate_domestic": 0.0015858800879305112,
+                        "single_rate_nondomestic": 0.0015906176444514435,
+                        "multi_rate_nondomestic": 0.0019120534667550928
+                    }
+                },
+                "6469": {
+                    "variables": {
+                        "load": 15.066597938537598,
+                        "single_rate_domestic": 0.002179175985886788,
+                        "multi_rate_domestic": 0.0015711972198000333,
+                        "single_rate_nondomestic": 0.001575890963889292,
+                        "multi_rate_nondomestic": 0.0018943509520962644
+                    }
+                },
+                "6471": {
+                    "variables": {
+                        "load": 15.69882869720459,
+                        "single_rate_domestic": 0.0022125483073743716,
+                        "multi_rate_domestic": 0.0015952589214212774,
+                        "single_rate_nondomestic": 0.001600024539172703,
+                        "multi_rate_nondomestic": 0.0019233614591327908
+                    }
+                },
+                "6472": {
+                    "variables": {
+                        "load": 9.240438461303711,
+                        "single_rate_domestic": 0.002210397216561005,
+                        "multi_rate_domestic": 0.0015937080132864356,
+                        "single_rate_nondomestic": 0.0015984690102557326,
+                        "multi_rate_nondomestic": 0.001921491382165847
+                    }
+                },
+                "6474": {
+                    "variables": {
+                        "load": 7.510251998901367,
+                        "single_rate_domestic": 0.0022092748890764776,
+                        "multi_rate_domestic": 0.0015928987480319423,
+                        "single_rate_nondomestic": 0.0015976572937637127,
+                        "multi_rate_nondomestic": 0.001920515771881377
+                    }
+                },
+                "6475": {
+                    "variables": {
+                        "load": 7.828760147094727,
+                        "single_rate_domestic": 0.002209606676862601,
+                        "multi_rate_domestic": 0.0015931378837961497,
+                        "single_rate_nondomestic": 0.0015978972512989086,
+                        "multi_rate_nondomestic": 0.001920804201822642
+                    }
+                },
+                "6477": {
+                    "variables": {
+                        "load": 19.515167236328125,
+                        "single_rate_domestic": 0.002115102898165488,
+                        "multi_rate_domestic": 0.0015250002915623254,
+                        "single_rate_nondomestic": 0.0015295561147236083,
+                        "multi_rate_nondomestic": 0.0018386524740374238
+                    }
+                },
+                "6480": {
+                    "variables": {
+                        "load": 18.261953353881836,
+                        "single_rate_domestic": 0.002104227115728219,
+                        "multi_rate_domestic": 0.001517158807835645,
+                        "single_rate_nondomestic": 0.0015216911009849165,
+                        "multi_rate_nondomestic": 0.0018291981557160694
+                    }
+                },
+                "6482": {
+                    "variables": {
+                        "load": 56.494789123535156,
+                        "single_rate_domestic": 0.002093100944108355,
+                        "multi_rate_domestic": 0.0015091366588186421,
+                        "single_rate_nondomestic": 0.001513645084312916,
+                        "multi_rate_nondomestic": 0.0018195260996433822
+                    }
+                },
+                "6484": {
+                    "variables": {
+                        "load": 17.842363357543945,
+                        "single_rate_domestic": 0.002080291502453558,
+                        "multi_rate_domestic": 0.0014999010356189855,
+                        "single_rate_nondomestic": 0.0015043819403761443,
+                        "multi_rate_nondomestic": 0.0018083909910402423
+                    }
+                },
+                "6485": {
+                    "variables": {
+                        "load": 3.3982346057891846,
+                        "single_rate_domestic": 0.0022070934949786447,
+                        "multi_rate_domestic": 0.0015913259770242566,
+                        "single_rate_nondomestic": 0.0015960798386570462,
+                        "multi_rate_nondomestic": 0.0019186195663842736
+                    }
+                },
+                "6486": {
+                    "variables": {
+                        "load": 5.402801036834717,
+                        "single_rate_domestic": 0.002206974714951213,
+                        "multi_rate_domestic": 0.0015912402203292256,
+                        "single_rate_nondomestic": 0.0015959939237912978,
+                        "multi_rate_nondomestic": 0.0019185162135316408
+                    }
+                },
+                "7286": {
+                    "variables": {
+                        "load": 127.1594009399414,
+                        "single_rate_domestic": 0.0004316695959927814,
+                        "multi_rate_domestic": 0.00031123604451404783,
+                        "single_rate_nondomestic": 0.00031216581957779814,
+                        "multi_rate_nondomestic": 0.00037524905919816874
+                    }
+                },
+                "7361": {
+                    "variables": {
+                        "load": 126.60165405273438,
+                        "single_rate_domestic": 0.0004288037789901401,
+                        "multi_rate_domestic": 0.00030916974881084724,
+                        "single_rate_nondomestic": 0.0003100933751453234,
+                        "multi_rate_nondomestic": 0.0003727577764266737
+                    }
+                },
+                "7412": {
+                    "variables": {
+                        "load": 65.18444061279297,
+                        "single_rate_domestic": 0.00040477368914338123,
+                        "multi_rate_domestic": 0.00029184393052095637,
+                        "single_rate_nondomestic": 0.0002927157790949867,
+                        "multi_rate_nondomestic": 0.00035186848832896903
+                    }
+                },
+                "7454": {
+                    "variables": {
+                        "load": 129.2024383544922,
+                        "single_rate_domestic": 0.0004336329225681847,
+                        "multi_rate_domestic": 0.00031265160197582775,
+                        "single_rate_nondomestic": 0.0003135856242618655,
+                        "multi_rate_nondomestic": 0.00037695576027236275
+                    }
+                },
+                "7455": {
+                    "variables": {
+                        "load": 94.64990997314453,
+                        "single_rate_domestic": 0.00041776907020331784,
+                        "multi_rate_domestic": 0.00030121369685127936,
+                        "single_rate_nondomestic": 0.00030211352858151315,
+                        "multi_rate_nondomestic": 0.00036316537608134904
+                    }
+                },
+                "7456": {
+                    "variables": {
+                        "load": 66.47845458984375,
+                        "single_rate_domestic": 0.0004185279241681465,
+                        "multi_rate_domestic": 0.0003017607982962347,
+                        "single_rate_nondomestic": 0.0003026622985996503,
+                        "multi_rate_nondomestic": 0.00036382501259901067
+                    }
+                },
+                "7457": {
+                    "variables": {
+                        "load": 66.47845458984375,
+                        "single_rate_domestic": 0.0004171143699543497,
+                        "multi_rate_domestic": 0.0003007416325144764,
+                        "single_rate_nondomestic": 0.00030164007390629937,
+                        "multi_rate_nondomestic": 0.0003625962095993661
+                    }
+                },
+                "7458": {
+                    "variables": {
+                        "load": 67.34857940673828,
+                        "single_rate_domestic": 0.00042693708560744524,
+                        "multi_rate_domestic": 0.00030782386866378016,
+                        "single_rate_nondomestic": 0.0003087434601909127,
+                        "multi_rate_nondomestic": 0.0003711350858348688
+                    }
+                },
+                "7461": {
+                    "variables": {
+                        "load": 73.80470275878906,
+                        "single_rate_domestic": 0.00042278979357886654,
+                        "multi_rate_domestic": 0.0003048336547333815,
+                        "single_rate_nondomestic": 0.00030574432660590627,
+                        "multi_rate_nondomestic": 0.000367529856727557
+                    }
+                },
+                "7462": {
+                    "variables": {
+                        "load": 73.80470275878906,
+                        "single_rate_domestic": 0.0004223509212847717,
+                        "multi_rate_domestic": 0.0003045172150709111,
+                        "single_rate_nondomestic": 0.00030542692822980603,
+                        "multi_rate_nondomestic": 0.0003671483438975974
+                    }
+                },
+                "7463": {
+                    "variables": {
+                        "load": 84.10298919677734,
+                        "single_rate_domestic": 0.0004214469931104606,
+                        "multi_rate_domestic": 0.00030386548113663797,
+                        "single_rate_nondomestic": 0.000304773253699487,
+                        "multi_rate_nondomestic": 0.0003663625646426639
+                    }
+                },
+                "7464": {
+                    "variables": {
+                        "load": 84.10298919677734,
+                        "single_rate_domestic": 0.000421444560000029,
+                        "multi_rate_domestic": 0.0003038637227854306,
+                        "single_rate_nondomestic": 0.00030477146380645056,
+                        "multi_rate_nondomestic": 0.00036636042355477576
+                    }
+                },
+                "7465": {
+                    "variables": {
+                        "load": 106.27996826171875,
+                        "single_rate_domestic": 0.00042016792354597254,
+                        "multi_rate_domestic": 0.0003029432577057844,
+                        "single_rate_nondomestic": 0.0003038482705387557,
+                        "multi_rate_nondomestic": 0.00036525065052585965
+                    }
+                },
+                "7466": {
+                    "variables": {
+                        "load": 106.27996826171875,
+                        "single_rate_domestic": 0.00041956359974253083,
+                        "multi_rate_domestic": 0.0003025075467505707,
+                        "single_rate_nondomestic": 0.00030341125696708044,
+                        "multi_rate_nondomestic": 0.00036472532191114497
+                    }
+                },
+                "7469": {
+                    "variables": {
+                        "load": 9.850139617919922,
+                        "single_rate_domestic": 0.0022219710805002776,
+                        "multi_rate_domestic": 0.0016020528515274292,
+                        "single_rate_nondomestic": 0.001606838773830697,
+                        "multi_rate_nondomestic": 0.001931552608179416
+                    }
+                },
+                "7471": {
+                    "variables": {
+                        "load": 8.079124450683594,
+                        "single_rate_domestic": 0.002078279762510363,
+                        "multi_rate_domestic": 0.001498450628907372,
+                        "single_rate_nondomestic": 0.001502927092942473,
+                        "multi_rate_nondomestic": 0.0018066421214215402
+                    }
+                },
+                "7908": {
+                    "variables": {
+                        "load": 135.52601623535156,
+                        "single_rate_domestic": 0.00041434009873169634,
+                        "multi_rate_domestic": 0.0002987413703138479,
+                        "single_rate_nondomestic": 0.0002996338275490937,
+                        "multi_rate_nondomestic": 0.0003601845462656082
+                    }
+                },
+                "7909": {
+                    "variables": {
+                        "load": 111.01837921142578,
+                        "single_rate_domestic": 0.0004365803317172302,
+                        "multi_rate_domestic": 0.00031477668592722784,
+                        "single_rate_nondomestic": 0.00031571705126330634,
+                        "multi_rate_nondomestic": 0.0003795179166819166
+                    }
+                },
+                "7945": {
+                    "variables": {
+                        "load": 25.378381729125977,
+                        "single_rate_domestic": 0.0004267377364459494,
+                        "multi_rate_domestic": 0.0003076801499337675,
+                        "single_rate_nondomestic": 0.0003085993178673229,
+                        "multi_rate_nondomestic": 0.0003709618028744334
+                    }
+                },
+                "7946": {
+                    "variables": {
+                        "load": 38.656089782714844,
+                        "single_rate_domestic": 0.0004422326684416292,
+                        "multi_rate_domestic": 0.00031885205677204833,
+                        "single_rate_nondomestic": 0.00031980460761693287,
+                        "multi_rate_nondomestic": 0.0003844314956473596
+                    }
+                },
+                "8013": {
+                    "variables": {
+                        "load": 5.166903972625732,
+                        "single_rate_domestic": 0.002207170690936883,
+                        "multi_rate_domestic": 0.001591381566344356,
+                        "single_rate_nondomestic": 0.0015961356609461197,
+                        "multi_rate_nondomestic": 0.0019186866296116837
+                    }
+                },
+                "8014": {
+                    "variables": {
+                        "load": 69.02619171142578,
+                        "single_rate_domestic": 0.00043099612208491515,
+                        "multi_rate_domestic": 0.0003107504429914432,
+                        "single_rate_nondomestic": 0.000311678772902339,
+                        "multi_rate_nondomestic": 0.0003746635623848359
+                    }
+                },
+                "8015": {
+                    "variables": {
+                        "load": 12.0210599899292,
+                        "single_rate_domestic": 0.0022070120963751157,
+                        "multi_rate_domestic": 0.0015912673370707376,
+                        "single_rate_nondomestic": 0.0015960209959234738,
+                        "multi_rate_nondomestic": 0.0019185488741943406
+                    }
+                },
+                "8016": {
+                    "variables": {
+                        "load": 111.46246337890625,
+                        "single_rate_domestic": 0.00042804937651144193,
+                        "multi_rate_domestic": 0.00030862584629399217,
+                        "single_rate_nondomestic": 0.000309547821341236,
+                        "multi_rate_nondomestic": 0.00037210198660928565
+                    }
+                },
+                "8017": {
+                    "variables": {
+                        "load": 36.816062927246094,
+                        "single_rate_domestic": 0.0005790896280700976,
+                        "multi_rate_domestic": 0.0004175266378355503,
+                        "single_rate_nondomestic": 0.00041877394635832135,
+                        "multi_rate_nondomestic": 0.0005034007901223788
+                    }
+                },
+                "8019": {
+                    "variables": {
+                        "load": 1.5402148962020874,
+                        "single_rate_domestic": 0.0022127259244358764,
+                        "multi_rate_domestic": 0.0015953868785452863,
+                        "single_rate_nondomestic": 0.0016001529639980664,
+                        "multi_rate_nondomestic": 0.001923515762619235
+                    }
+                },
+                "8020": {
+                    "variables": {
+                        "load": 16.721630096435547,
+                        "single_rate_domestic": 0.002208913461581461,
+                        "multi_rate_domestic": 0.0015926380883541599,
+                        "single_rate_nondomestic": 0.0015973959693803942,
+                        "multi_rate_nondomestic": 0.0019202016488854548
+                    }
+                },
+                "8021": {
+                    "variables": {
+                        "load": 73.45684814453125,
+                        "single_rate_domestic": 0.0004447482834360172,
+                        "multi_rate_domestic": 0.0003206658278199201,
+                        "single_rate_nondomestic": 0.0003216237821847531,
+                        "multi_rate_nondomestic": 0.0003866183084632416
+                    }
+                },
+                "8022": {
+                    "variables": {
+                        "load": 87.68299865722656,
+                        "single_rate_domestic": 0.0003800429464392761,
+                        "multi_rate_domestic": 0.00027401293581068195,
+                        "single_rate_nondomestic": 0.00027483153144702626,
+                        "multi_rate_nondomestic": 0.00033037015145116245
+                    }
+                },
+                "8023": {
+                    "variables": {
+                        "load": 63.7396240234375,
+                        "single_rate_domestic": 0.0004032268115375272,
+                        "multi_rate_domestic": 0.00029072862741655694,
+                        "single_rate_nondomestic": 0.0002915971518813769,
+                        "multi_rate_nondomestic": 0.0003505238125559905
+                    }
+                },
+                "8024": {
+                    "variables": {
+                        "load": 80.09942626953125,
+                        "single_rate_domestic": 0.000430787814653194,
+                        "multi_rate_domestic": 0.00031060026285036725,
+                        "single_rate_nondomestic": 0.00031152814221649215,
+                        "multi_rate_nondomestic": 0.000374482513444603
+                    }
+                },
+                "8025": {
+                    "variables": {
+                        "load": 80.09942626953125,
+                        "single_rate_domestic": 0.0004320087107591817,
+                        "multi_rate_domestic": 0.00031148054007169466,
+                        "single_rate_nondomestic": 0.0003124110628908674,
+                        "multi_rate_nondomestic": 0.0003755438398238476
+                    }
+                },
+                "8026": {
+                    "variables": {
+                        "load": 90.80712890625,
+                        "single_rate_domestic": 0.0003645798660710642,
+                        "multi_rate_domestic": 0.00026286397227791465,
+                        "single_rate_nondomestic": 0.0002636492586031816,
+                        "multi_rate_nondomestic": 0.00031692814766228064
+                    }
+                },
+                "8027": {
+                    "variables": {
+                        "load": 44.57870864868164,
+                        "single_rate_domestic": 0.00034919317984060717,
+                        "multi_rate_domestic": 0.00025177011081129754,
+                        "single_rate_nondomestic": 0.0002525222487068366,
+                        "multi_rate_nondomestic": 0.00030355253574274255
+                    }
+                },
+                "8029": {
+                    "variables": {
+                        "load": 77.52416229248047,
+                        "single_rate_domestic": 0.0004346759527718281,
+                        "multi_rate_domestic": 0.000313403625483786,
+                        "single_rate_nondomestic": 0.0003143398684071689,
+                        "multi_rate_nondomestic": 0.00037786245655853617
+                    }
+                },
+                "8030": {
+                    "variables": {
+                        "load": 122.01058959960938,
+                        "single_rate_domestic": 0.00043020715837849575,
+                        "multi_rate_domestic": 0.0003101816057833699,
+                        "single_rate_nondomestic": 0.0003111082444969778,
+                        "multi_rate_nondomestic": 0.0003739777610473892
+                    }
+                },
+                "8032": {
+                    "variables": {
+                        "load": 7.867239952087402,
+                        "single_rate_domestic": 0.0021844184540993966,
+                        "multi_rate_domestic": 0.0015749771240871463,
+                        "single_rate_nondomestic": 0.0015796821810770748,
+                        "multi_rate_nondomestic": 0.001898908203231652
+                    }
+                },
+                "8033": {
+                    "variables": {
+                        "load": 19.489652633666992,
+                        "single_rate_domestic": 0.002097007192310315,
+                        "multi_rate_domestic": 0.0015119530713839134,
+                        "single_rate_nondomestic": 0.0015164698711293426,
+                        "multi_rate_nondomestic": 0.001822921792454662
+                    }
+                },
+                "8034": {
+                    "variables": {
+                        "load": 10.145666122436523,
+                        "single_rate_domestic": 0.0021007639148166624,
+                        "multi_rate_domestic": 0.0015146616949016753,
+                        "single_rate_nondomestic": 0.001519186593153695,
+                        "multi_rate_nondomestic": 0.0018261874232491453
+                    }
+                },
+                "8035": {
+                    "variables": {
+                        "load": 20.456745147705078,
+                        "single_rate_domestic": 0.002262849105285546,
+                        "multi_rate_domestic": 0.0016315260378766256,
+                        "single_rate_nondomestic": 0.0016363999760104447,
+                        "multi_rate_nondomestic": 0.0019670875543553678
+                    }
+                },
+                "8036": {
+                    "variables": {
+                        "load": 9.814745903015137,
+                        "single_rate_domestic": 0.0022604611179928864,
+                        "multi_rate_domestic": 0.0016298042942702595,
+                        "single_rate_nondomestic": 0.0016346731767035514,
+                        "multi_rate_nondomestic": 0.0019650117877926653
+                    }
+                },
+                "8037": {
+                    "variables": {
+                        "load": 16.9254207611084,
+                        "single_rate_domestic": 0.0022640415505888736,
+                        "multi_rate_domestic": 0.0016323858080621847,
+                        "single_rate_nondomestic": 0.0016372623688490585,
+                        "multi_rate_nondomestic": 0.001968124276368712
+                    }
+                },
+                "8093": {
+                    "variables": {
+                        "load": 80.09942626953125,
+                        "single_rate_domestic": 0.0004307882293879266,
+                        "multi_rate_domestic": 0.0003106005594397275,
+                        "single_rate_nondomestic": 0.0003115284498543578,
+                        "multi_rate_nondomestic": 0.0003744828763408552
+                    }
+                },
+                "8189": {
+                    "variables": {
+                        "load": 42.2731819152832,
+                        "single_rate_domestic": 0.0004267241884446827,
+                        "multi_rate_domestic": 0.00030767038366983235,
+                        "single_rate_nondomestic": 0.0003085895014227012,
+                        "multi_rate_nondomestic": 0.00037095000874623626
+                    }
+                },
+                "8283": {
+                    "variables": {
+                        "load": 212.17190551757812,
+                        "single_rate_domestic": 0.0004359444604251246,
+                        "multi_rate_domestic": 0.00031431824351604366,
+                        "single_rate_nondomestic": 0.00031525721655541666,
+                        "multi_rate_nondomestic": 0.000378965153110534
+                    }
+                },
+                "8290": {
+                    "variables": {
+                        "load": 62.714378356933594,
+                        "single_rate_domestic": 0.0004267351374416248,
+                        "multi_rate_domestic": 0.00030767826447283423,
+                        "single_rate_nondomestic": 0.0003085974161059717,
+                        "multi_rate_nondomestic": 0.0003709595529176696
+                    }
+                },
+                "8397": {
+                    "variables": {
+                        "load": 63.690277099609375,
+                        "single_rate_domestic": 0.0004269506889066763,
+                        "multi_rate_domestic": 0.00030783367729762383,
+                        "single_rate_nondomestic": 0.00030875330460261303,
+                        "multi_rate_nondomestic": 0.00037114691625269116
+                    }
+                },
+                "8473": {
+                    "variables": {
+                        "load": 112.08893585205078,
+                        "single_rate_domestic": 0.00043059385704322263,
+                        "multi_rate_domestic": 0.0003104604209669926,
+                        "single_rate_nondomestic": 0.0003113878873168408,
+                        "multi_rate_nondomestic": 0.0003743139118458212
+                    }
+                },
+                "8489": {
+                    "variables": {
+                        "load": 8.174211502075195,
+                        "single_rate_domestic": 0.0021749352955964156,
+                        "multi_rate_domestic": 0.001568139637714941,
+                        "single_rate_nondomestic": 0.0015728243177763179,
+                        "multi_rate_nondomestic": 0.0018906645068077056
+                    }
+                },
+                "8515": {
+                    "variables": {
+                        "load": 124.6815185546875,
+                        "single_rate_domestic": 0.0004267719382369023,
+                        "multi_rate_domestic": 0.00030770480922057977,
+                        "single_rate_nondomestic": 0.00030862404076488855,
+                        "multi_rate_nondomestic": 0.00037099152407749027
+                    }
+                },
+                "8529": {
+                    "variables": {
+                        "load": 125.76879119873047,
+                        "single_rate_domestic": 0.0004267740672085299,
+                        "multi_rate_domestic": 0.00030770633453728984,
+                        "single_rate_nondomestic": 0.00030862557895421674,
+                        "multi_rate_nondomestic": 0.00037099337484837664
+                    }
+                },
+                "8565": {
+                    "variables": {
+                        "load": 12.904261589050293,
+                        "single_rate_domestic": 0.0022373547529916777,
+                        "multi_rate_domestic": 0.0016131444462039355,
+                        "single_rate_nondomestic": 0.0016179635183936677,
+                        "multi_rate_nondomestic": 0.0019449254802322495
+                    }
+                },
+                "8575": {
+                    "variables": {
+                        "load": 118.9177474975586,
+                        "single_rate_domestic": 0.00041477993874016735,
+                        "multi_rate_domestic": 0.0002990585090798103,
+                        "single_rate_nondomestic": 0.0002999518971350826,
+                        "multi_rate_nondomestic": 0.00036056689375694794
+                    }
+                },
+                "8578": {
+                    "variables": {
+                        "load": 196.36288452148438,
+                        "single_rate_domestic": 0.00042955574835840674,
+                        "multi_rate_domestic": 0.00030971193534640347,
+                        "single_rate_nondomestic": 0.000310637167023453,
+                        "multi_rate_nondomestic": 0.0003734114614457988
+                    }
+                },
+                "8649": {
+                    "variables": {
+                        "load": 80.16188049316406,
+                        "single_rate_domestic": 0.0004220603581310741,
+                        "multi_rate_domestic": 0.000304307717057778,
+                        "single_rate_nondomestic": 0.0003052168115675767,
+                        "multi_rate_nondomestic": 0.0003668957681060518
+                    }
+                },
+                "8744": {
+                    "variables": {
+                        "load": 7.611998081207275,
+                        "single_rate_domestic": 0.0022621625257601276,
+                        "multi_rate_domestic": 0.0016310309878644004,
+                        "single_rate_nondomestic": 0.0016359036162977804,
+                        "multi_rate_nondomestic": 0.001966490952916717
+                    }
+                },
+                "8747": {
+                    "variables": {
+                        "load": 81.65899658203125,
+                        "single_rate_domestic": 0.0004261235143068884,
+                        "multi_rate_domestic": 0.00030723727846399825,
+                        "single_rate_nondomestic": 0.0003081551167564232,
+                        "multi_rate_nondomestic": 0.0003704278373289159
+                    }
+                },
+                "8838": {
+                    "variables": {
+                        "load": 50.950374603271484,
+                        "single_rate_domestic": 0.0004138382420562025,
+                        "multi_rate_domestic": 0.00029837953129429955,
+                        "single_rate_nondomestic": 0.00029927089876887933,
+                        "multi_rate_nondomestic": 0.0003597483086808137
+                    }
+                },
+                "8860": {
+                    "variables": {
+                        "load": 152.50193786621094,
+                        "single_rate_domestic": 0.0004323691152418583,
+                        "multi_rate_domestic": 0.0003117403947212134,
+                        "single_rate_nondomestic": 0.00031267168809721846,
+                        "multi_rate_nondomestic": 0.00037585712815838983
+                    }
+                }
+            },
+            "globals": {
+                "variables": {}
+            }
+        },
+        "eso": {
+            "geographies": {
+                "GB0 Z7": {
+                    "variables": {
+                        "load": 1186.214111328125,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z6": {
+                    "variables": {
+                        "load": 114.71468353271484,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z5": {
+                    "variables": {
+                        "load": 526.9266357421875,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z3": {
+                    "variables": {
+                        "load": 0.0,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z2": {
+                    "variables": {
+                        "load": 45.126407623291016,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z1_4": {
+                    "variables": {
+                        "load": 20.083572387695312,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z1_2": {
+                    "variables": {
+                        "load": 0.0,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z1_3": {
+                    "variables": {
+                        "load": 0.0,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z1_1": {
+                    "variables": {
+                        "load": 0.0,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z4": {
+                    "variables": {
+                        "load": 0.0,
+                        "single_rate_domestic": 0.0017541192246102514,
+                        "multi_rate_domestic": 0.0012647291458419353,
+                        "single_rate_nondomestic": 0.0012685073749328052,
+                        "multi_rate_nondomestic": 0.0015248504235606483
+                    }
+                },
+                "GB0 Z12": {
+                    "variables": {
+                        "load": 1459.12353515625,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z14": {
+                    "variables": {
+                        "load": 2296.593505859375,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z15": {
+                    "variables": {
+                        "load": 634.0759887695312,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z17": {
+                    "variables": {
+                        "load": 789.809814453125,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z16": {
+                    "variables": {
+                        "load": 1200.0279541015625,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z13": {
+                    "variables": {
+                        "load": 2251.039306640625,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z11": {
+                    "variables": {
+                        "load": 3402.64111328125,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z10": {
+                    "variables": {
+                        "load": 609.313720703125,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z9": {
+                    "variables": {
+                        "load": 2493.243896484375,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                },
+                "GB0 Z8": {
+                    "variables": {
+                        "load": 2765.57666015625,
+                        "single_rate_domestic": 0.00034279346347898293,
+                        "multi_rate_domestic": 0.00024715587946874684,
+                        "single_rate_nondomestic": 0.0002478942285574452,
+                        "multi_rate_nondomestic": 0.000297989299906574
+                    }
+                }
+            },
+            "globals": {
+                "variables": {}
+            }
+        }
     }
 }

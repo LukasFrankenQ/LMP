@@ -54,7 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     day, period = args.day, args.period
 
-    assert (int(day is None) + int(period is None)) % 2 == 0, "day and period must be both None or not None"
+    assert (int(day is None) + int(period is None)) % 2 == 0, "day and period must be both None or defined"
 
     if day is None:
         day, period = to_date_period(pd.Timestamp.now())

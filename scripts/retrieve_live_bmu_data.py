@@ -31,8 +31,7 @@ pn_url = "https://data.elexon.co.uk/bmrs/api/v1/datasets/PN?settlementDate={}&se
 mels_url = "https://data.elexon.co.uk/bmrs/api/v1/datasets/MELS?from={}T{}%3A{}Z&to={}T{}%3A{}Z&format=csv"
 
 if __name__ == "__main__":
-
-    configure_logging(snakemake)
+    # configure_logging(snakemake)
 
     date = snakemake.wildcards.date
     period = int(snakemake.wildcards.period)

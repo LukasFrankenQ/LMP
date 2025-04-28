@@ -198,8 +198,6 @@ rule build_bus_regions:
 rule retrieve_wiki_data:
     output:
         wiki_data=RESOURCES + "wiki_data.csv",
-    log:
-        LOGS + "retrieve_wiki_data.log",
     threads: 1
     resources:
         mem_mb=1000,

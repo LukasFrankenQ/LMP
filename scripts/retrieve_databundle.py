@@ -36,9 +36,7 @@ import logging
 import tarfile
 from pathlib import Path
 
-from _helpers import configure_logging, progress_retrieve, validate_checksum
-
-logger = logging.getLogger(__name__)
+from _helpers import progress_retrieve, validate_checksum
 
 
 if __name__ == "__main__":
@@ -49,24 +47,17 @@ if __name__ == "__main__":
         rootpath = ".."
     else:
         rootpath = "."
-    configure_logging(
-        snakemake
-    )  # TODO Make logging compatible with progressbar (see PR #102)
 
     url = "https://zenodo.org/record/3517935/files/pypsa-eur-data-bundle.tar.xz"
 
     tarball_fn = Path(f"{rootpath}/bundle.tar.xz")
     to_fn = Path(rootpath) / Path(snakemake.output[0]).parent.parent
 
-    logger.info(f"Downloading databundle from '{url}'.")
     disable_progress = snakemake.config["run"].get("disable_progressbar", False)
     progress_retrieve(url, tarball_fn, disable=disable_progress)
 
     validate_checksum(tarball_fn, url)
 
-    logger.info("Extracting databundle.")
     tarfile.open(tarball_fn).extractall(to_fn)
 
     tarball_fn.unlink()
-
-    logger.info(f"Databundle available in '{to_fn}'.")
